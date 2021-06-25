@@ -1,3 +1,4 @@
+from vectorizer import vectorize_text
 from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import TweetTokenizer
@@ -17,6 +18,9 @@ def clean_tweet(text):
     # Switch between stem and lemmatize when necessary
     text = lemmatize_text(text)
     # text = stem_text(text)
+
+    text = detokenize_text_list(text)
+    text = vectorize_text(text)
 
     return text
 
@@ -43,6 +47,11 @@ def remove_hashtags(text):
 
 def remove_special_characters(text):
     return re.sub('[@#!,.;:?/]', '', text)
+
+def detokenize_text_list(text_list):
+    detokenized_text = ' '.join(text_list)
+        
+    return detokenized_text
     
 if __name__ == "__main__":
     # df = pd.read_csv("Tweets.csv")
