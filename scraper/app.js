@@ -1,5 +1,10 @@
 const pp = require("puppeteer");
 const fs = require("fs");
+const mongoose = require('mongoose');
+const RawTweet = require('./models/RawTweet')
+
+mongoose.connect('mongodb://localhost:27017/minerva_raw_tweets', {useNewUrlParser: true, useUnifiedTopology: true});
+
 
 // goto the twitter search url - done
 // get the adaptive json response - done
@@ -11,9 +16,44 @@ const fs = require("fs");
 // save as json for checking
 // TODO connect to db
 
-const db = [];
+// save everything in the db to the database 
 
-const scrape = async (keywords = null, dateFrom = null, dateTo = null) => {
+const to_save = [];
+
+
+const getQueryString = ({ from, to, query, hashtags, location, language = 'en' }) => {
+
+  let date = ''
+
+  if(from && to) {
+    date = `since:${from} until:${to}`
+  }
+
+  let hashes = ''
+
+  if(hashtags && hashtags.length > 0 && typeof hashtags == 'array') {
+      hashes = '(' + hashtags.map(item => '#' + item).join(' OR ') + ')'
+  }
+  
+  let loc = ''
+
+  if(typeof location == 'object') {
+    const { lat, long, radius } = location
+    loc = `geocode:${lat},${long},${radius}km`
+  } else loc = `near:${location}`
+  
+  const lang = `lang:${language}`
+
+  const res = `${query} ${date} ${hashes} ${loc} ${lang}`
+
+
+  return encodeURIComponent(res)
+}
+
+const scrape = async (options) => {
+
+  const to_search = getQueryString(options)
+
   const browser = await pp.launch();
   const page = await browser.newPage();
 
@@ -26,7 +66,7 @@ const scrape = async (keywords = null, dateFrom = null, dateTo = null) => {
       const keys = Object.keys(json.globalObjects.tweets);
 
       for (const i of keys) {
-        db.push(json.globalObjects.tweets[i]);
+        to_save.push(json.globalObjects.tweets[i]);
       }
     }
   });
@@ -36,7 +76,7 @@ const scrape = async (keywords = null, dateFrom = null, dateTo = null) => {
   );
 
   await page.goto(
-    "https://twitter.com/search?q=(from%3Aelonmusk)%20until%3A2021-06-23%20since%3A2021-06-01%20-filter%3Areplies",
+    `https://twitter.com/search?q=${to_search}`,
     {
       waitUntil: "networkidle0",
     }
@@ -67,9 +107,26 @@ const scrape = async (keywords = null, dateFrom = null, dateTo = null) => {
     }
   }
 
-  fs.writeFileSync('sample.json', JSON.stringify(db, null, 2))
-
   await browser.close();
+
+  to_save.forEach(async (item, i) => {
+    console.log('Saving Tweet ' + i)
+    const row = new RawTweet({ data: item })
+    await row.save()
+  })
+
+  console.log('Done')
 };
 
-scrape();
+
+scrape({
+  from: '2021-05-01',
+  to: '2021-06-01',
+  query: `"online classes" OR "e-class"`,
+  location: {
+    lat: 10.3095549,
+    long: 123.8931107,
+    radius: 5
+  }
+})
+
