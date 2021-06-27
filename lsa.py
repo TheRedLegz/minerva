@@ -1,0 +1,50 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import re
+from nltk.corpus import stopwords
+from sklearn.decomposition import TruncatedSVD
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+
+tweets_df = pd.read_json (r'sample.json')
+
+def preprocessing():
+    stop_words = stopwords.words('english')
+    tweets_df['clean_doc'] = tweets_df['full_text'].apply(lambda x: re.split('https:\/\/.*', str(x))[0])
+    tweets_df['clean_doc'] = tweets_df['clean_doc'].str.replace("[^a-zA-Z#]", " ", regex=True)
+    tweets_df['clean_doc'] = tweets_df['clean_doc'].apply(lambda x: ' '.join([w for w in x.split() if len(w)>3]))
+    tweets_df['clean_doc'] = tweets_df['clean_doc'].apply(lambda x: x.lower())
+    tokenized_doc = tweets_df['clean_doc'].apply(lambda x: x.split())
+    tokenized_doc = tokenized_doc.apply(lambda x: [item for item in x if item not in stop_words])
+    detokenized_doc = []
+    for i in range(len(tweets_df)):
+        t = ' '.join(tokenized_doc[i])
+        detokenized_doc.append(t)
+
+    tweets_df['clean_doc'] = detokenized_doc
+
+def topicModeling():
+    vectorizer = TfidfVectorizer(stop_words='english', 
+    max_features= 1000, # keep top 1000 terms 
+    max_df = 0.5, 
+    smooth_idf=True)
+    X = vectorizer.fit_transform(tweets_df['clean_doc'])
+    print(X.shape)
+
+    svd_model = TruncatedSVD(n_components=20, algorithm='randomized', n_iter=100, random_state=122)
+    svd_model.fit(X)
+    print(len(svd_model.components_))
+    terms = vectorizer.get_feature_names()
+    for i, comp in enumerate(svd_model.components_):
+        terms_comp = zip(terms, comp)
+        sorted_terms = sorted(terms_comp, key= lambda x:x[1], reverse=True)[:7]
+        print("Topic "+str(i)+": ")
+        for t in sorted_terms:
+            print(t[0])
+            print(t[1])
+            print(" ")
+        # print(sorted_terms)
+preprocessing()
+topicModeling()
