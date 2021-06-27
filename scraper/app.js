@@ -13,13 +13,16 @@ mongoose.connect('mongodb://localhost:27017/minerva_raw_tweets', {useNewUrlParse
 // scroll /
 // check for adaptive - if yes, go back to step 2. if no, go back to step 4 /
 
-// save as json for checking
-// TODO connect to db
+// connect to db /
 
-// save everything in the db to the database 
+// save everything in the db to the database /
+
+
+// TODO make a new collection for the cleaned tweets
+// TODO have a more robust way of checking the language of the tweets
+
 
 const to_save = [];
-
 
 const getQueryString = ({ from, to, query, hashtags, location, language = 'en' }) => {
 
@@ -40,7 +43,7 @@ const getQueryString = ({ from, to, query, hashtags, location, language = 'en' }
   if(typeof location == 'object') {
     const { lat, long, radius } = location
     loc = `geocode:${lat},${long},${radius}km`
-  } else loc = `near:${location}`
+  } else if (typeof location == 'string') loc = `near:${location}`
   
   const lang = `lang:${language}`
 
@@ -50,7 +53,7 @@ const getQueryString = ({ from, to, query, hashtags, location, language = 'en' }
   return encodeURIComponent(res)
 }
 
-const scrape = async (options) => {
+const scrape = async ({ test, ...options}) => {
 
   const to_search = getQueryString(options)
 
@@ -74,9 +77,13 @@ const scrape = async (options) => {
   await page.setUserAgent(
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54"
   );
+  
+  const url = `https://twitter.com/search?q=${to_search}\n`;
+
+  console.log('Navigating to ' + url)
 
   await page.goto(
-    `https://twitter.com/search?q=${to_search}`,
+    url,
     {
       waitUntil: "networkidle0",
     }
@@ -86,6 +93,7 @@ const scrape = async (options) => {
     return document.body.scrollHeight;
   });
 
+  console.log('Scraping started\n')
   while (true) {
     try {
       await page.evaluate((y) => {
@@ -109,24 +117,41 @@ const scrape = async (options) => {
 
   await browser.close();
 
-  to_save.forEach(async (item, i) => {
-    console.log('Saving Tweet ' + i)
-    const row = new RawTweet({ data: item })
-    await row.save()
-  })
+  console.log(`Scraping done. Number of tweets scraped: ${to_save.length}\n`)
 
+  if(test) {
+      const json = JSON.stringify(to_save, null, 2)
+
+      console.log('Saving tweets as test_data.json\n')
+
+      try {
+        fs.writeFileSync('test/test_data.json', json)
+      } catch(e) {
+        console.log('Failed to write test_data.json. Error: \n')
+        console.log(e)
+      }
+
+  } else {
+    to_save.forEach(async (item, i) => {
+      console.log('Saving Tweet ' + i + 'to DB')
+      const row = new RawTweet({ data: item })
+      await row.save()
+    })
+  }
+  
   console.log('Done')
 };
 
 
 scrape({
-  from: '2021-05-01',
+  test: true,
+  from: '2021-01-01',
   to: '2021-06-01',
-  query: `"online classes" OR "e-class"`,
-  location: {
-    lat: 10.3095549,
-    long: 123.8931107,
-    radius: 5
-  }
+  query: `"online class" OR "e-class"`,
 })
 
+// location: {
+//   lat: 10.3095549,
+//   long: 123.8931107,
+//   radius: 5
+// }
