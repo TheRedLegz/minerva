@@ -1,3 +1,4 @@
+from operator import index
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,6 +7,7 @@ import re
 from nltk.corpus import stopwords
 from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import PCA
 
 
 tweets_df = pd.read_json (r'sample.json')
@@ -31,20 +33,28 @@ def topicModeling():
     max_df = 0.5, 
     smooth_idf=True)
     X = vectorizer.fit_transform(tweets_df['clean_doc'])
-    print(X.shape)
+    # print(X.shape)
 
     svd_model = TruncatedSVD(n_components=20, algorithm='randomized', n_iter=100, random_state=122)
     svd_model.fit(X)
-    print(len(svd_model.components_))
     terms = vectorizer.get_feature_names()
-    for i, comp in enumerate(svd_model.components_):
-        terms_comp = zip(terms, comp)
-        sorted_terms = sorted(terms_comp, key= lambda x:x[1], reverse=True)[:7]
-        print("Topic "+str(i)+": ")
-        for t in sorted_terms:
-            print(t[0])
-            print(t[1])
-            print(" ")
+
+    # print(len(terms))
+    # for i, comp in enumerate(svd_model.components_):
+    #     terms_comp = zip(terms, comp)
+    #     sorted_terms = sorted(terms_comp, key= lambda x:x[1], reverse=True)[:7]
+        # print("Topic "+str(i)+": ")
+        # for t in sorted_terms:
+        #     print(t)
+        #     print(" ")
         # print(sorted_terms)
+
+    pca = PCA(n_components = 2)
+    principalComponents = pca.fit_transform(svd_model.components_)
+    principalDf = pd.DataFrame(data = principalComponents, columns = ['1', '2'])
+    
+    print(principalDf)
+
+
 preprocessing()
 topicModeling()

@@ -1,4 +1,3 @@
-from vectorizer import vectorize_text
 from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import TweetTokenizer
@@ -20,7 +19,6 @@ def clean_tweet(text):
     # text = stem_text(text)
 
     text = detokenize_text_list(text)
-    text = vectorize_text(text)
 
     return text
 
