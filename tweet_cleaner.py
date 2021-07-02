@@ -18,6 +18,8 @@ def clean_tweet(text):
     text = lemmatize_text(text)
     # text = stem_text(text)
 
+    text = detokenize_text_list(text)
+
     return text
 
 def stem_text(text_list):
@@ -43,6 +45,11 @@ def remove_hashtags(text):
 
 def remove_special_characters(text):
     return re.sub('[@#!,.;:?/]', '', text)
+
+def detokenize_text_list(text_list):
+    detokenized_text = ' '.join(text_list)
+        
+    return detokenized_text
     
 if __name__ == "__main__":
     # df = pd.read_csv("Tweets.csv")
