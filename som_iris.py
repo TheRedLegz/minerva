@@ -53,6 +53,7 @@ def main():
     dtype=np.float64)
   data_y = np.loadtxt(data_file, delimiter=",", usecols=[4],
     dtype=np.int)
+  print(data_y)
   # option: normalize data  
 
   # 2. construct the SOM
