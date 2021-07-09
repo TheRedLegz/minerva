@@ -53,7 +53,7 @@ def topicModeling():
     principalComponents = pca.fit_transform(svd_model.components_)
     principalDf = pd.DataFrame(data = principalComponents, columns = ['1', '2'])
     
-    print(principalDf)
+    return principalDf
 
 
 preprocessing()
