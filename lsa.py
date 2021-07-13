@@ -32,14 +32,6 @@ def preprocessing():
     return detokenized_doc
 
 
-corpus = [
-    'This is the first document.',
-    'This document is the second document.',
-    'And this is the third one.',
-    'Is this the first document?',
-]
-
-
 # def bgram(document_array):
 #     vectorizer = TfidfVectorizer(ngram_range=(2,2), sublinear_tf=True, use_idf=True)
 #     sparse_matrix = vectorizer.fit_transform(document_array)
@@ -53,6 +45,9 @@ corpus = [
 
 #     return data
 
+# TODO test accuracy of LSA
+# TODO try connecting LSA to SOM
+# TODO make SOM
 
 def topicModeling(document_array):
     vectorizer = TfidfVectorizer(ngram_range=(2,2), stop_words="english", max_features= 1000, sublinear_tf=True)
@@ -60,20 +55,22 @@ def topicModeling(document_array):
     X = vectorizer.fit_transform(document_array)
     features = vectorizer.get_feature_names()
 
-    svd_model = TruncatedSVD(n_components=2, n_iter=100)
+    svd_model = TruncatedSVD(n_components=26, n_iter=100)
     svd_model.fit(X)
 
-    print(svd_model.explained_variance_ratio_.cumsum())
-
-    # pca = PCA(n_components=2)
-    # principalComponents = pca.fit_transform(svd_model.components_)
+    pca = PCA(n_components=2)
+    principalComponents = pca.fit_transform(svd_model.components_)
     # principalDf = pd.DataFrame(data=principalComponents)
 
-    # print(pca.explained_variance_ratio_.cumsum())
+    return principalComponents
+
 
     # return principalDf
 
-    
+
+
+
+
 # def topicModeling():
 #     vectorizer = TfidfVectorizer(stop_words='english', 
 #     max_features= 1000, # keep top 1000 terms 
@@ -103,7 +100,7 @@ def topicModeling(document_array):
 #     return principalDf
 
 
-something = preprocessing()
-res = topicModeling(something)
+# texts = preprocessing()
+# res = topicModeling(texts)
 
-pprint(res)
+# pprint(res)

@@ -6,6 +6,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+from pprint import pprint
 # note: if this fails, try >pip uninstall matplotlib
 # and then >pip install matplotlib
 
@@ -24,8 +25,11 @@ def closest_node(data, t, map, m_rows, m_cols):
 def euc_dist(v1, v2):
   return np.linalg.norm(v1 - v2) 
 
+# if manhattan_dist(bmu_row, bmu_col, i, j) < curr_range:
 def manhattan_dist(r1, c1, r2, c2):
   return np.abs(r1-r2) + np.abs(c1-c2)
+
+
 
 def most_common(lst, n):
   # lst is a list of values 0 . . n
@@ -40,13 +44,14 @@ def most_common(lst, n):
 def main():
   # 0. get started
   np.random.seed(1)
-  Dim = 4
-  Rows = 30; Cols = 30
-  RangeMax = Rows + Cols
-  LearnMax = 0.5
-  StepsMax = 5000
+  
 
   # 1. load data
+
+
+  # get the data from LSA = 2d numpy array
+
+
   print("\nLoading Iris data into memory \n")
   data_file = ".\\Data\\iris_data_012.txt"
   data_x = np.loadtxt(data_file, delimiter=",", usecols=range(0,4),
@@ -54,25 +59,57 @@ def main():
   data_y = np.loadtxt(data_file, delimiter=",", usecols=[4],
     dtype=np.int)
   print(data_y)
+
+
+  Dim = 4 # number of features
+  Rows = 30; Cols = 30 # arbitrary shape of SOM matrix
+  RangeMax = Rows + Cols
+  LearnMax = 0.5
+  StepsMax = 5000
+
   # option: normalize data  
 
   # 2. construct the SOM
   print("Constructing a 30x30 SOM from the iris data")
   map = np.random.random_sample(size=(Rows,Cols,Dim))
+  
   for s in range(StepsMax):
-    if s % (StepsMax/10) == 0: print("step = ", str(s))
-    pct_left = 1.0 - ((s * 1.0) / StepsMax)
-    curr_range = (int)(pct_left * RangeMax)
-    curr_rate = pct_left * LearnMax
 
-    t = np.random.randint(len(data_x))
+    # changeo
+    # ------------------------------------------------------------------
+    if s % (StepsMax/10) == 0: print("step = ", str(s))
+
+
+    pct_left = 1.0 - ((s * 1.0) / StepsMax) # percent of steps left
+    curr_range = (int)(pct_left * RangeMax) # percent * number of steps = number of steps left
+    curr_rate = pct_left * LearnMax
+    # ------------------------------------------------------------------
+
+    # change - choose a unique input
+    t = np.random.randint(len(data_x)) # pick a random input
+
+    # find a node in the lattice that is closest to that input using eucl distance
     (bmu_row, bmu_col) = closest_node(data_x, t, map, Rows, Cols)
+
+
+    # looping thru the matrix
     for i in range(Rows):
       for j in range(Cols):
+
+        # if the manhattan dist of the current iterated cell and the BMU < curr range
         if manhattan_dist(bmu_row, bmu_col, i, j) < curr_range:
-          map[i][j] = map[i][j] + curr_rate * \
-(data_x[t] - map[i][j])
+
+          # update the cell
+          map[i][j] = map[i][j] + curr_rate * (data_x[t] - map[i][j])
+
   print("SOM construction complete \n")
+
+
+
+  pprint(map)
+
+
+
 
   # 3. construct U-Matrix
   print("Constructing U-Matrix from SOM")
@@ -94,6 +131,17 @@ def main():
       u_matrix[i][j] = sum_dists / ct
   print("U-Matrix constructed \n")
 
+
+
+
+
+
+
+
+
+
+
+
   # display U-Matrix
   plt.imshow(u_matrix, cmap='gray')  # black = close = clusters
   plt.show()
@@ -101,7 +149,11 @@ def main():
   # 4. because the data has labels, another possible visualization:
   # associate each data label with a map node
   print("Associating each data label to one map node ")
+
+
+
   mapping = np.empty(shape=(Rows,Cols), dtype=object)
+  
   for i in range(Rows):
     for j in range(Cols):
       mapping[i][j] = []
@@ -109,6 +161,8 @@ def main():
   for t in range(len(data_x)):
     (m_row, m_col) = closest_node(data_x, t, map, Rows, Cols)
     mapping[m_row][m_col].append(data_y[t])
+
+  pprint(mapping)
 
   label_map = np.zeros(shape=(Rows,Cols), dtype=np.int)
   for i in range(Rows):
