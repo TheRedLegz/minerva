@@ -55,8 +55,10 @@ def topicModeling(document_array):
     X = vectorizer.fit_transform(document_array)
     features = vectorizer.get_feature_names()
 
-    svd_model = TruncatedSVD(n_components=26, n_iter=100)
+    # TODO hyperparameter n_components (k) must be optimized
+    svd_model = TruncatedSVD(n_components=10, n_iter=100)
     svd_model.fit(X)
+    print(svd_model.components_.shape)
 
     pca = PCA(n_components=2)
     principalComponents = pca.fit_transform(svd_model.components_)
@@ -100,7 +102,7 @@ def topicModeling(document_array):
 #     return principalDf
 
 
-# texts = preprocessing()
-# res = topicModeling(texts)
+texts = preprocessing()
+res = topicModeling(texts)
 
-# pprint(res)
+pprint(res)
