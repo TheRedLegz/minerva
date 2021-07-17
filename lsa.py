@@ -1,14 +1,16 @@
 from operator import index
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import re
-import nltk
 # from nltk.corpus import stopwords
 from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
+
+from gensim.parsing.preprocessing import preprocess_documents
+from gensim.models import CoherenceModel
+from gensim.corpora.dictionary import Dictionary
+from gensim.models import LsiModel, TfidfModel
+
 from pprint import pprint
 import math
 # nltk.download('stopwords')
@@ -27,7 +29,7 @@ def preprocessing():
     for i in range(len(tweets_df)):
         t = ' '.join(tokenized_doc[i])
         detokenized_doc.append(t)
-
+    topicModeling(detokenized_doc)
     # tweets_df['clean_doc'] = detokenized_doc
     return detokenized_doc
 
@@ -50,24 +52,40 @@ def preprocessing():
 # TODO make SOM
 
 def topicModeling(document_array):
-    vectorizer = TfidfVectorizer(ngram_range=(2,2), stop_words="english", max_features= 1000, sublinear_tf=True)
+    # X = vectorizer.fit_transform(document_array)
+    # features = vectorizer.get_feature_names()
 
-    X = vectorizer.fit_transform(document_array)
-    features = vectorizer.get_feature_names()
-
-    # TODO hyperparameter n_components (k) must be optimized
-    svd_model = TruncatedSVD(n_components=10, n_iter=100)
-    svd_model.fit(X)
-    print(svd_model.components_.shape)
-
-    pca = PCA(n_components=2)
-    principalComponents = pca.fit_transform(svd_model.components_)
-    # principalDf = pd.DataFrame(data=principalComponents)
-
-    return principalComponents
+    # svd_model = TruncatedSVD(n_components=26, n_iter=100)
+    # svd_model.fit(X)
+    # print(features)
+    
+    processed_corpus = preprocess_documents(document_array)
+    dictionary = Dictionary(processed_corpus)
+    bow_corpus = [dictionary.doc2bow(text) for text in processed_corpus]
+    tfidf = TfidfModel(bow_corpus, smartirs='npu')
+    corpus_tfidf = tfidf[bow_corpus]
+    
+    coherenceList_UMass = []
+    numTopicsList = [20,100,200,300,400,500,800,1000, 1500]
+    
+    for k in numTopicsList:
+        c_UMass = compute_coherence_UMass(corpus_tfidf, dictionary, k)
+        coherenceList_UMass.append(c_UMass)
+    print(coherenceList_UMass)
+    
+    # pca = PCA(n_components=2)
+    # principalComponents = pca.fit_transform(svd_model.components_)
+    # # principalDf = pd.DataFrame(data=principalComponents)
+    # return principalComponents
 
 
     # return principalDf
+    
+def compute_coherence_UMass(corpus, dictionary, k):
+    lsi_model = LsiModel(corpus=corpus, num_topics=k)
+    coherence = CoherenceModel(model=lsi_model, corpus=corpus, dictionary=dictionary, coherence='u_mass')
+    return coherence.get_coherence()
+preprocessing()
 
 
 
@@ -104,5 +122,3 @@ def topicModeling(document_array):
 
 texts = preprocessing()
 res = topicModeling(texts)
-
-pprint(res)
