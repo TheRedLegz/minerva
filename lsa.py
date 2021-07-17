@@ -81,7 +81,6 @@ def topicModeling(document_array):
 
 
     # array of tokenized documents
-    dictionary = Dictionary(document_array)
 
 
     # pprint(document_array)
@@ -95,19 +94,22 @@ def topicModeling(document_array):
 
     for document in document_array:
         res.append(bigram_model[document])
+    dictionary = Dictionary(res)
+    
+    # pprint(res)
 
     bow_corpus = [dictionary.doc2bow(text) for text in res]
 
-
+    # pprint(dictionary.save_as_text("dictionary", sort_by_word=False))
     pprint(bow_corpus)
-    pprint(len(bow_corpus))
-
+    # pprint(len(bow_corpus))
+ 
 
     tfidf = TfidfModel(bow_corpus, smartirs='npu')
     corpus_tfidf = tfidf[bow_corpus]
     
     coherenceList_UMass = []
-    numTopicsList = [20,100,200,300,400,500,800,1000, 1500]
+    numTopicsList = [20,100,200,300,400,500,800,1000,1500]
     
     for k in numTopicsList:
         c_UMass = compute_coherence_UMass(corpus_tfidf, dictionary, k)
@@ -124,6 +126,7 @@ def topicModeling(document_array):
     
 def compute_coherence_UMass(corpus, dictionary, k):
     lsi_model = LsiModel(corpus=corpus, num_topics=k)
+    # print(lsi_model.print_topic(topicno=1))
     coherence = CoherenceModel(model=lsi_model, corpus=corpus, dictionary=dictionary, coherence='u_mass')
     return coherence.get_coherence()
 
