@@ -7,9 +7,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
 
 from gensim.parsing.preprocessing import preprocess_documents
-from gensim.models import CoherenceModel
+from gensim.models import CoherenceModel, Phrases
+from gensim.models.phrases import Phraser
 from gensim.corpora.dictionary import Dictionary
 from gensim.models import LsiModel, TfidfModel
+
 
 from pprint import pprint
 import math
@@ -25,12 +27,15 @@ def preprocessing():
     tweets_df['clean_doc'] = tweets_df['clean_doc'].apply(lambda x: x.lower())
     tokenized_doc = tweets_df['clean_doc'].apply(lambda x: x.split())
     # tokenized_doc = tokenized_doc.apply(lambda x: [item for item in x if item not in stop_words])
+    return tokenized_doc
+
     detokenized_doc = []
     for i in range(len(tweets_df)):
         t = ' '.join(tokenized_doc[i])
         detokenized_doc.append(t)
-    topicModeling(detokenized_doc)
+    # topicModeling(detokenized_doc)
     # tweets_df['clean_doc'] = detokenized_doc
+
     return detokenized_doc
 
 
@@ -52,6 +57,7 @@ def preprocessing():
 # TODO make SOM
 
 def topicModeling(document_array):
+
     # X = vectorizer.fit_transform(document_array)
     # features = vectorizer.get_feature_names()
 
@@ -59,9 +65,44 @@ def topicModeling(document_array):
     # svd_model.fit(X)
     # print(features)
     
-    processed_corpus = preprocess_documents(document_array)
-    dictionary = Dictionary(processed_corpus)
-    bow_corpus = [dictionary.doc2bow(text) for text in processed_corpus]
+    # processed_corpus = preprocess_documents(document_array)
+
+    """ 
+
+    step 1: preprocess documents (stopwords, lemmatize)
+    step 2: split to bigram
+    step 3: generate document-term matrix
+    step 4: apply lsa to the document-term matrix
+    
+    """
+
+    # gensim tf idf <= array of bigrammed documents
+
+
+
+    # array of tokenized documents
+    dictionary = Dictionary(document_array)
+
+
+    # pprint(document_array)
+
+
+    bigram = Phrases(document_array, min_count=1, threshold=2)
+    
+    bigram_model = Phraser(bigram)
+
+    res = []
+
+    for document in document_array:
+        res.append(bigram_model[document])
+
+    bow_corpus = [dictionary.doc2bow(text) for text in res]
+
+
+    pprint(bow_corpus)
+    pprint(len(bow_corpus))
+
+
     tfidf = TfidfModel(bow_corpus, smartirs='npu')
     corpus_tfidf = tfidf[bow_corpus]
     
@@ -71,7 +112,7 @@ def topicModeling(document_array):
     for k in numTopicsList:
         c_UMass = compute_coherence_UMass(corpus_tfidf, dictionary, k)
         coherenceList_UMass.append(c_UMass)
-    print(coherenceList_UMass)
+    # print(coherenceList_UMass)
     
     # pca = PCA(n_components=2)
     # principalComponents = pca.fit_transform(svd_model.components_)
@@ -85,7 +126,6 @@ def compute_coherence_UMass(corpus, dictionary, k):
     lsi_model = LsiModel(corpus=corpus, num_topics=k)
     coherence = CoherenceModel(model=lsi_model, corpus=corpus, dictionary=dictionary, coherence='u_mass')
     return coherence.get_coherence()
-preprocessing()
 
 
 
@@ -118,7 +158,6 @@ preprocessing()
 #     principalDf = pd.DataFrame(data = principalComponents, columns = ['1', '2'])
     
 #     return principalDf
-
 
 texts = preprocessing()
 res = topicModeling(texts)
