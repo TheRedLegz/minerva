@@ -59,7 +59,8 @@ def topicModeling(detokenized):
     #         print(t)
     #         print(" ")
     #     print(sorted_terms)
-    # print(svd_model.components_)
+    pprint(svd_model.components_)
+    print(len(svd_model.components_))
     transpose = numpy.transpose(svd_model.components_)
     # pprint(transpose)
     scaler = MinMaxScaler()
@@ -83,7 +84,11 @@ def lsiGensim(detokenized):
         c_UMass = compute_coherence_UMass(corpus_tfidf, dictionary, k)
         coherenceList_UMass.append(c_UMass)
     plt.plot(numTopicsList, coherenceList_UMass)
+    minpos = coherenceList_UMass.index(min(coherenceList_UMass))
+    optimized = LsiModel(corpus=corpus_tfidf, num_topics=numTopicsList[minpos])
+    print(optimized.get_topics())
     plt.show()
+    return optimized.get_topics()
     
 
 def compute_coherence_UMass(corpus, dictionary, k):
