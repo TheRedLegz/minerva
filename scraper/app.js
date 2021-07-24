@@ -1,3 +1,4 @@
+
 const pp = require("puppeteer");
 const fs = require("fs");
 const mongoose = require('mongoose');
@@ -18,9 +19,8 @@ mongoose.connect('mongodb://localhost:27017/minerva_raw_tweets', {useNewUrlParse
 // save everything in the db to the database /
 
 
-// TODO make a new collection for the cleaned tweets
+// TODO make a new collection for the cleaned tweets - ongoing
 // TODO have a more robust way of checking the language of the tweets
-
 
 const to_save = [];
 
