@@ -112,6 +112,7 @@ def main():
 
 
   # 3. construct U-Matrix
+  print(data_y)
   print("Constructing U-Matrix from SOM")
   u_matrix = np.zeros(shape=(Rows,Cols), dtype=np.float64)
   for i in range(Rows):

@@ -64,12 +64,13 @@ def SOM(data, learn_rate, matrix_size):
 
     # 3 run main logic
 
-    steps_max = steps # change this
+    steps_max = 5000 # change this
 
     indices = np.zeros(len(data))
 
 
     for s in range(steps_max):
+        if s % (steps_max/10) == 0: print("step = ", str(s))
         
         # update
         percent = 1.0 - ((s * 1.0) / steps_max)
@@ -78,15 +79,7 @@ def SOM(data, learn_rate, matrix_size):
 
         # get a unique input from data
 
-        rand = None
-
-        while True:
-            rand = np.random.randint(len(data))
-
-            if(indices[rand] != 1):
-                break
-
-            indices[rand] = 1
+        rand = np.random.randint(len(data))
 
         input = data[rand]
 
@@ -106,16 +99,21 @@ def SOM(data, learn_rate, matrix_size):
 
 
 
-matrix_size = (10, 10)
+matrix_size = (20, 20)
 (row, col) = matrix_size
 
 texts = lsa.preprocessing()
 res = lsa.topicModeling(texts)
+# data_file = ".\\Data\\iris_data_012.txt"
+# res = np.loadtxt(data_file, delimiter=",", usecols=range(0,4),
+#     dtype=np.float64)
+# targets = np.loadtxt(data_file, delimiter=",", usecols=range(4,5),
+#     dtype=np.float64)
 
 result = SOM(res, .5, matrix_size)
 
-
-print(result)
+# print(targets)
+# print(result)
 
 print("Constructing U-Matrix from SOM")
 
@@ -155,12 +153,12 @@ mapping = np.empty(shape=matrix_size, dtype=object)
 for i in range(row):
     for j in range(col):
         mapping[i][j] = []
-
+print(len(res))
 for t in range(len(res)):
     (m_row, m_col) = find_bmu(result, res[t], matrix_size)
     
-    rand = np.random.randint(0, 2)
-    mapping[m_row][m_col].append(rand)
+
+    mapping[m_row][m_col].append(0)
 
 
 label_map = np.zeros(shape=matrix_size, dtype=np.int)

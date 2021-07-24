@@ -1,14 +1,21 @@
 from operator import index
-import numpy as np
+import numpy
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import re
-import nltk
-# from nltk.corpus import stopwords
+import matplotlib.pyplot as plt
+from nltk.corpus import stopwords
 from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import MinMaxScaler
+
+from gensim.parsing.preprocessing import preprocess_documents
+from gensim.models import CoherenceModel, Phrases
+from gensim.models.phrases import Phraser
+from gensim.corpora.dictionary import Dictionary
+from gensim.models import LsiModel, TfidfModel
+
+
 from pprint import pprint
 import math
 # nltk.download('stopwords')
@@ -28,81 +35,70 @@ def preprocessing():
         t = ' '.join(tokenized_doc[i])
         detokenized_doc.append(t)
 
-    # tweets_df['clean_doc'] = detokenized_doc
+    tweets_df['clean_doc'] = detokenized_doc
     return detokenized_doc
 
+def topicModeling(detokenized):
+    vectorizer = TfidfVectorizer(ngram_range=(1,2),stop_words='english', 
+    max_features= 1000, # keep top 1000 terms 
+    max_df = 0.5, 
+    smooth_idf=True)
+    X = vectorizer.fit_transform(detokenized)
+    # print(X.shape)
 
-# def bgram(document_array):
-#     vectorizer = TfidfVectorizer(ngram_range=(2,2), sublinear_tf=True, use_idf=True)
-#     sparse_matrix = vectorizer.fit_transform(document_array)
-#     features = vectorizer.get_feature_names()
+    svd_model = TruncatedSVD(n_components=20, algorithm='randomized', n_iter=100, random_state=122)
+    svd_model.fit_transform(X)
+    # terms = vectorizer.get_feature_names()
 
-#     sum = sparse_matrix.sum(axis=0)
-#     data = []
+    # print(len(terms))
+    # for i, comp in enumerate(svd_model.components_):
+    #     terms_comp = zip(terms, comp)
+    #     sorted_terms = sorted(terms_comp, key= lambda x:x[1], reverse=False)[:7]
+    #     print("Topic "+str(i)+": ")
+    #     for t in sorted_terms:
+    #         print(t)
+    #         print(" ")
+    #     print(sorted_terms)
+    pprint(svd_model.components_)
+    print(len(svd_model.components_))
+    transpose = numpy.transpose(svd_model.components_)
+    # pprint(transpose)
+    scaler = MinMaxScaler()
+    scaled = scaler.fit_transform(transpose)
 
-#     for i, j in enumerate(features):
-#         data.append((j, sum[0, i]))
-
-#     return data
-
-# TODO test accuracy of LSA
-# TODO try connecting LSA to SOM
-# TODO make SOM
-
-def topicModeling(document_array):
-    vectorizer = TfidfVectorizer(ngram_range=(2,2), stop_words="english", max_features= 1000, sublinear_tf=True)
-
-    X = vectorizer.fit_transform(document_array)
-    features = vectorizer.get_feature_names()
-
-    # TODO hyperparameter n_components (k) must be optimized
-    svd_model = TruncatedSVD(n_components=10, n_iter=100)
-    svd_model.fit(X)
-    print(svd_model.components_.shape)
-
-    pca = PCA(n_components=2)
-    principalComponents = pca.fit_transform(svd_model.components_)
-    # principalDf = pd.DataFrame(data=principalComponents)
-
-    return principalComponents
-
-
-    # return principalDf
-
-
-
-
-
-# def topicModeling():
-#     vectorizer = TfidfVectorizer(stop_words='english', 
-#     max_features= 1000, # keep top 1000 terms 
-#     max_df = 0.5, 
-#     smooth_idf=True)
-#     X = vectorizer.fit_transform(tweets_df['clean_doc'])
-#     # print(X.shape)
-
-#     svd_model = TruncatedSVD(n_components=20, algorithm='randomized', n_iter=100, random_state=122)
-#     svd_model.fit(X)
-#     terms = vectorizer.get_feature_names()
-
-#     # print(len(terms))
-#     # for i, comp in enumerate(svd_model.components_):
-#     #     terms_comp = zip(terms, comp)
-#     #     sorted_terms = sorted(terms_comp, key= lambda x:x[1], reverse=True)[:7]
-#         # print("Topic "+str(i)+": ")
-#         # for t in sorted_terms:
-#         #     print(t)
-#         #     print(" ")
-#         # print(sorted_terms)
-
-#     pca = PCA(n_components = 2)
-#     principalComponents = pca.fit_transform(svd_model.components_)
-#     principalDf = pd.DataFrame(data = principalComponents, columns = ['1', '2'])
+    # pca = PCA(n_components = 2)
+    # principalComponents = pca.fit_transform(svd_model.components_)
+    # principalDf = pd.DataFrame(data = principalComponents, columns = ['1', '2'])
     
-#     return principalDf
+    return transpose
+
+def lsiGensim(detokenized):
+    processed_corpus = preprocess_documents(detokenized)
+    dictionary = Dictionary(processed_corpus)
+    bow_corpus = [dictionary.doc2bow(text) for text in processed_corpus]
+    tfidf = TfidfModel(bow_corpus, smartirs='npu')
+    corpus_tfidf = tfidf[bow_corpus]
+    coherenceList_UMass = []
+    numTopicsList = [35,36,37,38,39,40]
+    for k in numTopicsList:
+        c_UMass = compute_coherence_UMass(corpus_tfidf, dictionary, k)
+        coherenceList_UMass.append(c_UMass)
+    plt.plot(numTopicsList, coherenceList_UMass)
+    minpos = coherenceList_UMass.index(min(coherenceList_UMass))
+    optimized = LsiModel(corpus=corpus_tfidf, num_topics=numTopicsList[minpos])
+    print(optimized.get_topics())
+    plt.show()
+    return optimized.get_topics()
+    
+
+def compute_coherence_UMass(corpus, dictionary, k):
+   lsi_model = LsiModel(corpus=corpus, num_topics=k)
+   coherence = CoherenceModel(model=lsi_model,
+                              corpus=corpus,
+                              dictionary=dictionary,
+                              coherence='u_mass')
+   return coherence.get_coherence()
 
 
 texts = preprocessing()
-res = topicModeling(texts)
-
-pprint(res)
+lsiGensim(texts)
