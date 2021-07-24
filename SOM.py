@@ -56,6 +56,7 @@ def SOM(data, learn_rate, matrix_size):
     # 1 initialize some constants
 
     (steps, num_features) = data.shape
+    print(num_features)
     (row, col) = matrix_size
     range_max = row + col # change this
 
@@ -111,7 +112,8 @@ matrix_size = (10, 10)
 (row, col) = matrix_size
 
 texts = lsa.preprocessing()
-res = lsa.lsiGensim(texts)
+lsi_res = np.array(lsa.lsiGensim(texts)).T
+res = lsa.pca(lsi_res, 16)
 # data_file = ".\\Data\\iris_data_012.txt"
 # res = np.loadtxt(data_file, delimiter=",", usecols=range(0,4),
 #     dtype=np.float64)
@@ -177,9 +179,3 @@ for i in range(row):
 plt.imshow(label_map, cmap=plt.cm.get_cmap('terrain_r', 4))
 plt.colorbar()
 plt.show()
-
-
-
-
-
-
