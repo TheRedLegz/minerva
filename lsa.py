@@ -143,16 +143,16 @@ def pca(matrix, k):
 
 
 
-texts = preprocessing()
+# texts = preprocessing()
 
 
-something = [
-    "cat cat cat cat",
-    "cat some cat some",
-    "cute cat haha"
-]
+# something = [
+#     "cat cat cat cat",
+#     "cat some cat some",
+#     "cute cat haha"
+# ]
 
 
-matrix = numpy.array(lsiGensim(texts)).T
+# matrix = numpy.array(lsiGensim(texts)).T
 
-res = pca(matrix, 16)
+# res = pca(matrix, 16)
