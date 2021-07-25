@@ -93,6 +93,3 @@ def pca(matrix, k):
 
     res = pca.fit_transform(scaled)
     return res
-
-text = preprocessing()
-lsiGensim(text)
