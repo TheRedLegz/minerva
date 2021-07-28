@@ -50,19 +50,19 @@ def man_distance(bmu_row, bmu_col, row, col):
 
 def SOM(data, learn_rate, matrix_size):
 
-    # 1 initialize some constants
+    # 1 Initialize some constants
 
     (steps, num_features) = data.shape
     print(num_features)
     (row, col) = matrix_size
     range_max = row + col # change this
 
-    # 2 create the initial matrix
+    # 2 Create the initial matrix
 
     matrix = np.random.random_sample(size=(row,col,num_features))
     print(matrix)
 
-    # 3 run main logic
+    # 3 Run main logic
 
     steps_max = 5000 # change this
 
@@ -71,10 +71,12 @@ def SOM(data, learn_rate, matrix_size):
     for s in range(steps_max):
         if s % (steps_max/50) == 0: print(str((s/steps_max) * 100) + " percent")
         
-        # update
+        # Update
         percent = 1.0 - ((s * 1.0) / steps_max)
+
         # curr_range for manhattan distance updating
         curr_range = (int)(percent * range_max)
+        
         # curr_range for pythagorean updating
         # curr_range = range_max * exp(-(s / steps_max))
         curr_rate = percent * learn_rate
