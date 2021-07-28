@@ -2,6 +2,12 @@ import numpy
 import pandas as pd
 import re
 import matplotlib.pyplot as plt
+import seaborn as sns
+import re
+import math
+from nltk.corpus import stopwords
+from sklearn.decomposition import TruncatedSVD
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
 from gensim.parsing.preprocessing import preprocess_documents
@@ -75,11 +81,9 @@ def lsiGensim(detokenized):
     return topics
     
 
-def compute_coherence_UMass(corpus, dictionary, k):
-    lsi_model = LsiModel(corpus=corpus, num_topics=k)
-    coherence = CoherenceModel(model=lsi_model,corpus=corpus, dictionary=dictionary,coherence='u_mass')
 
-    return coherence.get_coherence()
+preprocessing()
+topicModeling()
 
 
 
