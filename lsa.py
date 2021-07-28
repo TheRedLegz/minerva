@@ -156,11 +156,13 @@ def SvD(Amatrix):
     
     maximum=1
 
+    # NOTE: Why not maximum > 0?
     # Loop is iterated untill the max element does not become 0.
     while(maximum>0.001):
         # iOfMaxElement is the ith index of the max element other then diagonal
         # jOfMaxElement is the jth index of the max element other then diagonal
         
+        # NOTE: Why start a [0][1]?
         maximum, iOfMaxElement,jOfMaxElement =math.fabs(diagonalMatrix[0][1]), 0, 1
 
         # Finds the location of the element with the highest value
@@ -182,6 +184,8 @@ def SvD(Amatrix):
         #       theta = pi/4
         #   else
         #       theta = -1(pi/4)
+        # else
+        #   theta = | 0.5 * (arctan((2 * matrix[i][j])/(matrix[i][i] - matrix[j][j]))) |
 
         if(diagonalMatrix[iOfMaxElement][iOfMaxElement] == diagonalMatrix[jOfMaxElement][jOfMaxElement]):
             if(diagonalMatrix[iOfMaxElement][jOfMaxElement] > 0):
@@ -194,7 +198,7 @@ def SvD(Amatrix):
 
 
         # Initialize an empty matrix with the size of the square matrix of the input matrix
-        #   i.e. input matrix 3 x 5 then OrthogonalMatrix = 3 x 3    
+        #   i.e. input matrix 3 x 5 then OrthogonalMatrix = 5 x 5    
         # NOTE: Perhaps change np.zeroes to np.arange? Automatically initialize the matrix with 1s rather than 0s
         OrthogonalMatrix = np.zeros((len(diagonalMatrix),len(diagonalMatrix[0])))
         
@@ -217,6 +221,12 @@ def SvD(Amatrix):
         # oMatrix[j][j] is a negative mirror of oMatrix[i][i]
         # oMatrix[j][i] is a negative mirror of oMatrix[i][j]
         # NOTE: I am not exactly sure what this is. Will do further research. !!! Search Jacobi Algorithm
+        #   i = 0, j = 1
+        #   k = cos(theta)
+        #   l = sin(theta)
+        #   k   l   x
+        #  -l   k   x
+        #   x   x   x
         OrthogonalMatrix[iOfMaxElement][iOfMaxElement] = math.cos(theta)
         OrthogonalMatrix[jOfMaxElement][jOfMaxElement] = OrthogonalMatrix[iOfMaxElement][iOfMaxElement] 
         OrthogonalMatrix[iOfMaxElement][jOfMaxElement] = math.sin(theta)
@@ -232,10 +242,11 @@ def SvD(Amatrix):
         #   - eigenVectorsMatrix * oMatrix          == (n x n)(n x n) = n x n
         # NOTE: All matrices involved are n x n. Since they are all derived from the square matrix of the AMatrix
 
+        # oMatrixT x diagonalMatrix x oMatrix
         diagonalMatrix = matmul(transpose(OrthogonalMatrix),diagonalMatrix)
-        
         diagonalMatrix = matmul(diagonalMatrix,OrthogonalMatrix)
         
+        # eigenVectorsMatrix x oMatrix
         eigenVectorsMatrix = matmul(eigenVectorsMatrix,OrthogonalMatrix)
 
         # End of loop
@@ -246,7 +257,7 @@ def SvD(Amatrix):
     # l1 is the list of eigen values which is extracted from the diagonal of the diagonalMatrix.
     l1 = []
     
-    # Returns only the diagonals of the diagonalMatrix. The size of the list is m, where m == rows of the AMatrix
+    # Returns only the diagonals of the diagonalMatrix. The size of the list is n, where n == columns of the AMatrix
     for i in range(0,len(diagonalMatrix)):
         l1.append(diagonalMatrix[i][i])
     
@@ -259,6 +270,12 @@ def SvD(Amatrix):
     
     # Perhaps a list of lists. It seems as though it inserts the respective value of the diagonals to the head of each list.
     # NOTE: Perhaps change implementation. We can use Python's zip() method instead
+    #   i.e
+    #   l   x   x   x   x   x
+    #   l   x   x   x   x   x
+    #   l   x   x   x   x   x
+    #   l   x   x   x   x   x
+    #   l   x   x   x   x   x
     for i in range(0,len(tempList)):
         tempList[i] = list(tempList[i])
         tempList[i].insert(0,l1[i])
@@ -273,6 +290,7 @@ def SvD(Amatrix):
     EigenFinalVectorslist=[]
 
     # Loops through tempList
+    # NOTE: Perhaps change to dictionary?
     for i in range(0,len(tempList)):
         # First, we pop the value of the diagonals we previously inserted into the Eigen Values list.
         EigenValueslist.append(tempList[i].pop(0))
@@ -297,10 +315,20 @@ def SvD(Amatrix):
         # Ui=(B*Vi)/root(lamda)
 
         # As stated in the formula above, it multiplies the entire BMatrix with the corresponding i of the EigenVectorList
+        # (m x n)(n x 1)
+        # (m x 1)
         mul=matmul((B),(EigenFinalVectorsTransarr[i]))
         
         # NOTE: Not exactly sure what happens here. Perhaps divides each element with the square root of the Eigen Value (the diagonals from earlier)
+
+        # x x x
+        # y y y
+        # ==
+        # x/sqrt(y) x/sqrt(y) x/sqrt(y) 
+        # (m x 1)
+
         UMatrix[i]=mul/math.sqrt(EigenValuesarr[i])
+        # Iterates until it becomes (m x m)
 
     # Transpose the UMatrix
     # NOTE: I do not understand yet why
@@ -315,7 +343,7 @@ def SvD(Amatrix):
         if(i > 1e-4): #we check if i!=0 
             finEigVals.append(i)
             
-    # NOTE: !!!Singular values are root of every eigen values.
+    # NOTE: !!!Singular values are square root of every eigen values.
     finSingVals = [math.sqrt(i) for i in finEigVals]
     # The values are rounded to the sixths place
     finSingVals = np.round(finSingVals,decimals = 6)
@@ -340,7 +368,7 @@ def SvD(Amatrix):
         UMatrix = transpose(EigenFinalVectorsTransarr)
         VT = transpose(Utemp)
 
-    # NOTE: Fixed the return values from finSingValues to Sigma
+    # NOTE: Fixed the return values from finSingValues to Sigma. Perhaps the dev wants to return a list instead?
     # return UMatrix,finSingVals,VT
     return UMatrix, Sigma, VT
 
