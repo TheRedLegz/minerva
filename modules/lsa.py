@@ -3,13 +3,13 @@ import nltk
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-import math
 import numpy as np
-from pprint import pprint
-import re
 import string as str
+import pandas as pd
+import math
+import re
+from pprint import pprint
 from nltk.stem import WordNetLemmatizer
-
 from nltk.corpus import stopwords
 
 
@@ -437,6 +437,11 @@ def SvD(Amatrix):
 
 
 
+
+# DRIVER HERE
+
+
+
 # raw = pd.read_json('sample.json')
 # data = []
 
@@ -444,13 +449,4 @@ def SvD(Amatrix):
 #     data.append(row['full_text'])
 
 
-data = [
-    'this is a sentence',
-    'this is not a sentence',
-    'sentence something',
-    'something cat cute',
-    'cat sentence',
-]
-
-
-pprint(tf_idf(data))
+# pprint(tf_idf(data))
