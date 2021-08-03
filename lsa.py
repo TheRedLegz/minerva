@@ -1,16 +1,13 @@
-from operator import index
+import nltk
+import matplotlib.pyplot as plt
 import numpy as np
+import string as str
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import re
 import math
+import re
+from pprint import pprint
+from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
-from sklearn.decomposition import TruncatedSVD
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.decomposition import PCA
-
-import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
 from gensim.parsing.preprocessing import preprocess_documents
@@ -21,50 +18,111 @@ from gensim.models import LsiModel, TfidfModel
 from pprint import pprint
 from IPython.display import display
 
-tweets_df = pd.read_json (r'sample.json')
+nltk.download('stopwords')
+nltk.download('wordnet')
+lemmatizer = WordNetLemmatizer()
+stop_words = set(stopwords.words('english'))
 
-def preprocessing():
-    stop_words = stopwords.words('english')
-    tweets_df['clean_doc'] = tweets_df['full_text'].apply(lambda x: re.split('https:\/\/.*', str(x))[0])
-    tweets_df['clean_doc'] = tweets_df['clean_doc'].str.replace("[^a-zA-Z#]", " ", regex=True)
-    tweets_df['clean_doc'] = tweets_df['clean_doc'].apply(lambda x: ' '.join([w for w in x.split() if len(w)>3]))
-    tweets_df['clean_doc'] = tweets_df['clean_doc'].apply(lambda x: x.lower())
-    tokenized_doc = tweets_df['clean_doc'].apply(lambda x: x.split())
-    tokenized_doc = tokenized_doc.apply(lambda x: [item for item in x if item not in stop_words])
-    detokenized_doc = []
-    for i in range(len(tweets_df)):
-        t = ' '.join(tokenized_doc[i])
-        detokenized_doc.append(t)
-
-    tweets_df['clean_doc'] = detokenized_doc
-
-def topicModeling():
-    vectorizer = TfidfVectorizer(stop_words='english', 
-    max_features= 1000, # keep top 1000 terms 
-    max_df = 0.5, 
-    smooth_idf=True)
-    X = vectorizer.fit_transform(tweets_df['clean_doc'])
-    # print(X.shape)
-
-    svd_model = TruncatedSVD(n_components=20, algorithm='randomized', n_iter=100, random_state=122)
-    svd_model.fit(X)
-    terms = vectorizer.get_feature_names()
-
-    # print(len(terms))
-    # for i, comp in enumerate(svd_model.components_):
-    #     terms_comp = zip(terms, comp)
-    #     sorted_terms = sorted(terms_comp, key= lambda x:x[1], reverse=True)[:7]
-        # print("Topic "+str(i)+": ")
-        # for t in sorted_terms:
-        #     print(t)
-        #     print(" ")
-        # print(sorted_terms)
-
-    pca = PCA(n_components = 2)
-    principalComponents = pca.fit_transform(svd_model.components_)
-    principalDf = pd.DataFrame(data = principalComponents, columns = ['1', '2'])
+def preprocess(string):
     
-    print(principalDf)
+    def remove_numbers(string):
+        res = re.sub(r'\d+', '', string)
+        return res
+
+    def remove_punctation(string):
+        res = string.translate(string.maketrans("", "", str.punctuation))
+        return res
+
+    # NOTE this returns an array
+    def remove_stop_words(string):
+        split = string.split(' ')
+        res = [w for w in split if w not in stop_words]
+        return res
+
+    def lemmatize_string(string):
+        split = string
+
+        if not isinstance(string, list):    
+            split = string.split(' ')
+
+        res = []
+
+        for word in split:
+            lemma = lemmatizer.lemmatize(word)
+            res.append(lemma)
+
+        return ' '.join(res)
+
+    string = string.lower().strip()
+    string = remove_numbers(string)
+    string = remove_punctation(string)
+    string = remove_stop_words(string)
+    string = lemmatize_string(string)
+
+    return string
+
+def bag_of_words(document_array):
+
+    doc_grams = []
+
+    for doc in document_array:
+        string = preprocess(doc)
+        unigrams = nltk.word_tokenize(string)
+        bigrams = nltk.bigrams(unigrams)
+        bigrams = map(lambda x: x[0] + '_' + x[1], bigrams)
+        uni_bi_grams = list(bigrams) + unigrams
+        doc_grams.append(list(uni_bi_grams))
+
+
+    unique_grams = []
+
+    for doc in doc_grams:
+        for bigram in doc:
+            if bigram not in unique_grams:
+                unique_grams.append(bigram)
+    
+
+    # doc = row, bigram = col
+    document_count = len(doc_grams)
+    gram_count = len(unique_grams)
+
+    bow_grams = np.zeros((document_count, gram_count), dtype=int)
+    
+
+    for i in range(document_count):
+        doc = doc_grams[i]
+
+        for j in range(gram_count):
+            gram = unique_grams[j]
+            count = doc.count(gram)
+
+            bow_grams[i][j] = int(count)
+
+    return (bow_grams, unique_grams, doc_grams)
+
+
+def tf_idf(document_array, bow = None):
+
+    if bow is None:
+        (bow, x, y) = bag_of_words(document_array)
+
+    matrix = np.zeros(bow.shape, dtype=float)
+    doc_count = len(document_array)
+
+    for i, row in enumerate(bow):
+
+        word_count = np.sum(row)
+
+        for j, col in enumerate(row):
+            
+            tf = col / word_count
+        
+            has_word_count = np.count_nonzero(bow[:, j:j+1])
+            idf = math.log(doc_count / (has_word_count + 1))
+
+            matrix[i][j] = tf * idf
+
+    return matrix
 
 def lsiGensim(detokenized):
     processed_corpus = preprocess_documents(detokenized)
@@ -95,8 +153,8 @@ def lsiGensim(detokenized):
 
 
     optimized = LsiModel(corpus=corpus_tfidf, num_topics=numTopicsList[minpos])
-    s = numpy.array(optimized.projection.s)
-    x = numpy.arange(len(s), step=1, dtype=numpy.int8)
+    s = np.array(optimized.projection.s)
+    x = np.arange(len(s), step=1, dtype=np.int8)
     plt.bar(x, s)
     # singular values
     plt.show()
@@ -129,5 +187,17 @@ def pca(matrix, k):
     res = pca.fit_transform(scaled)
     return res
 
-preprocessing()
-topicModeling()
+
+# DRIVER HERE
+
+
+
+raw = pd.read_json('sample.json')
+data = []
+
+for i, row in raw.iterrows():
+    data.append(row['full_text'])
+
+tf_idf_data = tf_idf(data)
+pprint(tf_idf_data)
+pprint(tf_idf_data.shape)
