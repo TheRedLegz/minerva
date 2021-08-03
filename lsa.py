@@ -5,18 +5,16 @@ import string as str
 import pandas as pd
 import math
 import re
-from pprint import pprint
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
-from gensim.parsing.preprocessing import preprocess_documents
-from gensim.models import CoherenceModel, Phrases
-from gensim.models.phrases import Phraser
+from gensim.models import CoherenceModel
 from gensim.corpora.dictionary import Dictionary
 from gensim.models import LsiModel, TfidfModel
 from pprint import pprint
 from IPython.display import display
+import emoji
 
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -24,13 +22,12 @@ lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
 
 def preprocess(string):
-    def remove_links(string):#TODO remove link
-        
+    def remove_links(string):
+        res = re.sub(r'http\S+', '', string)
         return res
     
-    def remove_emojis(string):#TODO remove emojis
-        
-        return res
+    def remove_emojis(string):
+        return emoji.get_emoji_regexp().sub(u'', string)
     
     def remove_numbers(string):
         res = re.sub(r'\d+', '', string)
