@@ -1,53 +1,9 @@
-from operator import index
+
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import re
 import math
 
 #--------------------MANUAL LSI--------------------
 pi = math.pi
-
-# NOTE: Redundant. Use np library.
-def matmul(A,X):
-    '''
-    Parameter: 
-        A - 2D matrix having dimension m*r
-        X - 2D matrix having dimension r*n
-    Process:
-        matrix multiplication of A and X
-    Output:
-        ans - 2D matrix having dimension m*n
-    '''
-    
-    if(type(X)!=list and len(X.shape)==1):
-        X = X.reshape((len(X), 1))
-    ans = np.zeros((len(A),len(X[0])))
-    for i in range(len(A)):
-        for j in range(len(X[0])):
-            for k in range(len(X)):
-                ans[i][j] = ans[i][j] + A[i][k]*X[k][j]
-    if(type(X)!=list and ans.shape[1]==1):
-        ans = ans.reshape((len(ans)))
-    return ans
-
-# NOTE: Redundant. Use np library.
-def transpose(A):
-    '''
-    Parameter: 
-        A - 2D matrix having dimension m*n
-    Process:
-        Calculates transpose of given matrix
-    Output:
-        ans - 2D matrix having dimension n*m
-    '''
-    ans = np.zeros((len(A[0]),len(A)))
-    for i in range(len(A)):
-        for j in range(len(A[0])):
-            ans[j][i] = A[i][j]
-    return ans
-
 
 def SvD(Amatrix):
     '''
@@ -77,14 +33,14 @@ def SvD(Amatrix):
     #   i.e. A 3 x 10 matrix will not be transposed. However, a 10 x 3 matrix will be transposed to 3 x 10.
     #   i.e. cont. Other examples include: 7 x 2 -> 2 x 7; 8 x 5 -> 5 x 8;
     if (ROWS > COLS):
-        Amatrix = transpose(Amatrix)
+        Amatrix = np.transpose(Amatrix)
     B=Amatrix.copy()
 
     
     # Converts the matrix into a square matrix by multiplying the transposed matrix to itself
     #   i.e. 3 x 10 matrix -> (10 x 3)(3 x 10) = 10 x 10
     #   i.e. cont. Other examples include: 2 x 7 -> (7 x 2)(2 x 7) = 7 x 7; 5 x 8 -> (8 x 5)(5 x 8) = 8 x 8;
-    Amatrix = matmul(transpose(Amatrix),Amatrix)
+    Amatrix = np.matmul(np.transpose(Amatrix),Amatrix)
 
     # NOTE: Perhaps change the implementation here since it seems redundant
     # HERE Amatrix IS CONVERTED TO SQUARE MATRIX THUS ROWS=COLS
@@ -108,7 +64,9 @@ def SvD(Amatrix):
 
     # NOTE: Why not maximum > 0?
     # Loop is iterated untill the max element does not become 0.
-    while(maximum>0.001):
+    while(maximum>0.01):
+        print("Max: ", maximum)
+
         # iOfMaxElement is the ith index of the max element other then diagonal
         # jOfMaxElement is the jth index of the max element other then diagonal
         
@@ -193,11 +151,11 @@ def SvD(Amatrix):
         # NOTE: All matrices involved are n x n. Since they are all derived from the square matrix of the AMatrix
 
         # oMatrixT x diagonalMatrix x oMatrix
-        diagonalMatrix = matmul(transpose(OrthogonalMatrix),diagonalMatrix)
-        diagonalMatrix = matmul(diagonalMatrix,OrthogonalMatrix)
+        diagonalMatrix = np.matmul(np.transpose(OrthogonalMatrix),diagonalMatrix)
+        diagonalMatrix = np.matmul(diagonalMatrix,OrthogonalMatrix)
         
         # eigenVectorsMatrix x oMatrix
-        eigenVectorsMatrix = matmul(eigenVectorsMatrix,OrthogonalMatrix)
+        eigenVectorsMatrix = np.matmul(eigenVectorsMatrix,OrthogonalMatrix)
 
         # End of loop
         # Simplified findings:
@@ -213,7 +171,7 @@ def SvD(Amatrix):
     
     #eigenVectorsMatrix is a list of eigenvectors -- VT
     # NOTE: !!! This is apparently VT. Let's track a mental note here.
-    eigenVectorsMatrix=transpose(eigenVectorsMatrix)
+    eigenVectorsMatrix=np.transpose(eigenVectorsMatrix)
 
     # eigenVectors are flattened??? I am not sure what happens here. Perhaps a list of arrays? Must investigate
     tempList = list(eigenVectorsMatrix.copy())
@@ -267,7 +225,8 @@ def SvD(Amatrix):
         # As stated in the formula above, it multiplies the entire BMatrix with the corresponding i of the EigenVectorList
         # (m x n)(n x 1)
         # (m x 1)
-        mul=matmul((B),(EigenFinalVectorsTransarr[i]))
+
+        mul=np.matmul((B),(EigenFinalVectorsTransarr[i]))
         
         # NOTE: Not exactly sure what happens here. Perhaps divides each element with the square root of the Eigen Value (the diagonals from earlier)
 
@@ -282,7 +241,8 @@ def SvD(Amatrix):
 
     # Transpose the UMatrix
     # NOTE: I do not understand yet why
-    UMatrix = transpose(UMatrix)
+
+    UMatrix = np.transpose(UMatrix)
 
     # Initializes the final Eigen value list
     finEigVals = []
@@ -313,10 +273,10 @@ def SvD(Amatrix):
     if(len(originalMatrix) > len(originalMatrix[0])):
         # For rows>columns we had taken Atranspose above and we had found U*Sigma*VT of AT
         # Thus this will be equivalent to V*SigmaT*UT of A.
-        Sigma = transpose(Sigma)
+        Sigma = np.transpose(Sigma)
         Utemp = UMatrix.copy()
-        UMatrix = transpose(EigenFinalVectorsTransarr)
-        VT = transpose(Utemp)
+        UMatrix = np.transpose(EigenFinalVectorsTransarr)
+        VT = np.transpose(Utemp)
 
     # NOTE: Fixed the return values from finSingValues to Sigma. Perhaps the dev wants to return a list instead?
     # return UMatrix,finSingVals,VT
