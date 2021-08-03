@@ -1,9 +1,9 @@
+
 import numpy as np
 import math
 
 #--------------------MANUAL LSI--------------------
 pi = math.pi
-
 
 def SvD(Amatrix):
     '''
@@ -66,6 +66,7 @@ def SvD(Amatrix):
     # Loop is iterated untill the max element does not become 0.
     while(maximum>0.01):
         print("Max: ", maximum)
+
         # iOfMaxElement is the ith index of the max element other then diagonal
         # jOfMaxElement is the jth index of the max element other then diagonal
         
@@ -224,6 +225,7 @@ def SvD(Amatrix):
         # As stated in the formula above, it multiplies the entire BMatrix with the corresponding i of the EigenVectorList
         # (m x n)(n x 1)
         # (m x 1)
+
         mul=np.matmul((B),(EigenFinalVectorsTransarr[i]))
         
         # NOTE: Not exactly sure what happens here. Perhaps divides each element with the square root of the Eigen Value (the diagonals from earlier)
@@ -239,6 +241,7 @@ def SvD(Amatrix):
 
     # Transpose the UMatrix
     # NOTE: I do not understand yet why
+
     UMatrix = np.transpose(UMatrix)
 
     # Initializes the final Eigen value list
