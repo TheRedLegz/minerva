@@ -1,6 +1,3 @@
-
-import re
-from nltk.grammar import standard_nonterm_parser
 import numpy as np
 from pprint import pprint
 from math import sqrt, exp
@@ -53,19 +50,19 @@ def man_distance(bmu_row, bmu_col, row, col):
 
 def SOM(data, learn_rate, matrix_size):
 
-    # 1 initialize some constants
+    # 1 Initialize some constants
 
     (steps, num_features) = data.shape
     print(num_features)
     (row, col) = matrix_size
     range_max = row + col # change this
 
-    # 2 create the initial matrix
+    # 2 Create the initial matrix
 
     matrix = np.random.random_sample(size=(row,col,num_features))
     print(matrix)
 
-    # 3 run main logic
+    # 3 Run main logic
 
     steps_max = 5000 # change this
 
@@ -74,10 +71,12 @@ def SOM(data, learn_rate, matrix_size):
     for s in range(steps_max):
         if s % (steps_max/50) == 0: print(str((s/steps_max) * 100) + " percent")
         
-        # update
+        # Update
         percent = 1.0 - ((s * 1.0) / steps_max)
-        #curr_range for manhattan distance updating
+
+        # curr_range for manhattan distance updating
         curr_range = (int)(percent * range_max)
+        
         # curr_range for pythagorean updating
         # curr_range = range_max * exp(-(s / steps_max))
         curr_rate = percent * learn_rate
@@ -103,7 +102,7 @@ def SOM(data, learn_rate, matrix_size):
                 # Weight Updating (w/o man_distance)
                 # Formula: cell+curr_rate*(EXP(-((POWER(bmui-i,2)+POWER(bmuj-j,2))/(num_features???*POWER(curr_range,2)))))*(input- cell)
                 # matrix[i][j] = cell  + curr_rate * (exp(-(((bmu_row - i)**2 + (bmu_col - j)**2)/(num_features*(curr_range**2))))) * (input - cell)
-    pprint(matrix)
+
     return matrix
 
 
@@ -114,17 +113,8 @@ matrix_size = (10, 10)
 texts = lsa.preprocessing()
 lsi_res = np.array(lsa.lsiGensim(texts)).T
 res = lsa.pca(lsi_res, 16)
-# data_file = ".\\Data\\iris_data_012.txt"
-# res = np.loadtxt(data_file, delimiter=",", usecols=range(0,4),
-#     dtype=np.float64)
-# targets = np.loadtxt(data_file, delimiter=",", usecols=range(4,5),
-#     dtype=np.float64)
 
-print(len(res[0]))
 result = SOM(res, .5, matrix_size)
-
-# print(targets)
-# print(result)
 
 print("Constructing U-Matrix from SOM")
 
@@ -164,7 +154,6 @@ mapping = np.empty(shape=matrix_size, dtype=object)
 for i in range(row):
     for j in range(col):
         mapping[i][j] = []
-# print(len(res))
 for t in range(len(res)):
     (m_row, m_col) = find_bmu(result, res[t], matrix_size)
     mapping[m_row][m_col].append(0)
