@@ -24,6 +24,13 @@ lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
 
 def preprocess(string):
+    def remove_links(string):#TODO remove link
+        
+        return res
+    
+    def remove_emojis(string):#TODO remove emojis
+        
+        return res
     
     def remove_numbers(string):
         res = re.sub(r'\d+', '', string)
@@ -54,6 +61,8 @@ def preprocess(string):
         return ' '.join(res)
 
     string = string.lower().strip()
+    string = remove_links(string)
+    string = remove_emojis(string)
     string = remove_numbers(string)
     string = remove_punctation(string)
     string = remove_stop_words(string)
@@ -124,19 +133,10 @@ def tf_idf(document_array, bow = None):
 
     return matrix
 
-def lsiGensim(detokenized):
-    processed_corpus = preprocess_documents(detokenized)
+def lsiGensim(doc_gram):
+    dictionary = Dictionary(doc_gram)
 
-    bigram = Phrases(processed_corpus, min_count=1, threshold=2)
-    bigram_model = Phraser(bigram)
-    
-    res = []
-    for doc in processed_corpus:
-        res.append(bigram_model[doc])
-
-    dictionary = Dictionary(res)
-
-    bow_corpus = [dictionary.doc2bow(text) for text in res]
+    bow_corpus = [dictionary.doc2bow(text) for text in doc_gram]
     tfidf = TfidfModel(bow_corpus, smartirs='npu')
 
     corpus_tfidf = tfidf[bow_corpus]
@@ -198,6 +198,7 @@ data = []
 for i, row in raw.iterrows():
     data.append(row['full_text'])
 
-tf_idf_data = tf_idf(data)
-pprint(tf_idf_data)
-pprint(tf_idf_data.shape)
+(bow,x,y)= bag_of_words(data)
+lsires = lsiGensim(y)
+# pprint(lsires)
+# pprint(lsires.shape)
