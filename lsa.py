@@ -6,7 +6,7 @@ import pandas as pd
 import math
 import re
 from nltk.stem import WordNetLemmatizer
-from nltk.corpus import stopwords
+from nltk.corpus import stopwords, wordnet
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
 from gensim.models import CoherenceModel
@@ -16,10 +16,14 @@ from pprint import pprint
 from IPython.display import display
 import emoji
 
-nltk.download('stopwords')
-nltk.download('wordnet')
+# nltk.download('stopwords')
+# nltk.download('wordnet')
 lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
+
+
+dd = []
+
 
 def preprocess(string):
     def remove_links(string):
@@ -43,6 +47,16 @@ def preprocess(string):
         res = [w for w in split if w not in stop_words]
         return res
 
+    def pos_tag(word):
+        tag = nltk.pos_tag([word])[0][1][0].upper()
+
+        tag_dict = {"J": wordnet.ADJ,
+                    "N": wordnet.NOUN,
+                    "V": wordnet.VERB,
+                    "R": wordnet.ADV}
+        
+        return tag_dict.get(tag, wordnet.NOUN)
+
     def lemmatize_string(string):
         split = string
 
@@ -52,10 +66,30 @@ def preprocess(string):
         res = []
 
         for word in split:
-            lemma = lemmatizer.lemmatize(word)
-            res.append(lemma)
+            possible_lemmas = wordnet._morphy(word, pos=pos_tag(word))
+
+            if possible_lemmas:
+                to_add = None
+
+                for a in possible_lemmas:
+                    if a in dd:
+                        to_add = a
+
+                
+                if to_add is None:
+                    to_add = min(possible_lemmas, key=len)
+                    dd.append(to_add)
+
+                res.append(to_add)
+
+            else:
+                if word not in dd:
+                    dd.append(word)
+
+                res.append(word)
 
         return ' '.join(res)
+
 
     string = string.lower().strip()
     string = remove_links(string)
@@ -106,7 +140,6 @@ def bag_of_words(document_array):
 
     return (bow_grams, unique_grams, doc_grams)
 
-
 def tf_idf(document_array, bow = None):
 
     if bow is None:
@@ -132,8 +165,8 @@ def tf_idf(document_array, bow = None):
 
 def lsiGensim(doc_gram):
     dictionary = Dictionary(doc_gram)
-
     bow_corpus = [dictionary.doc2bow(text) for text in doc_gram]
+
     tfidf = TfidfModel(bow_corpus, smartirs='npu')
 
     corpus_tfidf = tfidf[bow_corpus]
@@ -157,10 +190,10 @@ def lsiGensim(doc_gram):
     plt.show()
     df = pd.DataFrame(list(optimized[corpus_tfidf]))
     # document topic matrix
-    display(df)
+    # display(df)
     df = pd.DataFrame(optimized.projection.u[:,:5])
     # word topic matrix
-    display(df)
+    # display(df)
     topics = optimized.get_topics()
     return topics
     
@@ -172,8 +205,6 @@ def compute_coherence_UMass(corpus, dictionary, k):
     return coherence.get_coherence()
 
 
-
-
 def pca(matrix, k):
     scaler = MinMaxScaler()
 
@@ -182,6 +213,12 @@ def pca(matrix, k):
     pca = PCA(k)
 
     res = pca.fit_transform(scaled)
+
+
+    x = np.arange(k, dtype=int)
+    height = pca.explained_variance_ratio_
+    plt.bar(x, height)
+    plt.show()
     return res
 
 
@@ -195,7 +232,20 @@ data = []
 for i, row in raw.iterrows():
     data.append(row['full_text'])
 
+
+data = [
+    'I want to eat ice cream',
+    'Eating ice cream is all I want',
+    'My sister ate all my ice cream',
+    'Antartica is full of ice'
+]   
+
 (bow,x,y)= bag_of_words(data)
+
+
 lsires = lsiGensim(y)
+
+
+# pca(lsires, 16)
 # pprint(lsires)
 # pprint(lsires.shape)
