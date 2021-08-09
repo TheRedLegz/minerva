@@ -12,7 +12,6 @@ from sklearn.preprocessing import MinMaxScaler
 from pprint import pprint
 from IPython.display import display
 import emoji
-from scipy.sparse import csr_matrix
 
 # nltk.download('stopwords')
 # nltk.download('wordnet')
@@ -164,8 +163,6 @@ def tf_idf(document_array, bow = None):
     for i, row in enumerate(bow):
         word_count = np.sum(row)
 
-        
-
         for j, col in enumerate(row):
             
             tf = col / word_count
@@ -205,13 +202,10 @@ data = []
 for i, row in raw.iterrows():
     data.append(row['full_text'])
 
-(bow, x, y) = bag_of_words(data)
+# (bow, x, y) = bag_of_words(data)
 
-print(data[5])
-print(data[11])
-print(data[18])
-tf_idf_data = tf_idf(y)
-# lsaSklearn(tf_idf_data)
+tf_idf_data = tf_idf(data)
+lsaSklearn(tf_idf_data)
 
 
 # pca(lsires, 16)
