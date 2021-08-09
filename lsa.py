@@ -7,11 +7,8 @@ import math
 import re
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords, wordnet
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import MinMaxScaler
-from gensim.models import CoherenceModel
-from gensim.corpora.dictionary import Dictionary
-from gensim.models import LsiModel, TfidfModel
+from sklearn.decomposition import PCA, TruncatedSVD
+from sklearn.preprocessing import StandardScaler
 from pprint import pprint
 from IPython.display import display
 import emoji
@@ -37,8 +34,17 @@ def preprocess(string):
         res = re.sub(r'\d+', '', string)
         return res
 
+    def remove_non_ascii(string):
+        return string.encode("ascii", "ignore").decode()
+
     def remove_punctation(string):
         res = string.translate(string.maketrans("", "", str.punctuation))
+        res = re.sub('’s', '', res)
+        res = re.sub('’ve', ' have', res)
+        return res
+
+    def remove_html_tags(string):
+        res = re.sub(r'&(gt|lt|amp|nbsp|quot|apos|cent|pound|yen|euro|copy|reg);', '', string)
         return res
 
     # NOTE this returns an array
@@ -90,16 +96,18 @@ def preprocess(string):
 
         return ' '.join(res)
 
-
-    string = string.lower().strip()
+    string = string.lower()
     string = remove_links(string)
     string = remove_emojis(string)
     string = remove_numbers(string)
+    string = remove_html_tags(string)
+    string = remove_non_ascii(string)
     string = remove_punctation(string)
     string = remove_stop_words(string)
     string = lemmatize_string(string)
 
-    return string
+    # print(string)
+    return string.strip()
 
 def bag_of_words(document_array):
 
@@ -107,6 +115,10 @@ def bag_of_words(document_array):
 
     for doc in document_array:
         string = preprocess(doc)
+        
+        if len(string) == 0:
+            continue
+
         unigrams = nltk.word_tokenize(string)
         bigrams = nltk.bigrams(unigrams)
         bigrams = map(lambda x: x[0] + '_' + x[1], bigrams)
@@ -149,101 +161,74 @@ def tf_idf(document_array, bow = None):
     doc_count = len(document_array)
 
     for i, row in enumerate(bow):
-
         word_count = np.sum(row)
 
         for j, col in enumerate(row):
             
             tf = col / word_count
-        
+            
             has_word_count = np.count_nonzero(bow[:, j:j+1])
-            idf = math.log(doc_count / (has_word_count + 1))
+            idf = math.log((doc_count / (has_word_count)))
 
-            matrix[i][j] = tf * idf
-
+            matrix[i][j] = tf * idf 
     return matrix
 
-def lsiGensim(doc_gram):
-    dictionary = Dictionary(doc_gram)
-    bow_corpus = [dictionary.doc2bow(text) for text in doc_gram]
-
-    tfidf = TfidfModel(bow_corpus, smartirs='npu')
-
-    corpus_tfidf = tfidf[bow_corpus]
-
-
-    coherenceList_UMass = []
-    numTopicsList = [35,36,37,38,39,40]
-    for k in numTopicsList:
-        c_UMass = compute_coherence_UMass(corpus_tfidf, dictionary, k)
-        coherenceList_UMass.append(c_UMass)
-    plt.plot(numTopicsList, coherenceList_UMass)
-    plt.show()
-    minpos = coherenceList_UMass.index(min(coherenceList_UMass))
-
-
-    optimized = LsiModel(corpus=corpus_tfidf, num_topics=numTopicsList[minpos])
-    s = np.array(optimized.projection.s)
-    x = np.arange(len(s), step=1, dtype=np.int8)
-    plt.bar(x, s)
-    # singular values
-    plt.show()
-    df = pd.DataFrame(list(optimized[corpus_tfidf]))
-    # document topic matrix
-    # display(df)
-    df = pd.DataFrame(optimized.projection.u[:,:5])
-    # word topic matrix
-    # display(df)
-    topics = optimized.get_topics()
-    return topics
+def lsaSklearn(tfidf_matrix):
+    (x, y) = tfidf_matrix.shape
+    lsa = TruncatedSVD(n_components= y-1, algorithm="randomized", n_iter=5, random_state= 42)
+    lsa.fit_transform(tfidf_matrix)
+    sigma = np.diag(lsa.singular_values_)
+    v_t = lsa.components_
+    # Word x Topic Matrix
+    res = np.dot(sigma, v_t)
+    return np.transpose(res)
     
-
-def compute_coherence_UMass(corpus, dictionary, k):
-    lsi_model = LsiModel(corpus=corpus, num_topics=k)
-    coherence = CoherenceModel(model=lsi_model,corpus=corpus, dictionary=dictionary,coherence='u_mass')
-
-    return coherence.get_coherence()
-
-
-def pca(matrix, k):
-    scaler = MinMaxScaler()
-
+def pca(matrix):
+    (x, y) = matrix.shape
+    scaler = StandardScaler()
     scaled = scaler.fit_transform(matrix)
+    
+    pca = PCA(n_components=y)
+    pca.fit(scaled)
+    cumsum = pca.explained_variance_ratio_.cumsum()
+    print(pca.explained_variance_ratio_.cumsum())
+    optimal_components = y
+    
+    for i, sum in enumerate(cumsum):
+        if sum > .80:
+            optimal_components = i + 1
+            break
 
-    pca = PCA(k)
-
-    res = pca.fit_transform(scaled)
-
-
-    x = np.arange(k, dtype=int)
-    height = pca.explained_variance_ratio_
-    plt.bar(x, height)
-    plt.show()
+    pca_final = PCA(n_components=optimal_components)
+    res = pca_final.fit_transform(scaled)
+    print(pca_final.explained_variance_ratio_.cumsum())
     return res
 
 
 # DRIVER HERE
-
-
 
 raw = pd.read_json('sample.json')
 data = []
 
 for i, row in raw.iterrows():
     data.append(row['full_text'])
+    
+data = ["I want to eat ice cream",
+        "Eating ice cream is all I want",
+        "My sister eat all my ice cream",
+        "Antartica is full of ice",
+        ]
 
+(bow, x, y) = bag_of_words(data)
+# pprint(x)
 
-data = [
-    'I want to eat ice cream',
-    'Eating ice cream is all I want',
-    'My sister ate all my ice cream',
-    'Antartica is full of ice'
-]   
-
-(bow,x,y)= bag_of_words(data)
-
-
-lsires = lsiGensim(y)
+tf_idf_data = tf_idf(data)
+# pprint(tf_idf_data)
+# pprint(tf_idf_data)
+lsares = lsaSklearn(tf_idf_data)
+pcares = pca(lsares)
+pprint(pcares)
+pprint(pcares.shape)
 
 
 # pca(lsires, 16)
