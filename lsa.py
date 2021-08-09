@@ -7,14 +7,12 @@ import math
 import re
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords, wordnet
-from sklearn.decomposition import PCA
+from sklearn.decomposition import PCA, TruncatedSVD
 from sklearn.preprocessing import MinMaxScaler
-from gensim.models import CoherenceModel
-from gensim.corpora.dictionary import Dictionary
-from gensim.models import LsiModel, TfidfModel
 from pprint import pprint
 from IPython.display import display
 import emoji
+from scipy.sparse import csr_matrix
 
 # nltk.download('stopwords')
 # nltk.download('wordnet')
@@ -164,7 +162,6 @@ def tf_idf(document_array, bow = None):
     doc_count = len(document_array)
 
     for i, row in enumerate(bow):
-
         word_count = np.sum(row)
 
         
@@ -172,25 +169,20 @@ def tf_idf(document_array, bow = None):
         for j, col in enumerate(row):
             
             tf = col / word_count
-        
+            
             has_word_count = np.count_nonzero(bow[:, j:j+1])
-            idf = math.log(doc_count / (has_word_count + 1))
+            idf = math.log((doc_count / (has_word_count + 1) + 1))
 
-            matrix[i][j] = tf * idf
-
+            matrix[i][j] = tf * idf 
     return matrix
 
-def lsiGensim(doc_gram):
-    dictionary = Dictionary(doc_gram)
-    bow_corpus = [dictionary.doc2bow(text) for text in doc_gram]
-
-    tfidf = TfidfModel(bow_corpus, smartirs='npu')
-
-    corpus_tfidf = tfidf[bow_corpus]
-
-    optimized = LsiModel(corpus=corpus_tfidf)
-    
-    return optimized.get_topics()
+def lsaSklearn(tfidf_matrix):
+    lsa = TruncatedSVD(n_components= 100, algorithm="randomized", n_iter=5, random_state= 42)
+    lsa.fit(tfidf_matrix)
+    sigma = lsa.singular_values_
+    v_t = lsa.components_
+    pprint(sigma)
+    pprint(v_t)
     
 def pca(matrix, k):
 
@@ -215,4 +207,13 @@ for i, row in raw.iterrows():
 
 (bow, x, y) = bag_of_words(data)
 
-pprint(x)
+print(data[5])
+print(data[11])
+print(data[18])
+tf_idf_data = tf_idf(y)
+# lsaSklearn(tf_idf_data)
+
+
+# pca(lsires, 16)
+# pprint(lsires)
+# pprint(lsires.shape)
