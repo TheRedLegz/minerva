@@ -37,8 +37,17 @@ def preprocess(string):
         res = re.sub(r'\d+', '', string)
         return res
 
+    def remove_non_ascii(string):
+        return string.encode("ascii", "ignore").decode()
+
     def remove_punctation(string):
         res = string.translate(string.maketrans("", "", str.punctuation))
+        res = re.sub('’s', '', res)
+        res = re.sub('’ve', ' have', res)
+        return res
+
+    def remove_html_tags(string):
+        res = re.sub(r'&(gt|lt|amp|nbsp|quot|apos|cent|pound|yen|euro|copy|reg);', '', string)
         return res
 
     # NOTE this returns an array
@@ -90,16 +99,18 @@ def preprocess(string):
 
         return ' '.join(res)
 
-
-    string = string.lower().strip()
+    string = string.lower()
     string = remove_links(string)
     string = remove_emojis(string)
     string = remove_numbers(string)
+    string = remove_html_tags(string)
+    string = remove_non_ascii(string)
     string = remove_punctation(string)
     string = remove_stop_words(string)
     string = lemmatize_string(string)
 
-    return string
+    # print(string)
+    return string.strip()
 
 def bag_of_words(document_array):
 
@@ -107,6 +118,10 @@ def bag_of_words(document_array):
 
     for doc in document_array:
         string = preprocess(doc)
+        
+        if len(string) == 0:
+            continue
+
         unigrams = nltk.word_tokenize(string)
         bigrams = nltk.bigrams(unigrams)
         bigrams = map(lambda x: x[0] + '_' + x[1], bigrams)
@@ -152,6 +167,8 @@ def tf_idf(document_array, bow = None):
 
         word_count = np.sum(row)
 
+        
+
         for j, col in enumerate(row):
             
             tf = col / word_count
@@ -171,60 +188,24 @@ def lsiGensim(doc_gram):
 
     corpus_tfidf = tfidf[bow_corpus]
 
-
-    coherenceList_UMass = []
-    numTopicsList = [35,36,37,38,39,40]
-    for k in numTopicsList:
-        c_UMass = compute_coherence_UMass(corpus_tfidf, dictionary, k)
-        coherenceList_UMass.append(c_UMass)
-    plt.plot(numTopicsList, coherenceList_UMass)
-    plt.show()
-    minpos = coherenceList_UMass.index(min(coherenceList_UMass))
-
-
-    optimized = LsiModel(corpus=corpus_tfidf, num_topics=numTopicsList[minpos])
-    s = np.array(optimized.projection.s)
-    x = np.arange(len(s), step=1, dtype=np.int8)
-    plt.bar(x, s)
-    # singular values
-    plt.show()
-    df = pd.DataFrame(list(optimized[corpus_tfidf]))
-    # document topic matrix
-    # display(df)
-    df = pd.DataFrame(optimized.projection.u[:,:5])
-    # word topic matrix
-    # display(df)
-    topics = optimized.get_topics()
-    return topics
+    optimized = LsiModel(corpus=corpus_tfidf)
     
-
-def compute_coherence_UMass(corpus, dictionary, k):
-    lsi_model = LsiModel(corpus=corpus, num_topics=k)
-    coherence = CoherenceModel(model=lsi_model,corpus=corpus, dictionary=dictionary,coherence='u_mass')
-
-    return coherence.get_coherence()
-
-
+    return optimized.get_topics()
+    
 def pca(matrix, k):
-    scaler = MinMaxScaler()
-
-    scaled = scaler.fit_transform(matrix)
 
     pca = PCA(k)
 
-    res = pca.fit_transform(scaled)
+    res = pca.fit_transform(matrix)
+
+    print(pca.explained_variance_.cumsum())
 
 
-    x = np.arange(k, dtype=int)
-    height = pca.explained_variance_ratio_
-    plt.bar(x, height)
-    plt.show()
+
     return res
 
 
 # DRIVER HERE
-
-
 
 raw = pd.read_json('sample.json')
 data = []
@@ -232,20 +213,6 @@ data = []
 for i, row in raw.iterrows():
     data.append(row['full_text'])
 
+(bow, x, y) = bag_of_words(data)
 
-data = [
-    'I want to eat ice cream',
-    'Eating ice cream is all I want',
-    'My sister ate all my ice cream',
-    'Antartica is full of ice'
-]   
-
-(bow,x,y)= bag_of_words(data)
-
-
-lsires = lsiGensim(y)
-
-
-# pca(lsires, 16)
-# pprint(lsires)
-# pprint(lsires.shape)
+pprint(x)
