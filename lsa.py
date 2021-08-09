@@ -230,6 +230,3 @@ for i, row in raw.iterrows():
 tf_idf_data = tf_idf(data)
 lsares = lsaSklearn(tf_idf_data)
 pcares = pca(lsares)
-
-pprint(pcares)
-pprint(pcares.shape)

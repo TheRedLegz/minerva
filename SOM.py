@@ -1,10 +1,11 @@
+import lsa
 import numpy as np
+import pandas as pd
 from pprint import pprint
 from math import sqrt, exp
-import lsa
 from matplotlib import pyplot as plt
 
-np.random.seed(10)
+np.random.seed(101)
 
 
 def most_common(lst, n):
@@ -53,14 +54,12 @@ def SOM(data, learn_rate, matrix_size):
     # 1 Initialize some constants
 
     (steps, num_features) = data.shape
-    print(num_features)
     (row, col) = matrix_size
     range_max = row + col # change this
 
     # 2 Create the initial matrix
 
     matrix = np.random.random_sample(size=(row,col,num_features))
-    print(matrix)
 
     # 3 Run main logic
 
@@ -69,7 +68,7 @@ def SOM(data, learn_rate, matrix_size):
     indices = np.zeros(len(data))
 
     for s in range(steps_max):
-        if s % (steps_max/50) == 0: print(str((s/steps_max) * 100) + " percent")
+        if s % (steps_max/50) == 0: print(str((s/steps_max) * 100.00) + " percent")
         
         # Update
         percent = 1.0 - ((s * 1.0) / steps_max)
@@ -107,12 +106,35 @@ def SOM(data, learn_rate, matrix_size):
 
 
 
-matrix_size = (10, 10)
-(row, col) = matrix_size
 
-texts = lsa.preprocessing()
-lsi_res = np.array(lsa.lsiGensim(texts)).T
-res = lsa.pca(lsi_res, 16)
+# LSA over here
+
+raw = pd.read_json('sample.json')
+data = []
+
+for i, jsonRow in raw.iterrows():
+    data.append(jsonRow['full_text'])
+
+(bow, x, y) = lsa.bag_of_words(data)
+tf_idf_data = lsa.tf_idf(data)
+print(tf_idf_data.shape)
+
+# np.savetxt("near_cebu", tf_idf_data, delimiter = ', ')
+# tf_idf_data = np.round_(tf_idf_data, decimals = 3)
+lsares = lsa.lsaSklearn(tf_idf_data)
+res = lsa.pca(lsares)
+
+print(res.shape)
+(grams, __) = res.shape
+
+matrix_dim = 1
+while (matrix_dim)**2 <= grams:
+    matrix_dim += 1
+
+print(matrix_dim)
+
+matrix_size = (matrix_dim, matrix_dim)
+(row, col) = matrix_size
 
 result = SOM(res, .5, matrix_size)
 
@@ -147,24 +169,24 @@ for i in range(row):
 plt.imshow(u_matrix, cmap='gray') 
 plt.show()
 
-print("Associating each data label to one map node ")
+# print("Associating each data label to one map node ")
 
-mapping = np.empty(shape=matrix_size, dtype=object)
+# mapping = np.empty(shape=matrix_size, dtype=object)
 
-for i in range(row):
-    for j in range(col):
-        mapping[i][j] = []
-for t in range(len(res)):
-    (m_row, m_col) = find_bmu(result, res[t], matrix_size)
-    mapping[m_row][m_col].append(0)
+# for i in range(row):
+#     for j in range(col):
+#         mapping[i][j] = []
+# for t in range(len(res)):
+#     (m_row, m_col) = find_bmu(result, res[t], matrix_size)
+#     mapping[m_row][m_col].append(0)
 
 
-label_map = np.zeros(shape=matrix_size, dtype=np.int)
+# label_map = np.zeros(shape=matrix_size, dtype=np.int)
 
-for i in range(row):
-    for j in range(col):
-        label_map[i][j] = most_common(mapping[i][j], 3)
+# for i in range(row):
+#     for j in range(col):
+#         label_map[i][j] = most_common(mapping[i][j], 3)
 
-plt.imshow(label_map, cmap=plt.cm.get_cmap('terrain_r', 4))
-plt.colorbar()
-plt.show()
+# plt.imshow(label_map, cmap=plt.cm.get_cmap('terrain_r', 4))
+# plt.colorbar()
+# plt.show()
