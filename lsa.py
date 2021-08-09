@@ -176,12 +176,12 @@ def tf_idf(document_array, bow = None):
 def lsaSklearn(tfidf_matrix):
     (x, y) = tfidf_matrix.shape
     lsa = TruncatedSVD(n_components= y-1, algorithm="randomized", n_iter=5, random_state= 42)
-    lsa.fit_transform(tfidf_matrix)
-    sigma = np.diag(lsa.singular_values_)
-    v_t = lsa.components_
-    # Word x Topic Matrix
-    res = np.dot(sigma, v_t)
-    return np.transpose(res)
+    res = lsa.fit_transform(tfidf_matrix)
+    # sigma = np.diag(lsa.singular_values_)
+    # v_t = lsa.components_
+    # # Word x Topic Matrix
+    # res = np.dot(sigma, v_t)
+    return res
     
 def pca(matrix):
     (x, y) = matrix.shape
