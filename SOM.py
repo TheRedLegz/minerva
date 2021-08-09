@@ -1,7 +1,8 @@
+import lsa
 import numpy as np
+import pandas as pd
 from pprint import pprint
 from math import sqrt, exp
-import lsa
 from matplotlib import pyplot as plt
 
 np.random.seed(10)
@@ -107,12 +108,22 @@ def SOM(data, learn_rate, matrix_size):
 
 
 
-matrix_size = (10, 10)
+matrix_size = (16, 16)
 (row, col) = matrix_size
 
-texts = lsa.preprocessing()
-lsi_res = np.array(lsa.lsiGensim(texts)).T
-res = lsa.pca(lsi_res, 16)
+# LSA over here
+
+raw = pd.read_json('sample.json')
+data = []
+
+for i, jsonRow in raw.iterrows():
+    data.append(jsonRow['full_text'])
+
+(bow, x, y) = lsa.bag_of_words(data)
+
+tf_idf_data = lsa.tf_idf(data)
+lsares = lsa.lsaSklearn(tf_idf_data)
+res = lsa.pca(lsares)
 
 result = SOM(res, .5, matrix_size)
 

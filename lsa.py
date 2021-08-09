@@ -213,11 +213,11 @@ data = []
 for i, row in raw.iterrows():
     data.append(row['full_text'])
     
-data = ["I want to eat ice cream",
-        "Eating ice cream is all I want",
-        "My sister eat all my ice cream",
-        "Antartica is full of ice",
-        ]
+# data = ["I want to eat ice cream",
+#         "Eating ice cream is all I want",
+#         "My sister eat all my ice cream",
+#         "Antartica is full of ice",
+#         ]
 
 (bow, x, y) = bag_of_words(data)
 # pprint(x)
@@ -227,8 +227,6 @@ tf_idf_data = tf_idf(data)
 # pprint(tf_idf_data)
 lsares = lsaSklearn(tf_idf_data)
 pcares = pca(lsares)
-pprint(pcares)
-pprint(pcares.shape)
 
 
 # pca(lsires, 16)
