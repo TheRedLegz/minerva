@@ -176,10 +176,23 @@ def tf_idf(document_array, bow = None):
 def lsaSklearn(tfidf_matrix):
     (x, y) = tfidf_matrix.shape
     lsa = TruncatedSVD(n_components= y-1, algorithm="randomized", n_iter=5, random_state= 42)
-    lsa.fit_transform(tfidf_matrix)
-    sigma = np.diag(lsa.singular_values_)
-    v_t = lsa.components_
-    # Word x Topic Matrix
+    lsa.fit(tfidf_matrix)
+
+    cumsum = lsa.explained_variance_ratio_.cumsum()
+    optimal_num = y - 1
+
+    for i, a in enumerate(cumsum):
+        if a > .8:
+            optimal_num = i + 1
+            break
+    
+
+    lsa_final = TruncatedSVD(n_components=optimal_num, algorithm="randomized", n_iter=5, random_state= 42)
+    lsa_final.fit(tfidf_matrix)
+
+    sigma = np.diag(lsa_final.singular_values_)
+    v_t = lsa_final.components_
+    
     res = np.dot(sigma, v_t)
     return np.transpose(res)
     
@@ -191,7 +204,7 @@ def pca(matrix):
     pca = PCA(n_components=y)
     pca.fit(scaled)
     cumsum = pca.explained_variance_ratio_.cumsum()
-    print(pca.explained_variance_ratio_.cumsum())
+
     optimal_components = y
     
     for i, sum in enumerate(cumsum):
@@ -201,7 +214,7 @@ def pca(matrix):
 
     pca_final = PCA(n_components=optimal_components)
     res = pca_final.fit_transform(scaled)
-    print(pca_final.explained_variance_ratio_.cumsum())
+
     return res
 
 
@@ -213,22 +226,7 @@ data = []
 for i, row in raw.iterrows():
     data.append(row['full_text'])
     
-# data = ["I want to eat ice cream",
-#         "Eating ice cream is all I want",
-#         "My sister eat all my ice cream",
-#         "Antartica is full of ice",
-#         ]
-
-(bow, x, y) = bag_of_words(data)
-# pprint(x)
 
 tf_idf_data = tf_idf(data)
-# pprint(tf_idf_data)
-# pprint(tf_idf_data)
 lsares = lsaSklearn(tf_idf_data)
 pcares = pca(lsares)
-
-
-# pca(lsires, 16)
-# pprint(lsires)
-# pprint(lsires.shape)
