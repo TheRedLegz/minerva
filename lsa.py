@@ -8,7 +8,7 @@ import re
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords, wordnet
 from sklearn.decomposition import PCA, TruncatedSVD
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
 from pprint import pprint
 from IPython.display import display
 import emoji
@@ -168,29 +168,40 @@ def tf_idf(document_array, bow = None):
             tf = col / word_count
             
             has_word_count = np.count_nonzero(bow[:, j:j+1])
-            idf = math.log((doc_count / (has_word_count + 1) + 1))
+            idf = math.log((doc_count / (has_word_count)))
 
             matrix[i][j] = tf * idf 
     return matrix
 
 def lsaSklearn(tfidf_matrix):
-    lsa = TruncatedSVD(n_components= 100, algorithm="randomized", n_iter=5, random_state= 42)
-    lsa.fit(tfidf_matrix)
-    sigma = lsa.singular_values_
+    (x, y) = tfidf_matrix.shape
+    lsa = TruncatedSVD(n_components= y-1, algorithm="randomized", n_iter=5, random_state= 42)
+    lsa.fit_transform(tfidf_matrix)
+    sigma = np.diag(lsa.singular_values_)
     v_t = lsa.components_
-    pprint(sigma)
-    pprint(v_t)
+    # Word x Topic Matrix
+    res = np.dot(sigma, v_t)
+    return np.transpose(res)
     
-def pca(matrix, k):
+def pca(matrix):
+    (x, y) = matrix.shape
+    scaler = StandardScaler()
+    scaled = scaler.fit_transform(matrix)
+    
+    pca = PCA(n_components=y)
+    pca.fit(scaled)
+    cumsum = pca.explained_variance_ratio_.cumsum()
+    print(pca.explained_variance_ratio_.cumsum())
+    optimal_components = y
+    
+    for i, sum in enumerate(cumsum):
+        if sum > .80:
+            optimal_components = i + 1
+            break
 
-    pca = PCA(k)
-
-    res = pca.fit_transform(matrix)
-
-    print(pca.explained_variance_.cumsum())
-
-
-
+    pca_final = PCA(n_components=optimal_components)
+    res = pca_final.fit_transform(scaled)
+    print(pca_final.explained_variance_ratio_.cumsum())
     return res
 
 
@@ -201,11 +212,23 @@ data = []
 
 for i, row in raw.iterrows():
     data.append(row['full_text'])
+    
+data = ["I want to eat ice cream",
+        "Eating ice cream is all I want",
+        "My sister eat all my ice cream",
+        "Antartica is full of ice",
+        ]
 
-# (bow, x, y) = bag_of_words(data)
+(bow, x, y) = bag_of_words(data)
+# pprint(x)
 
 tf_idf_data = tf_idf(data)
-lsaSklearn(tf_idf_data)
+# pprint(tf_idf_data)
+# pprint(tf_idf_data)
+lsares = lsaSklearn(tf_idf_data)
+pcares = pca(lsares)
+pprint(pcares)
+pprint(pcares.shape)
 
 
 # pca(lsires, 16)
