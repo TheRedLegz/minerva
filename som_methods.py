@@ -8,8 +8,8 @@ import re
 import emoji
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords, wordnet
-# from sklearn.decomposition import PCA, TruncatedSVD
-# from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA, TruncatedSVD
+from sklearn.preprocessing import StandardScaler
 # from pprint import pprint
 # from IPython.display import display
 
@@ -175,3 +175,47 @@ def tf_idf(document_array, bow = None):
 
             matrix[i][j] = tf * idf 
     return matrix
+
+def lsaSklearn(tfidf_matrix):
+    (x, y) = tfidf_matrix.shape
+    lsa = TruncatedSVD(n_components= y-1, algorithm="randomized", n_iter=5, random_state= 42)
+    lsa.fit(tfidf_matrix)
+
+    cumsum = lsa.explained_variance_ratio_.cumsum()
+    optimal_num = y - 1
+
+    for i, a in enumerate(cumsum):
+        if a > .8:
+            optimal_num = i + 1
+            break
+    
+
+    lsa_final = TruncatedSVD(n_components=optimal_num, algorithm="randomized", n_iter=5, random_state= 42)
+    lsa_final.fit(tfidf_matrix)
+
+    sigma = np.diag(lsa_final.singular_values_)
+    v_t = lsa_final.components_
+    
+    res = np.dot(sigma, v_t)
+    return np.transpose(res)
+    
+def pca(matrix):
+    (x, y) = matrix.shape
+    scaler = StandardScaler()
+    scaled = scaler.fit_transform(matrix)
+    
+    pca = PCA(n_components=y)
+    pca.fit(scaled)
+    cumsum = pca.explained_variance_ratio_.cumsum()
+
+    optimal_components = y
+    
+    for i, sum in enumerate(cumsum):
+        if sum > .80:
+            optimal_components = i + 1
+            break
+
+    pca_final = PCA(n_components=optimal_components)
+    res = pca_final.fit_transform(scaled)
+
+    return res
