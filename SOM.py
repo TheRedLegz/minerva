@@ -55,7 +55,7 @@ def SOM(data, learn_rate, matrix_size):
 
     (steps, num_features) = data.shape
     (row, col) = matrix_size
-    range_max = row + col # change this
+    range_max = row + col 
 
     # 2 Create the initial matrix
 
@@ -63,7 +63,7 @@ def SOM(data, learn_rate, matrix_size):
 
     # 3 Run main logic
 
-    steps_max = 5000 # change this
+    steps_max = 5000 
 
     indices = np.zeros(len(data))
 
@@ -98,6 +98,9 @@ def SOM(data, learn_rate, matrix_size):
                 if man_distance(bmu_row, bmu_col, i, j) < curr_range:
                     matrix[i][j] = cell + curr_rate * (input-cell)
 
+                    # [1, 0.4, 0.5, ..., 9n]
+                    # [0.3, 0.6, 1, ..., 9n]
+
                 # Weight Updating (w/o man_distance)
                 # Formula: cell+curr_rate*(EXP(-((POWER(bmui-i,2)+POWER(bmuj-j,2))/(num_features???*POWER(curr_range,2)))))*(input- cell)
                 # matrix[i][j] = cell  + curr_rate * (exp(-(((bmu_row - i)**2 + (bmu_col - j)**2)/(num_features*(curr_range**2))))) * (input - cell)
@@ -117,14 +120,12 @@ for i, jsonRow in raw.iterrows():
 
 (bow, x, y) = lsa.bag_of_words(data)
 tf_idf_data = lsa.tf_idf(data)
-print(tf_idf_data.shape)
 
 # np.savetxt("near_cebu", tf_idf_data, delimiter = ', ')
 # tf_idf_data = np.round_(tf_idf_data, decimals = 3)
 lsares = lsa.lsaSklearn(tf_idf_data)
 res = lsa.pca(lsares)
 
-print(res.shape)
 (grams, __) = res.shape
 
 matrix_dim = 1
