@@ -1,0 +1,6930 @@
+[
+  {
+    "created_at": "Sun Apr 19 15:31:56 +0000 2020",
+    "id": 1251896319351730200,
+    "id_str": "1251896319351730176",
+    "full_text": "Thank you @this_is_arise for the free 60 day access to the online class! Can’t wait to get started! Blessings! 🙏🏻 https://t.co/3NNuxmwc9y",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      113
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [
+        {
+          "screen_name": "this_is_arise",
+          "name": "ARISE",
+          "id": 842136471653896200,
+          "id_str": "842136471653896192",
+          "indices": [
+            10,
+            24
+          ]
+        }
+      ],
+      "urls": [],
+      "media": [
+        {
+          "id": 1251896301748252700,
+          "id_str": "1251896301748252674",
+          "indices": [
+            114,
+            137
+          ],
+          "media_url": "http://pbs.twimg.com/media/EV-hDblUcAIsS61.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EV-hDblUcAIsS61.jpg",
+          "url": "https://t.co/3NNuxmwc9y",
+          "display_url": "pic.twitter.com/3NNuxmwc9y",
+          "expanded_url": "https://twitter.com/sheeneries/status/1251896319351730176/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1536,
+            "height": 2048,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 440,
+                "h": 860,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 102,
+                "h": 1536,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1751,
+                "w": 1536
+              },
+              {
+                "x": 256,
+                "y": 0,
+                "h": 2048,
+                "w": 1024
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2048,
+                "w": 1536
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 1536,
+              "h": 2048,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1251896301748252700,
+          "id_str": "1251896301748252674",
+          "indices": [
+            114,
+            137
+          ],
+          "media_url": "http://pbs.twimg.com/media/EV-hDblUcAIsS61.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EV-hDblUcAIsS61.jpg",
+          "url": "https://t.co/3NNuxmwc9y",
+          "display_url": "pic.twitter.com/3NNuxmwc9y",
+          "expanded_url": "https://twitter.com/sheeneries/status/1251896319351730176/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1536,
+            "height": 2048,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 440,
+                "h": 860,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 102,
+                "h": 1536,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1751,
+                "w": 1536
+              },
+              {
+                "x": 256,
+                "y": 0,
+                "h": 2048,
+                "w": 1024
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2048,
+                "w": 1536
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 1536,
+              "h": 2048,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1251896301748252674",
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 61,
+                  "green": 55,
+                  "blue": 55
+                },
+                "percentage": 44
+              },
+              {
+                "rgb": {
+                  "red": 130,
+                  "green": 124,
+                  "blue": 116
+                },
+                "percentage": 25.25
+              },
+              {
+                "rgb": {
+                  "red": 223,
+                  "green": 118,
+                  "blue": 147
+                },
+                "percentage": 9.48
+              },
+              {
+                "rgb": {
+                  "red": 22,
+                  "green": 26,
+                  "blue": 56
+                },
+                "percentage": 6.12
+              },
+              {
+                "rgb": {
+                  "red": 219,
+                  "green": 217,
+                  "blue": 248
+                },
+                "percentage": 5.78
+              }
+            ]
+          },
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 85216319,
+    "user_id_str": "85216319",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "01f0b47b0f09494d",
+      "url": "https://api.twitter.com/1.1/geo/id/01f0b47b0f09494d.json",
+      "place_type": "city",
+      "name": "Toledo City",
+      "full_name": "Toledo City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.582125,
+              10.2832044
+            ],
+            [
+              123.7746639,
+              10.2832044
+            ],
+            [
+              123.7746639,
+              10.4531519
+            ],
+            [
+              123.582125,
+              10.4531519
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 3,
+    "reply_count": 2,
+    "quote_count": 0,
+    "conversation_id": 1251896319351730200,
+    "conversation_id_str": "1251896319351730176",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null,
+    "self_thread": {
+      "id": 1251896319351730200,
+      "id_str": "1251896319351730176"
+    }
+  },
+  {
+    "created_at": "Tue Sep 08 16:01:01 +0000 2020",
+    "id": 1303362717382656000,
+    "id_str": "1303362717382656000",
+    "full_text": "imma drop these nalang sad here (conyo ra?) online class tingzz 😴 https://t.co/pWtXTFuWat",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      65
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [],
+      "media": [
+        {
+          "id": 1303362678191263700,
+          "id_str": "1303362678191263745",
+          "indices": [
+            66,
+            89
+          ],
+          "media_url": "http://pbs.twimg.com/media/EhZ5c0cXkAE5ckw.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EhZ5c0cXkAE5ckw.jpg",
+          "url": "https://t.co/pWtXTFuWat",
+          "display_url": "pic.twitter.com/pWtXTFuWat",
+          "expanded_url": "https://twitter.com/_zoletamycaeel/status/1303362717382656000/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 960,
+            "height": 1280,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 467,
+                "h": 538,
+                "w": 960
+              },
+              {
+                "x": 0,
+                "y": 256,
+                "h": 960,
+                "w": 960
+              },
+              {
+                "x": 0,
+                "y": 186,
+                "h": 1094,
+                "w": 960
+              },
+              {
+                "x": 224,
+                "y": 0,
+                "h": 1280,
+                "w": 640
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1280,
+                "w": 960
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 960,
+              "h": 1280,
+              "resize": "fit"
+            }
+          }
+        },
+        {
+          "id": 1303362698713981000,
+          "id_str": "1303362698713980929",
+          "indices": [
+            66,
+            89
+          ],
+          "media_url": "http://pbs.twimg.com/media/EhZ5eA5XYAEstZL.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EhZ5eA5XYAEstZL.jpg",
+          "url": "https://t.co/pWtXTFuWat",
+          "display_url": "pic.twitter.com/pWtXTFuWat",
+          "expanded_url": "https://twitter.com/_zoletamycaeel/status/1303362717382656000/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 960,
+            "height": 1280,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 403,
+                "h": 538,
+                "w": 960
+              },
+              {
+                "x": 0,
+                "y": 192,
+                "h": 960,
+                "w": 960
+              },
+              {
+                "x": 0,
+                "y": 125,
+                "h": 1094,
+                "w": 960
+              },
+              {
+                "x": 224,
+                "y": 0,
+                "h": 1280,
+                "w": 640
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1280,
+                "w": 960
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "w": 960,
+              "h": 1280,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1303362678191263700,
+          "id_str": "1303362678191263745",
+          "indices": [
+            66,
+            89
+          ],
+          "media_url": "http://pbs.twimg.com/media/EhZ5c0cXkAE5ckw.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EhZ5c0cXkAE5ckw.jpg",
+          "url": "https://t.co/pWtXTFuWat",
+          "display_url": "pic.twitter.com/pWtXTFuWat",
+          "expanded_url": "https://twitter.com/_zoletamycaeel/status/1303362717382656000/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 960,
+            "height": 1280,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 467,
+                "h": 538,
+                "w": 960
+              },
+              {
+                "x": 0,
+                "y": 256,
+                "h": 960,
+                "w": 960
+              },
+              {
+                "x": 0,
+                "y": 186,
+                "h": 1094,
+                "w": 960
+              },
+              {
+                "x": 224,
+                "y": 0,
+                "h": 1280,
+                "w": 640
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1280,
+                "w": 960
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 960,
+              "h": 1280,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1303362678191263745",
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 161,
+                  "green": 154,
+                  "blue": 135
+                },
+                "percentage": 38.35
+              },
+              {
+                "rgb": {
+                  "red": 190,
+                  "green": 130,
+                  "blue": 126
+                },
+                "percentage": 20.26
+              },
+              {
+                "rgb": {
+                  "red": 63,
+                  "green": 149,
+                  "blue": 212
+                },
+                "percentage": 11.72
+              },
+              {
+                "rgb": {
+                  "red": 12,
+                  "green": 185,
+                  "blue": 208
+                },
+                "percentage": 10.35
+              },
+              {
+                "rgb": {
+                  "red": 4,
+                  "green": 211,
+                  "blue": 200
+                },
+                "percentage": 3.47
+              }
+            ]
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        },
+        {
+          "id": 1303362698713981000,
+          "id_str": "1303362698713980929",
+          "indices": [
+            66,
+            89
+          ],
+          "media_url": "http://pbs.twimg.com/media/EhZ5eA5XYAEstZL.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EhZ5eA5XYAEstZL.jpg",
+          "url": "https://t.co/pWtXTFuWat",
+          "display_url": "pic.twitter.com/pWtXTFuWat",
+          "expanded_url": "https://twitter.com/_zoletamycaeel/status/1303362717382656000/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 960,
+            "height": 1280,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 403,
+                "h": 538,
+                "w": 960
+              },
+              {
+                "x": 0,
+                "y": 192,
+                "h": 960,
+                "w": 960
+              },
+              {
+                "x": 0,
+                "y": 125,
+                "h": 1094,
+                "w": 960
+              },
+              {
+                "x": 224,
+                "y": 0,
+                "h": 1280,
+                "w": 640
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1280,
+                "w": 960
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "w": 960,
+              "h": 1280,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1303362698713980929",
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 158,
+                  "green": 151,
+                  "blue": 132
+                },
+                "percentage": 33.85
+              },
+              {
+                "rgb": {
+                  "red": 175,
+                  "green": 120,
+                  "blue": 115
+                },
+                "percentage": 19.91
+              },
+              {
+                "rgb": {
+                  "red": 56,
+                  "green": 143,
+                  "blue": 206
+                },
+                "percentage": 14.94
+              },
+              {
+                "rgb": {
+                  "red": 3,
+                  "green": 191,
+                  "blue": 206
+                },
+                "percentage": 8.98
+              },
+              {
+                "rgb": {
+                  "red": 91,
+                  "green": 79,
+                  "blue": 68
+                },
+                "percentage": 8.97
+              }
+            ]
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 990060573231476700,
+    "user_id_str": "990060573231476736",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 2,
+    "favorite_count": 15,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1303362717382656000,
+    "conversation_id_str": "1303362717382656000",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sun May 23 12:55:50 +0000 2021",
+    "id": 1396449794898284500,
+    "id_str": "1396449794898284544",
+    "full_text": "ONLINE CLASS IS INEFFECTIVE!!!!",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      31
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 983618994769817600,
+    "user_id_str": "983618994769817600",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00bedc564eb56dce",
+      "url": "https://api.twitter.com/1.1/geo/id/00bedc564eb56dce.json",
+      "place_type": "city",
+      "name": "Naga City",
+      "full_name": "Naga City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.6603066,
+              10.1815022
+            ],
+            [
+              123.7806891,
+              10.1815022
+            ],
+            [
+              123.7806891,
+              10.3079693
+            ],
+            [
+              123.6603066,
+              10.3079693
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 36,
+    "favorite_count": 73,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1396449794898284500,
+    "conversation_id_str": "1396449794898284544",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Thu Mar 18 08:50:20 +0000 2021",
+    "id": 1372470414685790200,
+    "id_str": "1372470414685790210",
+    "full_text": "Asa naman diay tong \"digital detox\" nga gimention sa start of second sem? Why does online class feel so much heavier this time 'round? Why are they actively making it so much heavier??",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      184
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 2458047624,
+    "user_id_str": "2458047624",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 127,
+    "favorite_count": 376,
+    "reply_count": 2,
+    "quote_count": 8,
+    "conversation_id": 1372470414685790200,
+    "conversation_id_str": "1372470414685790210",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null,
+    "self_thread": {
+      "id": 1372470414685790200,
+      "id_str": "1372470414685790210"
+    }
+  },
+  {
+    "created_at": "Tue Jan 05 10:20:55 +0000 2021",
+    "id": 1346401283511525400,
+    "id_str": "1346401283511525376",
+    "full_text": "Did my entry while having an online class. 🙈\n\n #131100 #131BACK https://t.co/o05ElRExty",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      63
+    ],
+    "entities": {
+      "hashtags": [
+        {
+          "text": "131BACK",
+          "indices": [
+            55,
+            63
+          ]
+        }
+      ],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [],
+      "media": [
+        {
+          "id": 1346401279614935000,
+          "id_str": "1346401279614935046",
+          "indices": [
+            64,
+            87
+          ],
+          "media_url": "http://pbs.twimg.com/media/Eq9g1IyUYAY6mU5.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/Eq9g1IyUYAY6mU5.jpg",
+          "url": "https://t.co/o05ElRExty",
+          "display_url": "pic.twitter.com/o05ElRExty",
+          "expanded_url": "https://twitter.com/SonoPreziosi/status/1346401283511525376/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 2016,
+            "height": 2016,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1129,
+                "w": 2016
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2016,
+                "w": 2016
+              },
+              {
+                "x": 248,
+                "y": 0,
+                "h": 2016,
+                "w": 1768
+              },
+              {
+                "x": 655,
+                "y": 0,
+                "h": 2016,
+                "w": 1008
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2016,
+                "w": 2016
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "medium": {
+              "w": 1200,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 2016,
+              "h": 2016,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 680,
+              "h": 680,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1346401279614935000,
+          "id_str": "1346401279614935046",
+          "indices": [
+            64,
+            87
+          ],
+          "media_url": "http://pbs.twimg.com/media/Eq9g1IyUYAY6mU5.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/Eq9g1IyUYAY6mU5.jpg",
+          "url": "https://t.co/o05ElRExty",
+          "display_url": "pic.twitter.com/o05ElRExty",
+          "expanded_url": "https://twitter.com/SonoPreziosi/status/1346401283511525376/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 2016,
+            "height": 2016,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1129,
+                "w": 2016
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2016,
+                "w": 2016
+              },
+              {
+                "x": 248,
+                "y": 0,
+                "h": 2016,
+                "w": 1768
+              },
+              {
+                "x": 655,
+                "y": 0,
+                "h": 2016,
+                "w": 1008
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2016,
+                "w": 2016
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "medium": {
+              "w": 1200,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 2016,
+              "h": 2016,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 680,
+              "h": 680,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1346401279614935046",
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 49,
+                  "green": 38,
+                  "blue": 35
+                },
+                "percentage": 71.2
+              },
+              {
+                "rgb": {
+                  "red": 233,
+                  "green": 214,
+                  "blue": 192
+                },
+                "percentage": 15.29
+              },
+              {
+                "rgb": {
+                  "red": 148,
+                  "green": 88,
+                  "blue": 70
+                },
+                "percentage": 9.58
+              },
+              {
+                "rgb": {
+                  "red": 134,
+                  "green": 112,
+                  "blue": 104
+                },
+                "percentage": 1.12
+              },
+              {
+                "rgb": {
+                  "red": 215,
+                  "green": 166,
+                  "blue": 124
+                },
+                "percentage": 0.4
+              }
+            ]
+          },
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 124020648,
+    "user_id_str": "124020648",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 2,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1346401283511525400,
+    "conversation_id_str": "1346401283511525376",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Thu Jun 24 05:29:57 +0000 2021",
+    "id": 1407933997229826000,
+    "id_str": "1407933997229826054",
+    "full_text": "off is me during online class when I’m caught eating 🤣🤣🤣 @off_tumcial https://t.co/wgTEuygxrT",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      69
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [
+        {
+          "screen_name": "off_tumcial",
+          "name": "Tumcial",
+          "id": 702411609742970900,
+          "id_str": "702411609742970881",
+          "indices": [
+            57,
+            69
+          ]
+        }
+      ],
+      "urls": [],
+      "media": [
+        {
+          "id": 1407933956645785600,
+          "id_str": "1407933956645785601",
+          "indices": [
+            70,
+            93
+          ],
+          "media_url": "http://pbs.twimg.com/ext_tw_video_thumb/1407933956645785601/pu/img/vdGJy4KJsygCtK5A.jpg",
+          "media_url_https": "https://pbs.twimg.com/ext_tw_video_thumb/1407933956645785601/pu/img/vdGJy4KJsygCtK5A.jpg",
+          "url": "https://t.co/wgTEuygxrT",
+          "display_url": "pic.twitter.com/wgTEuygxrT",
+          "expanded_url": "https://twitter.com/nicoygrace/status/1407933997229826054/video/1",
+          "type": "photo",
+          "original_info": {
+            "width": 750,
+            "height": 600
+          },
+          "sizes": {
+            "large": {
+              "w": 750,
+              "h": 600,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 750,
+              "h": 600,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 680,
+              "h": 544,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1407933956645785600,
+          "id_str": "1407933956645785601",
+          "indices": [
+            70,
+            93
+          ],
+          "media_url": "http://pbs.twimg.com/ext_tw_video_thumb/1407933956645785601/pu/img/vdGJy4KJsygCtK5A.jpg",
+          "media_url_https": "https://pbs.twimg.com/ext_tw_video_thumb/1407933956645785601/pu/img/vdGJy4KJsygCtK5A.jpg",
+          "url": "https://t.co/wgTEuygxrT",
+          "display_url": "pic.twitter.com/wgTEuygxrT",
+          "expanded_url": "https://twitter.com/nicoygrace/status/1407933997229826054/video/1",
+          "type": "video",
+          "original_info": {
+            "width": 750,
+            "height": 600
+          },
+          "sizes": {
+            "large": {
+              "w": 750,
+              "h": 600,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 750,
+              "h": 600,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 680,
+              "h": 544,
+              "resize": "fit"
+            }
+          },
+          "video_info": {
+            "aspect_ratio": [
+              5,
+              4
+            ],
+            "duration_millis": 9867,
+            "variants": [
+              {
+                "bitrate": 832000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/ext_tw_video/1407933956645785601/pu/vid/450x360/sheifwNicymwTliF.mp4?tag=12"
+              },
+              {
+                "bitrate": 256000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/ext_tw_video/1407933956645785601/pu/vid/336x270/DUEdynkZwC1DmQYc.mp4?tag=12"
+              },
+              {
+                "content_type": "application/x-mpegURL",
+                "url": "https://video.twimg.com/ext_tw_video/1407933956645785601/pu/pl/LOknywKBacyd9SKx.m3u8?tag=12&container=fmp4"
+              },
+              {
+                "bitrate": 2176000,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/ext_tw_video/1407933956645785601/pu/vid/750x600/ut1R-MR9py83Oaaw.mp4?tag=12"
+              }
+            ]
+          },
+          "media_key": "7_1407933956645785601",
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 30,
+                  "green": 39,
+                  "blue": 46
+                },
+                "percentage": 17.51
+              },
+              {
+                "rgb": {
+                  "red": 120,
+                  "green": 137,
+                  "blue": 145
+                },
+                "percentage": 17.06
+              },
+              {
+                "rgb": {
+                  "red": 205,
+                  "green": 196,
+                  "blue": 191
+                },
+                "percentage": 15.72
+              },
+              {
+                "rgb": {
+                  "red": 88,
+                  "green": 77,
+                  "blue": 35
+                },
+                "percentage": 11.86
+              },
+              {
+                "rgb": {
+                  "red": 211,
+                  "green": 151,
+                  "blue": 141
+                },
+                "percentage": 9.77
+              }
+            ]
+          },
+          "ext": {
+            "mediaStats": {
+              "r": {
+                "ok": {
+                  "viewCount": "1453"
+                }
+              },
+              "ttl": -1
+            }
+          },
+          "additional_media_info": {
+            "monetizable": false
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1268037975071326200,
+    "user_id_str": "1268037975071326209",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 33,
+    "favorite_count": 80,
+    "reply_count": 1,
+    "quote_count": 1,
+    "conversation_id": 1407933997229826000,
+    "conversation_id_str": "1407933997229826054",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Fri May 22 04:22:22 +0000 2020",
+    "id": 1263686619690762200,
+    "id_str": "1263686619690762240",
+    "full_text": "first of all. I dont think anyone would pass a blank paper when it’s already online class. ITS OBVIOUSLY TECHNICAL DIFFICULTIES 🙃  so. Pls. Reconsider. Cause like EVEN TURKEY IS DISAPPOINTED AND SHES A DOG. https://t.co/RYo8fKgaob",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      206
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [],
+      "media": [
+        {
+          "id": 1263686592410972200,
+          "id_str": "1263686592410972162",
+          "indices": [
+            207,
+            230
+          ],
+          "media_url": "http://pbs.twimg.com/media/EYmEQrAUcAIDXCi.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EYmEQrAUcAIDXCi.jpg",
+          "url": "https://t.co/RYo8fKgaob",
+          "display_url": "pic.twitter.com/RYo8fKgaob",
+          "expanded_url": "https://twitter.com/ashleycgo_x2x2/status/1263686619690762240/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1536,
+            "height": 2048,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 747,
+                "h": 860,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 409,
+                "h": 1536,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 297,
+                "h": 1751,
+                "w": 1536
+              },
+              {
+                "x": 358,
+                "y": 0,
+                "h": 2048,
+                "w": 1024
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2048,
+                "w": 1536
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 1536,
+              "h": 2048,
+              "resize": "fit"
+            }
+          }
+        },
+        {
+          "id": 1263686592406802400,
+          "id_str": "1263686592406802432",
+          "indices": [
+            207,
+            230
+          ],
+          "media_url": "http://pbs.twimg.com/media/EYmEQq_U0AAbZFp.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EYmEQq_U0AAbZFp.jpg",
+          "url": "https://t.co/RYo8fKgaob",
+          "display_url": "pic.twitter.com/RYo8fKgaob",
+          "expanded_url": "https://twitter.com/ashleycgo_x2x2/status/1263686619690762240/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1536,
+            "height": 2048,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 747,
+                "h": 860,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 409,
+                "h": 1536,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 297,
+                "h": 1751,
+                "w": 1536
+              },
+              {
+                "x": 256,
+                "y": 0,
+                "h": 2048,
+                "w": 1024
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2048,
+                "w": 1536
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 1536,
+              "h": 2048,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            }
+          }
+        },
+        {
+          "id": 1263686592419360800,
+          "id_str": "1263686592419360768",
+          "indices": [
+            207,
+            230
+          ],
+          "media_url": "http://pbs.twimg.com/media/EYmEQrCUcAAI5d9.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EYmEQrCUcAAI5d9.jpg",
+          "url": "https://t.co/RYo8fKgaob",
+          "display_url": "pic.twitter.com/RYo8fKgaob",
+          "expanded_url": "https://twitter.com/ashleycgo_x2x2/status/1263686619690762240/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1536,
+            "height": 2048,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 645,
+                "h": 860,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 307,
+                "h": 1536,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 200,
+                "h": 1751,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2048,
+                "w": 1024
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2048,
+                "w": 1536
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 1536,
+              "h": 2048,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1263686592410972200,
+          "id_str": "1263686592410972162",
+          "indices": [
+            207,
+            230
+          ],
+          "media_url": "http://pbs.twimg.com/media/EYmEQrAUcAIDXCi.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EYmEQrAUcAIDXCi.jpg",
+          "url": "https://t.co/RYo8fKgaob",
+          "display_url": "pic.twitter.com/RYo8fKgaob",
+          "expanded_url": "https://twitter.com/ashleycgo_x2x2/status/1263686619690762240/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1536,
+            "height": 2048,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 747,
+                "h": 860,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 409,
+                "h": 1536,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 297,
+                "h": 1751,
+                "w": 1536
+              },
+              {
+                "x": 358,
+                "y": 0,
+                "h": 2048,
+                "w": 1024
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2048,
+                "w": 1536
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 1536,
+              "h": 2048,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1263686592410972162",
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 153,
+                  "green": 119,
+                  "blue": 92
+                },
+                "percentage": 51
+              },
+              {
+                "rgb": {
+                  "red": 47,
+                  "green": 30,
+                  "blue": 22
+                },
+                "percentage": 44.69
+              },
+              {
+                "rgb": {
+                  "red": 92,
+                  "green": 58,
+                  "blue": 33
+                },
+                "percentage": 3.19
+              },
+              {
+                "rgb": {
+                  "red": 179,
+                  "green": 146,
+                  "blue": 102
+                },
+                "percentage": 0.41
+              }
+            ]
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        },
+        {
+          "id": 1263686592406802400,
+          "id_str": "1263686592406802432",
+          "indices": [
+            207,
+            230
+          ],
+          "media_url": "http://pbs.twimg.com/media/EYmEQq_U0AAbZFp.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EYmEQq_U0AAbZFp.jpg",
+          "url": "https://t.co/RYo8fKgaob",
+          "display_url": "pic.twitter.com/RYo8fKgaob",
+          "expanded_url": "https://twitter.com/ashleycgo_x2x2/status/1263686619690762240/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1536,
+            "height": 2048,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 747,
+                "h": 860,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 409,
+                "h": 1536,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 297,
+                "h": 1751,
+                "w": 1536
+              },
+              {
+                "x": 256,
+                "y": 0,
+                "h": 2048,
+                "w": 1024
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2048,
+                "w": 1536
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 1536,
+              "h": 2048,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1263686592406802432",
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 146,
+                  "green": 116,
+                  "blue": 89
+                },
+                "percentage": 54.89
+              },
+              {
+                "rgb": {
+                  "red": 38,
+                  "green": 25,
+                  "blue": 18
+                },
+                "percentage": 34.58
+              },
+              {
+                "rgb": {
+                  "red": 84,
+                  "green": 55,
+                  "blue": 29
+                },
+                "percentage": 3.39
+              },
+              {
+                "rgb": {
+                  "red": 178,
+                  "green": 177,
+                  "blue": 181
+                },
+                "percentage": 2.88
+              },
+              {
+                "rgb": {
+                  "red": 69,
+                  "green": 81,
+                  "blue": 97
+                },
+                "percentage": 0.29
+              }
+            ]
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        },
+        {
+          "id": 1263686592419360800,
+          "id_str": "1263686592419360768",
+          "indices": [
+            207,
+            230
+          ],
+          "media_url": "http://pbs.twimg.com/media/EYmEQrCUcAAI5d9.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EYmEQrCUcAAI5d9.jpg",
+          "url": "https://t.co/RYo8fKgaob",
+          "display_url": "pic.twitter.com/RYo8fKgaob",
+          "expanded_url": "https://twitter.com/ashleycgo_x2x2/status/1263686619690762240/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1536,
+            "height": 2048,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 645,
+                "h": 860,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 307,
+                "h": 1536,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 200,
+                "h": 1751,
+                "w": 1536
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2048,
+                "w": 1024
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 2048,
+                "w": 1536
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 1536,
+              "h": 2048,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 510,
+              "h": 680,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 900,
+              "h": 1200,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1263686592419360768",
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 68,
+                  "green": 56,
+                  "blue": 40
+                },
+                "percentage": 52.6
+              },
+              {
+                "rgb": {
+                  "red": 172,
+                  "green": 150,
+                  "blue": 127
+                },
+                "percentage": 23.66
+              },
+              {
+                "rgb": {
+                  "red": 96,
+                  "green": 68,
+                  "blue": 44
+                },
+                "percentage": 14.23
+              },
+              {
+                "rgb": {
+                  "red": 53,
+                  "green": 57,
+                  "blue": 69
+                },
+                "percentage": 5.67
+              },
+              {
+                "rgb": {
+                  "red": 108,
+                  "green": 103,
+                  "blue": 108
+                },
+                "percentage": 0.14
+              }
+            ]
+          },
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 2927210504,
+    "user_id_str": "2927210504",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 21,
+    "reply_count": 2,
+    "quote_count": 0,
+    "conversation_id": 1263686619690762200,
+    "conversation_id_str": "1263686619690762240",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sat Apr 10 02:19:46 +0000 2021",
+    "id": 1380707043041013800,
+    "id_str": "1380707043041013762",
+    "full_text": "back to back online class because, why not?!\n\n#distancelearning https://t.co/slpNF59AjG",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      63
+    ],
+    "entities": {
+      "hashtags": [
+        {
+          "text": "distancelearning",
+          "indices": [
+            46,
+            63
+          ]
+        }
+      ],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [],
+      "media": [
+        {
+          "id": 1380707034711040000,
+          "id_str": "1380707034711040003",
+          "indices": [
+            64,
+            87
+          ],
+          "media_url": "http://pbs.twimg.com/media/EylBu5bVoAMTyp_.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EylBu5bVoAMTyp_.jpg",
+          "url": "https://t.co/slpNF59AjG",
+          "display_url": "pic.twitter.com/slpNF59AjG",
+          "expanded_url": "https://twitter.com/jamesdlcz/status/1380707043041013762/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1920,
+            "height": 1080,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1075,
+                "w": 1920
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 1080
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 947
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 540
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 1920
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 680,
+              "h": 383,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 1200,
+              "h": 675,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 1920,
+              "h": 1080,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1380707034711040000,
+          "id_str": "1380707034711040003",
+          "indices": [
+            64,
+            87
+          ],
+          "media_url": "http://pbs.twimg.com/media/EylBu5bVoAMTyp_.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EylBu5bVoAMTyp_.jpg",
+          "url": "https://t.co/slpNF59AjG",
+          "display_url": "pic.twitter.com/slpNF59AjG",
+          "expanded_url": "https://twitter.com/jamesdlcz/status/1380707043041013762/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1920,
+            "height": 1080,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1075,
+                "w": 1920
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 1080
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 947
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 540
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 1920
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 680,
+              "h": 383,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 1200,
+              "h": 675,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 1920,
+              "h": 1080,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1380707034711040003",
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 202,
+                  "green": 190,
+                  "blue": 158
+                },
+                "percentage": 43.54
+              },
+              {
+                "rgb": {
+                  "red": 57,
+                  "green": 58,
+                  "blue": 60
+                },
+                "percentage": 18.02
+              },
+              {
+                "rgb": {
+                  "red": 194,
+                  "green": 195,
+                  "blue": 195
+                },
+                "percentage": 16.91
+              },
+              {
+                "rgb": {
+                  "red": 133,
+                  "green": 118,
+                  "blue": 96
+                },
+                "percentage": 6.28
+              },
+              {
+                "rgb": {
+                  "red": 70,
+                  "green": 74,
+                  "blue": 120
+                },
+                "percentage": 5.13
+              }
+            ]
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 185655397,
+    "user_id_str": "185655397",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 1,
+    "favorite_count": 4,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1380707043041013800,
+    "conversation_id_str": "1380707043041013762",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Wed Sep 16 02:29:55 +0000 2020",
+    "id": 1306057698237063200,
+    "id_str": "1306057698237063170",
+    "full_text": "Friends are the reason why we can survive the online class",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      58
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 975315496739328000,
+    "user_id_str": "975315496739328000",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 10,
+    "favorite_count": 26,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1306057698237063200,
+    "conversation_id_str": "1306057698237063170",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sat May 16 09:02:00 +0000 2020",
+    "id": 1261582661262274600,
+    "id_str": "1261582661262274562",
+    "full_text": "@CN_MR_FISH I hope you could not do this during ur online class!!! But I know don't do this cheating plan!! 😂 https://t.co/kBLu1fl0bI",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      109
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [],
+      "media": [
+        {
+          "id": 1261582642253717500,
+          "id_str": "1261582642253717504",
+          "indices": [
+            110,
+            133
+          ],
+          "media_url": "http://pbs.twimg.com/media/EYIKup5U4AA9hFb.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EYIKup5U4AA9hFb.jpg",
+          "url": "https://t.co/kBLu1fl0bI",
+          "display_url": "pic.twitter.com/kBLu1fl0bI",
+          "expanded_url": "https://twitter.com/tmsfireboy_yt/status/1261582661262274562/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 480,
+            "height": 508,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "h": 269,
+                "w": 480
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 480,
+                "w": 480
+              },
+              {
+                "x": 34,
+                "y": 0,
+                "h": 508,
+                "w": 446
+              },
+              {
+                "x": 226,
+                "y": 0,
+                "h": 508,
+                "w": 254
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 508,
+                "w": 480
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 480,
+              "h": 508,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 480,
+              "h": 508,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 480,
+              "h": 508,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1261582642253717500,
+          "id_str": "1261582642253717504",
+          "indices": [
+            110,
+            133
+          ],
+          "media_url": "http://pbs.twimg.com/media/EYIKup5U4AA9hFb.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EYIKup5U4AA9hFb.jpg",
+          "url": "https://t.co/kBLu1fl0bI",
+          "display_url": "pic.twitter.com/kBLu1fl0bI",
+          "expanded_url": "https://twitter.com/tmsfireboy_yt/status/1261582661262274562/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 480,
+            "height": 508,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "h": 269,
+                "w": 480
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 480,
+                "w": 480
+              },
+              {
+                "x": 34,
+                "y": 0,
+                "h": 508,
+                "w": 446
+              },
+              {
+                "x": 226,
+                "y": 0,
+                "h": 508,
+                "w": 254
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 508,
+                "w": 480
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 480,
+              "h": 508,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 480,
+              "h": 508,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 480,
+              "h": 508,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1261582642253717504",
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 27,
+                  "green": 30,
+                  "blue": 26
+                },
+                "percentage": 47.48
+              },
+              {
+                "rgb": {
+                  "red": 254,
+                  "green": 254,
+                  "blue": 254
+                },
+                "percentage": 42
+              },
+              {
+                "rgb": {
+                  "red": 120,
+                  "green": 121,
+                  "blue": 120
+                },
+                "percentage": 5.28
+              },
+              {
+                "rgb": {
+                  "red": 129,
+                  "green": 131,
+                  "blue": 86
+                },
+                "percentage": 2.49
+              },
+              {
+                "rgb": {
+                  "red": 134,
+                  "green": 242,
+                  "blue": 150
+                },
+                "percentage": 1.03
+              }
+            ]
+          },
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": 1256832131105321000,
+    "in_reply_to_user_id_str": "1256832131105320962",
+    "in_reply_to_screen_name": "Eat_Your_Pants",
+    "user_id": 1121958376060047400,
+    "user_id_str": "1121958376060047360",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 3,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1261582661262274600,
+    "conversation_id_str": "1261582661262274562",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Tue Oct 06 06:07:22 +0000 2020",
+    "id": 1313360178729816000,
+    "id_str": "1313360178729816064",
+    "full_text": "Imagine paying for online class but the teacher only gives out youtube videos for modules 👁👄👁",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      93
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1210985593,
+    "user_id_str": "1210985593",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 1,
+    "favorite_count": 7,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1313360178729816000,
+    "conversation_id_str": "1313360178729816064",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Wed Nov 25 09:23:34 +0000 2020",
+    "id": 1331528949982085000,
+    "id_str": "1331528949982085120",
+    "full_text": "I'm so tired of online class there's literally no stop from all these stupid academic final papers Hshdjskdkdkd",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      111
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 2458047624,
+    "user_id_str": "2458047624",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 2,
+    "favorite_count": 15,
+    "reply_count": 0,
+    "quote_count": 1,
+    "conversation_id": 1331528949982085000,
+    "conversation_id_str": "1331528949982085120",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Thu May 28 12:24:34 +0000 2020",
+    "id": 1265982295434920000,
+    "id_str": "1265982295434919937",
+    "full_text": "My sister just told me “laina sad online class ah way allowance!”\nMe:...😳...😲 bitaw sa!!!☹️",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      91
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 3737623274,
+    "user_id_str": "3737623274",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 8,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1265982295434920000,
+    "conversation_id_str": "1265982295434919937",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Wed Aug 26 14:20:08 +0000 2020",
+    "id": 1298626285980340200,
+    "id_str": "1298626285980340224",
+    "full_text": "During online class:\n\nAtty to my classmate: Discuss the case of bla bla bla.\nMe na bag ong sulod and missed 2 weeks na klase: https://t.co/D2GplqHWpz",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      125
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [],
+      "media": [
+        {
+          "id": 1298626281097986000,
+          "id_str": "1298626281097986048",
+          "indices": [
+            126,
+            149
+          ],
+          "media_url": "http://pbs.twimg.com/media/EgWluOTVAAA_at9.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EgWluOTVAAA_at9.jpg",
+          "url": "https://t.co/D2GplqHWpz",
+          "display_url": "pic.twitter.com/D2GplqHWpz",
+          "expanded_url": "https://twitter.com/iamninotchkaii/status/1298626285980340224/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 587,
+            "height": 523,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 85,
+                "h": 329,
+                "w": 587
+              },
+              {
+                "x": 17,
+                "y": 0,
+                "h": 523,
+                "w": 523
+              },
+              {
+                "x": 49,
+                "y": 0,
+                "h": 523,
+                "w": 459
+              },
+              {
+                "x": 147,
+                "y": 0,
+                "h": 523,
+                "w": 262
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 523,
+                "w": 587
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 587,
+              "h": 523,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 587,
+              "h": 523,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 587,
+              "h": 523,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1298626281097986000,
+          "id_str": "1298626281097986048",
+          "indices": [
+            126,
+            149
+          ],
+          "media_url": "http://pbs.twimg.com/media/EgWluOTVAAA_at9.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EgWluOTVAAA_at9.jpg",
+          "url": "https://t.co/D2GplqHWpz",
+          "display_url": "pic.twitter.com/D2GplqHWpz",
+          "expanded_url": "https://twitter.com/iamninotchkaii/status/1298626285980340224/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 587,
+            "height": 523,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 85,
+                "h": 329,
+                "w": 587
+              },
+              {
+                "x": 17,
+                "y": 0,
+                "h": 523,
+                "w": 523
+              },
+              {
+                "x": 49,
+                "y": 0,
+                "h": 523,
+                "w": 459
+              },
+              {
+                "x": 147,
+                "y": 0,
+                "h": 523,
+                "w": 262
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 523,
+                "w": 587
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 587,
+              "h": 523,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 587,
+              "h": 523,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 587,
+              "h": 523,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1298626281097986048",
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 219,
+                  "green": 185,
+                  "blue": 147
+                },
+                "percentage": 32.79
+              },
+              {
+                "rgb": {
+                  "red": 60,
+                  "green": 52,
+                  "blue": 45
+                },
+                "percentage": 29.52
+              },
+              {
+                "rgb": {
+                  "red": 135,
+                  "green": 107,
+                  "blue": 74
+                },
+                "percentage": 23.57
+              },
+              {
+                "rgb": {
+                  "red": 227,
+                  "green": 133,
+                  "blue": 133
+                },
+                "percentage": 5.3
+              },
+              {
+                "rgb": {
+                  "red": 205,
+                  "green": 195,
+                  "blue": 155
+                },
+                "percentage": 1.69
+              }
+            ]
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 108627395,
+    "user_id_str": "108627395",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 4,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1298626285980340200,
+    "conversation_id_str": "1298626285980340224",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": true,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Thu Jan 14 15:32:28 +0000 2021",
+    "id": 1349741180154593300,
+    "id_str": "1349741180154593280",
+    "full_text": "I am considering to be on off semester 'coz the learning does not justify the hassle though.",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      92
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1172175310080503800,
+    "user_id_str": "1172175310080503808",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "014ff5bc45533d1c",
+      "url": "https://api.twitter.com/1.1/geo/id/014ff5bc45533d1c.json",
+      "place_type": "city",
+      "name": "Mandaue City",
+      "full_name": "Mandaue City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.9114563,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3998978
+            ],
+            [
+              123.9114563,
+              10.3998978
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 6,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1349741180154593300,
+    "conversation_id_str": "1349741180154593280",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null,
+    "self_thread": {
+      "id": 1349741180154593300,
+      "id_str": "1349741180154593280"
+    }
+  },
+  {
+    "created_at": "Wed Aug 26 04:23:09 +0000 2020",
+    "id": 1298476050293432300,
+    "id_str": "1298476050293432320",
+    "full_text": "I hope you guys are considerate to those having poor internet connection while having online class.\n\nPlease be kind, everyone is making an effort to make things work.\n\nAnd yes, money is an issue.",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      195
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 2239119283,
+    "user_id_str": "2239119283",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00de688c424ec036",
+      "url": "https://api.twitter.com/1.1/geo/id/00de688c424ec036.json",
+      "place_type": "city",
+      "name": "Lapu-Lapu City",
+      "full_name": "Lapu-Lapu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.9086254,
+              10.2035208
+            ],
+            [
+              124.0725263,
+              10.2035208
+            ],
+            [
+              124.0725263,
+              10.3342405
+            ],
+            [
+              123.9086254,
+              10.3342405
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 4,
+    "favorite_count": 17,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1298476050293432300,
+    "conversation_id_str": "1298476050293432320",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sat Jul 18 14:27:10 +0000 2020",
+    "id": 1284494930551816200,
+    "id_str": "1284494930551816192",
+    "full_text": "Online class pero full gihapon ang tuition fee tf is that ok pamo!?🙄",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      68
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1240879405158633500,
+    "user_id_str": "1240879405158633472",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 2,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1284494930551816200,
+    "conversation_id_str": "1284494930551816192",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Thu Jan 14 15:33:57 +0000 2021",
+    "id": 1349741550524223500,
+    "id_str": "1349741550524223494",
+    "full_text": "Should CHED evaluate the effectiveness of online class.",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      55
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": 1349741180154593300,
+    "in_reply_to_status_id_str": "1349741180154593280",
+    "in_reply_to_user_id": 1172175310080503800,
+    "in_reply_to_user_id_str": "1172175310080503808",
+    "in_reply_to_screen_name": "bjustincarl",
+    "user_id": 1172175310080503800,
+    "user_id_str": "1172175310080503808",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "014ff5bc45533d1c",
+      "url": "https://api.twitter.com/1.1/geo/id/014ff5bc45533d1c.json",
+      "place_type": "city",
+      "name": "Mandaue City",
+      "full_name": "Mandaue City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.9114563,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3998978
+            ],
+            [
+              123.9114563,
+              10.3998978
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 2,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1349741180154593300,
+    "conversation_id_str": "1349741180154593280",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null,
+    "self_thread": {
+      "id": 1349741180154593300,
+      "id_str": "1349741180154593280"
+    }
+  },
+  {
+    "created_at": "Tue Apr 21 03:36:47 +0000 2020",
+    "id": 1252441123538104300,
+    "id_str": "1252441123538104321",
+    "full_text": "BREAKING: DepEd Sec. Leonor Briones: classes may resume in August but maybe online through DepEd commons | @Joseph_Morong https://t.co/dw3dbawIMF",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      121
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [
+        {
+          "screen_name": "Joseph_Morong",
+          "name": "Joseph Morong 🇵🇭",
+          "id": 15947471,
+          "id_str": "15947471",
+          "indices": [
+            107,
+            121
+          ]
+        }
+      ],
+      "urls": [],
+      "media": [
+        {
+          "id": 1252441114491056000,
+          "id_str": "1252441114491056129",
+          "indices": [
+            122,
+            145
+          ],
+          "media_url": "http://pbs.twimg.com/media/EWGQjtNVcAE3W2-.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EWGQjtNVcAE3W2-.jpg",
+          "url": "https://t.co/dw3dbawIMF",
+          "display_url": "pic.twitter.com/dw3dbawIMF",
+          "expanded_url": "https://twitter.com/gmanews/status/1252441123538104321/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1080,
+            "height": 1080,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "h": 605,
+                "w": 1080
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 1080
+              },
+              {
+                "x": 40,
+                "y": 0,
+                "h": 1080,
+                "w": 947
+              },
+              {
+                "x": 243,
+                "y": 0,
+                "h": 1080,
+                "w": 540
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 1080
+              }
+            ]
+          },
+          "sizes": {
+            "small": {
+              "w": 680,
+              "h": 680,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 1080,
+              "h": 1080,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 1080,
+              "h": 1080,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1252441114491056000,
+          "id_str": "1252441114491056129",
+          "indices": [
+            122,
+            145
+          ],
+          "media_url": "http://pbs.twimg.com/media/EWGQjtNVcAE3W2-.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EWGQjtNVcAE3W2-.jpg",
+          "url": "https://t.co/dw3dbawIMF",
+          "display_url": "pic.twitter.com/dw3dbawIMF",
+          "expanded_url": "https://twitter.com/gmanews/status/1252441123538104321/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1080,
+            "height": 1080,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "h": 605,
+                "w": 1080
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 1080
+              },
+              {
+                "x": 40,
+                "y": 0,
+                "h": 1080,
+                "w": 947
+              },
+              {
+                "x": 243,
+                "y": 0,
+                "h": 1080,
+                "w": 540
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1080,
+                "w": 1080
+              }
+            ]
+          },
+          "sizes": {
+            "small": {
+              "w": 680,
+              "h": 680,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 1080,
+              "h": 1080,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 1080,
+              "h": 1080,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1252441114491056129",
+          "ext_alt_text": null,
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 234,
+                  "green": 233,
+                  "blue": 233
+                },
+                "percentage": 66.56
+              },
+              {
+                "rgb": {
+                  "red": 180,
+                  "green": 1,
+                  "blue": 1
+                },
+                "percentage": 26.09
+              },
+              {
+                "rgb": {
+                  "red": 195,
+                  "green": 79,
+                  "blue": 79
+                },
+                "percentage": 4.38
+              },
+              {
+                "rgb": {
+                  "red": 214,
+                  "green": 140,
+                  "blue": 142
+                },
+                "percentage": 1.92
+              },
+              {
+                "rgb": {
+                  "red": 250,
+                  "green": 48,
+                  "blue": 14
+                },
+                "percentage": 0.39
+              }
+            ]
+          },
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 39453212,
+    "user_id_str": "39453212",
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 1723,
+    "favorite_count": 10473,
+    "reply_count": 571,
+    "quote_count": 10623,
+    "conversation_id": 1252441123538104300,
+    "conversation_id_str": "1252441123538104321",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Mon Jun 15 10:35:51 +0000 2020",
+    "id": 1272477918426521600,
+    "id_str": "1272477918426521601",
+    "full_text": "First day of online class ain’t bad.",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      36
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1034690431831826400,
+    "user_id_str": "1034690431831826432",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 3,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1272477918426521600,
+    "conversation_id_str": "1272477918426521601",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Tue Apr 21 05:58:42 +0000 2020",
+    "id": 1252476837227184000,
+    "id_str": "1252476837227184128",
+    "full_text": "I know a lot of people who can barely afford a meal nya gaexpect mo ug online class lol",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      87
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 442615231,
+    "user_id_str": "442615231",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "014ff5bc45533d1c",
+      "url": "https://api.twitter.com/1.1/geo/id/014ff5bc45533d1c.json",
+      "place_type": "city",
+      "name": "Mandaue City",
+      "full_name": "Mandaue City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.9114563,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3998978
+            ],
+            [
+              123.9114563,
+              10.3998978
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": true,
+    "quoted_status_id": 1252441123538104300,
+    "quoted_status_id_str": "1252441123538104321",
+    "quoted_status_permalink": {
+      "url": "https://t.co/DFPY7ZQ5Mt",
+      "expanded": "https://twitter.com/gmanews/status/1252441123538104321",
+      "display": "twitter.com/gmanews/status…"
+    },
+    "retweet_count": 2,
+    "favorite_count": 10,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1252476837227184000,
+    "conversation_id_str": "1252476837227184128",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Wed Oct 21 01:50:04 +0000 2020",
+    "id": 1318731246533374000,
+    "id_str": "1318731246533373952",
+    "full_text": "Online class really got me complaining bout stuffs then still I’d comply 😑😬",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      75
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1044242757173207000,
+    "user_id_str": "1044242757173207040",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "01d5900173ccec29",
+      "url": "https://api.twitter.com/1.1/geo/id/01d5900173ccec29.json",
+      "place_type": "city",
+      "name": "Talibon",
+      "full_name": "Talibon, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.1946548,
+              10.0301638
+            ],
+            [
+              124.3773024,
+              10.0301638
+            ],
+            [
+              124.3773024,
+              10.2454174
+            ],
+            [
+              124.1946548,
+              10.2454174
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 5,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1318731246533374000,
+    "conversation_id_str": "1318731246533373952",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sun Jul 19 17:01:16 +0000 2020",
+    "id": 1284896096225882000,
+    "id_str": "1284896096225882112",
+    "full_text": "Me during online class",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      22
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 2993837755,
+    "user_id_str": "2993837755",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00370a296d59c6a3",
+      "url": "https://api.twitter.com/1.1/geo/id/00370a296d59c6a3.json",
+      "place_type": "city",
+      "name": "Talisay City",
+      "full_name": "Talisay City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7722811,
+              10.2343911
+            ],
+            [
+              123.8736671,
+              10.2343911
+            ],
+            [
+              123.8736671,
+              10.3389809
+            ],
+            [
+              123.7722811,
+              10.3389809
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": true,
+    "quoted_status_id": 1284886461360169000,
+    "quoted_status_id_str": "1284886461360168960",
+    "quoted_status_permalink": {
+      "url": "https://t.co/5JX3Z6LEFP",
+      "expanded": "https://twitter.com/richardjuan/status/1284886461360168960",
+      "display": "twitter.com/richardjuan/st…"
+    },
+    "retweet_count": 0,
+    "favorite_count": 2,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1284896096225882000,
+    "conversation_id_str": "1284896096225882112",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sun Oct 18 13:44:25 +0000 2020",
+    "id": 1317823852928434200,
+    "id_str": "1317823852928434176",
+    "full_text": "kamo pud mga GINGs, hinay-hinay rapod unta. i know u want to finish &amp; submit on time to that subj. but be sensitive with your actions &amp; consider all possible consequences bc we're not junior high studs anymore... College nata + ONLINE CLASS PAJUD! Be cautious enough ha? Amping!",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      286
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": 1317820252718248000,
+    "in_reply_to_status_id_str": "1317820252718247939",
+    "in_reply_to_user_id": 976387785232810000,
+    "in_reply_to_user_id_str": "976387785232809984",
+    "in_reply_to_screen_name": "leyymarieeee",
+    "user_id": 976387785232810000,
+    "user_id_str": "976387785232809984",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "0a6bbec14aa9da15",
+      "url": "https://api.twitter.com/1.1/geo/id/0a6bbec14aa9da15.json",
+      "place_type": "admin",
+      "name": "Central Visayas",
+      "full_name": "Central Visayas, Republic of the Philippines",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.6140433,
+              9.0404895
+            ],
+            [
+              124.6453181,
+              9.0404895
+            ],
+            [
+              124.6453181,
+              11.3542107
+            ],
+            [
+              122.6140433,
+              11.3542107
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 3,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1317820252718248000,
+    "conversation_id_str": "1317820252718247939",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null,
+    "self_thread": {
+      "id": 1317820252718248000,
+      "id_str": "1317820252718247939"
+    }
+  },
+  {
+    "created_at": "Wed Jul 29 19:57:02 +0000 2020",
+    "id": 1288564209815392300,
+    "id_str": "1288564209815392256",
+    "full_text": "Y y'all acting high and mighty? Acting like you've achieved the impossible! Taena online class ain't effective! 100% would not recommend. Cancel order. End subscription. Delete.",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      177
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 868422366048559100,
+    "user_id_str": "868422366048559104",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00370a296d59c6a3",
+      "url": "https://api.twitter.com/1.1/geo/id/00370a296d59c6a3.json",
+      "place_type": "city",
+      "name": "Talisay City",
+      "full_name": "Talisay City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7722811,
+              10.2343911
+            ],
+            [
+              123.8736671,
+              10.2343911
+            ],
+            [
+              123.8736671,
+              10.3389809
+            ],
+            [
+              123.7722811,
+              10.3389809
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 6,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1288564209815392300,
+    "conversation_id_str": "1288564209815392256",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Mon Sep 28 01:18:41 +0000 2020",
+    "id": 1310388427490128000,
+    "id_str": "1310388427490127872",
+    "full_text": "good morning another day to hate online class.",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      46
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 2821714086,
+    "user_id_str": "2821714086",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 3,
+    "favorite_count": 9,
+    "reply_count": 1,
+    "quote_count": 2,
+    "conversation_id": 1310388427490128000,
+    "conversation_id_str": "1310388427490127872",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sun Jul 19 16:22:59 +0000 2020",
+    "id": 1284886461360169000,
+    "id_str": "1284886461360168960",
+    "full_text": "Literally me every single day since the pandemic started.\n\n#ItsOkayToNotBeOkay \n#ItsOkayToNotBeOkayEP10 https://t.co/1jT7f6poSY",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      103
+    ],
+    "entities": {
+      "hashtags": [
+        {
+          "text": "ItsOkayToNotBeOkay",
+          "indices": [
+            59,
+            78
+          ]
+        },
+        {
+          "text": "ItsOkayToNotBeOkayEP10",
+          "indices": [
+            80,
+            103
+          ]
+        }
+      ],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [],
+      "media": [
+        {
+          "id": 1284886338513145900,
+          "id_str": "1284886338513145856",
+          "indices": [
+            104,
+            127
+          ],
+          "media_url": "http://pbs.twimg.com/media/EdTVUTfUEAAcBjK.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EdTVUTfUEAAcBjK.jpg",
+          "url": "https://t.co/1jT7f6poSY",
+          "display_url": "pic.twitter.com/1jT7f6poSY",
+          "expanded_url": "https://twitter.com/richardjuan/status/1284886461360168960/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 2668,
+            "height": 1501,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 7,
+                "h": 1494,
+                "w": 2668
+              },
+              {
+                "x": 383,
+                "y": 0,
+                "h": 1501,
+                "w": 1501
+              },
+              {
+                "x": 475,
+                "y": 0,
+                "h": 1501,
+                "w": 1317
+              },
+              {
+                "x": 758,
+                "y": 0,
+                "h": 1501,
+                "w": 751
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1501,
+                "w": 2668
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "w": 2048,
+              "h": 1152,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "medium": {
+              "w": 1200,
+              "h": 675,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 680,
+              "h": 383,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1284886338513145900,
+          "id_str": "1284886338513145856",
+          "indices": [
+            104,
+            127
+          ],
+          "media_url": "http://pbs.twimg.com/media/EdTVUTfUEAAcBjK.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EdTVUTfUEAAcBjK.jpg",
+          "url": "https://t.co/1jT7f6poSY",
+          "display_url": "pic.twitter.com/1jT7f6poSY",
+          "expanded_url": "https://twitter.com/richardjuan/status/1284886461360168960/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 2668,
+            "height": 1501,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 7,
+                "h": 1494,
+                "w": 2668
+              },
+              {
+                "x": 383,
+                "y": 0,
+                "h": 1501,
+                "w": 1501
+              },
+              {
+                "x": 475,
+                "y": 0,
+                "h": 1501,
+                "w": 1317
+              },
+              {
+                "x": 758,
+                "y": 0,
+                "h": 1501,
+                "w": 751
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 1501,
+                "w": 2668
+              }
+            ]
+          },
+          "sizes": {
+            "large": {
+              "w": 2048,
+              "h": 1152,
+              "resize": "fit"
+            },
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "medium": {
+              "w": 1200,
+              "h": 675,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 680,
+              "h": 383,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1284886338513145856",
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 39,
+                  "green": 37,
+                  "blue": 45
+                },
+                "percentage": 57.63
+              },
+              {
+                "rgb": {
+                  "red": 128,
+                  "green": 120,
+                  "blue": 114
+                },
+                "percentage": 33.63
+              },
+              {
+                "rgb": {
+                  "red": 62,
+                  "green": 79,
+                  "blue": 89
+                },
+                "percentage": 6.52
+              },
+              {
+                "rgb": {
+                  "red": 90,
+                  "green": 57,
+                  "blue": 50
+                },
+                "percentage": 3.63
+              },
+              {
+                "rgb": {
+                  "red": 97,
+                  "green": 51,
+                  "blue": 62
+                },
+                "percentage": 0.22
+              }
+            ]
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 141220989,
+    "user_id_str": "141220989",
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 1637,
+    "favorite_count": 4493,
+    "reply_count": 17,
+    "quote_count": 73,
+    "conversation_id": 1284886461360169000,
+    "conversation_id_str": "1284886461360168960",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Fri May 22 07:38:01 +0000 2020",
+    "id": 1263735853370622000,
+    "id_str": "1263735853370621952",
+    "full_text": "gad, been awake for almost 20 hours now. I forgot that we still have an online class after our exam 😭 *drained",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      110
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 95421877,
+    "user_id_str": "95421877",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 2,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1263735853370622000,
+    "conversation_id_str": "1263735853370621952",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sat Jun 13 13:27:29 +0000 2020",
+    "id": 1271796333699973000,
+    "id_str": "1271796333699973121",
+    "full_text": "should prolly adjust body clock coz online class is forthcoming",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      63
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 890443064442929200,
+    "user_id_str": "890443064442929153",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 1,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1271796333699973000,
+    "conversation_id_str": "1271796333699973121",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Fri Aug 21 03:15:34 +0000 2020",
+    "id": 1296647103704207400,
+    "id_str": "1296647103704207360",
+    "full_text": "Ma, i need laptop/PC for this f*ckn' online class, brand new or not i'll accept it hehe",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      87
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1085749505767526400,
+    "user_id_str": "1085749505767526401",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00c1398e3be06eb5",
+      "url": "https://api.twitter.com/1.1/geo/id/00c1398e3be06eb5.json",
+      "place_type": "city",
+      "name": "City Of Maasin",
+      "full_name": "City Of Maasin, Eastern Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.7521175,
+              10.1103384
+            ],
+            [
+              124.9593881,
+              10.1103384
+            ],
+            [
+              124.9593881,
+              10.2762828
+            ],
+            [
+              124.7521175,
+              10.2762828
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 6,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1296647103704207400,
+    "conversation_id_str": "1296647103704207360",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sun Aug 30 02:45:53 +0000 2020",
+    "id": 1299901123315208200,
+    "id_str": "1299901123315208192",
+    "full_text": "Online class new bestfriend: haplas.\nWorks wonders for your back and neck pains",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      79
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 4807625532,
+    "user_id_str": "4807625532",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ccde280e6bd5ee",
+      "url": "https://api.twitter.com/1.1/geo/id/00ccde280e6bd5ee.json",
+      "place_type": "city",
+      "name": "Consolacion",
+      "full_name": "Consolacion, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.924315,
+              10.3484357
+            ],
+            [
+              124.0017032,
+              10.3484357
+            ],
+            [
+              124.0017032,
+              10.4444441
+            ],
+            [
+              123.924315,
+              10.4444441
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 11,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1299901123315208200,
+    "conversation_id_str": "1299901123315208192",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Tue Aug 11 16:42:34 +0000 2020",
+    "id": 1293226312077725700,
+    "id_str": "1293226312077725696",
+    "full_text": "online class is not easy. you have to check your phone/laptop coz’ maybe there are new activities and quizes to answer. you need a stable wifi connection. big storage (coz’ daghan apps ipa dl). Your gadget must be working well like camera, mic, audio. hays. i prefer face2face jud",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      280
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 3177717151,
+    "user_id_str": "3177717151",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00de688c424ec036",
+      "url": "https://api.twitter.com/1.1/geo/id/00de688c424ec036.json",
+      "place_type": "city",
+      "name": "Lapu-Lapu City",
+      "full_name": "Lapu-Lapu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.9086254,
+              10.2035208
+            ],
+            [
+              124.0725263,
+              10.2035208
+            ],
+            [
+              124.0725263,
+              10.3342405
+            ],
+            [
+              123.9086254,
+              10.3342405
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 4,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1293226312077725700,
+    "conversation_id_str": "1293226312077725696",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Wed Feb 17 02:46:27 +0000 2021",
+    "id": 1361869589433307100,
+    "id_str": "1361869589433307144",
+    "full_text": "at this moment, in the middle of our online class, ga crave kog cheesecake sa cheezken😭😭",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      88
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 765475659019792400,
+    "user_id_str": "765475659019792384",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00de688c424ec036",
+      "url": "https://api.twitter.com/1.1/geo/id/00de688c424ec036.json",
+      "place_type": "city",
+      "name": "Lapu-Lapu City",
+      "full_name": "Lapu-Lapu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.9086254,
+              10.2035208
+            ],
+            [
+              124.0725263,
+              10.2035208
+            ],
+            [
+              124.0725263,
+              10.3342405
+            ],
+            [
+              123.9086254,
+              10.3342405
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 3,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1361869589433307100,
+    "conversation_id_str": "1361869589433307144",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Fri Mar 05 08:31:36 +0000 2021",
+    "id": 1367754658719010800,
+    "id_str": "1367754658719010816",
+    "full_text": "Whatever I can help sa online class woes sa mga students, maybe I could offer help sa abot ng ating makakaya. Di ko gusto na maglabad ang ulo ni because of unaddressed issue.\n\nThat's why I keep my lines open 24/7.",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      213
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 4557709454,
+    "user_id_str": "4557709454",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 1,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1367754658719010800,
+    "conversation_id_str": "1367754658719010816",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Thu Sep 03 08:40:27 +0000 2020",
+    "id": 1301439904883196000,
+    "id_str": "1301439904883195904",
+    "full_text": "i think i took advantage of the thought that online class was going to be fine just cause i am provided with the stuff i need. but its really hard and stressful, it makes me cry. i can’t do this.",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      195
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 2564733684,
+    "user_id_str": "2564733684",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 2,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1301439904883196000,
+    "conversation_id_str": "1301439904883195904",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Tue Sep 15 05:45:00 +0000 2020",
+    "id": 1305744406620692500,
+    "id_str": "1305744406620692480",
+    "full_text": "1yr college online class oral recitation\n\nTeacher asks question\nStudent answers and shouts YEYYYY\n\nMe in the room: HAHAHAHAHAHAHA kakyot",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      136
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 2835225487,
+    "user_id_str": "2835225487",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00370a296d59c6a3",
+      "url": "https://api.twitter.com/1.1/geo/id/00370a296d59c6a3.json",
+      "place_type": "city",
+      "name": "Talisay City",
+      "full_name": "Talisay City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7722811,
+              10.2343911
+            ],
+            [
+              123.8736671,
+              10.2343911
+            ],
+            [
+              123.8736671,
+              10.3389809
+            ],
+            [
+              123.7722811,
+              10.3389809
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 1,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1305744406620692500,
+    "conversation_id_str": "1305744406620692480",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sun Apr 18 00:14:19 +0000 2021",
+    "id": 1383574576601337900,
+    "id_str": "1383574576601337863",
+    "full_text": "For the first time in forever — naligo ko ug buntag before online class hahahaha",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      80
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 78270255,
+    "user_id_str": "78270255",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 3,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1383574576601337900,
+    "conversation_id_str": "1383574576601337863",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Wed Aug 05 06:19:21 +0000 2020",
+    "id": 1290895148092493800,
+    "id_str": "1290895148092493825",
+    "full_text": "What are the common issues regarding the online class? \nYour thoughts would bring great help to find solution to the certain issue. Comment down if you have one.",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      161
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1208969395923382300,
+    "user_id_str": "1208969395923382272",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 1,
+    "favorite_count": 2,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1290895148092493800,
+    "conversation_id_str": "1290895148092493825",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Thu Apr 23 14:03:22 +0000 2020",
+    "id": 1253323583863971800,
+    "id_str": "1253323583863971840",
+    "full_text": "Online class calls are so awkward hahahahahaha I can’t even",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      59
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 501699506,
+    "user_id_str": "501699506",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "014ff5bc45533d1c",
+      "url": "https://api.twitter.com/1.1/geo/id/014ff5bc45533d1c.json",
+      "place_type": "city",
+      "name": "Mandaue City",
+      "full_name": "Mandaue City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.9114563,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3998978
+            ],
+            [
+              123.9114563,
+              10.3998978
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 1,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1253323583863971800,
+    "conversation_id_str": "1253323583863971840",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sat Jun 20 03:38:19 +0000 2020",
+    "id": 1274184780104364000,
+    "id_str": "1274184780104364037",
+    "full_text": "hate my passive ass, i thought xaler ra ang online class",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      56
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 890443064442929200,
+    "user_id_str": "890443064442929153",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 5,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1274184780104364000,
+    "conversation_id_str": "1274184780104364037",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Wed Sep 16 01:05:51 +0000 2020",
+    "id": 1306036543774056400,
+    "id_str": "1306036543774056449",
+    "full_text": "which would you rather get? (i haven’t looked up their respective specs yet)",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      76
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 46389035,
+    "user_id_str": "46389035",
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "reply_count": 9,
+    "quote_count": 1,
+    "conversation_id": 1306036543774056400,
+    "conversation_id_str": "1306036543774056449",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "card": {
+      "name": "poll2choice_text_only",
+      "url": "card://1306036542163439616",
+      "card_type_url": "http://card-type-url-is-deprecated.invalid",
+      "binding_values": {
+        "choice1_label": {
+          "type": "STRING",
+          "string_value": "iPad"
+        },
+        "choice2_label": {
+          "type": "STRING",
+          "string_value": "Macbook"
+        },
+        "end_datetime_utc": {
+          "type": "STRING",
+          "string_value": "2020-09-17T01:05:51Z"
+        },
+        "counts_are_final": {
+          "type": "BOOLEAN",
+          "boolean_value": true
+        },
+        "choice2_count": {
+          "type": "STRING",
+          "string_value": "60"
+        },
+        "choice1_count": {
+          "type": "STRING",
+          "string_value": "76"
+        },
+        "last_updated_datetime_utc": {
+          "type": "STRING",
+          "string_value": "2020-09-17T01:05:54Z"
+        },
+        "duration_minutes": {
+          "type": "STRING",
+          "string_value": "1440"
+        },
+        "api": {
+          "type": "STRING",
+          "string_value": "capi://passthrough/1"
+        },
+        "card_url": {
+          "type": "STRING",
+          "string_value": "https://twitter.com",
+          "scribe_key": "card_url"
+        }
+      },
+      "card_platform": {
+        "platform": {
+          "device": {
+            "name": "Swift",
+            "version": "12"
+          },
+          "audience": {
+            "name": "production",
+            "bucket": null
+          }
+        }
+      }
+    },
+    "lang": "en",
+    "supplemental_language": null,
+    "self_thread": {
+      "id": 1306036543774056400,
+      "id_str": "1306036543774056449"
+    }
+  },
+  {
+    "created_at": "Fri Jul 10 17:23:33 +0000 2020",
+    "id": 1281640215824593000,
+    "id_str": "1281640215824592896",
+    "full_text": "Ambot nalang jud from 'heal as one' naging 'learn as one' rq, unaha sa ang pag lessen sa cases oy, education can wait because lots of people can't access internet connection duh ultimo public schools inyo gipa online class grrr 😤",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      229
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 2993837755,
+    "user_id_str": "2993837755",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00370a296d59c6a3",
+      "url": "https://api.twitter.com/1.1/geo/id/00370a296d59c6a3.json",
+      "place_type": "city",
+      "name": "Talisay City",
+      "full_name": "Talisay City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7722811,
+              10.2343911
+            ],
+            [
+              123.8736671,
+              10.2343911
+            ],
+            [
+              123.8736671,
+              10.3389809
+            ],
+            [
+              123.7722811,
+              10.3389809
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": true,
+    "quoted_status_id": 1281560239075098600,
+    "quoted_status_id_str": "1281560239075098624",
+    "quoted_status_permalink": {
+      "url": "https://t.co/QywVRoWFl3",
+      "expanded": "https://twitter.com/rapplerdotcom/status/1281560239075098624",
+      "display": "twitter.com/rapplerdotcom/…"
+    },
+    "retweet_count": 0,
+    "favorite_count": 2,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1281640215824593000,
+    "conversation_id_str": "1281640215824592896",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Fri Aug 14 07:10:55 +0000 2020",
+    "id": 1294169615447203800,
+    "id_str": "1294169615447203841",
+    "full_text": "@LorenzoJerard @_yuchengcooo My point is just be practical. In times of crisis, there's a way diba? I have the disadvantage but I find academic freeze way too detrimental. \n\nI'm good with online class, alternative learning or modules so students and teachers doesn't have the lost cause.",
+    "truncated": false,
+    "display_text_range": [
+      29,
+      287
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [
+        {
+          "screen_name": "Lorenzojerard",
+          "name": "Lorenzö✨",
+          "id": 937056481819557900,
+          "id_str": "937056481819557888",
+          "indices": [
+            0,
+            14
+          ]
+        }
+      ],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": 1294162385201234000,
+    "in_reply_to_status_id_str": "1294162385201233921",
+    "in_reply_to_user_id": 937056481819557900,
+    "in_reply_to_user_id_str": "937056481819557888",
+    "in_reply_to_screen_name": "Lorenzojerard",
+    "user_id": 1205078260419154000,
+    "user_id_str": "1205078260419153920",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 1,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1293410670138933200,
+    "conversation_id_str": "1293410670138933248",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Tue Sep 29 06:27:13 +0000 2020",
+    "id": 1310828461389357000,
+    "id_str": "1310828461389357056",
+    "full_text": "Reading post some of my friends regarding their experiences about the online class and how their teachers treat them makes my heart sad 😞whoever read this, pls stay strong, all your struggles will be paid off soon ❤️ fighting 💪🏻",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      228
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 823079273850208300,
+    "user_id_str": "823079273850208257",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 1,
+    "favorite_count": 4,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1310828461389357000,
+    "conversation_id_str": "1310828461389357056",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Fri Jul 31 18:25:28 +0000 2020",
+    "id": 1289265943529447400,
+    "id_str": "1289265943529447425",
+    "full_text": "Had my last Jap student tonight in an online class and he literally showed me his d*ck before we ended 😂",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      104
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1089905752796360700,
+    "user_id_str": "1089905752796360704",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "014ff5bc45533d1c",
+      "url": "https://api.twitter.com/1.1/geo/id/014ff5bc45533d1c.json",
+      "place_type": "city",
+      "name": "Mandaue City",
+      "full_name": "Mandaue City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.9114563,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3998978
+            ],
+            [
+              123.9114563,
+              10.3998978
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 5,
+    "reply_count": 3,
+    "quote_count": 0,
+    "conversation_id": 1289265943529447400,
+    "conversation_id_str": "1289265943529447425",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Fri Oct 02 16:56:26 +0000 2020",
+    "id": 1312073969474830300,
+    "id_str": "1312073969474830336",
+    "full_text": "It's past midnight and I'm crying over some videos on Facebook — student attending his online class while taking Grab orders, a daddy supportive of his daughter who's crying on stage. Kapayason Mark. 🥺😅",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      202
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 899800429810155500,
+    "user_id_str": "899800429810155521",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 2,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1312073969474830300,
+    "conversation_id_str": "1312073969474830336",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Fri Jul 10 12:05:45 +0000 2020",
+    "id": 1281560239075098600,
+    "id_str": "1281560239075098624",
+    "full_text": "But the story on the ground is different.\n\nMany students and groups have also called for an “academic freeze” as the country fights the pandemic. They pointed out that the lockdown affected household finances, and many Filipinos don't have access to a computer or the internet. https://t.co/C6q6tP5FXG",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      277
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": [],
+      "media": [
+        {
+          "id": 1281560236835446800,
+          "id_str": "1281560236835446784",
+          "indices": [
+            278,
+            301
+          ],
+          "media_url": "http://pbs.twimg.com/media/EckEPtLXoAA-2TS.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EckEPtLXoAA-2TS.jpg",
+          "url": "https://t.co/C6q6tP5FXG",
+          "display_url": "pic.twitter.com/C6q6tP5FXG",
+          "expanded_url": "https://twitter.com/rapplerdotcom/status/1281560239075098624/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1280,
+            "height": 720,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "h": 717,
+                "w": 1280
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 720,
+                "w": 720
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 720,
+                "w": 632
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 720,
+                "w": 360
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 720,
+                "w": 1280
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 680,
+              "h": 383,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 1280,
+              "h": 720,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 1200,
+              "h": 675,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "extended_entities": {
+      "media": [
+        {
+          "id": 1281560236835446800,
+          "id_str": "1281560236835446784",
+          "indices": [
+            278,
+            301
+          ],
+          "media_url": "http://pbs.twimg.com/media/EckEPtLXoAA-2TS.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EckEPtLXoAA-2TS.jpg",
+          "url": "https://t.co/C6q6tP5FXG",
+          "display_url": "pic.twitter.com/C6q6tP5FXG",
+          "expanded_url": "https://twitter.com/rapplerdotcom/status/1281560239075098624/photo/1",
+          "type": "photo",
+          "original_info": {
+            "width": 1280,
+            "height": 720,
+            "focus_rects": [
+              {
+                "x": 0,
+                "y": 0,
+                "h": 717,
+                "w": 1280
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 720,
+                "w": 720
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 720,
+                "w": 632
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 720,
+                "w": 360
+              },
+              {
+                "x": 0,
+                "y": 0,
+                "h": 720,
+                "w": 1280
+              }
+            ]
+          },
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "small": {
+              "w": 680,
+              "h": 383,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 1280,
+              "h": 720,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 1200,
+              "h": 675,
+              "resize": "fit"
+            }
+          },
+          "media_key": "3_1281560236835446784",
+          "ext_alt_text": null,
+          "ext_media_availability": {
+            "status": "available"
+          },
+          "ext_media_color": {
+            "palette": [
+              {
+                "rgb": {
+                  "red": 25,
+                  "green": 32,
+                  "blue": 58
+                },
+                "percentage": 63.5
+              },
+              {
+                "rgb": {
+                  "red": 179,
+                  "green": 179,
+                  "blue": 173
+                },
+                "percentage": 15.05
+              },
+              {
+                "rgb": {
+                  "red": 124,
+                  "green": 91,
+                  "blue": 82
+                },
+                "percentage": 11.04
+              },
+              {
+                "rgb": {
+                  "red": 239,
+                  "green": 87,
+                  "blue": 68
+                },
+                "percentage": 2.5
+              },
+              {
+                "rgb": {
+                  "red": 240,
+                  "green": 150,
+                  "blue": 139
+                },
+                "percentage": 1.64
+              }
+            ]
+          },
+          "ext": {
+            "mediaStats": {
+              "r": "Missing",
+              "ttl": -1
+            }
+          }
+        }
+      ]
+    },
+    "source": "<a href=\"https://www.echobox.com\" rel=\"nofollow\">Echobox</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 330826792,
+    "user_id_str": "330826792",
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 330,
+    "favorite_count": 1888,
+    "reply_count": 50,
+    "quote_count": 2503,
+    "conversation_id": 1281560239075098600,
+    "conversation_id_str": "1281560239075098624",
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "possibly_sensitive_editable": true,
+    "lang": "en",
+    "supplemental_language": null,
+    "self_thread": {
+      "id": 1281560239075098600,
+      "id_str": "1281560239075098624"
+    }
+  },
+  {
+    "created_at": "Wed Sep 09 04:59:43 +0000 2020",
+    "id": 1303558681833824300,
+    "id_str": "1303558681833824256",
+    "full_text": "me to my online class:\n\nfor next meeting watch the kdrama Descendants of the Sun, episode 6, afterwhich, write a reaction paper on how the medical team implemented the color tagging triage system, min of 500 words.\n\ncharot! 😂🤣",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      226
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 57834004,
+    "user_id_str": "57834004",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00370a296d59c6a3",
+      "url": "https://api.twitter.com/1.1/geo/id/00370a296d59c6a3.json",
+      "place_type": "city",
+      "name": "Talisay City",
+      "full_name": "Talisay City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7722811,
+              10.2343911
+            ],
+            [
+              123.8736671,
+              10.2343911
+            ],
+            [
+              123.8736671,
+              10.3389809
+            ],
+            [
+              123.7722811,
+              10.3389809
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 5,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1303558681833824300,
+    "conversation_id_str": "1303558681833824256",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null,
+    "self_thread": {
+      "id": 1303558681833824300,
+      "id_str": "1303558681833824256"
+    }
+  },
+  {
+    "created_at": "Tue Jun 16 22:44:54 +0000 2020",
+    "id": 1273023776633094100,
+    "id_str": "1273023776633094145",
+    "full_text": "This is it! Summer online class begin.🤔",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      39
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1192389028252770300,
+    "user_id_str": "1192389028252770304",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 5,
+    "reply_count": 5,
+    "quote_count": 0,
+    "conversation_id": 1273023776633094100,
+    "conversation_id_str": "1273023776633094145",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Wed Sep 16 08:33:59 +0000 2020",
+    "id": 1306149320668844000,
+    "id_str": "1306149320668844032",
+    "full_text": "@ohrianana Ipad: for studying and if you want to go paperless, convenient, easy to bring\nMac: for productivity-esp online class, paper works, video editing",
+    "truncated": false,
+    "display_text_range": [
+      11,
+      155
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [
+        {
+          "screen_name": "ohrianana",
+          "name": "Ria ♡",
+          "id": 46389035,
+          "id_str": "46389035",
+          "indices": [
+            0,
+            10
+          ]
+        }
+      ],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": 1306036543774056400,
+    "in_reply_to_status_id_str": "1306036543774056449",
+    "in_reply_to_user_id": 46389035,
+    "in_reply_to_user_id_str": "46389035",
+    "in_reply_to_screen_name": "ohrianana",
+    "user_id": 4807625532,
+    "user_id_str": "4807625532",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ccde280e6bd5ee",
+      "url": "https://api.twitter.com/1.1/geo/id/00ccde280e6bd5ee.json",
+      "place_type": "city",
+      "name": "Consolacion",
+      "full_name": "Consolacion, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.924315,
+              10.3484357
+            ],
+            [
+              124.0017032,
+              10.3484357
+            ],
+            [
+              124.0017032,
+              10.4444441
+            ],
+            [
+              123.924315,
+              10.4444441
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 4,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1306036543774056400,
+    "conversation_id_str": "1306036543774056449",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Mon Apr 20 15:57:58 +0000 2020",
+    "id": 1252265261001924600,
+    "id_str": "1252265261001924608",
+    "full_text": "Thank you to everyone who joined The KM Project Creative @MaiusErano in his online class 🙏🏻\n\nDon’t forget to tag us (@thekmprojectph) and Maius on your class footage! We’d love to see them 🔥\n\nStay updated for future online classes by following all our social media 📲",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      266
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [
+        {
+          "screen_name": "maiuserano",
+          "name": "Maius",
+          "id": 1094634406835179500,
+          "id_str": "1094634406835179520",
+          "indices": [
+            57,
+            68
+          ]
+        },
+        {
+          "screen_name": "thekmprojectph",
+          "name": "The KM Project",
+          "id": 1169724876677992400,
+          "id_str": "1169724876677992448",
+          "indices": [
+            117,
+            132
+          ]
+        }
+      ],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1169724876677992400,
+    "user_id_str": "1169724876677992448",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 3,
+    "favorite_count": 5,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1252265261001924600,
+    "conversation_id_str": "1252265261001924608",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Wed Oct 21 10:35:53 +0000 2020",
+    "id": 1318863573033001000,
+    "id_str": "1318863573033000960",
+    "full_text": "During Online Class:\n\nProf conducting recits. Suddenly Piolo Pascual's interwebs got cut out while answering the questions. \n\nClass rep: I'm afraid Mr. Jorda @PropesyonalTiyo is no longer with us, sir. 😭  *Everyone laughs*\n\nThe irony is Succession pa jud ang class. Hahahahahah",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      277
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 3282320232,
+    "user_id_str": "3282320232",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 2,
+    "reply_count": 1,
+    "quote_count": 0,
+    "conversation_id": 1318863573033001000,
+    "conversation_id_str": "1318863573033000960",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Thu May 28 07:30:24 +0000 2020",
+    "id": 1265908265394684000,
+    "id_str": "1265908265394683904",
+    "full_text": "NO VACCINE, NO CLASSES! Stop pushing online classes or else provide online class materials, coz how bout those who cant afford gadgets/internet? Education is everyone's right but look how anti poor, letting only those who can afford can continue n those who cant will left behind",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      279
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 1106546391264817200,
+    "user_id_str": "1106546391264817152",
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 19785,
+    "favorite_count": 44347,
+    "reply_count": 47,
+    "quote_count": 1039,
+    "conversation_id": 1265908265394684000,
+    "conversation_id_str": "1265908265394683904",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null,
+    "self_thread": {
+      "id": 1265908265394684000,
+      "id_str": "1265908265394683904"
+    }
+  },
+  {
+    "created_at": "Thu Aug 27 06:36:28 +0000 2020",
+    "id": 1298871988027498500,
+    "id_str": "1298871988027498499",
+    "full_text": "when my teacher asks me a question during my online class",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      57
+    ],
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 2564733684,
+    "user_id_str": "2564733684",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "00ca4cd1517ddd94",
+      "url": "https://api.twitter.com/1.1/geo/id/00ca4cd1517ddd94.json",
+      "place_type": "city",
+      "name": "Cebu City",
+      "full_name": "Cebu City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7647381,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.2594754
+            ],
+            [
+              123.9287057,
+              10.4901895
+            ],
+            [
+              123.7647381,
+              10.4901895
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": true,
+    "quoted_status_id": 1298586469947252700,
+    "quoted_status_id_str": "1298586469947252737",
+    "quoted_status_permalink": {
+      "url": "https://t.co/XWvYb5b5zV",
+      "expanded": "https://twitter.com/markgeronimo_/status/1298586469947252737",
+      "display": "twitter.com/markgeronimo_/…"
+    },
+    "retweet_count": 0,
+    "favorite_count": 3,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1298871988027498500,
+    "conversation_id_str": "1298871988027498499",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  },
+  {
+    "created_at": "Sun Jul 18 13:59:44 +0000 2021",
+    "id": 1416759595695890400,
+    "id_str": "1416759595695890432",
+    "full_text": "Things to do after July\n\n1. Research Assistant in CNU\n2. Online class for SNMC by August\n3. September online class for UCLM and MCC\n4. 2 months preparation every Sat Sun for my upcoming exam this October 10\n\n#LabanSaPangarap",
+    "truncated": false,
+    "display_text_range": [
+      0,
+      224
+    ],
+    "entities": {
+      "hashtags": [
+        {
+          "text": "LabanSaPangarap",
+          "indices": [
+            208,
+            224
+          ]
+        }
+      ],
+      "symbols": [],
+      "user_mentions": [],
+      "urls": []
+    },
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user_id": 446988099,
+    "user_id_str": "446988099",
+    "geo": null,
+    "coordinates": null,
+    "place": {
+      "id": "014ff5bc45533d1c",
+      "url": "https://api.twitter.com/1.1/geo/id/014ff5bc45533d1c.json",
+      "place_type": "city",
+      "name": "Mandaue City",
+      "full_name": "Mandaue City, Central Visayas",
+      "country_code": "PH",
+      "country": "Republic of the Philippines",
+      "contained_within": [],
+      "bounding_box": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.9114563,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3107867
+            ],
+            [
+              123.9742663,
+              10.3998978
+            ],
+            [
+              123.9114563,
+              10.3998978
+            ]
+          ]
+        ]
+      },
+      "attributes": {}
+    },
+    "contributors": null,
+    "is_quote_status": false,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "reply_count": 0,
+    "quote_count": 0,
+    "conversation_id": 1416759595695890400,
+    "conversation_id_str": "1416759595695890432",
+    "favorited": false,
+    "retweeted": false,
+    "lang": "en",
+    "supplemental_language": null
+  }
+]

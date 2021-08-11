@@ -3,26 +3,12 @@ const pp = require("puppeteer");
 const fs = require("fs");
 const mongoose = require('mongoose');
 const RawTweet = require('./models/RawTweet')
+const LanguageDetect = require('languagedetect');
+
+const lngDetector = new LanguageDetect()
 
 mongoose.connect('mongodb://localhost:27017/minerva_raw_tweets', {useNewUrlParser: true, useUnifiedTopology: true});
 
-
-// goto the twitter search url - done
-// get the adaptive json response - done
-// save it - done
-// check scroll position - if cant scroll, quit. if can, continue /
-// scroll /
-// check for adaptive - if yes, go back to step 2. if no, go back to step 4 /
-
-// connect to db /
-
-// save everything in the db to the database /
-
-
-// TODO make a new collection for the cleaned tweets - ongoing
-// TODO have a more robust way of checking the language of the tweets
-
-const to_save = [];
 
 const getQueryString = ({ from, to, query, hashtags, location, language = 'en' }) => {
 
@@ -53,7 +39,11 @@ const getQueryString = ({ from, to, query, hashtags, location, language = 'en' }
   return encodeURIComponent(res)
 }
 
+
 const scrape = async ({ test, ...options}) => {
+
+  let count = 0;
+  const to_save = [];
 
   const to_search = getQueryString(options)
 
@@ -69,7 +59,16 @@ const scrape = async ({ test, ...options}) => {
       const keys = Object.keys(json.globalObjects.tweets);
 
       for (const i of keys) {
-        to_save.push(json.globalObjects.tweets[i]);
+        count++;
+        const obj = json.globalObjects.tweets[i];
+        const { full_text, id, lang } = obj
+        const [ [lng, val] ] = lngDetector.detect(full_text, 1)
+
+
+        if(lng === 'english' && val > .2 && lang == 'en') {
+          to_save.push(json.globalObjects.tweets[i]);
+        }
+
       }
     }
   });
@@ -100,7 +99,12 @@ const scrape = async ({ test, ...options}) => {
         window.scrollTo(0, y);
       }, lastHeight);
 
-      await page.waitForTimeout(2000);
+      await page.waitForTimeout(4000);
+
+      await page.evaluate((y) => {
+        window.scrollTo(0, y);
+      }, lastHeight + 50);
+
 
       const currentHeight = await page.evaluate(() => {
         return document.body.scrollHeight;
@@ -117,7 +121,7 @@ const scrape = async ({ test, ...options}) => {
 
   await browser.close();
 
-  console.log(`Scraping done. Number of tweets scraped: ${to_save.length}\n`)
+  console.log(`Scraping done\nNumber of tweets found: ${count}\nNumber of tweets saved: ${to_save.length}\n`)
 
   if(test) {
       const json = JSON.stringify(to_save, null, 2)
@@ -145,13 +149,9 @@ const scrape = async ({ test, ...options}) => {
 
 scrape({
   test: true,
-  from: '2021-01-01',
-  to: '2021-06-01',
+  from: '2020-04-01',
+  to: '2021-08-01',
   query: `"online class" OR "e-class"`,
+  location: 'Cebu',
+  lang: 'en'
 })
-
-// location: {
-//   lat: 10.3095549,
-//   long: 123.8931107,
-//   radius: 5
-// }

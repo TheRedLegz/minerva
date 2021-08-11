@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "*",
+    "languagedetect": "^2.0.0",
     "mongoose": "^5.12.14",
     "puppeteer": "^10.0.0"
   }
