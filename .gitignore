@@ -3,4 +3,5 @@ node_modules
 scraper/test
 .vscode
 modules/__pycache__
+output_data
 __pycache__
