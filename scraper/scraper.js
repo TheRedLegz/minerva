@@ -110,6 +110,8 @@ const scrape = async ({ test, ...options }) => {
 
       if (lastHeight == currentHeight) break;
 
+      await page.waitForTimeout(3000);
+
       lastHeight = currentHeight;
       log(chalk.green('SCROLL ') + 'done');
     } catch (e) {
@@ -118,7 +120,7 @@ const scrape = async ({ test, ...options }) => {
     }
   }
 
-  await page.waitForTimeout(3000);
+  
 
   await browser.close();
 

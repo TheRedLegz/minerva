@@ -17,14 +17,11 @@ setup()
 
     const { filtered } = await scrape(parameters);
 
-    const contents = await RawTweet.find({}).exec();
-    const length = contents.length;
-
     for (const tweet of filtered) {
       const { id } = tweet;
-      const dup = RawTweet.findOne({ tweet_id: id });
-
-      if (!dup || !length) {
+      const dup = await RawTweet.findOne({ tweet_id: id });
+      
+      if (!dup) {
         const toSave = new RawTweet({
           data: tweet,
           parameters,
