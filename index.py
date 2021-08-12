@@ -30,12 +30,12 @@ if __name__ == "__main__":
     (bow, unique, doc_grams) = bowres
     # write_to_file("raw_bow.txt", bow, is_2d=True)
     # write_to_file("raw_unique_words.txt", unique)
-    write_to_file("raw_doc_grams.txt", doc_grams, is_2d=True)
+    # write_to_file("raw_doc_grams.txt", doc_grams, is_2d=True)
 
     (bow, unique, doc_grams) = prune_bow(bowres)
     # write_to_file("pruned_bow.txt", bow, is_2d=True)
     # write_to_file("pruned_unique_words.txt", unique)
-    write_to_file("pruned_doc_grams.txt", doc_grams, is_2d=True)
+    # write_to_file("pruned_doc_grams.txt", doc_grams, is_2d=True)
 
     vectors = tf_idf(data, bow)
     # np.savetxt("tf_idf_raw.csv", vectors, delimiter=',')
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # write_to_file("tf_idf_transposed.txt", vectors_t, is_2d=True)
 
     (pca_matrix, sum) = pca(vectors_t)
-    print(pca_matrix.shape )
+    # print(pca_matrix.shape )
     # np.savetxt("pca_data.csv", pca_matrix, delimiter=',')
     # write_to_file("pca.txt", pca_matrix, is_2d=True)
 
@@ -57,4 +57,9 @@ if __name__ == "__main__":
     # plt.show()
 
     SOM_matrix = SOM(pca_matrix,.5,(3, 4))
+
+    for i in range(3):
+        for j in range(4):
+            print("[", i, "] [", j, "] =", SOM_matrix[i][j][:3])
+
     print_data_to_SOM(SOM_matrix, pca_matrix, unique)
