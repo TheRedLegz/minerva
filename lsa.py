@@ -191,73 +191,34 @@ def tf_idf(document_array, bow = None):
 
             matrix[i][j] = tf * idf 
     return matrix
-
-def lsaSklearn(tfidf_matrix):
-
-    # document x word 
-    (x, y) = tfidf_matrix.shape
-
-    lsa = TruncatedSVD(n_components= y-1, algorithm="randomized", n_iter=5, random_state= 42)
-    lsa.fit(tfidf_matrix)
     
-
-    # u = left singular vectors = documents
-
-    # s = singular values
-    # vt = right singular vectors = word
-
-    # word to topic matrix
-
-
-    cumsum = lsa.explained_variance_ratio_.cumsum()
-
-    x = np.arange(len(lsa.explained_variance_ratio_))
-
-    plt.bar(x, lsa.explained_variance_ratio_)
-    plt.show()
-    print(lsa.explained_variance_ratio_)
-
-
-    optimal_num = y - 1
-
-    for i, a in enumerate(cumsum):
-        if a > .8:
-            optimal_num = i + 1
-            break
-    
-
-    lsa_final = TruncatedSVD(n_components=optimal_num, algorithm="randomized", n_iter=5, random_state= 42)
-    lsa_final.fit(tfidf_matrix)
-
-
-    sigma = np.diag(lsa_final.singular_values_)
-    v_t = lsa_final.components_
-    res = np.dot(sigma, v_t)
-
-    return np.transpose(res)
-    #  v matrix = word to topic matrix
-    
-
 def pca(matrix):
     (x, y) = matrix.shape
 
     scaler = StandardScaler()
     scaled = scaler.fit_transform(matrix)
     
-    pca = PCA(n_components=y)
+    pca = PCA(n_components=21)
     pca.fit(scaled)
 
     cumsum = pca.explained_variance_ratio_.cumsum()
     optimal_components = y
-    
+    optimal_sum = []
+    optimal_i = []
     for i, sum in enumerate(cumsum):
+        optimal_sum.append(sum)
+        optimal_i.append(i)
         if sum > .80:
             optimal_components = i + 1
             break
 
     pca_final = PCA(n_components=optimal_components)
     res = pca_final.fit_transform(scaled)
-
+    plt.bar(optimal_i,optimal_sum)
+    plt.title('Best Number of Features')
+    plt.xlabel('Features')
+    plt.ylabel('Explained Variance Ratio')
+    plt.show()
     return res
 
 
@@ -292,11 +253,11 @@ def preprocess_documents(array):
 
 # Checking the documents
 
-# raw = pd.read_json('test_data.json')
-# data = []
+raw = pd.read_json('sample.json')
+data = []
 
-# for i, row in raw.iterrows():
-#     data.append(row['full_text'])
+for i, row in raw.iterrows():
+    data.append(row['full_text'])
     
 
 
@@ -309,7 +270,7 @@ def preprocess_documents(array):
 
 # Making the Bag of words
 
-# (bow, unique, document_words) = bag_of_words(cleaned_documents, to_preprocess=False)
+(bow, unique, document_words) = bag_of_words(data, to_preprocess=True)
 
 
 # write_to_file('unique.txt', unique)
@@ -319,10 +280,9 @@ def preprocess_documents(array):
 
 # TF IDF
 
-# matrix = tf_idf(data, bow)
-# lsares = lsaSklearn(matrix)
-# pcares = pca(lsares)
-
+matrix = tf_idf(data, bow)
+pcares = pca(matrix)
+# pprint(pcares)
 
 
 
