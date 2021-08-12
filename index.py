@@ -12,20 +12,21 @@ db_raw = client['minerva_raw_tweets']
 rawtweets = db_raw['rawtweets']
 
 
-db_results = list(rawtweets.find())
-data = []
+if __name__ == "__main__":
+    db_results = list(rawtweets.find())
+    data = []
 
 
-for a in db_results:
-    data.append(a['data']['full_text'])
+    for a in db_results:
+        data.append(a['data']['full_text'])
 
 
 
-data = preprocess_documents(data)
-(bow, unique, doc_grams) = bag_of_words(data, to_preprocess=False)
+    data = preprocess_documents(data)
+    (bow, unique, doc_grams) = bag_of_words(data, to_preprocess=False)
 
-vectors = tf_idf(data, bow)
-pca_matrix = pca(vectors)
+    vectors = tf_idf(data, bow)
+    pca_matrix = pca(vectors)
 
 
-pprint(pca_matrix)
+    pprint(pca_matrix)
