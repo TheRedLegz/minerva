@@ -108,6 +108,8 @@ const scrape = async ({ test, ...options }) => {
         return document.body.scrollHeight;
       });
 
+      await page.waitForTimeout(3000);
+
       if (lastHeight == currentHeight) break;
 
       await page.waitForTimeout(3000);
