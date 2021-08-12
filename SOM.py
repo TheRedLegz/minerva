@@ -49,9 +49,6 @@ def euc_distance(input, cell, num_features):
 def man_distance(bmu_row, bmu_col, row, col):
     return np.abs(bmu_row-row) + np.abs(bmu_col-col)
 
-def print_data_to_SOM(SOM_matrix, matrix_data):
-    print("TEST")
-
 
 def SOM(data, learn_rate, matrix_size):
 

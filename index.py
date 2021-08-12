@@ -22,21 +22,19 @@ if __name__ == "__main__":
     for a in db_results:
         data.append(a['data']['full_text'])
 
+    # write_to_file("data.txt", data)
+
     data = preprocess_documents(data)
 
     bowres = bag_of_words(data, to_preprocess=False)
     (bow, unique, doc_grams) = bowres
-    print(len(unique))
 
     (bow, unique, doc_grams) = prune_bow(bowres)
-    print(len(unique))
-    pprint(unique)
 
     vectors = tf_idf(data, bow)
     vectors_t = np.transpose(vectors)
-    print(vectors.shape)
-    print(vectors_t.shape)
 
     (pca_matrix, sum) = pca(vectors_t)
 
-    SOM(pca_matrix,.5,(3, 3))
+    SOM_matrix = SOM(pca_matrix,.5,(4, 5))
+    print_data_to_SOM(SOM_matrix, pca_matrix, unique)
