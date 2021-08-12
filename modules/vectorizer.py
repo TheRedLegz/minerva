@@ -52,18 +52,19 @@ def bag_of_words(document_array, to_preprocess=True):
 
     return (bow_grams, unique_grams, doc_grams)
     
-
 def prune_bow(bow):
     (bow_grams, unique, docs) = bow
+
+
+    original = np.copy(bow_grams)
+
     # Get Document Frequency == docs with gram / doc #
-    doc_count = len(docs)
     for i in range(len(unique)-1, -1, -1):
-        df =  np.count_nonzero(bow_grams[:, i:i+1]) / len(docs)
+        df =  np.count_nonzero(original[:, i:i+1]) / len(docs)
 
         if df < 0.05:
             unique.pop(i)
             bow_grams = np.delete(bow_grams, i, 1)
-
 
     return (bow_grams, unique, docs)
 
@@ -80,6 +81,12 @@ def tf_idf(document_array, bow = None):
 
         for j, col in enumerate(row):
             
+            # NOTE you might want to remove the document instead but not now
+
+            if word_count == 0:
+                matrix[i][j] = 0
+                continue
+                
             tf = col / word_count
             
             has_word_count = np.count_nonzero(bow[:, j:j+1])

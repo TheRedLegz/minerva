@@ -123,3 +123,22 @@ def preprocess_documents(array):
         res.append(preprocess(a))
 
     return res
+
+
+
+def write_to_file(fn, array, is_2d=False):
+    with open(fn, 'w', encoding="utf8") as file:
+        file.write("Number of entries: {}\n\n".format(len(array)))
+
+        if not is_2d:
+            for i, a in enumerate(array):
+                string = "$Index {}\n{}\n\n".format(i, a)
+                file.write(string)
+        else:
+            for i, a in enumerate(array):
+                file.write('Row {}: {} cols\n'.format(i, len(a)))
+
+                for val in a:
+                    file.write('{}\t'.format(val))
+
+                file.write('\n\n')
