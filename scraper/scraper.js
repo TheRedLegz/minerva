@@ -98,7 +98,7 @@ const scrape = async ({ test, ...options }) => {
         window.scrollTo(0, y);
       }, lastHeight);
 
-      await page.waitForTimeout(3000);
+      await page.waitForTimeout(6000);
 
       await page.evaluate((y) => {
         window.scrollTo(0, y);
