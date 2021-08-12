@@ -10,8 +10,13 @@ def pca(matrix):
     pca = PCA(n_components=y)
     pca.fit(scaled)
 
+    if y <= x:
+        initial_components = y
+    else:
+        initial_components = x
+
     cumsum = pca.explained_variance_ratio_.cumsum()
-    optimal_components = y
+    optimal_components = initial_components
     
     for i, sum in enumerate(cumsum):
         if sum > .80:
