@@ -5,7 +5,7 @@ from pprint import pprint
 from modules.preprocessor import preprocess_documents
 from modules.vectorizer import bag_of_words, tf_idf
 from modules.pca import pca
-from modules.som import SOM
+# from modules.som import SOM
 
 
 client = MongoClient('mongodb://localhost:27017')
@@ -13,7 +13,12 @@ db_raw = client['minerva_raw_tweets']
 rawtweets = db_raw['rawtweets']
 
 
-data = list(rawtweets.find())
+db_results = list(rawtweets.find())
+data = []
+
+
+for a in db_results:
+    data.append(a['data']['full_text'])
 
 
 
