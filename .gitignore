@@ -2,3 +2,5 @@ node_modules
 .DS_STORE
 scraper/test
 .vscode
+modules/__pycache__
+__pycache__
