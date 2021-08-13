@@ -6,6 +6,14 @@ from matplotlib import pyplot as plt
 
 np.random.seed(101)
 
+def find_topics(SOM_matrix, data_matrix, data_grams, labels, matrix_size):
+    topics = []
+    
+    for word in data_grams:
+        topic_location = find_bmu(SOM_matrix, data_matrix[labels.index(word)], matrix_size)
+        topics.append((topic_location, word))
+
+    return topics
 
 def most_common(lst, n):
   if len(lst) == 0:
@@ -67,7 +75,7 @@ def SOM(data, learn_rate, matrix_size):
     indices = np.zeros(len(data))
 
     for s in range(steps_max):
-        if s % (steps_max/50) == 0: print(str((s/steps_max) * 100.00) + " percent")
+        if s % (steps_max/10) == 0: print(str(np.round((s/steps_max) * 100.00)) + " percent")
         
         # Update
         percent = 1.0 - ((s * 1.0) / steps_max)
@@ -108,7 +116,6 @@ def SOM(data, learn_rate, matrix_size):
 
 def print_data_to_SOM(SOM_matrix, matrix_data, labels):
     matrix_size = SOM_matrix.shape
-    print(matrix_size)
     (row, col, _) = matrix_size
     mapping = np.empty(shape=(row, col), dtype=object)
 

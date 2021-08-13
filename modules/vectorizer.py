@@ -65,8 +65,9 @@ def prune_bow(bow):
         if df < 0.03:
             unique.pop(i)
             bow_grams = np.delete(bow_grams, i, 1)
-            for i in range(len(docs)):
-                docs[i] = [word for word in docs[i] if word in unique]
+            
+    for i in range(len(docs)):
+        docs[i] = [word for word in docs[i] if word in unique]
 
     return (bow_grams, unique, docs)
 
