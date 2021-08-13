@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
     print("\nFinal SOM weights")
     for i in range(3):
-        for j in range(3):
+        for j in range(4):
             print("[", i, "] [", j, "] =", SOM_matrix[i][j][:3])
 
     print("\nThe Clustered Topics")
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     while(data_selected_index != -1):
         print("\nSelect a tweet ( 0 -", len(data), "): ")
         data_selected_index = int(input())
-        topics = find_topics(SOM_matrix, pca_matrix, doc_grams[data_selected_index], unique, (3, 3))
+        topics = find_topics(SOM_matrix, pca_matrix, doc_grams[data_selected_index], unique, (3, 4))
 
         print("\nRaw Tweet:\n", db_results[data_selected_index]['data']['full_text'])
         print("\nSelected Doc:", doc_grams[data_selected_index])
