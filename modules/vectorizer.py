@@ -62,7 +62,7 @@ def prune_bow(bow):
     for i in range(len(unique)-1, -1, -1):
         df =  np.count_nonzero(original[:, i:i+1]) / len(docs)
 
-        if df < 0.03:
+        if df < 0.0175:
             unique.pop(i)
             bow_grams = np.delete(bow_grams, i, 1)
             
