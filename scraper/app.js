@@ -10,7 +10,7 @@ setup()
     const parameters = {
       from: '2020-04-01',
       to: '2021-08-01',
-      query: `"online class" OR "e-class" OR "online classes"`,
+      query: `"online class" OR "online classes" OR "internet"`,
       location: 'Cebu',
       lang: 'en',
     };

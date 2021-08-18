@@ -52,7 +52,7 @@ def bag_of_words(document_array, to_preprocess=True):
 
     return (bow_grams, unique_grams, doc_grams)
     
-def prune_bow(bow):
+def prune_bow(bow, tf_idf_treshold = 1):
     (bow_grams, unique, docs) = bow
 
 
@@ -62,7 +62,7 @@ def prune_bow(bow):
     for i in range(len(unique)-1, -1, -1):
         df =  np.count_nonzero(original[:, i:i+1]) / len(docs)
 
-        if df < 0.0175:
+        if df < tf_idf_treshold/len(docs):
             unique.pop(i)
             bow_grams = np.delete(bow_grams, i, 1)
             
