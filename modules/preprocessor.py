@@ -14,6 +14,12 @@ lemmatizer = WordNetLemmatizer()
 dd = []
 
 def preprocess(string):
+    def remove_non_english(string):
+        words = set(nltk.corpus.words.words())
+        res = " ".join(w for w in nltk.wordpunct_tokenize(string) \
+         if w.lower() in words or not w.isalpha())
+        return res
+        
     def remove_links(string):
         res = re.sub(r'http\S+', '', string)
         return res
@@ -98,6 +104,7 @@ def preprocess(string):
 
     try:
         string = string.lower()
+        string = remove_non_english(string)
         string = remove_links(string)
         string = remove_mentions(string)
         string = remove_hashtags(string)
