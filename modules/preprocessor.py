@@ -2,9 +2,9 @@ import re
 import emoji
 import nltk
 import requests
+from googletrans import Translator
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
-
 
 stopwords_list = requests.get("https://gist.githubusercontent.com/rg089/35e00abf8941d72d419224cfd5b5925d/raw/12d899b70156fd0041fa9778d657330b024b959c/stopwords.txt").content
 
@@ -14,6 +14,11 @@ lemmatizer = WordNetLemmatizer()
 dd = []
 
 def preprocess(string):
+    def translateinator(string):
+        translator = Translator()
+        res = translator.translate(string)
+        return res.text
+    
     def remove_non_english(string):
         words = set(nltk.corpus.words.words())
         res = " ".join(w for w in nltk.wordpunct_tokenize(string) \
@@ -104,7 +109,6 @@ def preprocess(string):
 
     try:
         string = string.lower()
-        string = remove_non_english(string)
         string = remove_links(string)
         string = remove_mentions(string)
         string = remove_hashtags(string)
@@ -113,11 +117,13 @@ def preprocess(string):
         string = remove_html_tags(string)
         string = remove_non_ascii(string)
         string = remove_punctation(string)
+        string = translateinator(string)
+        string = remove_non_english(string)
         string = remove_stop_words(string)
         string = lemmatize_string(string)
     except Exception as e:
         print(e)
-        print('error in string', string)
+        # print('error in string', string)
         return
 
     return string.strip()
