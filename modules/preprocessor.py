@@ -115,7 +115,8 @@ def preprocess(string):
         string = remove_punctation(string)
         string = remove_stop_words(string)
         string = lemmatize_string(string)
-    except:
+    except Exception as e:
+        print(e)
         print('error in string', string)
         return
 
