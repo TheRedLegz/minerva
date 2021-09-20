@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from pprint import pprint
 
 import numpy as np
-
+import nltk
 from modules.preprocessor import preprocess_documents, write_to_file
 from modules.vectorizer import bag_of_words, prune_bow, tf_idf
 from modules.pca import pca
@@ -12,7 +12,7 @@ from modules.som import SOM, find_topics, print_data_to_SOM
 client = MongoClient('mongodb://localhost:27017')
 db_raw = client['minerva_raw_tweets']
 rawtweets = db_raw['rawtweets']
-
+nltk.download("words")
 
 if __name__ == "__main__":
 
