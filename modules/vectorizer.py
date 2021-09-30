@@ -1,7 +1,7 @@
 import math
 import nltk
 import numpy as np
-from modules.preprocessor import preprocess
+from modules.tweet_preprocessor import preprocess
 
 def bag_of_words(document_array, to_preprocess=True):
 

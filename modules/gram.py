@@ -1,7 +1,7 @@
 from gensim.models.phrases import Phrases, Phraser
 from gensim.utils import tokenize
 from gensim.parsing.preprocessing import STOPWORDS
-import tweet_preprocessor as p
+import modules.tweet_preprocessor as p
 import pandas as pd
 from pprint import pprint as print
 import os.path

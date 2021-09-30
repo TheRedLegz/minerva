@@ -1,12 +1,13 @@
-from pymongo import MongoClient
-from pprint import pprint
+from modules.gram import gram_documents
+from pprint import pprint as print
+import pandas as pd
 
 import numpy as np
 import json
 from requests.api import get
-from modules.preprocessor import preprocess_documents, write_to_file
+from modules.tweet_preprocessor import preprocess_documents
 from modules.word2vec import get_word2vec_from_data
-from modules.vectorizer import bag_of_words, prune_bow, tf_idf
+# from modules.vectorizer import bag_of_words, prune_bow, tf_idf
 from modules.pca import pca
 from modules.lsi import lsi
 from matplotlib import pyplot as plt
@@ -14,16 +15,12 @@ from modules.som import SOM, find_topics, print_data_to_SOM
 
 import pandas as pd
 
-client = MongoClient('mongodb://localhost:27017')
-db_raw = client['minerva_raw_tweets']
-rawtweets = db_raw['rawtweets']
+# client = MongoClient('mongodb://localhost:27017')
+# db_raw = client['minerva_raw_tweets']
+# rawtweets = db_raw['rawtweets']
+
 
 if __name__ == "__main__":
-
-
-    f = open('file2.json',encoding="utf8")
-    db_results = json.load(f)
-    f.close()
 
     # data = []
     data = pd.read_csv('test_tweets.csv')
@@ -39,7 +36,7 @@ if __name__ == "__main__":
     #     data.append(a['data']['full_text'])
 
     print("Starting Preprocessing")
-    data = preprocess_documents(data[:50])
+    data = preprocess_documents(data[:200])
     print("Finished Preprocessing")
 
     #WORD2VEC implementation
@@ -52,15 +49,10 @@ if __name__ == "__main__":
         unique.append(word)
         vectorized_words.append(model.wv[word])
     vectorized_words = np.asarray(vectorized_words)
-    print(vectorized_words.shape)
 
     doc_grams = []
     for sentence in data:
         doc_grams.append([word for word in sentence if word in unique])
-
-    print(doc_grams)
-    
-
 
     # TF-IDF implementation
     # bowres = bag_of_words(data, to_preprocess=False)
@@ -75,7 +67,7 @@ if __name__ == "__main__":
     
     # print(lsi_matrix.shape )
 
-    lattice_size = (2, 2)
+    lattice_size = (10, 10)
     (row, col) = lattice_size
 
     #WORD2VEC implementation
@@ -86,28 +78,25 @@ if __name__ == "__main__":
     print("\nFinal SOM weights")
     print("Lattice size: (%d, %d)" %(row, col))
 
-    for i in range(row):
-        for j in range(col):
-            print("[", i, "] [", j, "] =", SOM_matrix[i][j][:3])
 
     print("\nThe Clustered Topics")
     print_data_to_SOM(SOM_matrix, vectorized_words, unique)
 
-    data_selected_index = 0
-    while(data_selected_index != -1):
-        print("\nSelect a tweet ( 0 -", len(data)-1, "): ")
-        data_selected_index = int(input())
+    # data_selected_index = 0
+    # while(data_selected_index != -1):
+    #     print("\nSelect a tweet ( 0 -", len(data)-1, "): ")
+    #     data_selected_index = int(input())
 
-        if data_selected_index != -1:    
-            topics = find_topics(SOM_matrix, vectorized_words, doc_grams[data_selected_index], unique, lattice_size)
+    #     if data_selected_index != -1:    
+    #         topics = find_topics(SOM_matrix, vectorized_words, doc_grams[data_selected_index], unique, lattice_size)
 
-            print("\nRaw Tweet:\n", db_results[data_selected_index]['data']['full_text'])
-            print("\nSelected Doc:", doc_grams[data_selected_index])
-            print("\nTopics:")
-            for topic in topics:
-                (location, word) = topic
-                (x, y) = location
-                print("[", x, "][", y,"] =", word)
+    #         print("\nRaw Tweet:\n", db_results[data_selected_index]['data']['full_text'])
+    #         print("\nSelected Doc:", doc_grams[data_selected_index])
+    #         print("\nTopics:")
+    #         for topic in topics:
+    #             (location, word) = topic
+    #             (x, y) = location
+    #             print("[", x, "][", y,"] =", word)
 
 
 

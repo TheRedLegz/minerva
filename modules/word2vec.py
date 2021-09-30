@@ -1,5 +1,5 @@
 from nltk import word_tokenize
-from modules.preprocessor import preprocess_documents
+from modules.tweet_preprocessor import preprocess_documents
 
 from gensim.models import Word2Vec
 
