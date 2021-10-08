@@ -122,7 +122,6 @@ def preprocess_documents(array):
 def _preprocess_array(array):
     res = []   
     for a in array:
-        print(a)
         res.append(preprocess_tweet(a))
 
     return res

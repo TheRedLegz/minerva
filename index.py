@@ -7,7 +7,7 @@ import json
 from requests.api import get
 from modules.tweet_preprocessor import preprocess_documents
 from modules.word2vec import get_word2vec_from_data
-# from modules.vectorizer import bag_of_words, prune_bow, tf_idf
+from modules.vectorizer import bag_of_words, prune_bow, tf_idf
 from modules.pca import pca
 from modules.lsi import lsi
 from matplotlib import pyplot as plt
@@ -23,8 +23,8 @@ import pandas as pd
 if __name__ == "__main__":
 
     # data = []
-    data = pd.read_csv('test_tweets.csv')
-    data = data['Tweet'].values
+    data = pd.read_csv('covid19_tweets.csv')
+    data = data['text'].values
     # All tweets
     # for tweet in db_results:
     #     data.append(tweet['tweet'])
@@ -63,11 +63,11 @@ if __name__ == "__main__":
     # vectors = tf_idf(data, bow)
 
     # vectors_t = np.transpose(vectors)
-    # (lsi_matrix, sum) = lsi(vectors_t)
+    # (lsi_matrix, sum) = pca(vectors_t)
     
     # print(lsi_matrix.shape )
 
-    lattice_size = (10, 10)
+    lattice_size = (6, 6)
     (row, col) = lattice_size
 
     #WORD2VEC implementation
