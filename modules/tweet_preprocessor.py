@@ -2,6 +2,7 @@ import pandas as pd
 import re
 import gensim
 import nltk
+import concurrent.futures
 from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
 
@@ -99,7 +100,27 @@ def basic_clean(tweet):
 
 def preprocess_documents(array):
     res = []
+    tres = []
+    wordnet.ensure_loaded()
 
+    divisions = int(len(array) / 4)
+    data = [] 
+    data.append(array[0:divisions])
+    data.append(array[divisions:divisions*2])
+    data.append(array[divisions*2:divisions*3])
+    data.append(array[divisions*3:])
+
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        for result in executor.map(_preprocess_array, data):
+            tres.append(result)
+
+        for array in tres:
+            res = res + array
+
+    return res
+
+def _preprocess_array(array):
+    res = []   
     for a in array:
         res.append(preprocess_tweet(a))
 

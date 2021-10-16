@@ -27,7 +27,7 @@ def pca(matrix):
             optimal_components = i + 1
             break
 
-    pca_final = PCA(n_components=optimal_components)
+    pca_final = PCA(n_components=0.95)
     res = pca_final.fit_transform(scaled)
 
     return (res, optimal_sum)

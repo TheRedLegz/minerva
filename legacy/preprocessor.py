@@ -5,6 +5,8 @@ import requests
 from googletrans import Translator
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
+import threading
+import concurrent.futures
 
 stopwords_list = requests.get("https://gist.githubusercontent.com/rg089/35e00abf8941d72d419224cfd5b5925d/raw/12d899b70156fd0041fa9778d657330b024b959c/stopwords.txt").content
 
@@ -133,10 +135,32 @@ def preprocess(string):
 def preprocess_documents(array):
     res = []
 
-    for a in array:
-        res.append(preprocess(a))
+    divisions = int(len(array) / 4)
+
+    data = [] 
+    data.append(array[0:divisions])
+    data.append(array[divisions:divisions*2])
+    data.append(array[divisions*2:divisions*3])
+    data.append(array[divisions*3:])
+
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        for data in executor.map(preprocess_array, data):
+            res.append(data)
+    
+    
+    print(len(res))
+    
+    # for a in array:
+    #     print(a)
+    #     res.append(preprocess(a))
 
     return res
+
+def preprocess_array(array):
+    res = []
+    for a in array:
+        print(a)
+        res.append(preprocess(a))
 
 
 
