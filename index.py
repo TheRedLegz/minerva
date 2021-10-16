@@ -83,6 +83,13 @@ if __name__ == "__main__":
     print("\nThe Clustered Topics")
     print_data_to_SOM(SOM_matrix, lsi_matrix, unique)
 
+    sentiRes = pd.DataFrame()
+    analyser = SentimentIntensityAnalyzer()
+    sentiment_score_list = []
+    sentiment_label_list = []
+    for i in dataSentiment:
+        sentiment_score = analyser.polarity_scores(i)
+
         if sentiment_score['compound'] >= 0.05:
             sentiment_score_list.append(sentiment_score['compound'])
             sentiment_label_list.append('Positive')
