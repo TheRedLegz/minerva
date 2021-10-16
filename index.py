@@ -12,6 +12,7 @@ from modules.pca import pca
 from modules.lsi import lsi
 from matplotlib import pyplot as plt
 from modules.som import SOM, find_topics, print_data_to_SOM
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 import pandas as pd
 
@@ -38,7 +39,7 @@ if __name__ == "__main__":
     print("Starting Preprocessing")
     data = preprocess_documents(data[:200])
     print("Finished Preprocessing")
-
+    dataSentiment = preprocess_documents(data[:200])
     #WORD2VEC implementation
     model = get_word2vec_from_data(data, to_preprocess=False)
 
@@ -81,7 +82,29 @@ if __name__ == "__main__":
 
     print("\nThe Clustered Topics")
     print_data_to_SOM(SOM_matrix, vectorized_words, unique)
+    
+    sentiRes = pd.DataFrame()
+    analyser = SentimentIntensityAnalyzer()
+    sentiment_score_list = []
+    sentiment_label_list = []
+    for i in dataSentiment:
+        sentiment_score = analyser.polarity_scores(i)
 
+        if sentiment_score['compound'] >= 0.05:
+            sentiment_score_list.append(sentiment_score['compound'])
+            sentiment_label_list.append('Positive')
+        elif sentiment_score['compound'] > -0.05 and sentiment_score['compound'] < 0.05:
+            sentiment_score_list.append(sentiment_score['compound'])
+            sentiment_label_list.append('Neutral')
+        elif sentiment_score['compound'] <= -0.05:
+            sentiment_score_list.append(sentiment_score['compound'])
+            sentiment_label_list.append('Negative')
+    
+    sentiRes['sentiment'] = sentiment_label_list
+    sentiRes['sentiment score'] = sentiment_score_list
+
+    print(sentiRes)
+    
     # data_selected_index = 0
     # while(data_selected_index != -1):
     #     print("\nSelect a tweet ( 0 -", len(data)-1, "): ")
