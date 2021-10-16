@@ -40,47 +40,47 @@ if __name__ == "__main__":
     print("Finished Preprocessing")
 
     #WORD2VEC implementation
-    model = get_word2vec_from_data(data, to_preprocess=False)
+    # model = get_word2vec_from_data(data, to_preprocess=False)
 
-    vectorized_words = []
-    unique = []
-    for i in range(len(model.wv.index_to_key)):
-        word = model.wv.index_to_key[i]
-        unique.append(word)
-        vectorized_words.append(model.wv[word])
-    vectorized_words = np.asarray(vectorized_words)
+    # vectorized_words = []
+    # unique = []
+    # for i in range(len(model.wv.index_to_key)):
+    #     word = model.wv.index_to_key[i]
+    #     unique.append(word)
+    #     vectorized_words.append(model.wv[word])
+    # vectorized_words = np.asarray(vectorized_words)
 
-    doc_grams = []
-    for sentence in data:
-        doc_grams.append([word for word in sentence if word in unique])
+    # doc_grams = []
+    # for sentence in data:
+    #     doc_grams.append([word for word in sentence if word in unique])
 
     # TF-IDF implementation
-    # bowres = bag_of_words(data, to_preprocess=False)
-    # (bow, unique, doc_grams) = bowres
+    bowres = bag_of_words(data, to_preprocess=False)
+    (bow, unique, doc_grams) = bowres
 
-    # (bow, unique, doc_grams) = prune_bow(bowres, 3)
+    (bow, unique, doc_grams) = prune_bow(bowres, 3)
 
-    # vectors = tf_idf(data, bow)
+    vectors = tf_idf(data, bow)
 
-    # vectors_t = np.transpose(vectors)
-    # (lsi_matrix, sum) = pca(vectors_t)
+    vectors_t = np.transpose(vectors)
+    (lsi_matrix, sum) = pca(vectors_t)
     
-    # print(lsi_matrix.shape )
+    print(lsi_matrix.shape )
 
     lattice_size = (6, 6)
     (row, col) = lattice_size
 
     #WORD2VEC implementation
-    SOM_matrix = SOM(vectorized_words, .5, lattice_size)
+    # SOM_matrix = SOM(vectorized_words, .5, lattice_size)
     #TF-IDF implementation
-    # SOM_matrix = SOM(lsi_matrix, .5, lattice_size)
+    SOM_matrix = SOM(lsi_matrix, .5, lattice_size)
 
     print("\nFinal SOM weights")
     print("Lattice size: (%d, %d)" %(row, col))
 
 
     print("\nThe Clustered Topics")
-    print_data_to_SOM(SOM_matrix, vectorized_words, unique)
+    print_data_to_SOM(SOM_matrix, lsi_matrix, unique)
 
     # data_selected_index = 0
     # while(data_selected_index != -1):
