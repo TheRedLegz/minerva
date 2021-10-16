@@ -1,7 +1,12 @@
 from flask import Flask, jsonify, abort
 from pymongo import MongoClient
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
+
+
 client = MongoClient('mongodb://localhost:27017')
 db_raw = client['minerva_raw_tweets']
 rawtweets = db_raw['rawtweets']
@@ -32,5 +37,6 @@ def get_one_tweet(tweet_id):
 
     return error
     
+
 if __name__ == '__main__':
     app.run(debug=True)
