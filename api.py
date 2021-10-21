@@ -3,6 +3,9 @@ from pymongo import MongoClient
 from flask_cors import CORS
 from modules.tweet_preprocessor import basic_clean
 from modules.gram import gram_documents
+from modules.sentiment import sentimentinator
+from pprint import pprint as print
+
 
 app = Flask(__name__)
 CORS(app)
@@ -69,6 +72,31 @@ def get_grams():
     tokens = gram_documents(data)
 
     return jsonify({ 'data': tokens })
+
+
+
+
+
+@app.route('/sentiment', methods=['GET'])
+def get_sentiment():
+    db_results = list(rawtweets.find())
+    data = []
+    
+    for a in db_results:
+        data.append(a['data'])
+
+    df = sentimentinator([item['full_text'] for item in data])
+
+    for i in range(len(data)):
+        data[i]['sentiment'] = df.iloc[i]['sentiment']
+        data[i]['sentiment score'] = df.iloc[i]['sentiment score']
+        data[i]['preprocessed'] = df.iloc[i]['tweet']
+
+    
+        
+    return jsonify(data)
+
+
 
 
 if __name__ == '__main__':

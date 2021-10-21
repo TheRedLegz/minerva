@@ -28,3 +28,4 @@ def sentimentinator(dataSentiment):
     sentiRes['tweet'] = tweet_list
 
     print(sentiRes)
+    return sentiRes
