@@ -93,6 +93,7 @@ def get_sentiment():
         data[i]['preprocessed'] = df.iloc[i]['tweet']
 
     
+    data.sort(key=lambda x: x['sentiment score'], reverse=True)
         
     return jsonify(data)
 
