@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, abort
 from pymongo import MongoClient
 from flask_cors import CORS
-from modules.tweet_preprocessor import basic_clean
+from modules.tweet_preprocessor import basic_clean, preprocess_tweet
 from modules.gram import gram_documents
 from modules.sentiment import sentimentinator
 from pprint import pprint as print
@@ -85,7 +85,7 @@ def get_sentiment():
     for a in db_results:
         data.append(a['data'])
 
-    df = sentimentinator([item['full_text'] for item in data])
+    df = sentimentinator([preprocess_tweet(item['full_text']) for item in data])
 
     for i in range(len(data)):
         data[i]['sentiment'] = df.iloc[i]['sentiment']
