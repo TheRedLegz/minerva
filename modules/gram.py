@@ -79,7 +79,7 @@ def gram_sentence(data):
     data = p.basic_clean(data)
     data = data.split(' ')
 
-    results = bigram_model[data]
+    results = trigram_model[data]
     results = clean_document_tokens(results)
 
     return results

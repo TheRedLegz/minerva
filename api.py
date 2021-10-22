@@ -1,6 +1,10 @@
 from flask import Flask, jsonify, abort
 from pymongo import MongoClient
 from flask_cors import CORS
+from modules.tweet_preprocessor import basic_clean, preprocess_tweet
+from modules.gram import gram_documents
+from modules.sentiment import sentimentinator
+from pprint import pprint as print
 
 
 app = Flask(__name__)
@@ -37,6 +41,64 @@ def get_one_tweet(tweet_id):
 
     return error
     
+
+@app.route('/preprocessing', methods=['GET'])
+def get_processing_data():
+    db_results = list(rawtweets.find())
+    data = []
+
+    for a in db_results:
+        to_add = {}
+        to_add['full_text'] =  a['data']['full_text']
+        to_add['created_at'] =  a['data']['created_at']
+        to_add['id'] =  a['data']['id']
+
+        to_add['cleaned'] = basic_clean(a['data']['full_text'])
+
+        data.append(to_add)
+
+
+    return jsonify({ 'data': data })
+
+
+@app.route('/grams', methods=['GET'])
+def get_grams():
+    db_results = list(rawtweets.find())
+    data = []
+
+    for a in db_results:
+        data.append(a['data']['full_text'])
+
+    tokens = gram_documents(data)
+
+    return jsonify({ 'data': tokens })
+
+
+
+
+
+@app.route('/sentiment', methods=['GET'])
+def get_sentiment():
+    db_results = list(rawtweets.find())
+    data = []
+    
+    for a in db_results:
+        data.append(a['data'])
+
+    df = sentimentinator([preprocess_tweet(item['full_text']) for item in data])
+
+    for i in range(len(data)):
+        data[i]['sentiment'] = df.iloc[i]['sentiment']
+        data[i]['sentiment score'] = df.iloc[i]['sentiment score']
+        data[i]['preprocessed'] = df.iloc[i]['tweet']
+
+    
+    data.sort(key=lambda x: x['sentiment score'], reverse=True)
+        
+    return jsonify(data)
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
