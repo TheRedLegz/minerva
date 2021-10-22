@@ -24,7 +24,7 @@ def sentimentinator(dataSentiment):
             tweet_list.append(i)
     
     sentiRes['sentiment'] = sentiment_label_list
-    sentiRes['sentiment score'] = sentiment_score_list
+    sentiRes['sentiment_score'] = sentiment_score_list
     sentiRes['tweet'] = tweet_list
 
     print(sentiRes)
