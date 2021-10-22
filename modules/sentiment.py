@@ -27,5 +27,4 @@ def sentimentinator(dataSentiment):
     sentiRes['sentiment_score'] = sentiment_score_list
     sentiRes['tweet'] = tweet_list
 
-    print(sentiRes)
     return sentiRes
