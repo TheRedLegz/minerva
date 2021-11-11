@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, abort
 from pymongo import MongoClient
 from flask_cors import CORS
-from modules.tweet_preprocessor import basic_clean, preprocess_tweet
-from modules.gram import gram_sentence
+from modules.tweet_preprocessor import preprocess_tweet
+from modules.gram import gram_sentence, gram_documents
 from modules.sentiment import sentimentinator
+from gensim.corpora import Dictionary
+
 
 app = Flask(__name__)
 CORS(app)
@@ -12,7 +14,6 @@ CORS(app)
 client = MongoClient('mongodb://localhost:27017')
 db_raw = client['minerva_raw_tweets']
 rawtweets = db_raw['rawtweets']
-
 
 
 # experimental
@@ -25,11 +26,12 @@ def get_data():
         to_add = a['data']
 
         to_add['preprocessed'] = preprocess_tweet(a['data']['full_text'])
-        grams = gram_sentence(a['data']['full_text'])
+        grams = gram_sentence(to_add['preprocessed'])
         
         to_add['unigrams'] = [token for token in grams if '_' not in token]
         to_add['bigrams'] = [token for token in grams if token.count('_') == 1]
         to_add['trigrams'] = [token for token in grams if token.count('_') == 2]
+        to_add['tokens'] = to_add['unigrams'] + to_add['bigrams'] + to_add['trigrams']
 
         data.append(to_add)
 
@@ -45,6 +47,46 @@ def get_data():
     return jsonify(data)
 
 
+@app.route('/tokens', methods=['GET'])
+def get_tokens():
+    db_results = list(rawtweets.find())
+    data = [item['data']['full_text'] for item in db_results]
+
+    cleaned = gram_documents(data)
+    dt = Dictionary(cleaned)
+
+    uni = {}
+    bi = {}
+    tri = {}
+
+    cfs = dt.cfs
+    dfs = dt.dfs
+
+    res = {}
+
+    frequencies = {}
+
+    for word, id in dt.token2id.items():
+        frequencies[word] = {}
+
+        frequencies[word]['cfs'] = cfs[id]
+        frequencies[word]['dfs'] = dfs[id]
+
+        if '_' not in word:
+            uni[word] = id
+        elif word.count('_') == 1:
+            bi[word] = id
+        elif word.count('_') == 2:
+            tri[word] = id
+
+    res['uni'] = uni
+    res['bi'] = bi
+    res['tri'] = tri
+    res['frequencies'] = frequencies
+
+    return jsonify(res)
+
+    
 @app.route('/tweets', methods=['GET'])
 def get_tweets():
     db_results = list(rawtweets.find())
