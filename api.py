@@ -5,6 +5,16 @@ from modules.tweet_preprocessor import basic_clean, preprocess_tweet
 from modules.gram import gram_sentence
 from modules.sentiment import sentimentinator
 
+import numpy as np
+from modules.tweet_preprocessor import preprocess_documents
+from modules.word2vec import get_word2vec_from_data
+from modules.vectorizer import bag_of_words, prune_bow, tf_idf
+from modules.pca import pca
+from modules.lsi import lsi
+from matplotlib import pyplot as plt
+from modules.som import SOM, find_topics, get_SOM_model, print_data_to_SOM
+from modules.sentiment import sentimentinator
+
 app = Flask(__name__)
 CORS(app)
 
@@ -13,6 +23,65 @@ client = MongoClient('mongodb://localhost:27017')
 db_raw = client['minerva_raw_tweets']
 rawtweets = db_raw['rawtweets']
 
+# TEMPORARY MODEL CREATOR ON RUN
+
+# From MongoDB
+db_results_model = list(rawtweets.find())
+data_model = []
+for a in db_results_model:
+    data_model.append(a['data']['full_text'])
+
+print("Starting Preprocessing")
+data = preprocess_documents(data_model[:200])
+print("Finished Preprocessing")
+
+# dataSentiment = preprocess_documents(data[:200])
+
+#WORD2VEC implementation
+model = get_word2vec_from_data(data, to_preprocess=False)
+
+vectorized_words = []
+unique = []
+for i in range(len(model.wv.index_to_key)):
+    word = model.wv.index_to_key[i]
+    unique.append(word)
+    vectorized_words.append(model.wv[word])
+vectorized_words = np.asarray(vectorized_words)
+
+doc_grams = []
+for sentence in data:
+    doc_grams.append([word for word in sentence if word in unique])
+
+# TF-IDF implementation
+# bowres = bag_of_words(data, to_preprocess=False)
+# (bow, unique, doc_grams) = bowres
+
+# (bow, unique, doc_grams) = prune_bow(bowres, 3)
+
+# vectors = tf_idf(data, bow)
+
+# vectors_t = np.transpose(vectors)
+# (lsi_matrix, sum) = pca(vectors_t)
+
+# print(lsi_matrix.shape )
+
+lattice_size = (6, 6)
+(row, col) = lattice_size
+
+#WORD2VEC implementation
+SOM_matrix = SOM(vectorized_words, .5, lattice_size)
+#TF-IDF implementation
+# SOM_matrix = SOM(lsi_matrix, .5, lattice_size)
+
+print("\nFinal SOM weights")
+print("Lattice size: (%d, %d)" %(row, col))
+
+
+print("\nThe Clustered Topics")
+model = get_SOM_model(SOM_matrix, vectorized_words, unique)
+
+
+# END OF TEMP MODEL CREATOR
 
 
 # experimental
@@ -55,6 +124,51 @@ def get_tweets():
 
     return jsonify(data)
 
+
+@app.route('/model', methods=['GET'])
+def get_model():
+
+    modelObject = {}
+
+    for i in range(row):
+        modelObject[str(i)] = {}
+        for j in range(col):
+            modelObject[str(i)][str(j)] = model[i][j]
+            
+    
+    return jsonify(modelObject)
+
+# TODO: Try to optimize this better
+@app.route('/model/tweets')
+def get_model_tweets():
+    modelTweetObject = {}
+    print("Model Tweets Here")
+    db_results = list(rawtweets.find())
+    preprocessed_tweets = []
+
+    for i in range(row):
+        modelTweetObject[str(i)] = {}
+        for j in range(col):
+            modelTweetObject[str(i)][str(j)] = []
+    for tweet_data in db_results:
+        tweet = {}
+        preprocessed_tweet_text = tweet_data['data']['full_text']
+        preprocessed_tweet_tokens = preprocess_tweet(preprocessed_tweet_text).split(' ')
+        tweet['data']= tweet_data['data']
+        tweet['tokens'] = preprocessed_tweet_tokens
+
+
+        for i in range(row):
+            for j in range(col):
+                intersection = [keyword for keyword in model[i][j] if keyword in preprocessed_tweet_tokens]
+                if len(intersection) > 0:
+                    modelTweetObject[str(i)][str(j)].append(tweet)
+    return jsonify(modelTweetObject)
+
+        
+
+
+# TODO: '/model/tweets/<int:row>/<int:col>'
 
 @app.route('/tweets/<int:tweet_id>')
 def get_one_tweet(tweet_id):
