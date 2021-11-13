@@ -132,6 +132,22 @@ def print_data_to_SOM(SOM_matrix, matrix_data, labels):
             if len(mapping[i][j]) > 0:
                 print("[", i, "][", j ,"] = ", mapping[i][j])
 
+def get_SOM_model(SOM_matrix, matrix_data, labels):
+    matrix_size = SOM_matrix.shape
+    (row, col, _) = matrix_size
+    mapping = np.empty(shape=(row, col), dtype=object)
+
+    for i in range(row):
+        for j in range(col):
+            mapping[i][j] = []
+
+    for t in range(len(matrix_data)):
+        (m_row, m_col) = find_bmu(SOM_matrix, matrix_data[t], (row, col))
+        mapping[m_row][m_col].append(labels[t])
+
+    return mapping
+
+
 
 
 
