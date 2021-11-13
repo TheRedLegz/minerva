@@ -142,7 +142,7 @@ def get_model():
         tweet = {}
         preprocessed_tweet_text = tweet_data['data']['full_text']
         preprocessed_tweet_tokens = preprocess_tweet(preprocessed_tweet_text).split(' ')
-        tweet['data']= tweet_data['data']
+        tweet['id']= tweet_data['data']['id']
         tweet['tokens'] = preprocessed_tweet_tokens
 
         for i in range(row):
