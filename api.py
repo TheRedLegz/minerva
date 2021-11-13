@@ -99,11 +99,10 @@ def get_data():
     data_array.append(db_results[divisions:divisions*2])
     data_array.append(db_results[divisions*2:divisions*3])
     data_array.append(db_results[divisions*3:])
-    print(len(data_array))
 
     def _append_preprocessed_data(array):
+        temp = []
         for a in array:
-            temp = []
             to_add = a['data']
 
             to_add['preprocessed'] = preprocess_tweet(a['data']['full_text'])
@@ -115,6 +114,13 @@ def get_data():
             to_add['tokens'] = to_add['unigrams'] + to_add['bigrams'] + to_add['trigrams']
 
             temp.append(to_add)
+
+
+        s_data = sentimentinator([item['preprocessed'] for item in temp])
+
+        for i, _ in enumerate(data):
+            temp[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
+            temp[i]['sentiment'] = s_data.iloc[i]['sentiment']
 
         return temp
 
