@@ -131,25 +131,13 @@ def get_model():
     modelObject = {}
 
     for i in range(row):
+        db_results = list(rawtweets.find())
+
         modelObject[str(i)] = {}
         for j in range(col):
-            modelObject[str(i)][str(j)] = model[i][j]
-            
-    
-    return jsonify(modelObject)
-
-# TODO: Try to optimize this better
-@app.route('/model/tweets')
-def get_model_tweets():
-    modelTweetObject = {}
-    print("Model Tweets Here")
-    db_results = list(rawtweets.find())
-    preprocessed_tweets = []
-
-    for i in range(row):
-        modelTweetObject[str(i)] = {}
-        for j in range(col):
-            modelTweetObject[str(i)][str(j)] = []
+            modelObject[str(i)][str(j)] = {}
+            modelObject[str(i)][str(j)]['keywords'] = model[i][j]
+            modelObject[str(i)][str(j)]['tweets'] = []
     for tweet_data in db_results:
         tweet = {}
         preprocessed_tweet_text = tweet_data['data']['full_text']
@@ -157,18 +145,14 @@ def get_model_tweets():
         tweet['data']= tweet_data['data']
         tweet['tokens'] = preprocessed_tweet_tokens
 
-
         for i in range(row):
             for j in range(col):
                 intersection = [keyword for keyword in model[i][j] if keyword in preprocessed_tweet_tokens]
                 if len(intersection) > 0:
-                    modelTweetObject[str(i)][str(j)].append(tweet)
-    return jsonify(modelTweetObject)
-
-        
-
-
-# TODO: '/model/tweets/<int:row>/<int:col>'
+                    modelObject[str(i)][str(j)]['tweets'].append(tweet)
+            
+    
+    return jsonify(modelObject)
 
 @app.route('/tweets/<int:tweet_id>')
 def get_one_tweet(tweet_id):
