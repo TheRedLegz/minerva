@@ -5,7 +5,8 @@ from modules.tweet_preprocessor import preprocess_tweet
 from modules.gram import gram_sentence, gram_documents
 from modules.sentiment import sentimentinator
 from gensim.corpora import Dictionary
-
+from modules.vectorizer import bow, tf_idf
+import numpy as np
 
 app = Flask(__name__)
 CORS(app)
@@ -19,7 +20,7 @@ rawtweets = db_raw['rawtweets']
 # experimental
 @app.route('/data', methods=['GET'])
 def get_data():
-    db_results = list(rawtweets.find())
+    db_results = list(rawtweets.find()[:1000])
     data = []
 
     for a in db_results:
@@ -86,6 +87,32 @@ def get_tokens():
 
     return jsonify(res)
 
+
+@app.route('/tfidf', methods=['GET'])
+def get_vectors():
+    db_results = list(rawtweets.find())
+    data = [item['data']['full_text'] for item in db_results]
+
+
+    cleaned = gram_documents(data)
+
+    (bows, unique) = bow(cleaned)
+    matrix = tf_idf(cleaned, bows)
+
+    flat_matrix = np.array(matrix).flatten()
+
+    docs = {}
+
+    for i, doc in enumerate(cleaned):
+        docs[i] = doc
+
+    res = {
+        'cols': unique,
+        'tfidf': list(flat_matrix),
+        'docs': docs
+    }
+
+    return jsonify(res)
     
 @app.route('/tweets', methods=['GET'])
 def get_tweets():

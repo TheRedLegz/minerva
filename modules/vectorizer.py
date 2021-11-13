@@ -3,6 +3,38 @@ import nltk
 import numpy as np
 from modules.tweet_preprocessor import preprocess_tweet
 
+
+
+def bow(doc_grams):
+    unique = []
+
+
+    for doc in doc_grams:
+        for gram in doc:
+            if gram not in unique:
+                unique.append(gram)
+
+
+
+    doc_len = len(doc_grams)
+    u_len = len(unique)
+
+    bow_grams = np.zeros((doc_len, u_len), dtype=int)
+
+    for i in range(doc_len):
+        doc = doc_grams[i]
+
+        for j in range(u_len):
+            gram = unique[j]
+
+            count = doc.count(gram)
+
+            bow_grams[i][j] = count
+
+    return (bow_grams, unique)
+
+
+
 def bag_of_words(document_array, to_preprocess=True):
 
     doc_grams = []
@@ -24,7 +56,6 @@ def bag_of_words(document_array, to_preprocess=True):
         bigrams = map(lambda x: x[0] + '_' + x[1], bigrams)
         uni_bi_grams = list(bigrams) + unigrams
         doc_grams.append(list(uni_bi_grams))
-
 
     unique_grams = []
 
