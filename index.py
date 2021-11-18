@@ -14,6 +14,9 @@ from modules.lsi import lsi
 from matplotlib import pyplot as plt
 from modules.som import SOM, find_topics, print_data_to_SOM
 from modules.sentiment import sentimentinator
+from nltk.corpus import stopwords
+
+from textblob import TextBlob
 
 import pandas as pd
 
@@ -40,11 +43,10 @@ if __name__ == "__main__":
 
     print("Starting Preprocessing")
     original_data = data[0:100]
-    print(original_data)
     data = preprocess_documents(data[:100])
 
     # TO BE DISCARDED
-    #WORD2VEC implementation
+    # WORD2VEC implementation
     # model = get_word2vec_from_data(data, to_preprocess=False)
 
     # vectorized_words = []
@@ -85,20 +87,19 @@ if __name__ == "__main__":
     SOM_matrix = SOM(vectors, .5, lattice_size)
 
     print("\nFinal SOM weights")
-    print("Lattice size: (%d, %d)" %(row, col))
+    print("Lattice size: (%d, %d)" % (row, col))
 
     print("\nThe Clustered Topics")
     # print_data_to_SOM(SOM_matrix, lsi_matrix, unique)
-    print_data_to_SOM(SOM_matrix, vectors, original_data)
+    # print_data_to_SOM(SOM_matrix, vectors, original_data)
     sentimentinator(data)
-    
-    
+
     # data_selected_index = 0
     # while(data_selected_index != -1):
     #     print("\nSelect a tweet ( 0 -", len(data)-1, "): ")
     #     data_selected_index = int(input())
 
-    #     if data_selected_index != -1:    
+    #     if data_selected_index != -1:
     #         topics = find_topics(SOM_matrix, vectorized_words, doc_grams[data_selected_index], unique, lattice_size)
 
     #         print("\nRaw Tweet:\n", db_results[data_selected_index]['data']['full_text'])
@@ -108,7 +109,5 @@ if __name__ == "__main__":
     #             (location, word) = topic
     #             (x, y) = location
     #             print("[", x, "][", y,"] =", word)
-
-
 
     print("---PROGRAM EXITED---")
