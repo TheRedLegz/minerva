@@ -2,6 +2,7 @@ import pandas as pd
 import re
 import gensim
 import nltk
+import time
 import concurrent.futures
 from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
@@ -100,29 +101,37 @@ def basic_clean(tweet):
 
 def preprocess_documents(array):
     res = []
-    tres = []
     wordnet.ensure_loaded()
-
-    divisions = int(len(array) / 4)
+    division_n = 8
+    divisions = int(len(array) / division_n)
     data = [] 
-    data.append(array[0:divisions])
-    data.append(array[divisions:divisions*2])
-    data.append(array[divisions*2:divisions*3])
-    data.append(array[divisions*3:])
 
+    for i in range(division_n):
+        if i != division_n - 1:
+            data.append(array[divisions*i:divisions*(i+1)])
+        else:
+            data.append(array[divisions*i:])
+            
+    start_time = time.time()
     with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = []
+        # Map
         for result in executor.map(_preprocess_array, data):
-            tres.append(result)
-
-        for array in tres:
+            futures.append(result)
+        for array in futures:
             res = res + array
+        
+    print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
     return res
 
 def _preprocess_array(array):
     res = []   
     for a in array:
-        res.append(preprocess_tweet(a))
+        preprocessed_tweet = preprocess_tweet(a)
+        if len(preprocessed_tweet) == 0:
+            continue
+        res.append(preprocessed_tweet)
 
     return res
 
