@@ -27,7 +27,8 @@ def remove_links(tweet):
 
 
 def spell_check(string):
-    spellcheck = TextBlob(string).correct()
+    spellcheck = TextBlob(string)
+    spellcheck = spellcheck.correct()
     return spellcheck
 
 
