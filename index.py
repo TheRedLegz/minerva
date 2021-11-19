@@ -6,7 +6,7 @@ from pymongo import MongoClient
 import numpy as np
 import json
 from requests.api import get
-from modules.tweet_preprocessor import preprocess_documents
+from modules.tweet_preprocessor import preprocess_documents, spell_check
 from modules.word2vec import get_word2vec_from_data
 from modules.vectorizer import bag_of_words, prune_bow, tf_idf
 from modules.pca import pca
@@ -15,8 +15,6 @@ from matplotlib import pyplot as plt
 from modules.som import SOM, find_topics, print_data_to_SOM
 from modules.sentiment import sentimentinator
 from nltk.corpus import stopwords
-
-from textblob import TextBlob
 
 import pandas as pd
 
@@ -41,7 +39,7 @@ if __name__ == "__main__":
     # data = pd.read_csv('covid19_tweets.csv')
     # data = data['text'].values
 
-    print("Starting Preprocessing")
+    print(spell_check("Starting Prprocessing"))
     original_data = data[0:100]
     data = preprocess_documents(data[:100])
 

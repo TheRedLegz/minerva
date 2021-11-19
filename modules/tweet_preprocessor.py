@@ -29,7 +29,7 @@ def remove_links(tweet):
 def spell_check(string):
     spellcheck = TextBlob(string)
     spellcheck = spellcheck.correct()
-    return spellcheck
+    return str(spellcheck)
 
 
 def translateinator(string):
