@@ -98,6 +98,8 @@ def remove_html_tags(string):
 
 def preprocess_tweet(tweet):
     """Main master function to clean tweets, stripping noisy characters, and tokenizing use lemmatization"""
+    tweet = translateinator(tweet)
+    tweet = spell_check(tweet)
     tweet = remove_users(tweet)
     tweet = remove_links(tweet)
     tweet = remove_hashtags(tweet)
@@ -128,43 +130,29 @@ def basic_clean(tweet):
     tweet = re.sub('📝 …', '', tweet)
     return tweet
 
+# TODO:
+#   - Add a way to check if a tweet preexists in preprocessed tweet database
+def preprocess_documents(raw_tweets, thread_count = 8):
+    start_time = time.time()
 
-def preprocess_documents(array):
     res = []
     wordnet.ensure_loaded()
-    division_n = 8
-    divisions = int(len(array) / division_n)
-    data = []
 
-    for i in range(division_n):
-        if i != division_n - 1:
-            data.append(array[divisions*i:divisions*(i+1)])
-        else:
-            data.append(array[divisions*i:])
-
-    start_time = time.time()
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = []
+    with concurrent.futures.ThreadPoolExecutor(thread_count) as executor:
         # Map
-        for result in executor.map(_preprocess_array, data):
-            futures.append(result)
-        for array in futures:
-            res = res + array
-
+        for result in executor.map(_preprocess_array, raw_tweets):
+            res.append(result)
     print("--- Execution time: %s seconds ---" % (time.time() - start_time))
-
+        
     return res
 
 
-def _preprocess_array(array):
-    res = []
-    for a in array:
-        preprocessed_tweet = preprocess_tweet(a)
-        if len(preprocessed_tweet) == 0:
-            continue
-        res.append(preprocessed_tweet)
+def _preprocess_array(document):
+    tweet_id = document['tweet_id']
+    preprocessed_text = preprocess_tweet(document['full_text'])
+    print(preprocessed_text)
 
-    return res
+    return {'tweet_id' : tweet_id, 'preprocessed_text' : preprocessed_text}
 
 
 def clean_documents(array):

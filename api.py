@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, abort
-from pymongo import MongoClient
 from flask_cors import CORS
+from pymongo import MongoClient
 from modules.tweet_preprocessor import preprocess_tweet
 from modules.gram import gram_sentence, gram_documents
 from modules.sentiment import sentimentinator
@@ -21,7 +21,6 @@ from modules.sentiment import sentimentinator
 
 app = Flask(__name__)
 CORS(app)
-
 
 client = MongoClient('mongodb://localhost:27017')
 db_raw = client['minerva_raw_tweets']
