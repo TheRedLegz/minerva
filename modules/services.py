@@ -50,4 +50,14 @@ class DatabaseConnection:
         else:
             print("EXCEPTION: No data to be added")
 
+    def get_tweet_text_by_id_array(self, tweet_id_array):
+        tweet_list = list(self.client[self.db_name]['rawtweets'].find({'tweet_id' : { '$in' : tweet_id_array}}))
+        tweet_list = [tweet['data']['full_text'] for tweet in tweet_list]
+        return tweet_list
+
+    def get_tweet_text_by_id(self, tweet_id):
+        tweet = list(self.client[self.db_name]['rawtweets'].find({'tweet_id' : tweet_id}))
+
+        return tweet['data']['full_text']
+
 

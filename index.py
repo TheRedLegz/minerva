@@ -40,32 +40,49 @@ if __name__ == "__main__":
     # TF-IDF implementation
     print("Starting BOW")
     preprocessed_tweets = db.get_preprocessed_tweets()
-    bowres = bag_of_words(preprocessed_tweets, to_preprocess=False)
+    limiter = 1000 # !!!Temporary
+    preprocessed_tweets_ids = [tweet['tweet_id'] for tweet in preprocessed_tweets[:limiter]]
+    preprocessed_tweets_texts = [tweet['preprocessed_text'] for tweet in preprocessed_tweets[:limiter]]
+    label_data = db.get_tweet_text_by_id_array(preprocessed_tweets_ids)
+    print(len(preprocessed_tweets_ids))
+    print(len(preprocessed_tweets_texts))
+    print(len(label_data))
+    bowres = bag_of_words(preprocessed_tweets_texts, 4)
     (bow, unique, doc_grams) = bowres
+    print(bow.shape)
 
     print("Starting Pruning")
-    (bow, unique, doc_grams) = prune_bow(bowres, 5)
+    (bow, unique, doc_grams) = prune_bow(bowres, 6)
+    print(bow.shape)
+    # print(unique)
 
-    # print("Starting TF-IDF")
-    # vectors = tf_idf(preprocessed_tweets, bow)
+    print("Starting TF-IDF")
+    vectors = tf_idf(preprocessed_tweets, bow)
 
     # # PCA (to be decided)
     # # vectors_t = np.transpose(vectors)
     # # (lsi_matrix, sum) = pca(vectors_t)
 
-    # lattice_size = (4, 4)
-    # (row, col) = lattice_size
+    lattice_size = (4, 4)
+    (row, col) = lattice_size
 
-    # # TF-IDF implementation
-    # # SOM_matrix = SOM(lsi_matrix, .5, lattice_size)
-    # SOM_matrix = SOM(vectors, .5, lattice_size)
+    # TF-IDF implementation
+    SOM_matrix = SOM(vectors, .5, lattice_size)
 
-    # print("\nFinal SOM weights")
-    # print("Lattice size: (%d, %d)" % (row, col))
+    print("\nFinal SOM weights")
+    print("Lattice size: (%d, %d)" % (row, col))
 
-    # print("\nThe Clustered Topics")
-    # # print_data_to_SOM(SOM_matrix, lsi_matrix, unique)
-    # # print_data_to_SOM(SOM_matrix, vectors, original_data)
+    print("\nThe Clustered Topics")
+
+    # NOTE: Temp
+    label_data = []
+    for gram in preprocessed_tweets_texts:
+        gram = gram.split(' ')
+        label = [word for word in gram if word in unique]
+        label_data.append(label)
+
+    
+    print_data_to_SOM(SOM_matrix, vectors, label_data)
     # sentimentinator(data)
 
     # data_selected_index = 0
@@ -83,7 +100,6 @@ if __name__ == "__main__":
     #             (location, word) = topic
     #             (x, y) = location
     #             print("[", x, "][", y,"] =", word)
-
 
     # TO BE DISCARDED
     # WORD2VEC implementation
