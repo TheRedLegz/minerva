@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, abort
-from pymongo import MongoClient
 from flask_cors import CORS
+from pymongo import MongoClient
 from modules.tweet_preprocessor import preprocess_tweet
 from modules.gram import gram_sentence, gram_documents
 from modules.sentiment import sentimentinator
@@ -9,6 +9,7 @@ from modules.vectorizer import bow, tf_idf
 import numpy as np
 
 import numpy as np
+import concurrent.futures
 from modules.tweet_preprocessor import preprocess_documents
 from modules.word2vec import get_word2vec_from_data
 from modules.vectorizer import bag_of_words, prune_bow, tf_idf
@@ -20,7 +21,6 @@ from modules.sentiment import sentimentinator
 
 app = Flask(__name__)
 CORS(app)
-
 
 client = MongoClient('mongodb://localhost:27017')
 db_raw = client['minerva_raw_tweets']
@@ -92,18 +92,58 @@ def get_data():
     db_results = list(rawtweets.find()[:1000])
     data = []
 
-    for a in db_results:
-        to_add = a['data']
+    divisions = int(len(db_results) / 4)
+    data_array = [] 
+    data_array.append(db_results[0:divisions])
+    data_array.append(db_results[divisions:divisions*2])
+    data_array.append(db_results[divisions*2:divisions*3])
+    data_array.append(db_results[divisions*3:])
 
-        to_add['preprocessed'] = preprocess_tweet(a['data']['full_text'])
-        grams = gram_sentence(to_add['preprocessed'])
+    def _append_preprocessed_data(array):
+        temp = []
+        for a in array:
+            to_add = a['data']
+
+            to_add['preprocessed'] = preprocess_tweet(a['data']['full_text'])
+            grams = gram_sentence(to_add['preprocessed'])
+            
+            to_add['unigrams'] = [token for token in grams if '_' not in token]
+            to_add['bigrams'] = [token for token in grams if token.count('_') == 1]
+            to_add['trigrams'] = [token for token in grams if token.count('_') == 2]
+            to_add['tokens'] = to_add['unigrams'] + to_add['bigrams'] + to_add['trigrams']
+
+            temp.append(to_add)
+
+
+        s_data = sentimentinator([item['preprocessed'] for item in temp])
+
+        for i, _ in enumerate(data):
+            temp[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
+            temp[i]['sentiment'] = s_data.iloc[i]['sentiment']
+
+        return temp
+
+    # for a in db_results:
+    #     to_add = a['data']
+
+    #     to_add['preprocessed'] = preprocess_tweet(a['data']['full_text'])
+    #     grams = gram_sentence(to_add['preprocessed'])
         
-        to_add['unigrams'] = [token for token in grams if '_' not in token]
-        to_add['bigrams'] = [token for token in grams if token.count('_') == 1]
-        to_add['trigrams'] = [token for token in grams if token.count('_') == 2]
-        to_add['tokens'] = to_add['unigrams'] + to_add['bigrams'] + to_add['trigrams']
+    #     to_add['unigrams'] = [token for token in grams if '_' not in token]
+    #     to_add['bigrams'] = [token for token in grams if token.count('_') == 1]
+    #     to_add['trigrams'] = [token for token in grams if token.count('_') == 2]
+    #     to_add['tokens'] = to_add['unigrams'] + to_add['bigrams'] + to_add['trigrams']
 
-        data.append(to_add)
+    #     data.append(to_add)
+
+        
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        tempData = []
+        for result in executor.map(_append_preprocessed_data, data_array):
+            tempData.append(result)
+
+        for array in tempData:
+            data = data + array
 
 
     s_data = sentimentinator([item['preprocessed'] for item in data])
@@ -115,7 +155,6 @@ def get_data():
 
 
     return jsonify(data)
-
 
 @app.route('/tokens', methods=['GET'])
 def get_tokens():

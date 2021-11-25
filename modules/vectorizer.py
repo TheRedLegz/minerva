@@ -1,5 +1,7 @@
 import math
 import nltk
+import time
+import concurrent.futures
 import numpy as np
 from modules.tweet_preprocessor import preprocess_tweet
 
@@ -7,7 +9,6 @@ from modules.tweet_preprocessor import preprocess_tweet
 
 def bow(doc_grams):
     unique = []
-
 
     for doc in doc_grams:
         for gram in doc:
@@ -33,29 +34,17 @@ def bow(doc_grams):
 
     return (bow_grams, unique)
 
-
-
-def bag_of_words(document_array, to_preprocess=True):
-
+def bag_of_words(preprocessed_tweets, process_count = 4):
+    start_time = time.time()
     doc_grams = []
 
-    for doc in document_array:
-        string = ''
+    # TODO: Add multi processing here
+    with concurrent.futures.ThreadPoolExecutor(process_count) as executor:
+        for result in executor.map(_bag_of_words_sub_method, preprocessed_tweets):
+            doc_grams.append(result)
 
-        if to_preprocess:
-            string = preprocess_tweet(doc)
-        else:
-            string = doc
-        
-        if len(string) == 0:
-            continue
-
-        unigrams = nltk.word_tokenize(string)
-        unigrams = [u for u in unigrams if len(u) > 2]
-        bigrams = nltk.bigrams(unigrams)
-        bigrams = map(lambda x: x[0] + '_' + x[1], bigrams)
-        uni_bi_grams = list(bigrams) + unigrams
-        doc_grams.append(list(uni_bi_grams))
+    # NOTE: Remove empty docs
+    # doc_grams = [doc for doc in doc_grams if doc != '']
 
     unique_grams = []
 
@@ -80,27 +69,78 @@ def bag_of_words(document_array, to_preprocess=True):
             count = doc.count(gram)
 
             bow_grams[i][j] = int(count)
-
+        
+    print("--- Execution time: %s seconds ---" % (time.time() - start_time))
     return (bow_grams, unique_grams, doc_grams)
     
-def prune_bow(bow, tf_idf_treshold = 1):
-    (bow_grams, unique, docs) = bow
+# TODO: For ThreadPool
+def _bag_of_words_sub_method(doc):
+    string = doc
+    
+    if len(string) == 0:
+        return ''
 
+    unigrams = nltk.word_tokenize(string)
+    unigrams = [u for u in unigrams if len(u) > 2]
+    bigrams = nltk.bigrams(unigrams)
+    bigrams = map(lambda x: x[0] + '_' + x[1], bigrams)
+    uni_bi_grams = list(bigrams) + unigrams
+    return list(uni_bi_grams)
 
+def prune_bow(bow, tf_idf_threshold = 1, thread_count = 4):
+    (bow_grams, unique_grams, docs) = bow
+    # TODO: Add removal of keywords in docgrams
+    total_docs = len(docs)
+
+    start_time = time.time()
     original = np.copy(bow_grams)
+    original_t = np.transpose(original)
 
-    # Get Document Frequency == docs with gram / doc #
-    for i in range(len(unique)-1, -1, -1):
-        df =  np.count_nonzero(original[:, i:i+1]) / len(docs)
+    data = [] 
+    pruned_grams = []
 
-        if df < tf_idf_treshold/len(docs):
-            unique.pop(i)
-            bow_grams = np.delete(bow_grams, i, 1)
-            
+    for i, gram in enumerate(original_t):
+        data.append((unique_grams[i], docs, total_docs, tf_idf_threshold, gram))
+
+    # NOTE: Multiprocessing application
+    with concurrent.futures.ThreadPoolExecutor(thread_count) as executor:
+        for result in executor.map(_prune_bow_sub_method, data):
+            (_, gram) = result
+            # Filter out pruned grams
+            # Not working... Change this
+            if len(gram) > 0:
+                pruned_grams.append(result)
+
+    # for data_item in data:
+    #     result = _prune_bow_sub_method(data_item)
+    #     # Filter out pruned grams
+    #     if len(result) > 0:
+    #         pruned_grams.append(result)
+
+    # Transfers unique keywords into list
+    unique_grams = [unique for (unique, _) in pruned_grams]
+    # Transfers grams into list
+    pruned_grams = [gram for (_, gram) in pruned_grams]
+    # From gram x doc -> doc x gram
+    pruned_grams = np.transpose(pruned_grams)
+    # Removes pruned unique words from doc_grams
     for i in range(len(docs)):
-        docs[i] = [word for word in docs[i] if word in unique]
+        docs[i] = [word for word in docs[i] if word in unique_grams]
+        
+    print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
-    return (bow_grams, unique, docs)
+    return (pruned_grams, unique_grams, docs)
+
+# TODO: Change this to remove loops
+def _prune_bow_sub_method(data):
+    (unique, docs, total_docs, tf_idf_threshold, gram) = data
+    df =  np.count_nonzero(gram) / total_docs
+
+    if df < tf_idf_threshold/len(docs):
+        return (unique, [])
+    
+    return (unique, gram)
+
 
 def tf_idf(document_array, bow = None):
 

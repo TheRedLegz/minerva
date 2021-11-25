@@ -5,7 +5,7 @@ import requests
 from googletrans import Translator
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
-import threading
+import time
 import concurrent.futures
 stopwords_list = requests.get("https://gist.githubusercontent.com/rg089/35e00abf8941d72d419224cfd5b5925d/raw/12d899b70156fd0041fa9778d657330b024b959c/stopwords.txt").content
 
@@ -136,14 +136,17 @@ def preprocess_documents(array):
     # Concurrency Implementation
     wordnet.ensure_loaded()
     tres = []
-    divisions = int(len(array) / 4)
-
+    division_n = 4
+    divisions = int(len(array) / division_n)
     data = [] 
-    data.append(array[0:divisions])
-    data.append(array[divisions:divisions*2])
-    data.append(array[divisions*2:divisions*3])
-    data.append(array[divisions*3:])
 
+    start_time = time.time()
+
+    for i in range(division_n):
+        if i != division_n - 1:
+            data.append(array[divisions*i:divisions*(i+1)])
+        else:
+            data.append(array[divisions*i:])
     with concurrent.futures.ThreadPoolExecutor() as executor:
         for result in executor.map(preprocess_array, data):
             tres.append(result)
@@ -152,12 +155,7 @@ def preprocess_documents(array):
         for array in tres:
             print(array)
             res = res + array
-
-    # print(len(res))
-    
-    # for a in array:
-    #     print(a)
-    #     res.append(preprocess(a))
+    print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
     return res
 
