@@ -30,15 +30,20 @@ def clean_token(word):
         return word
 
 
+def translateinator(string):
+    translator = Translator()
+    res = translator.translate(string, dest='en')
+    return res.text
+
+
 def count_english(tweet_array):
     translator = Translator()
     res = []
     for tweet in tweet_array:
         langs = translator.detect(tweet)
         if langs.lang == 'en':
-            res.append(tweet)
-    translations = translator.translate(res)
-    return translations
+            res.append(translateinator(tweet))
+    return res
 
 
 def clean_document_tokens(doc):
@@ -90,12 +95,6 @@ def spell_check(string):
     spellcheck = TextBlob(string)
     spellcheck = spellcheck.correct()
     return str(spellcheck)
-
-
-def translateinator(string):
-    translator = Translator()
-    res = translator.translate(string)
-    return res.text
 
 
 def remove_users(tweet):
