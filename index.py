@@ -12,25 +12,20 @@ from modules.vectorizer import bag_of_words, prune_bow, tf_idf
 from modules.pca import pca
 from modules.lsi import lsi
 from matplotlib import pyplot as plt
-from modules.som import SOM, find_topics, print_data_to_SOM
+from modules.som import SOM, find_topics, print_data_to_SOM, tweet_find_cluster
 from modules.sentiment import sentimentinator
 from nltk.corpus import stopwords
 from modules.services import DatabaseConnection
 
 import pandas as pd
 
-# client = MongoClient('mongodb://localhost:27017')
-# db_raw = client['minerva_raw_tweets']
-# rawtweets = db_raw['rawtweets']
-
-
 if __name__ == "__main__":
     db = DatabaseConnection('mongodb://localhost:27017')
     unprocessed_tweets = db.get_unprocessed_tweets()
 
     # From CSV
-    # data = pd.read_csv('covid19_tweets.csv')
-    # data = data['text'].values
+    training_data = pd.read_csv('tweets_processed.csv')
+
 
     print("Starting Preprocessing")
     print("Unprocessed Tweet count: " + str(len(unprocessed_tweets)))
@@ -40,19 +35,17 @@ if __name__ == "__main__":
     # TF-IDF implementation
     print("Starting BOW")
     preprocessed_tweets = db.get_preprocessed_tweets()
-    limiter = 1000 # !!!Temporary
-    preprocessed_tweets_ids = [tweet['tweet_id'] for tweet in preprocessed_tweets[:limiter]]
-    preprocessed_tweets_texts = [tweet['preprocessed_text'] for tweet in preprocessed_tweets[:limiter]]
+    preprocessed_tweets_ids = [tweet['tweet_id'] for tweet in preprocessed_tweets[:-200]]
+    preprocessed_tweets_texts = [tweet['preprocessed_text'] for tweet in preprocessed_tweets[:-200]]
+    test_set = preprocessed_tweets[-200:]
     label_data = db.get_tweet_text_by_id_array(preprocessed_tweets_ids)
-    print(len(preprocessed_tweets_ids))
-    print(len(preprocessed_tweets_texts))
-    print(len(label_data))
+    
     bowres = bag_of_words(preprocessed_tweets_texts, 4)
     (bow, unique, doc_grams) = bowres
     print(bow.shape)
 
     print("Starting Pruning")
-    (bow, unique, doc_grams) = prune_bow(bowres, 6)
+    (bow, unique, doc_grams) = prune_bow(bowres, 2)
     print(bow.shape)
     # print(unique)
 
@@ -69,20 +62,27 @@ if __name__ == "__main__":
     # TF-IDF implementation
     SOM_matrix = SOM(vectors, .5, lattice_size)
 
-    print("\nFinal SOM weights")
+    print("Final SOM weights")
     print("Lattice size: (%d, %d)" % (row, col))
 
-    print("\nThe Clustered Topics")
+    cluster_matrix = np.empty(shape=(row, col), dtype=object)
 
-    # NOTE: Temp
-    label_data = []
-    for gram in preprocessed_tweets_texts:
-        gram = gram.split(' ')
-        label = [word for word in gram if word in unique]
-        label_data.append(label)
+    for i in range(row):
+        for j in range(col):
+            cluster_matrix[i][j] = []
 
-    
-    print_data_to_SOM(SOM_matrix, vectors, label_data)
+    for tweet in test_set:
+        if tweet['preprocessed_text'] == '':
+            continue
+        (result_matrix, bmu) = tweet_find_cluster(SOM_matrix, lattice_size, tweet, unique)
+        (i, j) = bmu
+        cluster_matrix[i][j].append(tweet['preprocessed_text'])
+
+    for i in range(row):
+        for j in range(col):
+            print("[%d][%d] = " %(i,j))
+            for tweet in cluster_matrix[i][j]:
+                print(tweet)
     # sentimentinator(data)
 
     # data_selected_index = 0
