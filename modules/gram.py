@@ -5,6 +5,9 @@ import modules.tweet_preprocessor as p
 import pandas as pd
 from pprint import pprint as print
 import os.path
+import concurrent.futures
+
+
 
 my_path = os.path.abspath(os.path.dirname(__file__))
 bpath = os.path.join(my_path, "../data/models/bigram_model.pkl")
@@ -75,9 +78,13 @@ def clean_document_tokens(doc):
     return res
 
 
-def gram_sentence(data):
-    data = p.basic_clean(data)
-    data = data.split(' ')
+def gram_sentence(data, clean = True):
+
+    if clean:
+        data = p.basic_clean(data)
+
+    if not isinstance(data, list):
+        data = data.split(' ')
 
     results = trigram_model[data]
     results = clean_document_tokens(results)
@@ -88,6 +95,29 @@ def gram_sentence(data):
 def gram_documents(data):
     results = [gram_sentence(doc) for doc in data]
     return results
+
+
+
+def tweet_cleaner(obj):
+    res = []
+
+    with concurrent.futures.ThreadPoolExecutor(4) as executor:
+        for results in executor.map(p.basic_clean, obj):
+            res.append(results)
+
+    return res
+
+
+def tweet_grammer(docs):
+    res = trigram_model[docs]
+
+    grammed_docs = []
+
+    with concurrent.futures.ThreadPoolExecutor(4) as executor:
+            for result in executor.map(clean_document_tokens, res):
+                grammed_docs.append(result)
+
+    return grammed_docs
 
 
 

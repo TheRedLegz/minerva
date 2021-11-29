@@ -26,16 +26,31 @@ def clean_token(word):
         if len(split[0]) > 2 and len(split[1]) > 2 and split[1] not in STOPWORDS and split[0] not in STOPWORDS:
             return lemmatize(split[0]) + '_' + lemmatize(split[1])
 
-
     elif len(word) > 2 and word not in STOPWORDS:
         return word
+
+
+def translateinator(string):
+    translator = Translator()
+    res = translator.translate(string, dest='en')
+    return res.text
+
+
+def count_english(tweet_array):
+    translator = Translator()
+    res = []
+    for tweet in tweet_array:
+        langs = translator.detect(tweet)
+        if langs.lang == 'en':
+            res.append(translateinator(tweet))
+    return res
 
 
 def clean_document_tokens(doc):
     """
     Remove bigrams/trigrams that contain a stopword
     Also, lemmatizes valid bigrams/trigrams
-    
+
     Example:
 
     is_playing => removed
@@ -43,9 +58,9 @@ def clean_document_tokens(doc):
 
     Input:
     Array of bigrams/trigrams
-    
+
     """
-    
+
     res = []
 
     for word in doc:
@@ -80,12 +95,6 @@ def spell_check(string):
     spellcheck = TextBlob(string)
     spellcheck = spellcheck.correct()
     return str(spellcheck)
-
-
-def translateinator(string):
-    translator = Translator()
-    res = translator.translate(string)
-    return res.text
 
 
 def remove_users(tweet):
@@ -182,7 +191,9 @@ def basic_clean(tweet):
 
 # TODO:
 #   - Add a way to check if a tweet preexists in preprocessed tweet database
-def preprocess_documents(raw_tweets, thread_count = 8):
+
+
+def preprocess_documents(raw_tweets, thread_count=8):
     start_time = time.time()
 
     res = []
@@ -193,7 +204,7 @@ def preprocess_documents(raw_tweets, thread_count = 8):
         for result in executor.map(_preprocess_array, raw_tweets):
             res.append(result)
     print("--- Execution time: %s seconds ---" % (time.time() - start_time))
-        
+
     return res
 
 
@@ -202,7 +213,7 @@ def _preprocess_array(document):
     preprocessed_text = preprocess_tweet(document['full_text'])
     print(preprocessed_text)
 
-    return {'tweet_id' : tweet_id, 'preprocessed_text' : preprocessed_text}
+    return {'tweet_id': tweet_id, 'preprocessed_text': preprocessed_text}
 
 
 def clean_documents(array):
@@ -212,6 +223,7 @@ def clean_documents(array):
         res.append(basic_clean(a))
 
     return res
+
 
 my_path = os.path.abspath(os.path.dirname(__file__))
 bpath = os.path.join(my_path, "../data/models/bigram_model.pkl")
@@ -234,7 +246,8 @@ except:
     tokenized_data = [doc.split(' ') for doc in clean_test_data]
 
     bigram_phrases = Phrases(tokenized_data, min_count=1, threshold=50)
-    trigram_phrases = Phrases(bigram_phrases[tokenized_data], min_count=3, threshold=10)
+    trigram_phrases = Phrases(
+        bigram_phrases[tokenized_data], min_count=3, threshold=10)
 
     bigram_phrases.save(bpath)
     trigram_phrases.save(tpath)
