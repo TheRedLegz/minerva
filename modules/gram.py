@@ -6,6 +6,7 @@ import pandas as pd
 from pprint import pprint as print
 import os.path
 import concurrent.futures
+from nltk.corpus import wordnet
 
 
 
@@ -66,6 +67,7 @@ def clean_document_tokens(doc):
     Array of bigrams/trigrams
     
     """
+
     
     res = []
 
@@ -109,9 +111,11 @@ def tweet_cleaner(obj):
 
 
 def tweet_grammer(docs):
-    res = trigram_model[docs]
-
+    split = [s.split(' ') for s in docs]
+    res = trigram_model[split]
+    
     grammed_docs = []
+    wordnet.ensure_loaded()
 
     with concurrent.futures.ThreadPoolExecutor(4) as executor:
             for result in executor.map(clean_document_tokens, res):
