@@ -12,16 +12,11 @@ from modules.vectorizer import bag_of_words, prune_bow, tf_idf
 from legacy.pca import pca
 from legacy.lsi import lsi
 from matplotlib import pyplot as plt
-from modules.som import SOM, find_topics, print_data_to_SOM
+from modules.som import SOM, find_topics, print_data_to_SOM, tweet_find_cluster
 from modules.sentiment import sentimentinator
 from nltk.corpus import stopwords
 
 import pandas as pd
-
-# client = MongoClient('mongodb://localhost:27017')
-# db_raw = client['minerva_raw_tweets']
-# rawtweets = db_raw['rawtweets']
-
 
 if __name__ == "__main__":
 
@@ -36,8 +31,8 @@ if __name__ == "__main__":
         data.append(a['data']['full_text'])
 
     # From CSV
-    # data = pd.read_csv('covid19_tweets.csv')
-    # data = data['text'].values
+    training_data = pd.read_csv('tweets_processed.csv')
+
 
     # print(spell_check("Starting Prprocessing"))
     original_data = data[0:100]
@@ -64,11 +59,22 @@ if __name__ == "__main__":
 
     # TF-IDF implementation
     print("Starting BOW")
-    bowres = bag_of_words(data, to_preprocess=False)
+
+    preprocessed_tweets = db.get_preprocessed_tweets()
+    preprocessed_tweets_ids = [tweet['tweet_id'] for tweet in preprocessed_tweets[:-200]]
+    preprocessed_tweets_texts = [tweet['preprocessed_text'] for tweet in preprocessed_tweets[:-200]]
+    test_set = preprocessed_tweets[-200:]
+    label_data = db.get_tweet_text_by_id_array(preprocessed_tweets_ids)
+    
+    bowres = bag_of_words(preprocessed_tweets_texts, 4)
+
     (bow, unique, doc_grams) = bowres
 
     print("Starting Pruning")
-    (bow, unique, doc_grams) = prune_bow(bowres, 5)
+
+    (bow, unique, doc_grams) = prune_bow(bowres, 2)
+    print(bow.shape)
+    # print(unique)
 
     print("Starting TF-IDF")
     vectors = tf_idf(data, bow)
@@ -84,13 +90,28 @@ if __name__ == "__main__":
     # SOM_matrix = SOM(lsi_matrix, .5, lattice_size)
     SOM_matrix = SOM(vectors, .5, lattice_size)
 
-    print("\nFinal SOM weights")
+    print("Final SOM weights")
     print("Lattice size: (%d, %d)" % (row, col))
 
-    print("\nThe Clustered Topics")
-    # print_data_to_SOM(SOM_matrix, lsi_matrix, unique)
-    # print_data_to_SOM(SOM_matrix, vectors, original_data)
-    sentimentinator(data)
+    cluster_matrix = np.empty(shape=(row, col), dtype=object)
+
+    for i in range(row):
+        for j in range(col):
+            cluster_matrix[i][j] = []
+
+    for tweet in test_set:
+        if tweet['preprocessed_text'] == '':
+            continue
+        (result_matrix, bmu) = tweet_find_cluster(SOM_matrix, lattice_size, tweet, unique)
+        (i, j) = bmu
+        cluster_matrix[i][j].append(tweet['preprocessed_text'])
+
+    for i in range(row):
+        for j in range(col):
+            print("[%d][%d] = " %(i,j))
+            for tweet in cluster_matrix[i][j]:
+                print(tweet)
+    # sentimentinator(data)
 
     # data_selected_index = 0
     # while(data_selected_index != -1):
