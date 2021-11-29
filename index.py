@@ -7,10 +7,10 @@ import numpy as np
 import json
 from requests.api import get
 from modules.tweet_preprocessor import preprocess_documents, spell_check
-from modules.word2vec import get_word2vec_from_data
+from legacy.word2vec import get_word2vec_from_data
 from modules.vectorizer import bag_of_words, prune_bow, tf_idf
-from modules.pca import pca
-from modules.lsi import lsi
+from legacy.pca import pca
+from legacy.lsi import lsi
 from matplotlib import pyplot as plt
 from modules.som import SOM, find_topics, print_data_to_SOM
 from modules.sentiment import sentimentinator
