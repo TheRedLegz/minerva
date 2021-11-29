@@ -11,12 +11,29 @@ from textblob import TextBlob
 from gensim.models.phrases import Phrases, Phraser
 from gensim.parsing.preprocessing import STOPWORDS
 import os.path
-# define a string of punctuation symbols
+
+
 punctuation = '!"$%&\'()*+,-./:;<=>?[\\]^_`{|}~•@'
 
 l = WordNetLemmatizer()
 
-# Functions to clean tweets
+datapath = os.path.dirname(__file__)
+stopwordspath = os.path.join(datapath, '../data/non_english_stopwords.txt')
+
+with open(stopwordspath, 'r') as f:
+    noneng_stopwords = f.readlines()
+    noneng_stopwords = [word.strip() for word in noneng_stopwords if word.strip() != '']
+
+
+
+def remove_noneng_stopwords(string):
+    tokenized = string if isinstance(string, list) else string.split()
+    filtered = [word for word in tokenized if word not in noneng_stopwords and len(word) > 2]
+    
+    if isinstance(string, list):
+        return filtered
+    
+    return ' '.join(filtered)
 
 
 def clean_token(word):
@@ -37,13 +54,26 @@ def translateinator(string):
 
 
 def count_english(tweet_array):
-    translator = Translator()
     res = []
-    for tweet in tweet_array:
-        langs = translator.detect(tweet)
-        if langs.lang == 'en':
-            res.append(translateinator(tweet))
+
+    with concurrent.futures.ThreadPoolExecutor(4) as executor:
+        # Map
+        for result in executor.map(_count_english_sub, tweet_array):
+            if result != '':
+                res.append(result)
+
     return res
+
+
+def _count_english_sub(tweet):
+    translator = Translator()
+
+    langs = translator.detect(tweet)
+    if langs.lang == 'en':
+        return translateinator(tweet)
+
+    return ''
+
 
 
 def clean_document_tokens(doc):
