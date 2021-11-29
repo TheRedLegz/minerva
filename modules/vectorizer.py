@@ -155,14 +155,14 @@ def prune_bow(bow, tf_idf_threshold = 1, thread_count = 4):
 # TODO: Change this to remove loops
 def _prune_bow_sub_method(data):
     (unique, total_docs, tf_idf_threshold, gram) = data
+    total_keyword_count = np.count_nonzero(gram)
     df =  np.count_nonzero(gram) / total_docs
+    idf = total_docs / total_keyword_count
 
     if df < tf_idf_threshold/total_docs:
-        return (unique, [])
+        return (unique, [], -1)
     
     return (unique, gram, idf)
-    
-
 
 def tf_idf(document_array, bow = None):
     start_time = time.time()
