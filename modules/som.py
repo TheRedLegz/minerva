@@ -45,6 +45,43 @@ def find_bmu(matrix, input, matrix_size):
 
     return bmu
 
+# NOTE: Contemplate whether preprocessed before or after
+def tweet_find_cluster(SOM_model, matrix_size, preprocessed_tweet, unique):
+    """
+    Takes in the SOM model, tweet, and unique keywords and returns:
+
+    result_matrix = The distances of the input tweet to all the clusters on the map
+    
+    bmu = The indices of the best matching cluster in the map
+    """
+    (row, col) = matrix_size
+    u_keywords = [unique for (unique, _) in unique]
+    idf_list = [idf for (_, idf) in unique]
+    tweet_keyword_list = preprocessed_tweet['preprocessed_text'].split(' ')
+
+    num_features = len(unique)
+    tweet_tfidf_values = np.zeros(num_features, dtype = float)
+
+    for keyword in tweet_keyword_list:
+        if keyword in u_keywords:
+            tweet_tfidf_values[u_keywords.index(keyword)] += 1
+
+    for i, tf in enumerate(tweet_tfidf_values):
+        tweet_tfidf_values[i] = tf / idf_list[i]
+
+    bmu = (0,0)
+    nearest = 10000000
+    result_matrix = np.zeros(matrix_size, dtype=float)
+
+    for i in range(row):
+        for j in range(col):
+            distance = euc_distance(tweet_tfidf_values, SOM_model[i][j], num_features)
+            result_matrix[i][j] = distance
+            if distance < nearest:
+                nearest = distance
+                bmu = (i, j)
+    return (result_matrix, bmu)
+
 def euc_distance(input, cell, num_features):
     sum = 0
 
@@ -152,7 +189,7 @@ def print_data_to_SOM(SOM_matrix, matrix_data, labels):
                 print(tweet)
 
 def get_SOM_model(SOM_matrix, matrix_data, labels):
-    """Main master function to get the SOM model"""
+    """Main function to get the SOM model"""
     matrix_size = SOM_matrix.shape
     (row, col, _) = matrix_size
     mapping = np.empty(shape=(row, col), dtype=object)
