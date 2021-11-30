@@ -13,7 +13,7 @@ def bow(doc_grams, max = 5000):
     for doc in doc_grams:
         for gram in doc:
             if gram not in unique:
-                unique[gram] = 0
+                unique[gram] = 1
             else:
                 unique[gram] = unique[gram] + 1
     
@@ -32,7 +32,6 @@ def bow(doc_grams, max = 5000):
 
     for i in range(doc_len - 1, -1, -1):
 
-
         doc = doc_grams[i]
 
         for j in range(u_len):
@@ -44,6 +43,10 @@ def bow(doc_grams, max = 5000):
 
         if np.count_nonzero(bow_grams[i]) == 0:
             del doc_grams[i]
+
+    transposed_bow = np.transpose(np.copy(bow_grams))
+    for i, gram in enumerate(transposed_bow):
+        unique[i] = (unique[i], math.log(doc_len / np.count_nonzero(gram)))
 
     return (bow_grams, unique, doc_grams)
 

@@ -67,7 +67,7 @@ def tweet_find_cluster(SOM_model, matrix_size, preprocessed_tweet, unique):
             tweet_tfidf_values[u_keywords.index(keyword)] += 1
 
     for i, tf in enumerate(tweet_tfidf_values):
-        tweet_tfidf_values[i] = tf / idf_list[i]
+        tweet_tfidf_values[i] = (tf / len(tweet_keyword_list)) * idf_list[i]
 
     bmu = (0,0)
     nearest = 10000000
@@ -150,6 +150,13 @@ def SOM(data, learn_rate, matrix_size):
                 # matrix[i][j] = cell  + curr_rate * (exp(-(((bmu_row - i)**2 + (bmu_col - j)**2)/(num_features*(curr_range**2))))) * (input - cell)
 
     return matrix
+
+    # som_sub_method(cell, input, curr_rate)
+    # (n * n * 5000)
+    # data = [(cell[n], input[n], curr_rate),...]
+    # [5000]
+    # 0 - 1249      = Core 1
+    # 1250 - 2499   = Core 2
 
 def print_data_to_SOM(SOM_matrix, matrix_data, labels):
     matrix_size = SOM_matrix.shape
