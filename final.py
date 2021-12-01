@@ -10,20 +10,19 @@ from pprint import pprint as print
 conn = DatabaseConnection('mongodb://localhost:27017')
 
 
+start_time = time.time()
+raw = conn.get_raw_tweets()
+data = [tweet['full_text'] for tweet in raw]
+print("--- Execution time: %s seconds ---" % (time.time() - start_time))
+
 # start_time = time.time()
-# raw = conn.get_raw_tweets()
-# data = [tweet['full_text'] for tweet in raw]
+# csv = pd.read_csv('./data/tweets_processed.csv')
+# data = csv['Content'].values[:13000]
 # print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
 
 start_time = time.time()
-csv = pd.read_csv('./data/tweets_processed.csv')
-data = csv['Content'].values[:13000]
-print("--- Execution time: %s seconds ---" % (time.time() - start_time))
-
-
-start_time = time.time()
-cleaned = tweet_cleaner(data)
+cleaned = tweet_cleaner(data[:5000])
 print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
 
@@ -52,7 +51,7 @@ for i in range(row):
     for j in range(col):
         cluster_matrix[i][j] = []
 
-preprocessed_tweets = conn.get_preprocessed_tweets()
+preprocessed_tweets = grammed
 
 for tweet in preprocessed_tweets[1000:2000]:
     (result_matrix, bmu) = tweet_find_cluster(SOM_matrix, lattice_size, tweet, unique)
@@ -64,7 +63,7 @@ for i in range(row):
     for j in range(col):
         print("[%d][%d]:" % (i, j))
         for tweet in cluster_matrix[i][j]:
-            print(tweet['preprocessed_text'])
+            print(tweet)
 
 
 
@@ -73,8 +72,6 @@ for i in range(row):
 # todo remove empty docs
 
 # (grams, unique, docs) = prune_bow(bag)
-
-
 # print(len(unique))
 
 

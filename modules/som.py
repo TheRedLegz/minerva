@@ -57,7 +57,7 @@ def tweet_find_cluster(SOM_model, matrix_size, preprocessed_tweet, unique):
     (row, col) = matrix_size
     u_keywords = [unique for (unique, _) in unique]
     idf_list = [idf for (_, idf) in unique]
-    tweet_keyword_list = preprocessed_tweet['preprocessed_text'].split(' ')
+    tweet_keyword_list = preprocessed_tweet
 
     num_features = len(unique)
     tweet_tfidf_values = np.zeros(num_features, dtype = float)

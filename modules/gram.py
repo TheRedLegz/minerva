@@ -8,7 +8,17 @@ import os.path
 import concurrent.futures
 from nltk.corpus import wordnet
 
+add = [
+    'online',
+    'class',
+    'learning',
+    'distance',
+    'education',
+    'face',
+    'lms'
+]
 
+STOPWORDS = list(STOPWORDS) + add
 
 my_path = os.path.abspath(os.path.dirname(__file__))
 bpath = os.path.join(my_path, "../data/models/bigram_model.pkl")
