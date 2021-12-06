@@ -13,6 +13,13 @@ conn = DatabaseConnection('mongodb://localhost:27017')
 start_time = time.time()
 raw = conn.get_raw_tweets()
 data = [tweet['full_text'] for tweet in raw]
+
+data = data[:10000]
+csv = pd.read_csv('./data/tweets_processed.csv')
+
+for tweet in csv['Content'].values[:30000]:
+    data.append(tweet)
+
 print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
 # start_time = time.time()
@@ -22,14 +29,15 @@ print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
 
 start_time = time.time()
-cleaned = tweet_cleaner(data[:5000])
+cleaned = tweet_cleaner(data)
 print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
 
 start_time = time.time()
 grammed = tweet_grammer(cleaned)
 print("--- Execution time: %s seconds ---" % (time.time() - start_time))
-
+test_data = grammed[:1000]
+grammed = grammed[1000:]
 
 start_time = time.time()
 (bag, unique, docs) = bow(grammed)
@@ -40,10 +48,10 @@ start_time = time.time()
 matrix = tf_idf(docs, bag)
 print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
-lattice_size = (4, 4)
+lattice_size = (10, 10)
 (row, col) = lattice_size
 
-SOM_matrix = SOM(matrix, .5, lattice_size)
+SOM_matrix = SOM(matrix, .3, lattice_size)
 
 cluster_matrix = np.empty(shape=(row, col), dtype=object)
 
@@ -51,12 +59,13 @@ for i in range(row):
     for j in range(col):
         cluster_matrix[i][j] = []
 
-preprocessed_tweets = grammed
+# preprocessed_tweets = grammed
 
-for tweet in preprocessed_tweets[1000:2000]:
-    (result_matrix, bmu) = tweet_find_cluster(SOM_matrix, lattice_size, tweet, unique)
+for tweet in test_data:
+    (result_matrix, bmu) = tweet_find_cluster(
+        SOM_matrix, lattice_size, tweet, unique)
     (bmu_row, bmu_col) = bmu
-    
+
     cluster_matrix[bmu_row][bmu_col].append(tweet)
 
 for i in range(row):
@@ -66,12 +75,8 @@ for i in range(row):
             print(tweet)
 
 
-
-
 # todo iterate over all docs and remove keywords not in unique
 # todo remove empty docs
 
 # (grams, unique, docs) = prune_bow(bag)
 # print(len(unique))
-
-
