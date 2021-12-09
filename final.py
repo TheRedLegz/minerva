@@ -1,5 +1,5 @@
 from modules.services import DatabaseConnection
-from modules.gram import tweet_grammer, tweet_cleaner
+from modules.gram import tweet_grammer, tweet_cleaner, tweet_pos
 from modules.som import SOM, tweet_find_cluster
 from modules.vectorizer import bow, prune_bow, _tf_idf_sub, tf_idf
 import numpy as np
@@ -31,7 +31,8 @@ print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 start_time = time.time()
 cleaned = tweet_cleaner(data)
 print("--- Execution time: %s seconds ---" % (time.time() - start_time))
-
+pos_tags = tweet_pos(cleaned)
+print(pos_tags)
 
 start_time = time.time()
 grammed = tweet_grammer(cleaned)

@@ -41,7 +41,8 @@ except:
     tokenized_data = [doc.split(' ') for doc in clean_test_data]
 
     bigram_phrases = Phrases(tokenized_data, min_count=1, threshold=50)
-    trigram_phrases = Phrases(bigram_phrases[tokenized_data], min_count=3, threshold=10)
+    trigram_phrases = Phrases(
+        bigram_phrases[tokenized_data], min_count=3, threshold=10)
 
     bigram_phrases.save(bpath)
     trigram_phrases.save(tpath)
@@ -58,7 +59,6 @@ def clean_token(word):
         if len(split[0]) > 2 and len(split[1]) > 2 and split[1] not in STOPWORDS and split[0] not in STOPWORDS:
             return p.lemmatize(split[0]) + '_' + p.lemmatize(split[1])
 
-
     elif len(word) > 2 and word not in STOPWORDS:
         return word
 
@@ -67,7 +67,7 @@ def clean_document_tokens(doc):
     """
     Remove bigrams/trigrams that contain a stopword
     Also, lemmatizes valid bigrams/trigrams
-    
+
     Example:
 
     is_playing => removed
@@ -75,10 +75,9 @@ def clean_document_tokens(doc):
 
     Input:
     Array of bigrams/trigrams
-    
+
     """
 
-    
     res = []
 
     for word in doc:
@@ -90,7 +89,7 @@ def clean_document_tokens(doc):
     return res
 
 
-def gram_sentence(data, clean = True):
+def gram_sentence(data, clean=True):
 
     if clean:
         data = p.basic_clean(data)
@@ -109,6 +108,15 @@ def gram_documents(data):
     return results
 
 
+def tweet_pos(obj):
+    res = []
+
+    with concurrent.futures.ThreadPoolExecutor(4) as executor:
+        for results in executor.map(p.pos_tag, obj):
+            res.append(results)
+
+    return res
+
 
 def tweet_cleaner(obj):
     res = []
@@ -123,16 +131,12 @@ def tweet_cleaner(obj):
 def tweet_grammer(docs):
     split = [s.split(' ') for s in docs]
     res = trigram_model[split]
-    
+
     grammed_docs = []
     wordnet.ensure_loaded()
 
     with concurrent.futures.ThreadPoolExecutor(4) as executor:
-            for result in executor.map(clean_document_tokens, res):
-                grammed_docs.append(result)
+        for result in executor.map(clean_document_tokens, res):
+            grammed_docs.append(result)
 
     return grammed_docs
-
-
-
-

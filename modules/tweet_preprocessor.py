@@ -7,6 +7,7 @@ import concurrent.futures
 from googletrans import Translator
 from nltk.corpus import wordnet
 from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
 from textblob import TextBlob
 from gensim.models.phrases import Phrases, Phraser
 from gensim.parsing.preprocessing import STOPWORDS
@@ -22,17 +23,18 @@ stopwordspath = os.path.join(datapath, '../data/non_english_stopwords.txt')
 
 with open(stopwordspath, 'r') as f:
     noneng_stopwords = f.readlines()
-    noneng_stopwords = [word.strip() for word in noneng_stopwords if word.strip() != '']
-
+    noneng_stopwords = [word.strip()
+                        for word in noneng_stopwords if word.strip() != '']
 
 
 def remove_noneng_stopwords(string):
     tokenized = string if isinstance(string, list) else string.split()
-    filtered = [word for word in tokenized if word not in noneng_stopwords and len(word) > 2]
-    
+    filtered = [
+        word for word in tokenized if word not in noneng_stopwords and len(word) > 2]
+
     if isinstance(string, list):
         return filtered
-    
+
     return ' '.join(filtered)
 
 
@@ -73,7 +75,6 @@ def _count_english_sub(tweet):
         return translateinator(tweet)
 
     return ''
-
 
 
 def clean_document_tokens(doc):
@@ -202,6 +203,12 @@ def preprocess_tweet(tweet):
     tweet_token_list = tokenize(tweet)  # apply lemmatization and tokenization
     tweet = ' '.join(tweet_token_list)
     return tweet
+
+
+def pos_tag(tweet):
+    tokens = word_tokenize(tweet)
+    res = nltk.pos_tag(tokens)
+    return res
 
 
 def basic_clean(tweet):
