@@ -154,7 +154,7 @@ def SOM(data, learn_rate, matrix_size, steps_max=3000):
                     # [1, 0.4, 0.5, ..., 9n]
                     # [0.3, 0.6, 1, ..., 9n]
 
-                # Weight Updating (w/o man_distance)
+                # Weight Updating (w/o Mexican Hat)
                 # Formula: cell+curr_rate*(EXP(-((POWER(bmui-i,2)+POWER(bmuj-j,2))/(num_features???*POWER(curr_range,2)))))*(input- cell)
                 # matrix[i][j] = cell  + curr_rate * (exp(-(((bmu_row - i)**2 + (bmu_col - j)**2)/(num_features*(curr_range**2))))) * (input - cell)
 

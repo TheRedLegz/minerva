@@ -47,7 +47,7 @@ def bow(doc_grams, max=4000):
     transposed_bow = np.transpose(np.copy(bow_grams))
     for i, gram in enumerate(transposed_bow):
         unique[i] = (unique[i], math.log(
-            doc_len / (np.count_nonzero(gram) + 1)))
+            (doc_len + 1) / (np.count_nonzero(gram) + 1)) + 1)
 
     return (bow_grams, unique, doc_grams)
 
@@ -221,7 +221,7 @@ def _tf_idf_sub(data):
         tf = col / word_count
         has_word_count = col_sums[j] + 1
 
-        idf = math.log((doc_count / (has_word_count)))
+        idf = math.log(((doc_count + 1) / (has_word_count))) + 1
 
         res[j] = tf * idf
 
