@@ -74,7 +74,9 @@ def _count_english_sub(tweet):
 
     return ''
 
-
+def remove_haha(tweet):
+    tweet = re.sub(r' (h[aiou])+ ', ' ', tweet)
+    return tweet
 
 def clean_document_tokens(doc):
     """
@@ -213,11 +215,12 @@ def basic_clean(tweet):
     tweet = remove_html_tags(tweet)
     tweet = remove_non_ascii(tweet)
     tweet = tweet.lower()  # lower case
+    tweet = remove_haha(tweet)
     tweet = re.sub('[' + punctuation + ']+', ' ', tweet)  # strip punctuation
     tweet = re.sub('\s+', ' ', tweet)  # remove double spacing
     tweet = re.sub('([0-9]+)', '', tweet)  # remove numbers
     tweet = re.sub('📝 …', '', tweet)
-    return tweet
+    return tweet.strip()
 
 # TODO:
 #   - Add a way to check if a tweet preexists in preprocessed tweet database
