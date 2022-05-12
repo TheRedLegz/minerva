@@ -53,16 +53,15 @@ def bow(doc_grams, max=4000):
 
 
 def bag_of_words(preprocessed_tweets, process_count=4):
-    start_time = time.time()
     doc_grams = []
 
-    # TODO: Add multi processing here
     with concurrent.futures.ThreadPoolExecutor(process_count) as executor:
         for result in executor.map(_bag_of_words_sub_method, preprocessed_tweets):
             # NOTE: Removes empty docs
             if result != '':
                 doc_grams.append(result)
 
+    # TODO: Optimize this
     unique_grams = []
 
     for doc in doc_grams:
@@ -75,7 +74,26 @@ def bag_of_words(preprocessed_tweets, process_count=4):
     gram_count = len(unique_grams)
 
     bow_grams = np.zeros((document_count, gram_count), dtype=int)
+    print("start")
 
+    # TODO: Implement multiprocessing here
+
+    # def _gram_sub_method(doc):
+    #     (i, doc_gram) = doc
+
+    #     for j in range(gram_count):
+    #         gram = unique_grams[j]
+    #         count = doc_gram.count(gram)
+
+    #         bow_grams[i][j] = int(count)
+    
+    start_time = time.time()
+    # with concurrent.futures.ProcessPoolExecutor(process_count) as executor:
+    #     for result in executor.map(_gram_sub_method, list(enumerate(doc_grams))):
+    #         # doc_grams.append(result)
+    #         pass
+            
+    # TODO: OLD SERIAL METHOD
     for i in range(document_count):
         doc = doc_grams[i]
 

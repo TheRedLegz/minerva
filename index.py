@@ -1,3 +1,4 @@
+import time
 from modules.gram import gram_documents
 from pprint import pprint as print
 
@@ -6,6 +7,7 @@ from pymongo import MongoClient
 import numpy as np
 import json
 from requests.api import get
+from modules.services import DatabaseConnection
 from modules.tweet_preprocessor import preprocess_documents, spell_check
 from legacy.word2vec import get_word2vec_from_data
 from modules.vectorizer import bag_of_words, prune_bow, tf_idf
@@ -15,54 +17,41 @@ from matplotlib import pyplot as plt
 from modules.som import SOM, find_topics, print_data_to_SOM, tweet_find_cluster
 from modules.sentiment import sentimentinator
 from nltk.corpus import stopwords
+from minisom import MiniSom
 
 import pandas as pd
 
 if __name__ == "__main__":
 
-    data = []
+    data = pd.read_csv('tweets_raw.csv')
 
     # From MongoDB
-    client = MongoClient('mongodb://localhost:27017')
-    db_raw = client['minerva_raw_tweets']
-    rawtweets = db_raw['rawtweets']
-    db_results = list(rawtweets.find())
-    for a in db_results:
-        data.append(a['data']['full_text'])
+    # client = MongoClient('mongodb://localhost:27017')
+    # db_raw = client['minerva_raw_tweets']
+    # rawtweets = db_raw['rawtweets']
+    # db_results = list(rawtweets.find())
+    # for a in db_results:
+    #     data.append(a['data']['full_text'])
+
+    # Connecting to service
+    db = DatabaseConnection('mongodb://localhost:27017')
 
     # From CSV
     training_data = pd.read_csv('tweets_processed.csv')
 
-
     # print(spell_check("Starting Prprocessing"))
-    original_data = data[0:100]
-    data = preprocess_documents(data[:100])
-
-    # TO BE DISCARDED
-    # WORD2VEC implementation
-    # model = get_word2vec_from_data(data, to_preprocess=False)
-
-    # vectorized_words = []
-    # unique = []
-    # for i in range(len(model.wv.index_to_key)):
-    #     word = model.wv.index_to_key[i]
-    #     unique.append(word)
-    #     vectorized_words.append(model.wv[word])
-    # vectorized_words = np.asarray(vectorized_words)
-
-    # doc_grams = []
-    # for sentence in data:
-    #     doc_grams.append([word for word in sentence if word in unique])
-
-    # WORD2VEC implementation
-    # SOM_matrix = SOM(vectorized_words, .5, lattice_size)
+    original_data = training_data['Content'][:5000]
+    # data = preprocess_documents(data[:100])
+    start_time = time.time()
+    data = gram_documents(original_data)
+    print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
     # TF-IDF implementation
     print("Starting BOW")
 
     preprocessed_tweets = db.get_preprocessed_tweets()
-    preprocessed_tweets_ids = [tweet['tweet_id'] for tweet in preprocessed_tweets[:-200]]
-    preprocessed_tweets_texts = [tweet['preprocessed_text'] for tweet in preprocessed_tweets[:-200]]
+    preprocessed_tweets_ids = [tweet['tweet_id'] for tweet in preprocessed_tweets[:1000]]
+    preprocessed_tweets_texts = [tweet['preprocessed_text'] for tweet in preprocessed_tweets[:1000]]
     test_set = preprocessed_tweets[-200:]
     label_data = db.get_tweet_text_by_id_array(preprocessed_tweets_ids)
     
@@ -88,7 +77,8 @@ if __name__ == "__main__":
 
     # TF-IDF implementation
     # SOM_matrix = SOM(lsi_matrix, .5, lattice_size)
-    SOM_matrix = SOM(vectors, .5, lattice_size)
+
+    #----># SOM_matrix = SOM(vectors, .5, lattice_size)
 
     print("Final SOM weights")
     print("Lattice size: (%d, %d)" % (row, col))
@@ -106,11 +96,28 @@ if __name__ == "__main__":
         (i, j) = bmu
         cluster_matrix[i][j].append(tweet['preprocessed_text'])
 
+
+    cluster_string = ""
     for i in range(row):
         for j in range(col):
-            print("[%d][%d] = " %(i,j))
+            # print("[%d][%d] = " %(i,j))
+            cluster_string += "[" + str(i) + "]" + "[" + str(j) + "]" + " =\n"
             for tweet in cluster_matrix[i][j]:
-                print(tweet)
+                # print(tweet)
+                cluster_string += tweet
+                cluster_string += "\n"
+
+    for i in range(row):
+        for j in range(col):
+            # print("[%d][%d] = " %(i,j))
+            cluster_string += "[" + str(i) + "]" + "[" + str(j) + "]" + " =\n"
+            for tweet in cluster_matrix[i][j]:
+                # print(tweet)
+                cluster_string += tweet
+                cluster_string += "\n"
+    f = open("clusters.txt", "w")
+    f.write(cluster_string)
+    f.close()
     # sentimentinator(data)
 
     # data_selected_index = 0
@@ -128,5 +135,24 @@ if __name__ == "__main__":
     #             (location, word) = topic
     #             (x, y) = location
     #             print("[", x, "][", y,"] =", word)
+
+    # TO BE DISCARDED
+    # WORD2VEC implementation
+    # model = get_word2vec_from_data(data, to_preprocess=False)
+
+    # vectorized_words = []
+    # unique = []
+    # for i in range(len(model.wv.index_to_key)):
+    #     word = model.wv.index_to_key[i]
+    #     unique.append(word)
+    #     vectorized_words.append(model.wv[word])
+    # vectorized_words = np.asarray(vectorized_words)
+
+    # doc_grams = []
+    # for sentence in data:
+    #     doc_grams.append([word for word in sentence if word in unique])
+
+    # WORD2VEC implementation
+    # SOM_matrix = SOM(vectorized_words, .5, lattice_size)
 
     print("---PROGRAM EXITED---")
