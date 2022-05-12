@@ -51,8 +51,8 @@ for i, tweet_grams in enumerate(pos_tags):
             temp.append(gram[0])
     grammed[i] = temp
 print("--- Execution time: %s seconds ---" % (time.time() - start_time))
-test_data = grammed[:100]
-grammed = grammed[100:]
+test_data = grammed[:1000]
+grammed = grammed[1000:]
 
 start_time = time.time()
 (bag, unique, docs) = bow(grammed)
@@ -89,8 +89,7 @@ for i, tweet in enumerate(test_data):
 for i in range(row):
     for j in range(col):
         print("[%d][%d]:" % (i, j))
-        for tweet in cluster_matrix[i][j]:
-            print(tweet)
+        print(len(cluster_matrix[i][j]))
 
 
 # todo iterate over all docs and remove keywords not in unique

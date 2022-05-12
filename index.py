@@ -1,4 +1,5 @@
 import time
+from turtle import shape
 from modules.gram import gram_documents
 from pprint import pprint as print
 
@@ -14,10 +15,10 @@ from modules.vectorizer import bag_of_words, prune_bow, tf_idf
 from legacy.pca import pca
 from legacy.lsi import lsi
 from matplotlib import pyplot as plt
-from modules.som import SOM, find_topics, print_data_to_SOM, tweet_find_cluster
+from modules.som import SOM, find_bmu, find_topics, print_data_to_SOM, tweet_find_cluster
 from modules.sentiment import sentimentinator
 from nltk.corpus import stopwords
-from minisom import MiniSom
+# from minisom import MiniSom
 
 import pandas as pd
 
@@ -50,14 +51,17 @@ if __name__ == "__main__":
     print("Starting BOW")
 
     preprocessed_tweets = db.get_preprocessed_tweets()
-    preprocessed_tweets_ids = [tweet['tweet_id'] for tweet in preprocessed_tweets[:1000]]
-    preprocessed_tweets_texts = [tweet['preprocessed_text'] for tweet in preprocessed_tweets[:1000]]
+    preprocessed_tweets_ids = [tweet['tweet_id']
+                               for tweet in preprocessed_tweets[:1000]]
+    preprocessed_tweets_texts = [tweet['preprocessed_text']
+                                 for tweet in preprocessed_tweets[:1000]]
     test_set = preprocessed_tweets[-200:]
     label_data = db.get_tweet_text_by_id_array(preprocessed_tweets_ids)
-    
-    bowres = bag_of_words(preprocessed_tweets_texts, 4)
+    data = [' '.join(tweet)for tweet in data]
+    bowres = bag_of_words(data, 4)
 
     (bow, unique, doc_grams) = bowres
+    print(bow)
 
     print("Starting Pruning")
 
@@ -76,9 +80,10 @@ if __name__ == "__main__":
     (row, col) = lattice_size
 
     # TF-IDF implementation
-    # SOM_matrix = SOM(lsi_matrix, .5, lattice_size)
+    print(vectors.shape)
+    SOM_matrix = SOM(vectors, .5, lattice_size)
 
-    #----># SOM_matrix = SOM(vectors, .5, lattice_size)
+    # ----># SOM_matrix = SOM(vectors, .5, lattice_size)
 
     print("Final SOM weights")
     print("Lattice size: (%d, %d)" % (row, col))
@@ -89,13 +94,14 @@ if __name__ == "__main__":
         for j in range(col):
             cluster_matrix[i][j] = []
 
-    for tweet in test_set:
-        if tweet['preprocessed_text'] == '':
+    for i in range(data):
+        if data[i] == '':
             continue
-        (result_matrix, bmu) = tweet_find_cluster(SOM_matrix, lattice_size, tweet, unique)
-        (i, j) = bmu
-        cluster_matrix[i][j].append(tweet['preprocessed_text'])
-
+        (x, y) = find_bmu(SOM_matrix, vectors[i], lattice_size)
+        # (result_matrix, bmu) = tweet_find_cluster(
+        #     SOM_matrix, lattice_size, tweet, unique)
+        # (i, j) = bmu
+        cluster_matrix[x][y].append(data[i])
 
     cluster_string = ""
     for i in range(row):
