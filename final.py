@@ -93,6 +93,11 @@ for i in range(row):
             print(tweet)
 
 
+#             print(tweet)
+
+
+
+
 # todo iterate over all docs and remove keywords not in unique
 # todo remove empty docs
 

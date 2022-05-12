@@ -78,15 +78,22 @@ def tweet_find_cluster(SOM_model, matrix_size, preprocessed_tweet, unique):
     bmu = (0, 0)
     nearest = 10000000
     result_matrix = np.zeros(matrix_size, dtype=float)
+    total_distance = 0
 
     for i in range(row):
         for j in range(col):
             distance = euc_distance(
                 tweet_tfidf_values, SOM_model[i][j], num_features)
-            result_matrix[i][j] = distance
+            result_matrix[i][j] = distance;
+            total_distance += distance
             if distance < nearest:
                 nearest = distance
                 bmu = (i, j)
+
+
+    for i in range(row):
+        for j in range(col):
+            result_matrix[i][j] /= total_distance;
     return (result_matrix, bmu)
 
 

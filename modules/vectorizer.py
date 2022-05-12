@@ -243,4 +243,6 @@ def _tf_idf_sub(data):
 
         res[j] = tf * idf
 
+    # Normalization!!!
+
     return res
