@@ -23,7 +23,7 @@ raw = conn.get_raw_tweets()
 #     data.append(tweet)
 
 csv = pd.read_csv('./data/tweets_processed.csv')
-data = [tweet for tweet in csv['Content'].values[:30000]]
+data = [tweet['full_text'] for tweet in raw[:30000]]
 for i in range(10000):
     data.append(raw[i]['full_text'])
 
