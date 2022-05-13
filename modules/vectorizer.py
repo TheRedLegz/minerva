@@ -86,13 +86,13 @@ def bag_of_words(preprocessed_tweets, process_count=4):
     #         count = doc_gram.count(gram)
 
     #         bow_grams[i][j] = int(count)
-    
+
     start_time = time.time()
     # with concurrent.futures.ProcessPoolExecutor(process_count) as executor:
     #     for result in executor.map(_gram_sub_method, list(enumerate(doc_grams))):
     #         # doc_grams.append(result)
     #         pass
-            
+
     # TODO: OLD SERIAL METHOD
     for i in range(document_count):
         doc = doc_grams[i]
@@ -226,7 +226,7 @@ def tf_idf(document_array, bow=None):
 
 def _tf_idf_sub(data):
     (row, doc_count, col_sums) = data
-
+    total_distance = 0
     res = np.zeros(len(row), dtype=float)
 
     word_count = np.sum(row)
@@ -242,7 +242,12 @@ def _tf_idf_sub(data):
         idf = math.log(((doc_count + 1) / (has_word_count))) + 1
 
         res[j] = tf * idf
+        total_distance += res[j]
 
-    # Normalization!!!
+    for i in range(len(row)):
+        if total_distance == 0:
+            res[i] = 0
+        else:
+            res[i] /= total_distance
 
     return res

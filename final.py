@@ -51,8 +51,8 @@ for i, tweet_grams in enumerate(pos_tags):
             temp.append(gram[0])
     grammed[i] = temp
 print("--- Execution time: %s seconds ---" % (time.time() - start_time))
-test_data = grammed[:1000]
-grammed = grammed[1000:]
+test_data = grammed[:10000]
+grammed = grammed[10000:]
 
 start_time = time.time()
 (bag, unique, docs) = bow(grammed)
@@ -93,8 +93,6 @@ for i in range(row):
 
 
 #             print(tweet)
-
-
 
 
 # todo iterate over all docs and remove keywords not in unique
