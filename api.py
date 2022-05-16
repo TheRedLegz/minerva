@@ -2,7 +2,7 @@ from flask import Flask, jsonify, abort
 from flask_cors import CORS
 from pymongo import MongoClient
 from modules.services import DatabaseConnection
-from modules.tweet_preprocessor import preprocess_tweet
+from modules.tweet_preprocessor import basic_clean, preprocess_tweet
 from modules.gram import gram_sentence, gram_documents, tweet_cleaner, tweet_grammer, tweet_pos
 from modules.sentiment import sentimentinator
 from gensim.corpora import Dictionary
@@ -26,6 +26,22 @@ CORS(app)
 client = MongoClient('mongodb://localhost:27017')
 db_raw = client['minerva_raw_tweets']
 rawtweets = db_raw['rawtweets']
+alltweets = rawtweets.find()
+
+
+def create_tfidf():
+    db_results = list(rawtweets.find())
+    data = [item['data']['full_text'] for item in db_results]
+
+    cleaned = gram_documents(data)
+
+    (bows, unique, docs) = bow(cleaned)
+    matrix = tf_idf(cleaned, bows)
+
+    return (matrix, unique, docs)
+
+
+(tfidf_row, tfidf_col, docs) = create_tfidf()
 
 # #----------------final.py--------------------#
 # raw = client.get_raw_tweets()
@@ -115,46 +131,6 @@ def get_data():
     return jsonify(data)
 
 
-@app.route('/tokens', methods=['GET'])
-def get_tokens():
-    db_results = list(rawtweets.find())
-    data = [item['data']['full_text'] for item in db_results]
-
-    cleaned = gram_documents(data)
-    dt = Dictionary(cleaned)
-
-    uni = {}
-    bi = {}
-    tri = {}
-
-    cfs = dt.cfs
-    dfs = dt.dfs
-
-    res = {}
-
-    frequencies = {}
-
-    for word, id in dt.token2id.items():
-        frequencies[word] = {}
-
-        frequencies[word]['cfs'] = cfs[id]
-        frequencies[word]['dfs'] = dfs[id]
-
-        if '_' not in word:
-            uni[word] = id
-        elif word.count('_') == 1:
-            bi[word] = id
-        elif word.count('_') == 2:
-            tri[word] = id
-
-    res['uni'] = uni
-    res['bi'] = bi
-    res['tri'] = tri
-    res['frequencies'] = frequencies
-
-    return jsonify(res)
-
-
 @app.route('/tfidf', methods=['GET'])
 def get_vectors():
     db_results = list(rawtweets.find())
@@ -199,20 +175,63 @@ def get_tweets():
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.submit(get_sentiment(data))
-    print(data[0])
-    print(jsonify(data[0]))
-    return jsonify(data[:10])
+    return jsonify(data)
+
+
+def get_tokens(res):
+    cleaned = gram_documents(res)
+    dt = Dictionary(cleaned)
+
+    uni = {}
+    bi = {}
+    tri = {}
+
+    cfs = dt.cfs
+    dfs = dt.dfs
+
+    res = {}
+
+    frequencies = {}
+
+    for word, id in dt.token2id.items():
+        frequencies[word] = {}
+
+        frequencies[word]['cfs'] = cfs[id]
+        frequencies[word]['dfs'] = dfs[id]
+
+        if '_' not in word:
+            uni[word] = id
+        elif word.count('_') == 1:
+            bi[word] = id
+        elif word.count('_') == 2:
+            tri[word] = id
+
+    res['uni'] = uni
+    res['bi'] = bi
+    res['tri'] = tri
+    res['frequencies'] = frequencies
+
+    return res
 
 
 @app.route('/tweets/<int:tweet_id>')
 def get_one_tweet(tweet_id):
-    print(tweet_id)
-    res = rawtweets.find_one({'tweet_id': tweet_id})
+    temp = []
+    for index, tweets in enumerate(alltweets):
+        if(tweets['data']['id'] == tweet_id):
+            res = tweets
+            tweets_index = index
+            break
 
+    for item in docs[tweets_index]:
+        uniqueWord = tfidf_col.index(item)
+        temp.append(tfidf_row[uniqueWord])
+
+    res['data']['tfidf'] = temp
+    res['data']['cleaned'] = basic_clean(res['data']['full_text'])
     error = jsonify({
         'error': 'Tweet does not exist'
     })
-    print(res)
     if res:
         res['_id'] = str(res['_id'])
         return jsonify(res)
