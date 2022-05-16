@@ -1,13 +1,13 @@
 from flask import Flask, jsonify, abort
 from flask_cors import CORS
 from pymongo import MongoClient
+from modules.services import DatabaseConnection
 from modules.tweet_preprocessor import preprocess_tweet
-from modules.gram import gram_sentence, gram_documents
+from modules.gram import gram_sentence, gram_documents, tweet_cleaner, tweet_grammer, tweet_pos
 from modules.sentiment import sentimentinator
 from gensim.corpora import Dictionary
 from modules.vectorizer import bow, tf_idf
 import numpy as np
-
 import numpy as np
 import concurrent.futures
 from modules.tweet_preprocessor import preprocess_documents
@@ -17,6 +17,8 @@ from modules.vectorizer import bag_of_words, prune_bow, tf_idf
 from matplotlib import pyplot as plt
 from modules.som import SOM, find_topics, get_SOM_model, print_data_to_SOM
 from modules.sentiment import sentimentinator
+import json
+from bson import ObjectId
 
 app = Flask(__name__)
 CORS(app)
@@ -25,74 +27,58 @@ client = MongoClient('mongodb://localhost:27017')
 db_raw = client['minerva_raw_tweets']
 rawtweets = db_raw['rawtweets']
 
-# TEMPORARY MODEL CREATOR ON RUN
+# #----------------final.py--------------------#
+# raw = client.get_raw_tweets()
 
-# From MongoDB
-# db_results_model = list(rawtweets.find())
-# data_model = []
-# for a in db_results_model:
-#     data_model.append(a['data']['full_text'])
+# # data = [tweet['full_text'] for tweet in raw]
 
-# print("Starting Preprocessing")
-# data = preprocess_documents(data_model[:200])
-# print("Finished Preprocessing")
+# # data = data[:10000]
+# # csv = pd.read_csv('./data/tweets_processed.csv')
 
-# # dataSentiment = preprocess_documents(data[:200])
+# # for tweet in csv['Content'].values[:30000]:
+# #     data.append(tweet)
 
-# #WORD2VEC implementation
-# model = get_word2vec_from_data(data, to_preprocess=False)
+# data = [tweet['full_text'] for tweet in raw[:1000]]
+# for i in range(500):
+#     data.append(raw[i]['full_text'])
 
-# vectorized_words = []
-# unique = []
-# for i in range(len(model.wv.index_to_key)):
-#     word = model.wv.index_to_key[i]
-#     unique.append(word)
-#     vectorized_words.append(model.wv[word])
-# vectorized_words = np.asarray(vectorized_words)
+# # start_time = time.time()
+# # csv = pd.read_csv('./data/tweets_processed.csv')
+# # data = csv['Content'].values[:13000]
+# # print("--- Execution time: %s seconds ---" % (time.time() - start_time))
 
-# doc_grams = []
-# for sentence in data:
-#     doc_grams.append([word for word in sentence if word in unique])
 
-# # TF-IDF implementation
-# # bowres = bag_of_words(data, to_preprocess=False)
-# # (bow, unique, doc_grams) = bowres
+# cleaned = tweet_cleaner(data)
 
-# # (bow, unique, doc_grams) = prune_bow(bowres, 3)
-
-# # vectors = tf_idf(data, bow)
-
-# # vectors_t = np.transpose(vectors)
-# # (lsi_matrix, sum) = pca(vectors_t)
-
-# # print(lsi_matrix.shape )
-
-# lattice_size = (6, 6)
+# grammed = tweet_grammer(cleaned)
+# for i, tweet_grams in enumerate(grammed):
+#     grammed[i] = ' '.join(tweet_grams)
+# pos_tags = tweet_pos(grammed)
+# for i, tweet_grams in enumerate(pos_tags):
+#     temp = []
+#     for gram in tweet_grams:
+#         if gram[1].startswith('NN'):
+#             temp.append(gram[0])
+#     grammed[i] = temp
+# #------------------------------------GRAMMER---------------------------------------#
+# test_data = grammed[:500]
+# grammed = grammed[500:]
+# (bag, unique, docs) = bow(grammed)
+# #------------------------------------UNIQUE---------------------------------------#
+# matrix = tf_idf(docs, bag)
+# #------------------------------------TF-IDF---------------------------------------#
+# lattice_size = (4, 4)
 # (row, col) = lattice_size
+# SOM_matrix = SOM(matrix, .3, lattice_size)
+# #--------------------------------final.py----------------------------#
 
-# #WORD2VEC implementation
-# SOM_matrix = SOM(vectorized_words, .5, lattice_size)
-# #TF-IDF implementation
-# # SOM_matrix = SOM(lsi_matrix, .5, lattice_size)
-
-# print("\nFinal SOM weights")
-# print("Lattice size: (%d, %d)" %(row, col))
-
-
-# print("\nThe Clustered Topics")
-# model = get_SOM_model(SOM_matrix, vectorized_words, unique)
-
-
-# END OF TEMP MODEL CREATOR
-
-# experimental
 @app.route('/data', methods=['GET'])
 def get_data():
     db_results = list(rawtweets.find()[:1000])
     data = []
 
     divisions = int(len(db_results) / 4)
-    data_array = [] 
+    data_array = []
     data_array.append(db_results[0:divisions])
     data_array.append(db_results[divisions:divisions*2])
     data_array.append(db_results[divisions*2:divisions*3])
@@ -105,37 +91,19 @@ def get_data():
 
             to_add['preprocessed'] = preprocess_tweet(a['data']['full_text'])
             grams = gram_sentence(to_add['preprocessed'])
-            
+
             to_add['unigrams'] = [token for token in grams if '_' not in token]
-            to_add['bigrams'] = [token for token in grams if token.count('_') == 1]
-            to_add['trigrams'] = [token for token in grams if token.count('_') == 2]
-            to_add['tokens'] = to_add['unigrams'] + to_add['bigrams'] + to_add['trigrams']
+            to_add['bigrams'] = [
+                token for token in grams if token.count('_') == 1]
+            to_add['trigrams'] = [
+                token for token in grams if token.count('_') == 2]
+            to_add['tokens'] = to_add['unigrams'] + \
+                to_add['bigrams'] + to_add['trigrams']
 
             temp.append(to_add)
 
-
-        s_data = sentimentinator([item['preprocessed'] for item in temp])
-
-        for i, _ in enumerate(data):
-            temp[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
-            temp[i]['sentiment'] = s_data.iloc[i]['sentiment']
-
         return temp
 
-    # for a in db_results:
-    #     to_add = a['data']
-
-    #     to_add['preprocessed'] = preprocess_tweet(a['data']['full_text'])
-    #     grams = gram_sentence(to_add['preprocessed'])
-        
-    #     to_add['unigrams'] = [token for token in grams if '_' not in token]
-    #     to_add['bigrams'] = [token for token in grams if token.count('_') == 1]
-    #     to_add['trigrams'] = [token for token in grams if token.count('_') == 2]
-    #     to_add['tokens'] = to_add['unigrams'] + to_add['bigrams'] + to_add['trigrams']
-
-    #     data.append(to_add)
-
-        
     with concurrent.futures.ThreadPoolExecutor() as executor:
         tempData = []
         for result in executor.map(_append_preprocessed_data, data_array):
@@ -144,16 +112,8 @@ def get_data():
         for array in tempData:
             data = data + array
 
-
-    s_data = sentimentinator([item['preprocessed'] for item in data])
-
-
-    for i, _ in enumerate(data):
-        data[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
-        data[i]['sentiment'] = s_data.iloc[i]['sentiment']
-
-
     return jsonify(data)
+
 
 @app.route('/tokens', methods=['GET'])
 def get_tokens():
@@ -200,7 +160,6 @@ def get_vectors():
     db_results = list(rawtweets.find())
     data = [item['data']['full_text'] for item in db_results]
 
-
     cleaned = gram_documents(data)
 
     (bows, unique) = bow(cleaned)
@@ -220,60 +179,46 @@ def get_vectors():
     }
 
     return jsonify(res)
-    
+
+
 @app.route('/tweets', methods=['GET'])
 def get_tweets():
+
     db_results = list(rawtweets.find())
     data = []
-
     for a in db_results:
+        a['data']['id'] = str(a['data']['id'])
         data.append(a['data'])
 
-    return jsonify(data)
+    def get_sentiment(senti):
+        s_data = sentimentinator(
+            [item['full_text'] for item in senti])
+        for i, _ in enumerate(senti):
+            senti[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
+            senti[i]['sentiment'] = s_data.iloc[i]['sentiment']
 
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        executor.submit(get_sentiment(data))
+    print(data[0])
+    print(jsonify(data[0]))
+    return jsonify(data[:10])
 
-# @app.route('/model', methods=['GET'])
-# def get_model():
-
-#     modelObject = {}
-
-#     for i in range(row):
-#         db_results = list(rawtweets.find())
-
-#         modelObject[str(i)] = {}
-#         for j in range(col):
-#             modelObject[str(i)][str(j)] = {}
-#             modelObject[str(i)][str(j)]['keywords'] = model[i][j]
-#             modelObject[str(i)][str(j)]['tweets'] = []
-#     for tweet_data in db_results:
-#         tweet = {}
-#         preprocessed_tweet_text = tweet_data['data']['full_text']
-#         preprocessed_tweet_tokens = preprocess_tweet(preprocessed_tweet_text).split(' ')
-#         tweet['id']= tweet_data['data']['id']
-#         tweet['tokens'] = preprocessed_tweet_tokens
-
-#         for i in range(row):
-#             for j in range(col):
-#                 intersection = [keyword for keyword in model[i][j] if keyword in preprocessed_tweet_tokens]
-#                 if len(intersection) > 0:
-#                     modelObject[str(i)][str(j)]['tweets'].append(tweet)
-            
-    
-    return jsonify(modelObject)
 
 @app.route('/tweets/<int:tweet_id>')
 def get_one_tweet(tweet_id):
+    print(tweet_id)
+    res = rawtweets.find_one({'tweet_id': tweet_id})
 
-    res = rawtweets.find_one({ 'data': { 'id': tweet_id }})
-    
     error = jsonify({
         'error': 'Tweet does not exist'
     })
-
+    print(res)
     if res:
+        res['_id'] = str(res['_id'])
         return jsonify(res)
 
     return error
-    
+
+
 if __name__ == '__main__':
     app.run(debug=True)
