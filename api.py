@@ -8,13 +8,12 @@ from modules.sentiment import sentimentinator
 from gensim.corpora import Dictionary
 from modules.vectorizer import bow, tf_idf
 import numpy as np
-import numpy as np
 import concurrent.futures
 from modules.tweet_preprocessor import preprocess_documents
 from modules.vectorizer import bag_of_words, prune_bow, tf_idf
 # from modules.pca import pca
 # from modules.lsi import lsi
-from matplotlib import pyplot as plt
+from matplotlib import docstring, pyplot as plt
 from modules.som import SOM, find_topics, get_SOM_model, print_data_to_SOM
 from modules.sentiment import sentimentinator
 import json
@@ -27,10 +26,12 @@ client = MongoClient('mongodb://localhost:27017')
 db_raw = client['minerva_raw_tweets']
 rawtweets = db_raw['rawtweets']
 alltweets = rawtweets.find()
+alltweets = alltweets[:5]
 
 
 def create_tfidf():
     db_results = list(rawtweets.find())
+    db_results = db_results[:5]
     data = [item['data']['full_text'] for item in db_results]
 
     cleaned = gram_documents(data)
@@ -41,7 +42,7 @@ def create_tfidf():
     return (matrix, unique, docs)
 
 
-(tfidf_row, tfidf_col, docs) = create_tfidf()
+(weights, uniqueWords, docs) = create_tfidf()
 
 # #----------------final.py--------------------#
 # raw = client.get_raw_tweets()
@@ -131,14 +132,13 @@ def get_data():
     return jsonify(data)
 
 
-@app.route('/tfidf', methods=['GET'])
 def get_vectors():
     db_results = list(rawtweets.find())
     data = [item['data']['full_text'] for item in db_results]
 
     cleaned = gram_documents(data)
 
-    (bows, unique) = bow(cleaned)
+    (bows, unique, temp) = bow(cleaned)
     matrix = tf_idf(cleaned, bows)
 
     flat_matrix = np.array(matrix).flatten()
@@ -153,14 +153,18 @@ def get_vectors():
         'tfidf': list(flat_matrix),
         'docs': docs
     }
-
+    print(docs)
     return jsonify(res)
+
+
+# get_vectors()
 
 
 @app.route('/tweets', methods=['GET'])
 def get_tweets():
 
     db_results = list(rawtweets.find())
+    db_results = db_results[:5]
     data = []
     for a in db_results:
         a['data']['id'] = str(a['data']['id'])
@@ -214,20 +218,33 @@ def get_tokens(res):
     return res
 
 
-@app.route('/tweets/<int:tweet_id>')
+@app.route('/tweets/<tweet_id>')
 def get_one_tweet(tweet_id):
+    tweets_index = None
     temp = []
+    words = []
+    print(tweet_id)
     for index, tweets in enumerate(alltweets):
-        if(tweets['data']['id'] == tweet_id):
+        compare = tweets['data']['id']
+        print(compare)
+        if(str(tweets['data']['id']) == str(tweet_id)):
             res = tweets
             tweets_index = index
             break
+    # print(alltweets[0]['data']['id'])
+    print(tweets_index)
 
     for item in docs[tweets_index]:
-        uniqueWord = tfidf_col.index(item)
-        temp.append(tfidf_row[uniqueWord])
+        for i, a in enumerate(uniqueWords):
+            if item != uniqueWords[i][0]:
+                continue
+            else:
+                words.append(uniqueWords[i][0])
+                temp.append(weights[tweets_index][i])
+                break
 
     res['data']['tfidf'] = temp
+    res['data']['words'] = words
     res['data']['cleaned'] = basic_clean(res['data']['full_text'])
     error = jsonify({
         'error': 'Tweet does not exist'
