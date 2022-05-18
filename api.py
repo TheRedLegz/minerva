@@ -226,7 +226,7 @@ def get_one_tweet(tweet_id):
 
     for index, tweets in enumerate(alltweets):
         compare = tweets['data']['id']
-        
+
         if(str(tweets['data']['id']) == str(tweet_id)):
             res = tweets
             tweets_index = index
