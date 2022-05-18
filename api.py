@@ -1,3 +1,4 @@
+from langdetect import detect
 from flask import Flask, jsonify, abort
 from flask_cors import CORS
 from pymongo import MongoClient
@@ -22,17 +23,16 @@ from bson import ObjectId
 app = Flask(__name__)
 CORS(app)
 
-client = MongoClient('mongodb://localhost:27017')
-db_raw = client['minerva_raw_tweets']
-rawtweets = db_raw['rawtweets']
-alltweets = rawtweets.find()
-alltweets = list(alltweets[:5])
+client = DatabaseConnection('mongodb://localhost:27017')
+alltweets = client.get_raw_tweets()
+
+# some tweets have a language property on them. we can use this for filtering.
+# for those that dont have, we can use langdetect for detection
 
 
 def create_tfidf():
-    db_results = list(rawtweets.find())
-    db_results = db_results[:5]
-    data = [item['data']['full_text'] for item in db_results]
+    # db_results = list(rawtweets.find())
+    data = [item['data']['full_text'] for item in alltweets]
 
     cleaned = gram_documents(data)
 
@@ -43,6 +43,7 @@ def create_tfidf():
 
 
 (weights, uniqueWords, docs) = create_tfidf()
+
 
 # #----------------final.py--------------------#
 # raw = client.get_raw_tweets()
@@ -163,10 +164,9 @@ def get_vectors():
 @app.route('/tweets', methods=['GET'])
 def get_tweets():
 
-    db_results = list(rawtweets.find())
-    db_results = db_results[:5]
+    # db_results = list(rawtweets.find())
     data = []
-    for a in db_results:
+    for a in alltweets:
         a['data']['id'] = str(a['data']['id'])
         data.append(a['data'])
 
@@ -237,8 +237,9 @@ def get_one_tweet(tweet_id):
             if item != uniqueWords[i][0]:
                 continue
             else:
-                words.append(uniqueWords[i][0])
-                temp.append(weights[tweets_index][i])
+                if uniqueWords[i][0] not in words:
+                    words.append(uniqueWords[i][0])
+                    temp.append(weights[tweets_index][i])
                 break
 
     res['data']['tfidf'] = temp
