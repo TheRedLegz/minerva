@@ -26,7 +26,7 @@ client = MongoClient('mongodb://localhost:27017')
 db_raw = client['minerva_raw_tweets']
 rawtweets = db_raw['rawtweets']
 alltweets = rawtweets.find()
-alltweets = alltweets[:5]
+alltweets = list(alltweets[:5])
 
 
 def create_tfidf():
@@ -170,15 +170,15 @@ def get_tweets():
         a['data']['id'] = str(a['data']['id'])
         data.append(a['data'])
 
-    def get_sentiment(senti):
-        s_data = sentimentinator(
-            [item['full_text'] for item in senti])
-        for i, _ in enumerate(senti):
-            senti[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
-            senti[i]['sentiment'] = s_data.iloc[i]['sentiment']
+    # def get_sentiment(senti):
+    #     s_data = sentimentinator(
+    #         [item['full_text'] for item in senti])
+    #     for i, _ in enumerate(senti):
+    #         senti[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
+    #         senti[i]['sentiment'] = s_data.iloc[i]['sentiment']
 
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        executor.submit(get_sentiment(data))
+    # with concurrent.futures.ThreadPoolExecutor() as executor:
+    #     executor.submit(get_sentiment(data))
     return jsonify(data)
 
 
@@ -223,16 +223,14 @@ def get_one_tweet(tweet_id):
     tweets_index = None
     temp = []
     words = []
-    print(tweet_id)
+
     for index, tweets in enumerate(alltweets):
         compare = tweets['data']['id']
-        print(compare)
+        
         if(str(tweets['data']['id']) == str(tweet_id)):
             res = tweets
             tweets_index = index
             break
-    # print(alltweets[0]['data']['id'])
-    print(tweets_index)
 
     for item in docs[tweets_index]:
         for i, a in enumerate(uniqueWords):
