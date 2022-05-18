@@ -7,6 +7,78 @@ from matplotlib import pyplot as plt
 np.random.seed(101)
 
 
+def get_topic_words(matrix, unique, size):
+    (row, col) = size
+    res = []
+
+    for i in range(row):
+        for j in range(col):
+            obj = {}
+
+            obj['words'] = []
+            obj['weight'] = []
+
+            indx = np.argsort(matrix[i, j, :])[-10:]
+
+            for k in indx:
+                obj['words'].append(unique[k][0])
+                obj['weight'].append(matrix[i, j, k])
+
+            res.append(obj)
+    
+    return res
+
+
+def get_word_cluster(matrix, unique, size):
+    (row, col) = size
+
+    deets = []
+
+    for idx in range(len(unique)):
+        deet = {}
+        sum = 0
+        deet['weights'] = []
+
+        for i in range(row):
+            for j in range(col):
+                weight = matrix[i, j, idx]
+                sum += weight
+                deet["weights"].append(weight)
+
+        deet['sum'] = sum
+        deets.append(deet)
+            
+    for idx in range(len(unique)):
+        deets[idx]['distances'] = []
+        sum = deets[idx]['sum']
+
+        for cell in range(len(deets[idx]['weights'])):
+            value = deets[idx]['weights'][cell]
+
+            deets[idx]['distances'].append(value/sum)
+
+    return deets
+
+
+
+def get_tw_matrix(matrix, unique, size):
+    (row, col) = size
+
+    res = []
+
+    for i in range(row):
+        for j in range(col):
+            sum = np.sum(matrix[i, j])
+            distances = []
+
+            for k in range(len(unique)):
+                distances.append(matrix[i, j, k]/sum)
+            
+            res.append(distances)
+
+    return res
+
+
 def find_topics(SOM_matrix, data_matrix, data_grams, labels, matrix_size):
     topics = []
 
