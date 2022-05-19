@@ -25,7 +25,7 @@ def get_topic_words(matrix, unique, size):
                 obj['weight'].append(matrix[i, j, k])
 
             res.append(obj)
-    
+
     return res
 
 
@@ -47,7 +47,7 @@ def get_word_cluster(matrix, unique, size):
 
         deet['sum'] = sum
         deets.append(deet)
-            
+
     for idx in range(len(unique)):
         deets[idx]['distances'] = []
         sum = deets[idx]['sum']
@@ -58,7 +58,6 @@ def get_word_cluster(matrix, unique, size):
             deets[idx]['distances'].append(value/sum)
 
     return deets
-
 
 
 def get_tw_matrix(matrix, unique, size):
@@ -73,7 +72,7 @@ def get_tw_matrix(matrix, unique, size):
 
             for k in range(len(unique)):
                 distances.append(matrix[i, j, k]/sum)
-            
+
             res.append(distances)
 
     return res

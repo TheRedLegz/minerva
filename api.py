@@ -170,15 +170,15 @@ def get_tweets():
         a['data']['id'] = str(a['data']['id'])
         data.append(a['data'])
 
-    # def get_sentiment(senti):
-    #     s_data = sentimentinator(
-    #         [item['full_text'] for item in senti])
-    #     for i, _ in enumerate(senti):
-    #         senti[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
-    #         senti[i]['sentiment'] = s_data.iloc[i]['sentiment']
+    def get_sentiment(senti):
+        s_data = sentimentinator(
+            [item['full_text'] for item in senti])
+        for i, _ in enumerate(senti):
+            senti[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
+            senti[i]['sentiment'] = s_data.iloc[i]['sentiment']
 
-    # with concurrent.futures.ThreadPoolExecutor() as executor:
-    #     executor.submit(get_sentiment(data))
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        executor.submit(get_sentiment(data))
     return jsonify(data)
 
 
