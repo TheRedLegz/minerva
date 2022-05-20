@@ -1,5 +1,13 @@
+import pickle
+import codecs
+from flask import jsonify
 from pymongo import MongoClient
+import datetime
 
+from regex import P
+from modules.gram import tweet_cleaner, tweet_grammer, tweet_pos
+from modules.som import SOM
+from modules.vectorizer import bow, tf_idf
 
 class DatabaseConnection:
     def __init__(self, db_path):
@@ -14,9 +22,6 @@ class DatabaseConnection:
 
         for tweet in raw_tweet_collection:
             data.append({'tweet_id': tweet['tweet_id'], 'full_text': tweet['data']['full_text']})
-
-        # filter by language
-        data = [x for x in raw_tweet_collection if x['data']['language'] == 'en']
 
         return data
 
@@ -63,4 +68,52 @@ class DatabaseConnection:
 
         return tweet['data']['full_text']
 
+    def add_model(self):
+        raw_tweet_collection = list(self.client[self.db_name]['rawtweets'].find())
+        data = []
 
+        for tweet in raw_tweet_collection:
+            data.append({'tweet_id': tweet['tweet_id'], 'full_text': tweet['data']['full_text']})
+
+        raw_tweet_collection = data
+        data = []
+            
+        for i in range(10000):
+            data.append(raw_tweet_collection[i]['full_text'])
+
+        cleaned = tweet_cleaner(data)
+
+        grammed = tweet_grammer(cleaned)
+        for i, tweet_grams in enumerate(grammed):
+            grammed[i] = ' '.join(tweet_grams)
+        pos_tags = tweet_pos(grammed)
+        for i, tweet_grams in enumerate(pos_tags):
+            temp = []
+            for gram in tweet_grams:
+                if gram[1].startswith('NN'):
+                    temp.append(gram[0])
+            grammed[i] = temp
+
+        (bag, unique, docs) = bow(grammed)
+
+        matrix = tf_idf(docs, bag)
+
+        lattice_size = (4, 4)
+        (row, col) = lattice_size
+
+        SOM_matrix = SOM(matrix, .3, lattice_size)
+
+        pickled = codecs.encode(pickle.dumps(SOM_matrix), "base64").decode()
+        print(pickled)
+
+        self.client[self.db_name]["models"].insert_one({
+            "date" : datetime.datetime.now().timestamp(),
+            "model" : pickled,
+        })
+
+        return jsonify({
+            "response": "Model added successfully"
+        });
+
+    def get_model(self):
+        print("add model")

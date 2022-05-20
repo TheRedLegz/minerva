@@ -170,15 +170,15 @@ def get_tweets():
         a['data']['id'] = str(a['data']['id'])
         data.append(a['data'])
 
-    # def get_sentiment(senti):
-    #     s_data = sentimentinator(
-    #         [item['full_text'] for item in senti])
-    #     for i, _ in enumerate(senti):
-    #         senti[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
-    #         senti[i]['sentiment'] = s_data.iloc[i]['sentiment']
+    def get_sentiment(senti):
+        s_data = sentimentinator(
+            [item['full_text'] for item in senti])
+        for i, _ in enumerate(senti):
+            senti[i]['sentiment_score'] = s_data.iloc[i]['sentiment_score']
+            senti[i]['sentiment'] = s_data.iloc[i]['sentiment']
 
-    # with concurrent.futures.ThreadPoolExecutor() as executor:
-    #     executor.submit(get_sentiment(data))
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        executor.submit(get_sentiment(data))
     return jsonify(data)
 
 
@@ -226,7 +226,7 @@ def get_one_tweet(tweet_id):
 
     for index, tweets in enumerate(alltweets):
         compare = tweets['data']['id']
-        
+
         if(str(tweets['data']['id']) == str(tweet_id)):
             res = tweets
             tweets_index = index
@@ -253,6 +253,13 @@ def get_one_tweet(tweet_id):
         return jsonify(res)
 
     return error
+
+@app.route('/models')
+def add_model():
+    db.add_model()
+    return jsonify({
+        'message': 'Finished!'
+    })
 
 
 if __name__ == '__main__':

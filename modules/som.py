@@ -44,7 +44,6 @@ def get_word_cluster(matrix, unique, size):
                 weight = matrix[i, j, idx]
                 sum += weight
                 deet["weights"].append(weight)
-
         deet['sum'] = sum
         deets.append(deet)
             
@@ -299,86 +298,3 @@ def get_SOM_model(SOM_matrix, matrix_data, labels):
         mapping[m_row][m_col].append(labels[t])
 
     return mapping
-
-
-# # LSA over here
-
-# raw = pd.read_json('sample.json')
-# data = []
-
-# for i, jsonRow in raw.iterrows():
-#     data.append(jsonRow['full_text'])
-
-# (bow, x, y) = lsa.bag_of_words(data)
-# tf_idf_data = lsa.tf_idf(data)
-
-# # np.savetxt("near_cebu", tf_idf_data, delimiter = ', ')
-# # tf_idf_data = np.round_(tf_idf_data, decimals = 3)
-# lsares = lsa.lsaSklearn(tf_idf_data)
-# res = lsa.pca(lsares)
-
-# (grams, __) = res.shape
-
-# matrix_dim = 1
-# while (matrix_dim)**2 <= grams:
-#     matrix_dim += 1
-
-# print(matrix_dim)
-
-# matrix_size = (matrix_dim, matrix_dim)
-# (row, col) = matrix_size
-
-# result = SOM(res, .5, matrix_size)
-
-# print("Constructing U-Matrix from SOM")
-
-# u_matrix = np.zeros(shape=matrix_size, dtype=np.float64)
-
-# for i in range(row):
-#     for j in range(col):
-
-#         v = result[i][j]
-
-#         sum_dists = 0.0
-#         ct = 0
-
-#         if i-1 >= 0:
-#             sum_dists += euc_distance(v, result[i-1][j], len(v)); ct += 1
-
-#         if i+1 <= row-1:
-#             sum_dists += euc_distance(v, result[i+1][j], len(v)); ct += 1
-
-#         if j-1 >= 0:
-#             sum_dists += euc_distance(v, result[i][j-1], len(v)); ct += 1
-
-#         if j+1 <= col-1:
-#             sum_dists += euc_distance(v, result[i][j+1], len(v)); ct += 1
-
-
-#         u_matrix[i][j] = sum_dists / ct
-
-
-# plt.imshow(u_matrix, cmap='gray')
-# plt.show()
-
-# # print("Associating each data label to one map node ")
-
-# # mapping = np.empty(shape=matrix_size, dtype=object)
-
-# # for i in range(row):
-# #     for j in range(col):
-# #         mapping[i][j] = []
-# # for t in range(len(res)):
-# #     (m_row, m_col) = find_bmu(result, res[t], matrix_size)
-# #     mapping[m_row][m_col].append(0)
-
-
-# # label_map = np.zeros(shape=matrix_size, dtype=np.int)
-
-# # for i in range(row):
-# #     for j in range(col):
-# #         label_map[i][j] = most_common(mapping[i][j], 3)
-
-# # plt.imshow(label_map, cmap=plt.cm.get_cmap('terrain_r', 4))
-# # plt.colorbar()
-# # plt.show()
