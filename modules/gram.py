@@ -7,6 +7,11 @@ from pprint import pprint as print
 import os.path
 import concurrent.futures
 from nltk.corpus import wordnet
+import nltk
+
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
 
 add = [
     'online',

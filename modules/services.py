@@ -12,11 +12,10 @@ class DatabaseConnection:
         data = []
         raw_tweet_collection = list(self.client[self.db_name]['rawtweets'].find())
 
-        # for tweet in raw_tweet_collection:
-        #     data.append({'tweet_id': tweet['tweet_id'], 'full_text': tweet['data']['full_text']})
+        for tweet in raw_tweet_collection:
+            data.append({'tweet_id': tweet['tweet_id'], 'full_text': tweet['data']['full_text']})
 
         # filter by language
-        print(raw_tweet_collection[0])
         data = [x for x in raw_tweet_collection if x['data']['language'] == 'en']
 
         return data

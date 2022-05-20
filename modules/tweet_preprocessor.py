@@ -11,6 +11,8 @@ from nltk.tokenize import word_tokenize
 from textblob import TextBlob
 from gensim.models.phrases import Phrases, Phraser
 from gensim.parsing.preprocessing import STOPWORDS
+import contractions
+
 import os.path
 
 
@@ -84,7 +86,7 @@ def clean_document_tokens(doc):
 
     Example:
 
-    is_playing => removed
+    is_playing => removed\n
     stupid_cats => stupid_cat
 
     Input:
@@ -117,7 +119,7 @@ def remove_links(tweet):
     """Takes a string and removes web links from it"""
     tweet = re.sub(r'http\S+', '', tweet)   # remove http links
     tweet = re.sub(r'bit.ly/\S+', '', tweet)  # remove bitly links
-    tweet = tweet.strip('[link]')   # remove [links]
+    # remove [links]
     tweet = re.sub(r'pic.twitter\S+', '', tweet)
     return tweet
 
@@ -226,8 +228,18 @@ def basic_clean(tweet):
     tweet = re.sub('📝 …', '', tweet)
     return tweet
 
-# TODO:
-#   - Add a way to check if a tweet preexists in preprocessed tweet database
+def prepare_for_chunking(tweet):
+    tweet = remove_users(tweet)
+    tweet = remove_links(tweet)
+    tweet = remove_hashtags(tweet)
+    tweet = remove_av(tweet)
+    tweet = remove_html_tags(tweet)
+    tweet = remove_non_ascii(tweet)
+    tweet = tweet.lower()
+    tweet = contractions.fix(tweet)
+    tweet = re.sub('\s+', ' ', tweet)
+    tweet = re.sub('([0-9]+)', '', tweet)
+    return tweet
 
 
 def preprocess_documents(raw_tweets, thread_count=8):

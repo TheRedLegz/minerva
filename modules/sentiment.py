@@ -1,9 +1,20 @@
 import pandas as pd
+import nltk
+nltk.download('state_union')
+
+from nltk.corpus import state_union
+from nltk.tokenize import PunktSentenceTokenizer
+
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+train_text = state_union.raw("2005-GWBush.txt")
+tokenizer = PunktSentenceTokenizer(train_text)
+
+analyser = SentimentIntensityAnalyzer()
+
 
 def sentimentinator(dataSentiment):
     sentiRes = pd.DataFrame()
-    analyser = SentimentIntensityAnalyzer()
     sentiment_score_list = []
     sentiment_label_list = []
     tweet_list = []
@@ -28,3 +39,17 @@ def sentimentinator(dataSentiment):
     sentiRes['tweet'] = tweet_list
 
     return sentiRes
+
+def get_sentiment(tweet):
+    score = analyser.polarity_scores(tweet)['compound']
+    if score <= -0.05:
+        sentiment = "negative"
+    elif score < 0.05:
+        sentiment = "neutral"
+    elif score > 0.05:
+        sentiment = "positive"
+
+    return (sentiment, score)
+
+def chunker(string):
+    return tokenizer.tokenize(string)
