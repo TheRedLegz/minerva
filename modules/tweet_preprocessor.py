@@ -222,6 +222,7 @@ def basic_clean(tweet):
     tweet = remove_html_tags(tweet)
     tweet = remove_non_ascii(tweet)
     tweet = tweet.lower()  # lower case
+    tweet = contractions.fix(tweet)
     tweet = re.sub('[' + punctuation + ']+', ' ', tweet)  # strip punctuation
     tweet = re.sub('\s+', ' ', tweet)  # remove double spacing
     tweet = re.sub('([0-9]+)', '', tweet)  # remove numbers
