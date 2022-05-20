@@ -254,6 +254,13 @@ def get_one_tweet(tweet_id):
 
     return error
 
+@app.route('/models')
+def add_model():
+    db.add_model()
+    return jsonify({
+        'message': 'Finished!'
+    })
+
 
 if __name__ == '__main__':
     app.run(debug=True)
