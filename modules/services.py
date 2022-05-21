@@ -15,6 +15,10 @@ class DatabaseConnection:
         self.client = MongoClient(self.db_path)
         self.db_name = 'minerva_raw_tweets'
 
+    def get_full_raw_tweets(self):
+        '''Returns all the raw tweets from the database with metadata'''
+        return list(self.client[self.db_name]['rawtweets'].find())
+
     def get_raw_tweets(self):
         '''Returns all the raw tweets from the database'''
         data = []

@@ -237,52 +237,6 @@ def SOM(data, learn_rate, matrix_size, steps_max=3000):
 
     return matrix
 
-    # som_sub_method(cell, input, curr_rate)
-    # (n * n * 5000)
-    # data = [(cell[n], input[n], curr_rate),...]
-    # [5000]
-    # 0 - 1249      = Core 1
-    # 1250 - 2499   = Core 2
-
-
-def print_data_to_SOM(SOM_matrix, matrix_data, labels):
-    matrix_size = SOM_matrix.shape
-    (row, col, _) = matrix_size
-    mapping = np.empty(shape=(row, col), dtype=object)
-
-    for i in range(row):
-        for j in range(col):
-            mapping[i][j] = []
-
-    # TODO: Change BMU to list of keywords
-    for t in range(len(matrix_data)):
-
-        # Top 3 method
-        # for i in range(row):
-        #     for j in range(col):
-        #         # Gets the distance of the current keyword to the node
-        #         distance = euc_distance(matrix_data[t], SOM_matrix[i][j], len(matrix_data[t]))
-        #         mapping[i][j].append([labels[t],distance])
-
-        # BMU method
-        (m_row, m_col) = find_bmu(SOM_matrix, matrix_data[t], (row, col))
-        mapping[m_row][m_col].append(labels[t])
-
-    for i in range(row):
-        for j in range(col):
-
-            # Top 3 method
-            # mapping[i][j].sort(key=lambda x: x[1])
-            # print("[", i, "][", j ,"] = ")
-            # for tweet in mapping[i][j][:3]:
-            #     print(tweet)
-
-            # BMU method
-            print("[", i, "][", j, "] = ")
-            for tweet in mapping[i][j]:
-                print(tweet)
-
-
 def get_SOM_model(SOM_matrix, matrix_data, labels):
     """Main function to get the SOM model"""
     matrix_size = SOM_matrix.shape
