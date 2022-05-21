@@ -90,6 +90,7 @@ class Scraper:
 
 
                 insert = {
+                    "tweet_id": a['data']['id'],
                     "full_text": text,
                     "cleaned": processed,
                     "grams": grams,

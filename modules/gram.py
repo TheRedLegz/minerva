@@ -88,7 +88,7 @@ def clean_document_tokens(doc):
     for word in doc:
         cleaned = clean_token(word)
 
-        if cleaned:
+        if cleaned and cleaned not in res:
             res.append(cleaned)
 
     return res

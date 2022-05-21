@@ -14,6 +14,7 @@ class DatabaseConnection:
         self.db_path = db_path  
         self.client = MongoClient(self.db_path)
         self.db_name = 'minerva_raw_tweets'
+        self.conn = self.client[self.db_name]
 
     def get_full_raw_tweets(self):
         '''Returns all the raw tweets from the database with metadata'''
@@ -29,16 +30,12 @@ class DatabaseConnection:
 
         return data
 
-    def get_preprocessed_tweets(self):
+    def get_clean_tweets(self):
         '''Returns all the preprocessed tweets from the database'''
-
-        data = []
-        raw_tweet_collection = list(self.client[self.db_name]['preprocessed_tweets'].find())
-
-        for tweet in raw_tweet_collection:
-            data.append({'tweet_id': tweet['tweet_id'], 'preprocessed_text': tweet['preprocessed_text']})
-
-        return data
+        return self.client[self.db_name]['cleaned_tweets'].find()
+    
+    def get_one_clean_tweet(self, id):
+        return self.conn['cleaned_tweets'].find_one({ 'tweet_id': id })
 
     def get_unprocessed_tweets(self):
         '''Returns the raw tweets that hasn't been preprocessed yet from the database'''
@@ -68,9 +65,7 @@ class DatabaseConnection:
         return tweet_list
 
     def get_tweet_text_by_id(self, tweet_id):
-        tweet = list(self.client[self.db_name]['rawtweets'].find({'tweet_id' : tweet_id}))
-
-        return tweet['data']['full_text']
+        return self.client[self.db_name]['rawtweets'].find_one({'tweet_id' : tweet_id})
 
     def add_model(self):
         raw_tweet_collection = list(self.client[self.db_name]['rawtweets'].find())

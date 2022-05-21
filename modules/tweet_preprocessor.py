@@ -229,6 +229,24 @@ def basic_clean(tweet):
     tweet = re.sub('📝 …', '', tweet)
     return tweet
 
+def remove_double_spacing(string):
+    return re.sub('\s+', ' ', string)
+
+def remove_punctuations(string):
+    return re.sub('[' + punctuation + ']+', ' ', string)
+
+def lower(string):
+    return str(string).lower()
+
+def remove_numbers(string):
+    return re.sub('([0-9]+)', '', string)
+
+def fix_contractions(string):
+    return contractions.fix(string)
+
+
+
+
 def prepare_for_chunking(tweet):
     tweet = remove_users(tweet)
     tweet = remove_links(tweet)
