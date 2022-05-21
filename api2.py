@@ -41,7 +41,7 @@ def get_all():
         res = list(db.get_clean_tweets()[:20])
 
     if not res:
-        res = list(db.get_raw_tweets())[:20]
+        res = list(db.get_full_raw_tweets())[:20]
         return jsonify(res)
 
 
