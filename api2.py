@@ -55,13 +55,14 @@ def get_one_tweet(tweet_id):
     isFull = str(query.get('full')).lower()
     isClean = str(query.get('clean')).lower()
     
-    raw = db.get_tweet_text_by_id(tweet_id)
+    raw = db.get_tweet_text_by_id(int(tweet_id))
+    res = None
 
     if not raw:
         abort(404)
 
     if isFull == 'true':
-        return jsonify(raw)
+        res = raw
 
     elif isFull == 'false':
         res = {
@@ -72,9 +73,12 @@ def get_one_tweet(tweet_id):
         return jsonify(res)
 
     if isClean == 'true':
-        return jsonify(db.get_one_clean_tweet(tweet_id))
+        res = db.get_one_clean_tweet(int(tweet_id))
 
-    return raw
+    if not res:
+        res = raw
+        
+    return jsonify(prepare_tweet(res))
 
 
 @app.route('/tweets/<tweet_id>/steps')
