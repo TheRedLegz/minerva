@@ -1,4 +1,3 @@
-from langdetect import detect
 from flask import Flask, jsonify, abort
 from flask_cors import CORS
 from pymongo import MongoClient
@@ -10,21 +9,20 @@ from gensim.corpora import Dictionary
 from modules.vectorizer import bow, tf_idf
 import numpy as np
 import concurrent.futures
-from modules.tweet_preprocessor import preprocess_documents
-from modules.vectorizer import bag_of_words, prune_bow, tf_idf
+from modules.vectorizer import tf_idf
 # from modules.pca import pca
 # from modules.lsi import lsi
-from matplotlib import docstring, pyplot as plt
 from modules.som import SOM, find_topics, get_SOM_model, print_data_to_SOM
 from modules.sentiment import sentimentinator
-import json
 from bson import ObjectId
 
 app = Flask(__name__)
 CORS(app)
 
-client = DatabaseConnection('mongodb://localhost:27017')
-alltweets = client.get_raw_tweets()
+db = DatabaseConnection('mongodb://localhost:27017')
+tweet_data = db.get_raw_tweets()
+full_raw_tweets = db.get_full_raw_tweets()
+raw_tweets = [item['full_text'] for item in tweet_data]
 
 # some tweets have a language property on them. we can use this for filtering.
 # for those that dont have, we can use langdetect for detection
@@ -32,7 +30,7 @@ alltweets = client.get_raw_tweets()
 
 def create_tfidf():
     # db_results = list(rawtweets.find())
-    data = [item['data']['full_text'] for item in alltweets]
+    data = raw_tweets
 
     cleaned = gram_documents(data)
 
@@ -166,9 +164,9 @@ def get_tweets():
 
     # db_results = list(rawtweets.find())
     data = []
-    for a in alltweets:
+    for a in full_raw_tweets:
         a['data']['id'] = str(a['data']['id'])
-        data.append(a['data'])
+        data.append(a['data']) 
 
     def get_sentiment(senti):
         s_data = sentimentinator(
@@ -224,7 +222,7 @@ def get_one_tweet(tweet_id):
     temp = []
     words = []
 
-    for index, tweets in enumerate(alltweets):
+    for index, tweets in enumerate(full_raw_tweets):
         compare = tweets['data']['id']
 
         if(str(tweets['data']['id']) == str(tweet_id)):
@@ -253,6 +251,13 @@ def get_one_tweet(tweet_id):
         return jsonify(res)
 
     return error
+
+@app.route('/models')
+def add_model():
+    db.add_model()
+    return jsonify({
+        'message': 'Finished!'
+    })
 
 
 if __name__ == '__main__':
