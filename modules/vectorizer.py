@@ -67,7 +67,7 @@ def tf_idf(document_array, bow=None):
     matrix = np.zeros(bow.shape, dtype=float)
     doc_count = len(document_array)
 
-    col_sums = (bow != 0).sum(0)
+    col_sums = np.count_nonzero(bow, 0)
 
     data = []
     matrix = []
@@ -96,9 +96,9 @@ def _tf_idf_sub(data):
             continue
 
         tf = col / word_count
-        has_word_count = col_sums[j] + 1
+        has_word_count = col_sums[j]
 
-        idf = math.log(((doc_count + 1) / (has_word_count))) + 1
+        idf = math.log(((doc_count + 1) / (has_word_count + 1))) + 1
 
         res[j] = tf * idf
 

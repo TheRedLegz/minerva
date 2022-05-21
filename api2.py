@@ -1,8 +1,9 @@
 from flask import Flask, jsonify, abort, request, abort
 from flask_cors import CORS
 from modules.tweet_preprocessor import remove_av, remove_hashtags, remove_html_tags, remove_links, remove_non_ascii, remove_users, lower, remove_double_spacing, remove_numbers, remove_punctuations, fix_contractions
-
+from modules.vectorizer import tf_idf, bow
 from modules.services import DatabaseConnection
+from pprint import pprint
 
 app = Flask(__name__)
 CORS(app)
@@ -103,6 +104,41 @@ def get_one_tweet_pp(tweet_id):
     }
 
     return jsonify(res)
+
+@app.route('/vectors')
+def get_vectors():
+    data = list(db.get_clean_tweets())[:10]
+    doc_grams = [a['grams'] for a in data]
+
+    (bowm, unique, _) = bow(doc_grams)
+    
+    unique = [a[0] for a in unique]
+
+    matrix = tf_idf(doc_grams, bowm)
+
+    res = []
+
+    for idx, doc in enumerate(doc_grams):
+        obj = {}
+        tfidf = {}
+
+        for gram in doc:
+            try:
+                col = unique.index(gram)
+                tfidf[gram] = matrix[idx][col]
+            except:
+                continue
+
+        obj['tfidf'] = tfidf
+        obj['full_text'] = data[idx]['full_text']
+        obj['tweet_id'] = data[idx]['tweet_id']
+
+        res.append(obj)
+
+    return jsonify(res)
+
+    
+
 
 if __name__ == '__main__':
     app.run(debug=True)

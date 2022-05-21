@@ -65,7 +65,7 @@ def clean_token(word):
             return p.lemmatize(split[0]) + '_' + p.lemmatize(split[1])
 
     elif len(word) > 2 and word not in STOPWORDS:
-        return word
+        return p.lemmatize(word)
 
 
 def clean_document_tokens(doc):
