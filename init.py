@@ -23,6 +23,11 @@ for a in raw:
         text = a['data']['full_text']
         processed = basic_clean(text)
         grams = gram_sentence(processed)
+        unq = []
+
+        for b in grams:
+            if b not in unq:
+                unq.append(b)
 
         chunks = chunker(processed)
 
@@ -38,12 +43,14 @@ for a in raw:
             chunk_details.append(res)
 
         (sent, scr) = get_sentiment(text)
+        
 
         insert = {
             "tweet_id": a['data']['id'],
             "full_text": text,
             "cleaned": processed,
             "grams": grams,
+            "unique_grams": unq,
             "chunk_details": chunk_details,
             "overall_sentiment": {
                 'sentiment': sent,
