@@ -16,16 +16,16 @@ db = DatabaseConnection('mongodb://localhost:27017')
 # tab 2: preprocessed
 # tab 3: grammed
 
-def prepare_tweet(tweet):
+def prepare_tweet(tweet, hasTweetId = True):
     tweet['_id'] = str(tweet['_id'])
     
-    if tweet['tweet_id']:
+    if hasTweetId:
         tweet['tweet_id'] = str(tweet['tweet_id'])
 
     return tweet
 
-def prepare_tweets(arr):
-    res = [prepare_tweet(a) for a in arr]
+def prepare_tweets(arr, hasTweetId = True):
+    res = [prepare_tweet(a, hasTweetId) for a in arr]
     return res
 
 @app.route('/tweets')
@@ -113,35 +113,43 @@ def get_one_tweet_pp(tweet_id):
 @app.route('/vectors')
 def get_vectors():
     data = list(db.get_clean_tweets())[:10]
+    DOCCOUNT = len(data)
+
     doc_grams = [a['grams'] for a in data]
 
     (bowm, unique, _) = bow(doc_grams)
     
-    unique = [a[0] for a in unique]
-
-    matrix = tf_idf(doc_grams, bowm)
+    UNIQUE = [a[0] for a in unique]
 
     res = []
 
     for idx, doc in enumerate(doc_grams):
         obj = {}
-        tfidf = {}
+        grams = {}
 
         for gram in doc:
             try:
-                col = unique.index(gram)
-                tfidf[gram] = matrix[idx][col]
+                col = UNIQUE.index(gram)
+                grams[gram] = int(bowm[idx][col])
             except:
                 continue
 
-        obj['tfidf'] = tfidf
+        obj['grams'] = grams
         obj['full_text'] = data[idx]['full_text']
         obj['tweet_id'] = str(data[idx]['tweet_id'])
+        obj['doc_count'] = DOCCOUNT
 
         res.append(obj)
 
     return jsonify(res)
 
+
+@app.route('/vectors/features')
+def get_features():
+
+    data = list(db.get_features())
+    data = [a['name'] for a in data]
+    return jsonify(data)
 
 
 def tfidf():

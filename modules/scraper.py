@@ -1,7 +1,7 @@
 
 
-from minerva.modules.gram import gram_sentence
-from minerva.modules.tweet_preprocessor import basic_clean
+from modules.gram import gram_sentence
+from modules.tweet_preprocessor import basic_clean
 from modules.services import DatabaseConnection
 from modules.gram import tweet_grammer, tweet_cleaner
 from modules.sentiment import chunker, get_sentiment
@@ -43,22 +43,20 @@ class Scraper:
 
         for a in data:
             a['full_text'] = a['tweet']
-            a['parameters'] = {
-                "until": date,
-                "location": "Philippines",
-                "lang": "",
-                "query": self.SEARCH_STRING
-            }
 
-            count = count + 1
             insert = {
                 "scrape_date": date,
                 "tweet_id": a['id'],
-                "data": a
+                "data": a,
+                "parameters": {
+                    "until": date,
+                    "location": "Philippines",
+                    "lang": "",
+                    "query": self.SEARCH_STRING
+                }
             }
 
-            table.insert_one(insert)
-
+            table.replace_one({ 'tweet_id': a['id'] }, insert, upsert=True)
 
         # save to cleaned
 
@@ -99,7 +97,7 @@ class Scraper:
                     "scrape_details": a['parameters']
                 }
 
-                table2.insert_one(insert)
+                table2.replace_one({ "tweet_id": a['data']['id'] }, insert, upsert=True)
 
 
             

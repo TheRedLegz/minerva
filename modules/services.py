@@ -83,9 +83,14 @@ class DatabaseConnection:
         cleaned = tweet_cleaner(data)
 
         grammed = tweet_grammer(cleaned)
+
+        # join the grams to form a single sentence
         for i, tweet_grams in enumerate(grammed):
             grammed[i] = ' '.join(tweet_grams)
+
         pos_tags = tweet_pos(grammed)
+        
+        # filter out the non-nouns in the grams
         for i, tweet_grams in enumerate(pos_tags):
             temp = []
             for gram in tweet_grams:
@@ -112,7 +117,12 @@ class DatabaseConnection:
 
         return jsonify({
             "response": "Model added successfully"
-        });
+        })
+
+
 
     def get_model(self):
         print("add model")
+
+    def get_features(self):
+        return self.conn['features'].find()

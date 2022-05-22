@@ -224,8 +224,8 @@ def basic_clean(tweet):
     tweet = tweet.lower()  # lower case
     tweet = contractions.fix(tweet)
     tweet = re.sub('[' + punctuation + ']+', ' ', tweet)  # strip punctuation
-    tweet = re.sub('\s+', ' ', tweet)  # remove double spacing
     tweet = re.sub('([0-9]+)', '', tweet)  # remove numbers
+    tweet = re.sub('\s+', ' ', tweet)  # remove double spacing
     tweet = re.sub('📝 …', '', tweet)
     return tweet
 
@@ -256,8 +256,8 @@ def prepare_for_chunking(tweet):
     tweet = remove_non_ascii(tweet)
     tweet = tweet.lower()
     tweet = contractions.fix(tweet)
-    tweet = re.sub('\s+', ' ', tweet)
     tweet = re.sub('([0-9]+)', '', tweet)
+    tweet = re.sub('\s+', ' ', tweet)
     return tweet
 
 

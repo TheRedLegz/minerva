@@ -52,7 +52,7 @@ for a in raw:
             "scrape_details": a['parameters']
         }
 
-        table.insert_one(insert)
+        table.replace_one({ 'tweet_id': a['data']['id'] }, insert, upsert=True)
 
     res = {}
 
