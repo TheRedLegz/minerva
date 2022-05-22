@@ -30,7 +30,8 @@ for idx, a in enumerate(cleaned):
         'tweet_id': a['tweet_id'],
         'full_text': a['full_text'],
         'cleaned': a['cleaned'],
-        'grams': a['grams'],
+        'grams': a['unique_grams'],
+        'word_count': len(a['grams']),
         'df': df,
         'idf': doc_idf
     }
