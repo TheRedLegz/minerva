@@ -41,7 +41,7 @@ def get_all():
 
     elif isFull == 'false':
         res = list(db.get_raw_tweets())[:20]
-        return jsonify(res)
+        return jsonify(prepare_tweets(res))
 
     if isClean == 'true':
         res = list(db.get_clean_tweets()[:20])
@@ -94,7 +94,7 @@ def get_one_tweet_pp(tweet_id):
     if not tweet:
         abort(404)
 
-    functions = [remove_users, remove_links, remove_hashtags, remove_av, remove_html_tags, remove_non_ascii, lower, fix_contractions, remove_punctuations, remove_double_spacing, remove_numbers]
+    functions = [remove_users, remove_links, remove_hashtags, remove_av, remove_html_tags, remove_non_ascii, lower, fix_contractions, remove_punctuations, remove_numbers, remove_double_spacing]
     
     steps = [tweet['data']['full_text']]
 
@@ -165,6 +165,7 @@ def get_som():
     som = SOM(matrix, 0.1, size)
 
     return jsonify(get_topic_words(som, unique, size))
+
 
 
     
