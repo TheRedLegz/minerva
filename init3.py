@@ -18,7 +18,7 @@ for idx, a in enumerate(cleaned):
     df = []
     doc_idf = []
 
-    for gram in a['grams']:
+    for gram in a['unique_grams']:
         try:
             col = UNQ.index(gram)
             df.append(int(bowm[idx][col]))
