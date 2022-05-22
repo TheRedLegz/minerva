@@ -88,7 +88,7 @@ def clean_document_tokens(doc):
     for word in doc:
         cleaned = clean_token(word)
 
-        if cleaned and cleaned not in res:
+        if cleaned:
             res.append(cleaned)
 
     return res
@@ -101,7 +101,7 @@ def gram_sentence(data, clean=True):
 
     if not isinstance(data, list):
         data = data.split(' ')
-
+    
     results = trigram_model[data]
     results = clean_document_tokens(results)
 

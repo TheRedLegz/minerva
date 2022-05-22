@@ -16,16 +16,17 @@ db = DatabaseConnection('mongodb://localhost:27017')
 # tab 2: preprocessed
 # tab 3: grammed
 
-def prepare_tweet(tweet, hasTweetId = True):
-    tweet['_id'] = str(tweet['_id'])
+def prepare_tweet(tweet, hasTweetId = True, hasId = True):
+    if hasId:
+        tweet['_id'] = str(tweet['_id'])
     
     if hasTweetId:
         tweet['tweet_id'] = str(tweet['tweet_id'])
 
     return tweet
 
-def prepare_tweets(arr, hasTweetId = True):
-    res = [prepare_tweet(a, hasTweetId) for a in arr]
+def prepare_tweets(arr, hasTweetId = True, hasId = True):
+    res = [prepare_tweet(a, hasTweetId, hasId) for a in arr]
     return res
 
 @app.route('/tweets')
@@ -41,7 +42,7 @@ def get_all():
 
     elif isFull == 'false':
         res = list(db.get_raw_tweets())[:20]
-        return jsonify(prepare_tweets(res))
+        return jsonify(prepare_tweets(res, True, False))
 
     if isClean == 'true':
         res = list(db.get_clean_tweets()[:20])
@@ -138,6 +139,7 @@ def get_vectors():
         obj['full_text'] = data[idx]['full_text']
         obj['tweet_id'] = str(data[idx]['tweet_id'])
         obj['doc_count'] = DOCCOUNT
+        obj['word_count'] = len(doc)
 
         res.append(obj)
 
