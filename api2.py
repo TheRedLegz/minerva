@@ -3,6 +3,7 @@ from flask_cors import CORS
 from modules.tweet_preprocessor import remove_av, remove_hashtags, remove_html_tags, remove_links, remove_non_ascii, remove_users, lower, remove_double_spacing, remove_numbers, remove_punctuations, fix_contractions
 from modules.vectorizer import tf_idf, bow
 from modules.services import DatabaseConnection
+from modules.som import SOM, get_topic_words
 from pprint import pprint
 
 app = Flask(__name__)
@@ -17,6 +18,10 @@ db = DatabaseConnection('mongodb://localhost:27017')
 
 def prepare_tweet(tweet):
     tweet['_id'] = str(tweet['_id'])
+    
+    if tweet['tweet_id']:
+        tweet['tweet_id'] = str(tweet['tweet_id'])
+
     return tweet
 
 def prepare_tweets(arr):
@@ -67,7 +72,7 @@ def get_one_tweet(tweet_id):
 
     elif isFull == 'false':
         res = {
-            'tweet_id': raw['tweet_id'],
+            'tweet_id': str(raw['tweet_id']),
             'full_text': raw['data']['full_text']
         }
 
@@ -97,7 +102,7 @@ def get_one_tweet_pp(tweet_id):
         steps.append(method(steps[index]))
 
     res = {
-        'tweet_id': tweet['data']['id'],
+        'tweet_id': str(tweet['data']['id']),
         'full_text': tweet['data']['full_text'],
         'cleaned_tweet': steps[-1:],
         'steps': steps
@@ -131,14 +136,37 @@ def get_vectors():
 
         obj['tfidf'] = tfidf
         obj['full_text'] = data[idx]['full_text']
-        obj['tweet_id'] = data[idx]['tweet_id']
+        obj['tweet_id'] = str(data[idx]['tweet_id'])
 
         res.append(obj)
 
     return jsonify(res)
 
+
+
+def tfidf():
+    data = list(db.get_clean_tweets())[:10]
+    doc_grams = [a['grams'] for a in data]
+
+    (bowm, unique, _) = bow(doc_grams)
     
+    unique = [a[0] for a in unique]
+
+    matrix = tf_idf(doc_grams, bowm)
+
+    return (matrix, unique)
+
+@app.route('/som')
+def get_som():
+
+    (matrix, unique) = tfidf()
+    size = (2,2)
+
+    som = SOM(matrix, 0.1, size)
+
+    return jsonify(get_topic_words(som, unique, size))
 
 
+    
 if __name__ == '__main__':
     app.run(debug=True)

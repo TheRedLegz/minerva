@@ -15,14 +15,11 @@ def get_topic_words(matrix, unique, size):
         for j in range(col):
             obj = {}
 
-            obj['words'] = []
-            obj['weight'] = []
-
             indx = np.argsort(matrix[i, j, :])[-10:]
 
             for k in indx:
-                obj['words'].append(unique[k][0])
-                obj['weight'].append(matrix[i, j, k])
+                word = unique[k]
+                obj[word] = matrix[i, j, k]
 
             res.append(obj)
     
