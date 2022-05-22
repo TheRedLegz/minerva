@@ -7,7 +7,7 @@ from modules.tweet_preprocessor import preprocess_tweet
 from gensim.corpora import Dictionary
 
 
-def bow(doc_grams, max=4000):
+def bow(doc_grams, max=4000, getIdf = False):
     unique = {}
 
     for doc in doc_grams:
@@ -17,6 +17,7 @@ def bow(doc_grams, max=4000):
             else:
                 unique[gram] = unique[gram] + 1
 
+    
     unique = list(
         sorted(unique.items(), key=lambda item: item[1], reverse=True))[:max]
 
@@ -29,25 +30,41 @@ def bow(doc_grams, max=4000):
 
     bow_grams = np.zeros((doc_len, u_len), dtype=int)
 
+    idf = {}
+
     for i in range(doc_len - 1, -1, -1):
 
         doc = doc_grams[i]
 
         for j in range(u_len):
             gram = unique[j]
-
             count = doc.count(gram)
-
+                    
             bow_grams[i][j] = count
 
         if np.count_nonzero(bow_grams[i]) == 0:
             del doc_grams[i]
+            continue
+        
+        temp = []
+        for word in doc:
+            if word not in temp:
+                temp.append(word)
+
+                if word not in idf:
+                    idf[word] = 1
+                else:
+                    idf[word] += 1
+
 
     transposed_bow = np.transpose(np.copy(bow_grams))
     for i, gram in enumerate(transposed_bow):
         unique[i] = (unique[i], math.log(
             (doc_len + 1) / (np.count_nonzero(gram) + 1)) + 1)
-
+    
+    if getIdf:
+        return (bow_grams, unique, doc_grams, idf)
+    
     return (bow_grams, unique, doc_grams)
 
 def euc_distance(input, num_features):

@@ -113,37 +113,9 @@ def get_one_tweet_pp(tweet_id):
 
 @app.route('/vectors')
 def get_vectors():
-    data = list(db.get_clean_tweets())[:10]
-    DOCCOUNT = len(data)
-
-    doc_grams = [a['grams'] for a in data]
-
-    (bowm, unique, _) = bow(doc_grams)
+    data = list(db.get_vectors())[:10]
     
-    UNIQUE = [a[0] for a in unique]
-
-    res = []
-
-    for idx, doc in enumerate(doc_grams):
-        obj = {}
-        grams = {}
-
-        for gram in doc:
-            try:
-                col = UNIQUE.index(gram)
-                grams[gram] = int(bowm[idx][col])
-            except:
-                continue
-
-        obj['grams'] = grams
-        obj['full_text'] = data[idx]['full_text']
-        obj['tweet_id'] = str(data[idx]['tweet_id'])
-        obj['doc_count'] = DOCCOUNT
-        obj['word_count'] = len(doc)
-
-        res.append(obj)
-
-    return jsonify(res)
+    return jsonify(prepare_tweets(data))
 
 
 @app.route('/vectors/features')

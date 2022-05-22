@@ -126,3 +126,7 @@ class DatabaseConnection:
 
     def get_features(self):
         return self.conn['features'].find()
+
+    def get_vectors(self):
+        return self.conn['vectors'].find()
+        
