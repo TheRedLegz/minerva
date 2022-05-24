@@ -17,12 +17,18 @@ for idx, a in enumerate(cleaned):
     
     df = []
     doc_idf = []
+    valid_grams = []
 
     for gram in a['unique_grams']:
         try:
             col = UNQ.index(gram)
-            df.append(int(bowm[idx][col]))
-            doc_idf.append(int(idf[gram]))
+
+            insertdf = int(bowm[idx][col])
+            insertidf = int(idf[gram])
+
+            df.append(insertdf)
+            doc_idf.append(insertidf)
+            valid_grams.append(gram)
         except:
             continue
 
@@ -30,7 +36,7 @@ for idx, a in enumerate(cleaned):
         'tweet_id': a['tweet_id'],
         'full_text': a['full_text'],
         'cleaned': a['cleaned'],
-        'grams': a['unique_grams'],
+        'grams': valid_grams,
         'word_count': len(a['grams']),
         'df': df,
         'idf': doc_idf

@@ -7,6 +7,34 @@ from modules.tweet_preprocessor import preprocess_tweet
 from gensim.corpora import Dictionary
 
 
+def generate_dbvector_matrix(data, uniq):
+    size = (len(data), len(uniq))
+
+    matrix = np.zeros(size)
+
+    for i, row in enumerate(data):
+        mrow = matrix[i]
+        df = row['df']
+        idf = row['idf']
+        wordcount = row['word_count']
+        doccount = len(data)
+
+        print('len: ', len(df))
+        print('grams: ', len(row['grams']))
+
+        for k, gram in enumerate(row['grams']):
+
+            idx = uniq.index(gram)
+            
+            score1 = df[k] / wordcount
+            score2 = math.log((doccount + 1)/(idf[k] + 1)) + 1
+
+            mrow[idx] = score1 * score2
+
+    return matrix
+
+
+
 def bow(doc_grams, max=4000, getIdf = False):
     unique = {}
 

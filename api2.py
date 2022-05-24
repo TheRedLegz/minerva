@@ -138,16 +138,13 @@ def tfidf():
 
     return (matrix, unique)
 
-@app.route('/som')
+    
+# som endpoint should also display the results for every iteration
+
+@app.route('/som/snapshots')
 def get_som():
-
-    (matrix, unique) = tfidf()
-    size = (2,2)
-
-    som = SOM(matrix, 0.1, size)
-
-    return jsonify(get_topic_words(som, unique, size))
-
+    data = list(db.get_snapshots())
+    return jsonify(prepare_tweets(data, False))
 
 
     

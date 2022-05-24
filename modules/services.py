@@ -119,8 +119,6 @@ class DatabaseConnection:
             "response": "Model added successfully"
         })
 
-
-
     def get_model(self):
         print("add model")
 
@@ -129,4 +127,30 @@ class DatabaseConnection:
 
     def get_vectors(self):
         return self.conn['vectors'].find()
-        
+    
+    def get_settings(self):
+        return self.conn['settings'].find_one()
+
+
+
+
+    def save_snapshot(self, matrix, step, id):
+
+       model = codecs.encode(pickle.dumps(matrix), "base64").decode()
+
+       self.conn['snapshots'].insert_one({
+           "data": model,
+           "iteration": step,
+           "modelId": id
+       })
+
+    def get_snapshots(self):
+        return self.conn['snapshots'].find()
+
+
+    def save_settings(self, size, iterations, rate):
+        self.conn['settings'].insert_one({
+            'size': size,
+            'iterations': iterations,
+            'rate': rate,
+        })

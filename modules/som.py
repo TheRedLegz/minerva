@@ -177,7 +177,7 @@ def man_distance(bmu_row, bmu_col, row, col):
     return np.abs(bmu_row-row) + np.abs(bmu_col-col)
 
 
-def SOM(data, learn_rate, matrix_size, steps_max=3000):
+def SOM(data, learn_rate, matrix_size, steps_max=3000, cb = None):
 
     # 1 Initialize some constants
 
@@ -194,6 +194,10 @@ def SOM(data, learn_rate, matrix_size, steps_max=3000):
     indices = np.zeros(len(data))
 
     for s in range(steps_max):
+        
+        if cb is not None:
+            cb(matrix, s)
+        
         if s % (steps_max/10) == 0:
             print(str(np.round((s/steps_max) * 100.00)) + " percent")
 
@@ -207,6 +211,7 @@ def SOM(data, learn_rate, matrix_size, steps_max=3000):
         # curr_range = range_max * exp(-(s / steps_max))
         curr_rate = percent * learn_rate
 
+        
         # get a unique input from data
 
         rand = np.random.randint(len(data))
