@@ -13,7 +13,7 @@ uniq = [a['name'] for a in uniq]
 
 tfidf = generate_dbvector_matrix(data, uniq)
 
-size = [4,4]
+size = [4, 4]
 iterations = 3000
 rate = 0.1
 
@@ -26,8 +26,8 @@ checkpoint = math.floor(iterations/10)
 
 
 def save_snapshot(matrix, step):
-    if step%checkpoint == 0:
+    if step % checkpoint == 0:
         db.save_snapshot(matrix, step, 1)
-        
-    
+
+
 som = SOM(tfidf, rate, (row, col), iterations, save_snapshot)

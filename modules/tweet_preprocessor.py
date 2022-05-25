@@ -182,7 +182,7 @@ def remove_non_ascii(tweet):
     return tweet.encode("ascii", "ignore").decode()
 
 
-def remove_html_tags(string):
+def remove_html_entities(string):
     res = re.sub(
         r'&(gt|lt|amp|nbsp|quot|apos|cent|pound|yen|euro|copy|reg);', '', string)
     return res
@@ -196,7 +196,7 @@ def preprocess_tweet(tweet):
     tweet = remove_links(tweet)
     tweet = remove_hashtags(tweet)
     tweet = remove_av(tweet)
-    tweet = remove_html_tags(tweet)
+    tweet = remove_html_entities(tweet)
     tweet = tweet.lower()  # lower case
     tweet = remove_non_ascii(tweet)
     tweet = re.sub('[' + punctuation + ']+', ' ', tweet)  # strip punctuation
@@ -219,7 +219,7 @@ def basic_clean(tweet):
     tweet = remove_links(tweet)
     tweet = remove_hashtags(tweet)
     tweet = remove_av(tweet)
-    tweet = remove_html_tags(tweet)
+    tweet = remove_html_entities(tweet)
     tweet = remove_non_ascii(tweet)
     tweet = tweet.lower()  # lower case
     tweet = contractions.fix(tweet)
@@ -229,22 +229,25 @@ def basic_clean(tweet):
     tweet = re.sub('📝 …', '', tweet)
     return tweet
 
+
 def remove_double_spacing(string):
     return re.sub('\s+', ' ', string)
+
 
 def remove_punctuations(string):
     return re.sub('[' + punctuation + ']+', ' ', string)
 
+
 def lower(string):
     return str(string).lower()
+
 
 def remove_numbers(string):
     return re.sub('([0-9]+)', '', string)
 
+
 def fix_contractions(string):
     return contractions.fix(string)
-
-
 
 
 def prepare_for_chunking(tweet):
@@ -252,7 +255,7 @@ def prepare_for_chunking(tweet):
     tweet = remove_links(tweet)
     tweet = remove_hashtags(tweet)
     tweet = remove_av(tweet)
-    tweet = remove_html_tags(tweet)
+    tweet = remove_html_entities(tweet)
     tweet = remove_non_ascii(tweet)
     tweet = tweet.lower()
     tweet = contractions.fix(tweet)
