@@ -1,5 +1,4 @@
-
-
+from pprint import pprint
 from modules.gram import gram_sentence
 from modules.tweet_preprocessor import basic_clean
 from modules.services import DatabaseConnection
@@ -26,16 +25,17 @@ class Scraper:
         final_date = date
 
         if final_date is None:
-            date = datetime.today().strftime('%Y-%m-%d')
+            final_date = datetime.today().strftime('%Y-%m-%d')
 
         c.near = 'Philippines'
         c.Search = self.SEARCH_STRING
 
         # non-essential parameters
-        c.Until = date
+        c.Until = final_date
         c.Count = True
         c.Filter_retweets = True
         c.stats = True
+        c.Limit = 200
         c.Store_object = True
 
         twint.run.Search(c)
@@ -47,15 +47,20 @@ class Scraper:
 
         print('saving to db')
 
-        table = self.connection['minerva_raw_tweets']['rawtweets']
-        table2 = self.connection['minerva_raw_tweets']['cleaned_tweets']
-        table3 = self.connection['minerva_raw_tweets']['scrape_results']
+        print('TWEET COUNT', len(data))
+
+        table = self.connection.client['minerva_raw_tweets']['rawtweets']
+        table2 = self.connection.client['minerva_raw_tweets']['cleaned_tweets']
+        table3 = self.connection.client['minerva_raw_tweets']['scrape_results']
 
         # save to raw
+        data = [a.__dict__ for a in data]
+
+        print(data[0])
 
         for a in data:
             a['full_text'] = a['tweet']
-
+            
             insert = {
                 "scrape_date": date,
                 "tweet_id": a['id'],
@@ -77,16 +82,12 @@ class Scraper:
         cleaned = 0
 
         for a in data:
-            lang = a['data']['language']
-
-            if not lang:
-                lang = detect(a['data']['full_text'])
-
+            lang = a['lang'] if 'lang' in a else detect(a['full_text'])
 
             if lang == 'en':
                 cleaned += 1
 
-                text = a['data']['full_text']
+                text = a['full_text']
                 processed = basic_clean(text)
                 grams = gram_sentence(processed)
 
@@ -104,29 +105,32 @@ class Scraper:
 
 
                 insert = {
-                    "tweet_id": a['data']['id'],
+                    "tweet_id": a['id'],
                     "full_text": text,
                     "cleaned": processed,
                     "grams": grams,
                     "chunk_details": chunk_details,
                     "overall_sentiment": get_sentiment(text),
-                    "scrape_details": a['parameters']
+                    "scrape_details": {
+                        "until": date,
+                        "location": "Philippines",
+                        "lang": "",
+                        "query": self.SEARCH_STRING
+                    }
                 }
 
-                table2.replace_one({ "tweet_id": a['data']['id'] }, insert, upsert=True)
+                table2.replace_one({ "tweet_id": a['id'] }, insert, upsert=True)
         
         results = {}
         print('saved cleaned')
 
         results['tweets_scraped'] = len(data)
-        results['tweets_cleaned'] = len(cleaned)
+        results['tweets_cleaned'] = cleaned
         results['scrape_date'] = date
 
 
         table3.insert_one(results)
         print('saved results')
-
-
             
 
 
