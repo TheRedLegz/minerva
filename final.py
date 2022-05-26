@@ -87,7 +87,7 @@ if __name__ == '__main__':
                 coherence_list.append(topic_coherence(
                     SOM_matrix, lattice_size))
 
-                lattice_numbers.append((n, n))
+                lattice_numbers.append(n)
             return lattice_numbers[coherence_list.index(
                 max(coherence_list))]
 
