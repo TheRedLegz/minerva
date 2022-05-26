@@ -1,4 +1,5 @@
 import enum
+from httpx import get
 
 from sklearn import cluster
 from modules.services import DatabaseConnection
@@ -16,78 +17,57 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     conn = DatabaseConnection('mongodb://localhost:27017')
+    start_time = time.time()
+    raw = conn.get_raw_tweets()
 
-    def som_test(lattice_size):
-        start_time = time.time()
-        raw = conn.get_raw_tweets()
+    data = [tweet['full_text'] for tweet in raw]
+    csv = pd.read_csv('./data/tweets_processed.csv')
 
-        data = [tweet['full_text'] for tweet in raw]
-        csv = pd.read_csv('./data/tweets_processed.csv')
+    for tweet in csv['Content'].values[:30000]:
+        data.append(tweet)
 
-        for tweet in csv['Content'].values[:30000]:
-            data.append(tweet)
+    print("--- Execution time: %s seconds ---" %
+          (time.time() - start_time))
 
-        print("--- Execution time: %s seconds ---" %
-              (time.time() - start_time))
+    start_time = time.time()
+    cleaned = tweet_cleaner(data)
+    print("--- Execution time: %s seconds ---" %
+          (time.time() - start_time))
 
-        start_time = time.time()
-        cleaned = tweet_cleaner(data)
-        print("--- Execution time: %s seconds ---" %
-              (time.time() - start_time))
+    start_time = time.time()
+    grammed = tweet_grammer(cleaned)
+    for i, tweet_grams in enumerate(grammed):
+        grammed[i] = ' '.join(tweet_grams)
+    pos_tags = tweet_pos(grammed)
+    for i, tweet_grams in enumerate(pos_tags):
+        temp = []
+        for gram in tweet_grams:
+            if gram[1].startswith('NN'):
+                temp.append(gram[0])
+        grammed[i] = temp
+    print("--- Execution time: %s seconds ---" %
+          (time.time() - start_time))
+    test_data = grammed[:5000]
+    grammed = grammed[5000:]
 
-        start_time = time.time()
-        grammed = tweet_grammer(cleaned)
-        for i, tweet_grams in enumerate(grammed):
-            grammed[i] = ' '.join(tweet_grams)
-        pos_tags = tweet_pos(grammed)
-        for i, tweet_grams in enumerate(pos_tags):
-            temp = []
-            for gram in tweet_grams:
-                if gram[1].startswith('NN'):
-                    temp.append(gram[0])
-            grammed[i] = temp
-        print("--- Execution time: %s seconds ---" %
-              (time.time() - start_time))
-        test_data = grammed[:5000]
-        grammed = grammed[5000:]
+    start_time = time.time()
+    (bag, unique, docs) = bow(grammed)
+    print("--- Execution time: %s seconds ---" %
+          (time.time() - start_time))
 
-        start_time = time.time()
-        (bag, unique, docs) = bow(grammed)
-        print("--- Execution time: %s seconds ---" %
-              (time.time() - start_time))
+    start_time = time.time()
 
-        start_time = time.time()
+    matrix = tf_idf(docs, bag)
+    print("--- Execution time: %s seconds ---" %
+          (time.time() - start_time))
 
-        matrix = tf_idf(docs, bag)
-        print("--- Execution time: %s seconds ---" %
-              (time.time() - start_time))
-
-        (row, col) = lattice_size
-        print(matrix.shape)
-        SOM_matrix = SOM(matrix, .3, lattice_size, 4000)
-
-        cluster_matrix = np.empty(shape=(row, col), dtype=object)
-
-        for i in range(row):
-            for j in range(col):
-                cluster_matrix[i][j] = []
-
-        # preprocessed_tweets = grammed
-
-        for i, tweet in enumerate(test_data):
-            (result_matrix, bmu) = tweet_find_cluster(
-                SOM_matrix, lattice_size, tweet, unique)
-            (bmu_row, bmu_col) = bmu
-
-            cluster_matrix[bmu_row][bmu_col].append(tweet)
-            # cluster_matrix[bmu_row][bmu_col].append(data[i])
-        return SOM_matrix, unique, lattice_size, grammed
-
-    def topic_coherence(SOM_matrix, unique, lattice_size, grammed):
+    def topic_coherence(SOM_matrix, lattice_used):
         word2id = Dictionary(grammed)
-
-        topic_words = get_topic_words(SOM_matrix, unique, lattice_size)
-        topics = [topic['full_text'] for topic in topic_words]
+        topics = []
+        topic_words = get_topic_words(SOM_matrix, unique, lattice_used)
+        print(topic_words[0].keys())
+        for topic in topic_words:
+            topics.append([word[0] for word in topic.keys()])
 
         cm = CoherenceModel(topics=topics,
                             texts=grammed,
@@ -97,31 +77,35 @@ if __name__ == '__main__':
 
         return coherence_score
 
-    for x in range(3, 7):
-        coherence_list = []
-        lattice_numbers = []
-        SOM_matrix, unique, lattice_size, grammed = som_test((x, x))
-        coherence_list.append(topic_coherence(
-            SOM_matrix, unique, lattice_size, grammed))
-        lattice_numbers.append(x)
+    def get_coherence_scores():
+        optimal_size = get_coherent_lattice()
 
-    plt.plot(lattice_numbers, coherence_list)
-    plt.xlabel('Lattice Numbers')
-    plt.ylabel('Coherence Score')
-    plt.show()
-    plt.pause(5000)
+        def get_coherent_lattice():
+            lattice_numbers = []
+            coherence_list = []
+            for n in range(3, 7):
+                lattice_size = (n, n)
+                SOM_matrix = SOM(matrix, .3, lattice_size, 9000)
+                coherence_list.append(topic_coherence(
+                    SOM_matrix, lattice_size))
 
-    # TODO: Print out keyword frequencies per topic
-    # for i in range(row):
-    #     for j in range(col):
-    #         print("[%d][%d]:" % (i, j))
-    #         print(len(cluster_matrix[i][j]))
+                lattice_numbers.append((n, n))
+            return lattice_numbers[coherence_list.index(
+                max(coherence_list))]
+        optimal_iteration = get_coherent_iteration(optimal_size)
 
-    # for tweet in cluster_matrix[i][j]:
-    #     print(tweet)
+        def get_coherent_iteration(best_size):
+            iterations_list = []
+            coherence_list = []
+            lattice_used = (best_size, best_size)
+            for n in range(5000, 10001, 1000):
+                SOM_matrix = SOM(matrix, .3, lattice_used, n)
+                coherence_list.append(topic_coherence(
+                    SOM_matrix, lattice_used))
 
-    # todo iterate over all docs and remove keywords not in unique
-    # todo remove empty docs
+                iterations_list.append(n)
+            return iterations_list[coherence_list.index(
+                max(coherence_list))]
 
-    # (grams, unique, docs) = prune_bow(bag)
-    # print(len(unique))
+        return optimal_size, optimal_iteration
+    (lattice, iterations) = get_coherence_scores()

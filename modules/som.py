@@ -22,7 +22,7 @@ def get_topic_words(matrix, unique, size):
                 obj[word] = matrix[i, j, k]
 
             res.append(obj)
-    
+
     return res
 
 
@@ -43,7 +43,7 @@ def get_word_cluster(matrix, unique, size):
                 deet["weights"].append(weight)
         deet['sum'] = sum
         deets.append(deet)
-            
+
     for idx in range(len(unique)):
         deets[idx]['distances'] = []
         sum = deets[idx]['sum']
@@ -54,7 +54,6 @@ def get_word_cluster(matrix, unique, size):
             deets[idx]['distances'].append(value/sum)
 
     return deets
-
 
 
 def get_tw_matrix(matrix, unique, size):
@@ -69,7 +68,7 @@ def get_tw_matrix(matrix, unique, size):
 
             for k in range(len(unique)):
                 distances.append(matrix[i, j, k]/sum)
-            
+
             res.append(distances)
 
     return res
@@ -177,7 +176,7 @@ def man_distance(bmu_row, bmu_col, row, col):
     return np.abs(bmu_row-row) + np.abs(bmu_col-col)
 
 
-def SOM(data, learn_rate, matrix_size, steps_max=3000, cb = None):
+def SOM(data, learn_rate, matrix_size, steps_max=3000, cb=None):
 
     # 1 Initialize some constants
 
@@ -194,10 +193,10 @@ def SOM(data, learn_rate, matrix_size, steps_max=3000, cb = None):
     indices = np.zeros(len(data))
 
     for s in range(steps_max):
-        
+
         if cb is not None:
             cb(matrix, s)
-        
+
         if s % (steps_max/10) == 0:
             print(str(np.round((s/steps_max) * 100.00)) + " percent")
 
@@ -211,7 +210,6 @@ def SOM(data, learn_rate, matrix_size, steps_max=3000, cb = None):
         # curr_range = range_max * exp(-(s / steps_max))
         curr_rate = percent * learn_rate
 
-        
         # get a unique input from data
 
         rand = np.random.randint(len(data))
@@ -238,6 +236,7 @@ def SOM(data, learn_rate, matrix_size, steps_max=3000, cb = None):
                 # matrix[i][j] = cell  + curr_rate * (exp(-(((bmu_row - i)**2 + (bmu_col - j)**2)/(num_features*(curr_range**2))))) * (input - cell)
 
     return matrix
+
 
 def get_SOM_model(SOM_matrix, matrix_data, labels):
     """Main function to get the SOM model"""
