@@ -78,8 +78,6 @@ if __name__ == '__main__':
         return coherence_score
 
     def get_coherence_scores():
-        optimal_size = get_coherent_lattice()
-
         def get_coherent_lattice():
             lattice_numbers = []
             coherence_list = []
@@ -92,6 +90,7 @@ if __name__ == '__main__':
                 lattice_numbers.append((n, n))
             return lattice_numbers[coherence_list.index(
                 max(coherence_list))]
+        optimal_size = get_coherent_lattice()
         optimal_iteration = get_coherent_iteration(optimal_size)
 
         def get_coherent_iteration(best_size):
@@ -108,4 +107,4 @@ if __name__ == '__main__':
                 max(coherence_list))]
 
         return optimal_size, optimal_iteration
-    (lattice, iterations) = get_coherence_scores()
+    print(get_coherence_scores())
