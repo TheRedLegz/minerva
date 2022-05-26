@@ -5,6 +5,8 @@ from modules.tweet_preprocessor import remove_av, remove_hashtags, remove_html_e
 from modules.vectorizer import tf_idf, bow
 from modules.services import DatabaseConnection
 from modules.som import SOM, get_topic_words
+from modules.sentiment import get_sentiment
+
 from pprint import pprint
 import asyncio
 from modules.scraper import Scraper
@@ -32,6 +34,19 @@ def prepare_tweets(arr, hasTweetId=True, hasId=True):
     return res
 
 
+def inject_sentiments(arr):
+    for a in arr:
+        d = a['full_text'] if 'full_text' in a else a['data']['full_text']
+        (score, sentiment) = get_sentiment(d)
+        
+        a['overall_sentiment'] = {
+            "score": score,
+            "sentiment": sentiment
+        }
+
+    return arr
+
+
 @app.route('/tweets')
 def get_all():
     query = request.args
@@ -42,9 +57,11 @@ def get_all():
 
     if isFull == 'true':
         res = list(db.get_full_raw_tweets())
-
+        res = inject_sentiments(res)
+        
     elif isFull == 'false':
         res = list(db.get_raw_tweets())
+        res = inject_sentiments(res)
         return jsonify(prepare_tweets(res, True, False))
 
     if isClean == 'true':
@@ -52,6 +69,7 @@ def get_all():
 
     if not res:
         res = list(db.get_full_raw_tweets())
+        res = inject_sentiments(res)
         return jsonify(prepare_tweets(res))
 
     return jsonify(prepare_tweets(res))
