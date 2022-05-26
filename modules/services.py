@@ -120,7 +120,7 @@ class DatabaseConnection:
         })
 
     def get_model(self):
-        print("add model")
+        return self.conn['models'].find_one()
 
     def get_features(self):
         return self.conn['features'].find()
@@ -154,3 +154,6 @@ class DatabaseConnection:
             'iterations': iterations,
             'rate': rate,
         })
+
+    def get_scrape_results(self):
+        return self.conn['scrape_results'].find()

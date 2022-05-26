@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Flask, jsonify, abort, request, abort
 from flask_cors import CORS
 from modules.tweet_preprocessor import remove_av, remove_hashtags, remove_html_entities, remove_links, remove_non_ascii, remove_noneng_stopwords, remove_users, lower, remove_double_spacing, remove_numbers, remove_punctuations, fix_contractions
@@ -5,16 +6,16 @@ from modules.vectorizer import tf_idf, bow
 from modules.services import DatabaseConnection
 from modules.som import SOM, get_topic_words
 from pprint import pprint
+import asyncio
+from modules.scraper import Scraper
+import pickle
+import codecs
 
 app = Flask(__name__)
 CORS(app)
 
 db = DatabaseConnection('mongodb://localhost:27017')
-
-
-# tab 1: unprocessed
-# tab 2: preprocessed
-# tab 3: grammed
+sc = Scraper()
 
 def prepare_tweet(tweet, hasTweetId=True, hasId=True):
     if hasId:
@@ -40,17 +41,17 @@ def get_all():
     res = None
 
     if isFull == 'true':
-        res = list(db.get_full_raw_tweets())[:20]
+        res = list(db.get_full_raw_tweets())
 
     elif isFull == 'false':
-        res = list(db.get_raw_tweets())[:20]
+        res = list(db.get_raw_tweets())
         return jsonify(prepare_tweets(res, True, False))
 
     if isClean == 'true':
-        res = list(db.get_clean_tweets()[:20])
+        res = list(db.get_clean_tweets())
 
     if not res:
-        res = list(db.get_full_raw_tweets())[:20]
+        res = list(db.get_full_raw_tweets())
         return jsonify(prepare_tweets(res))
 
     return jsonify(prepare_tweets(res))
@@ -150,5 +151,42 @@ def get_som():
     return jsonify(prepare_tweets(data, False))
 
 
+
+
+@app.route('/som/cluster')
+def get_cluster_details():
+    row = db.get_model()
+
+    if not row:
+        return jsonify({
+            "error": "no_som"
+        })
+
+    som = pickle.loads(codecs.decode(row['model'].encode(), 'base64'))
+
+    res = som[1, :3, :]
+
+    return jsonify(res.tolist())
+    
+
+@app.route('/scrape')
+async def trigger_scrape():
+
+    async def scrape():
+        await sc.scrape()
+
+    asyncio.create_task(scrape())
+
+    return jsonify({})
+
+@app.route('/scrape/results')
+def get_scrape_results():
+    results = list(db.get_scrape_results())
+    results['_id'] = str(results['_id'])
+    
+    return jsonify(results)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
