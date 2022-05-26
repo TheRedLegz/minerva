@@ -37,7 +37,7 @@ def prepare_tweets(arr, hasTweetId=True, hasId=True):
 def inject_sentiments(arr):
     for a in arr:
         d = a['full_text'] if 'full_text' in a else a['data']['full_text']
-        (score, sentiment) = get_sentiment(d)
+        (sentiment, score) = get_sentiment(d)
         
         a['overall_sentiment'] = {
             "score": score,
