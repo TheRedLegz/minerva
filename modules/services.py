@@ -158,5 +158,11 @@ class DatabaseConnection:
     def get_scrape_results(self):
         return self.conn['scrape_results'].find()
 
+    def get_training_model(self):
+        return self.conn['training_model'].find_one()
+
     def get_one_vector(self, id):
         return self.conn['vectors'].find_one({ "tweet_id" : id })
+
+    def get_training_features(self):
+        return self.conn['training_features'].find()

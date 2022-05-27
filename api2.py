@@ -178,7 +178,6 @@ def get_som():
 
 
 
-
 @app.route('/som/cluster')
 def get_cluster_details():
     row = db.get_model()
@@ -197,20 +196,55 @@ def get_cluster_details():
 
 @app.route('/som/tweet/<id>')
 def get_tweet_cluster(id):
-    row = db.get_model()
+    row = db.get_training_model()
+    tweet = db.get_one_clean_tweet(int(id))
 
     if not row:
         return jsonify({
             "error": "no_som"
         })
 
-    som = pickle.loads(codecs.decode(row['model'].encode(), 'base64'))
+    if not tweet:
+        return jsonify({
+            "error": "no_tweet"
+        })
+
+    som = None
+
+    with open(row['path'], 'rb') as file:
+        som = pickle.load(file)
+
+    if som is None:
+        return jsonify({
+            "error": "som_not_loaded"
+        })
     
-    row = len(som)
-    col = len(som[0])
+    size = (row['size']['row'], row['size']['col'])
 
+    features = db.get_training_features()
 
+    uniq_tuple = []
+    uniq = []
 
+    for a in features:
+        uniq.append(a['name'])
+        uniq_tuple.append((a['name'], a['idf']))
+    
+    (_, bmu) = tweet_find_cluster(som, size, tweet['grams'], uniq_tuple)
+
+    cluster_details = get_topic_words(som, uniq, size)
+    cell = bmu[0] * size[0] + bmu[1]
+
+    top_words = cluster_details[cell]
+
+    return jsonify({
+        "row": bmu[0],
+        "col": bmu[1],
+        "distance": _[bmu[0]][bmu[1]],
+        "cluster_details": {
+            "top_words": top_words
+        }
+    })
 
 
 
