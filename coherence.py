@@ -1,19 +1,12 @@
-import enum
-from httpx import get
-
-from sklearn import cluster
 from modules.services import DatabaseConnection
 from modules.gram import tweet_grammer, tweet_cleaner, tweet_pos
-from modules.som import SOM, get_topic_words, tweet_find_cluster
+from modules.som import SOM, get_topic_words
 from modules.vectorizer import bow, tf_idf
-import numpy as np
 import pandas as pd
 import time
 from pprint import pprint as print
 from gensim.corpora.dictionary import Dictionary
 from gensim.models.coherencemodel import CoherenceModel
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     conn = DatabaseConnection('mongodb://localhost:27017')
@@ -105,5 +98,22 @@ if __name__ == '__main__':
                 max(coherence_list))]
         optimal_size = get_coherent_lattice()
         optimal_iteration = get_coherent_iteration(optimal_size)
-        return optimal_size, optimal_iteration
-    print(get_coherence_scores())
+
+        def get_best_learning_rate(used_size, used_iteration):
+            best_cohr_score = []
+            best_learning_rate = []
+            array_iterations = [0.05, 0.1, 0.15, 0.2, 0.25]
+            lattice_size = (used_size, used_size)
+
+            for n in array_iterations:
+                SOM_matrix = SOM(matrix, n, lattice_size, used_iteration)
+                best_cohr_score.append(topic_coherence(
+                    SOM_matrix, (6, 6)))
+                best_learning_rate.append(n)
+            return best_learning_rate[best_cohr_score.index(
+                max(best_cohr_score))]
+
+        optimal_learning_rate = get_best_learning_rate(
+            optimal_size, optimal_iteration)
+
+        return optimal_size, optimal_iteration, optimal_learning_rate
