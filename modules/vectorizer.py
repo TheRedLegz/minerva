@@ -19,9 +19,6 @@ def generate_dbvector_matrix(data, uniq):
         wordcount = row['word_count']
         doccount = len(data)
 
-        print('len: ', len(df))
-        print('grams: ', len(row['grams']))
-
         for k, gram in enumerate(row['grams']):
 
             idx = uniq.index(gram)

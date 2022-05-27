@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import Flask, jsonify, abort, request, abort
 from flask_cors import CORS
+from modules.som import tweet_find_cluster
 from modules.tweet_preprocessor import remove_av, remove_hashtags, remove_html_entities, remove_links, remove_non_ascii, remove_noneng_stopwords, remove_users, lower, remove_double_spacing, remove_numbers, remove_punctuations, fix_contractions
 from modules.vectorizer import tf_idf, bow
 from modules.services import DatabaseConnection
@@ -140,6 +141,13 @@ def get_vectors():
     return jsonify(prepare_tweets(data))
 
 
+@app.route('/vectors/<id>')
+def get_one_vector(id):
+    data = db.get_one_vector(int(id))
+
+    return jsonify(prepare_tweet(data))
+
+
 @app.route('/vectors/features')
 def get_features():
 
@@ -186,6 +194,25 @@ def get_cluster_details():
 
     return jsonify(res.tolist())
     
+
+@app.route('/som/tweet/<id>')
+def get_tweet_cluster(id):
+    row = db.get_model()
+
+    if not row:
+        return jsonify({
+            "error": "no_som"
+        })
+
+    som = pickle.loads(codecs.decode(row['model'].encode(), 'base64'))
+    
+    row = len(som)
+    col = len(som[0])
+
+
+
+
+
 
 @app.route('/scrape')
 async def trigger_scrape():

@@ -1,6 +1,6 @@
 from pprint import pprint
 from modules.gram import gram_sentence
-from modules.tweet_preprocessor import basic_clean
+from modules.tweet_preprocessor import basic_clean, prepare_for_chunking
 from modules.services import DatabaseConnection
 from modules.gram import tweet_grammer, tweet_cleaner
 from modules.sentiment import chunker, get_sentiment
@@ -35,7 +35,6 @@ class Scraper:
         c.Count = True
         c.Filter_retweets = True
         c.stats = True
-        c.Limit = 200
         c.Store_object = True
 
         twint.run.Search(c)
@@ -55,8 +54,6 @@ class Scraper:
 
         # save to raw
         data = [a.__dict__ for a in data]
-
-        print(data[0])
 
         for a in data:
             a['full_text'] = a['tweet']
@@ -91,17 +88,26 @@ class Scraper:
                 processed = basic_clean(text)
                 grams = gram_sentence(processed)
 
-                chunks = chunker(processed)
+                chunks = chunker(prepare_for_chunking(text))
+
+                unq = []
+
+                for b in grams:
+                    if b not in unq:
+                        unq.append(b)
 
                 chunk_details = []
 
                 for chunk in chunks:
                     res = {}
-                    score = get_sentiment(chunk)
+                    (sentiment, score) = get_sentiment(chunk)
                     res['score'] = score
+                    res['sentiment'] = sentiment
                     res['chunk'] = chunk
                     
                     chunk_details.append(res)
+
+                (sent, scr) = get_sentiment(text)
 
 
                 insert = {
@@ -109,8 +115,12 @@ class Scraper:
                     "full_text": text,
                     "cleaned": processed,
                     "grams": grams,
+                    "unique_grams": unq,
                     "chunk_details": chunk_details,
-                    "overall_sentiment": get_sentiment(text),
+                     "overall_sentiment": {
+                        'sentiment': sent,
+                        'score': scr
+                    },
                     "scrape_details": {
                         "until": date,
                         "location": "Philippines",

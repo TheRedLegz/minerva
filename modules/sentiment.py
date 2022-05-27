@@ -41,6 +41,8 @@ def sentimentinator(dataSentiment):
     return sentiRes
 
 def get_sentiment(tweet):
+    sentiment = "neutral"
+    
     score = analyser.polarity_scores(tweet)['compound']
     if score <= -0.05:
         sentiment = "negative"

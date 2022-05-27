@@ -1,3 +1,4 @@
+from modules.tweet_preprocessor import prepare_for_chunking
 from modules.gram import gram_sentence
 from modules.tweet_preprocessor import basic_clean
 from modules.services import DatabaseConnection
@@ -13,14 +14,17 @@ raw = list(db.get_full_raw_tweets())
 table = db.conn['cleaned_tweets']
 
 for a in raw:
-    lang = a['data']['language']
+    lang = a['data']['language'] if 'language' in a['data'] else None
 
-    if not lang:
-        lang = detect(a['data']['full_text'])
-
+    if lang is None:
+        try:
+            lang = detect(a['data']['lang'])
+        except:
+            lang = None
 
     if lang == 'en':
         text = a['data']['full_text']
+
         processed = basic_clean(text)
         grams = gram_sentence(processed)
         unq = []
@@ -29,7 +33,7 @@ for a in raw:
             if b not in unq:
                 unq.append(b)
 
-        chunks = chunker(processed)
+        chunks = chunker(prepare_for_chunking(text))
 
         chunk_details = []
 
