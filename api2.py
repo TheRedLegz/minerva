@@ -20,8 +20,6 @@ CORS(app)
 db = DatabaseConnection('mongodb://localhost:27017')
 sc = Scraper()
 
-SIZE = (3,3)
-
 def prepare_tweet(tweet, hasTweetId=True, hasId=True):
     if hasId:
         tweet['_id'] = str(tweet['_id'])
@@ -194,7 +192,13 @@ def load_som():
     if som is None:
         raise Exception('som_not_loaded')
 
-    return som
+    return {
+        "model": som,
+        "row": row['size']['row'],
+        "col": row['size']['col'],
+        "iterations": row['iterations'],
+        "rate": row['rate']
+    }
 
 
 def load_training_features():
@@ -215,10 +219,15 @@ def load_training_features():
 @app.route('/som/cluster/<int:id>')
 def get_cluster_details(id):
     try:
-        som = load_som()
+        data = load_som()
+        som = data['model']
         
-        if id > 36:
-            abort(404)
+        cells = data['row'] * data['col']
+
+        SIZE = (data['row'], data['col'])
+
+        if id >= cells:
+            raise Exception('cluster_invalid')
 
         ft = load_training_features()
 
@@ -230,7 +239,7 @@ def get_cluster_details(id):
         
     except Exception as e:
         return jsonify({
-            "error": e.getMessage()
+            "error": str(e)
         })
     
 
