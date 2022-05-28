@@ -94,6 +94,9 @@ def init_save_clean(data):
         for c in chunks:
             res = {}
             gm = gram_sentence(c)
+
+            if len(gm) == 0:
+                continue
         
             (_, bmu) = tweet_find_cluster(som, som_size, gm, tup)
 
