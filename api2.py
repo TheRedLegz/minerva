@@ -12,13 +12,15 @@ from pprint import pprint
 import asyncio
 from modules.scraper import Scraper
 import pickle
-import codecs
+import math
 
 app = Flask(__name__)
 CORS(app)
 
 db = DatabaseConnection('mongodb://localhost:27017')
 sc = Scraper()
+
+SIZE = (3,3)
 
 def prepare_tweet(tweet, hasTweetId=True, hasId=True):
     if hasId:
@@ -178,20 +180,58 @@ def get_som():
 
 
 
-@app.route('/som/cluster')
-def get_cluster_details():
-    row = db.get_model()
+def load_som():
+    row = db.get_training_model()
 
     if not row:
+        raise Exception('no_som')
+
+    som = None
+
+    with open(row['path'], 'rb') as file:
+        som = pickle.load(file)
+
+    if som is None:
+        raise Exception('som_not_loaded')
+
+    return som
+
+
+def load_training_features():
+    features = list(db.get_training_features())
+
+    uniq_tuple = []
+    uniq = []
+
+    for a in features:
+        uniq.append(a['name'])
+        uniq_tuple.append((a['name'], a['idf']))
+
+    return {
+        "idf_tuple": uniq_tuple,
+        "features": uniq
+    }
+
+@app.route('/som/cluster/<int:id>')
+def get_cluster_details(id):
+    try:
+        som = load_som()
+        
+        if id > 36:
+            abort(404)
+
+        ft = load_training_features()
+
+        cluster_details = get_topic_words(som, ft['features'], SIZE)
+
         return jsonify({
-            "error": "no_som"
+           "top_words": cluster_details[id]
         })
-
-    som = pickle.loads(codecs.decode(row['model'].encode(), 'base64'))
-
-    res = som[1, :3, :]
-
-    return jsonify(res.tolist())
+        
+    except Exception as e:
+        return jsonify({
+            "error": e.getMessage()
+        })
     
 
 @app.route('/som/tweet/<id>')
@@ -221,7 +261,7 @@ def get_tweet_cluster(id):
     
     size = (row['size']['row'], row['size']['col'])
 
-    features = db.get_training_features()
+    features = list(db.get_training_features())
 
     uniq_tuple = []
     uniq = []
