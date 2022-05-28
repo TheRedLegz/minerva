@@ -78,6 +78,9 @@ def init_save_clean(data):
         pp = basic_clean(tt)
         grams = gram_sentence(pp)
 
+        if len(grams) == 0:
+            return False
+
         unq = []
 
         for g in grams:
