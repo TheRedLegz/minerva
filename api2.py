@@ -216,6 +216,26 @@ def load_training_features():
         "features": uniq
     }
 
+@app.route('/som/cluster')
+def get_clusters():
+    try:
+        data = load_som()
+        som = data['model']
+
+        SIZE = (data['row'], data['col'])
+        ft = load_training_features()
+
+        cluster_details = get_topic_words(som, ft['features'], SIZE)
+
+        return jsonify({
+            "clusters": cluster_details
+        })
+        
+    except Exception as e:
+        return jsonify({
+            "error": str(e)
+        })
+
 @app.route('/som/cluster/<int:id>')
 def get_cluster_details(id):
     try:
