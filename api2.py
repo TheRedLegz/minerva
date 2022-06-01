@@ -1,12 +1,14 @@
 from datetime import datetime
 from flask import Flask, jsonify, abort, request, abort
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from modules.som import tweet_find_cluster
-from modules.tweet_preprocessor import remove_av, remove_hashtags, remove_html_entities, remove_links, remove_non_ascii, remove_noneng_stopwords, remove_users, lower, remove_double_spacing, remove_numbers, remove_punctuations, fix_contractions
+from modules.tweet_preprocessor import remove_av, remove_hashtags, remove_html_entities, remove_links, remove_non_ascii, remove_noneng_stopwords, remove_users, lower, remove_double_spacing, remove_numbers, remove_punctuations, fix_contractions, prepare_for_chunking, basic_clean
 from modules.vectorizer import tf_idf, bow
 from modules.services import DatabaseConnection
 from modules.som import SOM, get_topic_words
-from modules.sentiment import get_sentiment
+from modules.sentiment import get_sentiment, chunker
+from modules.gram import gram_sentence
+from modules.lib import load_features, load_som
 
 from pprint import pprint
 import asyncio
@@ -133,21 +135,21 @@ def get_one_tweet_pp(tweet_id):
 
     return jsonify(res)
 
-
+# ! this is deprecated
 @app.route('/vectors')
 def get_vectors():
     data = list(db.get_vectors())[:10]
 
     return jsonify(prepare_tweets(data))
 
-
+# ! this is deprecated
 @app.route('/vectors/<id>')
 def get_one_vector(id):
     data = db.get_one_vector(int(id))
 
     return jsonify(prepare_tweet(data))
 
-
+# ! this is deprecated
 @app.route('/vectors/features')
 def get_features():
 
@@ -175,30 +177,6 @@ def tfidf():
 def get_som():
     data = list(db.get_snapshots())
     return jsonify(prepare_tweets(data, False))
-
-
-
-def load_som():
-    row = db.get_training_model()
-
-    if not row:
-        raise Exception('no_som')
-
-    som = None
-
-    with open(row['path'], 'rb') as file:
-        som = pickle.load(file)
-
-    if som is None:
-        raise Exception('som_not_loaded')
-
-    return {
-        "model": som,
-        "row": row['size']['row'],
-        "col": row['size']['col'],
-        "iterations": row['iterations'],
-        "rate": row['rate']
-    }
 
 
 def load_training_features():
@@ -317,22 +295,131 @@ def get_tweet_cluster(id):
 
 
 
-@app.route('/scrape')
-async def trigger_scrape():
-
-    async def scrape():
-        await sc.scrape()
-
-    asyncio.create_task(scrape())
-
-    return jsonify({})
-
 @app.route('/scrape/results')
 def get_scrape_results():
     results = list(db.get_scrape_results())
     results['_id'] = str(results['_id'])
     
     return jsonify(results)
+
+
+@app.route('/analyze', methods=["POST"])
+@cross_origin()
+def analyze_tweet():
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    data = request.data
+    
+    if not data:
+        abort(400)
+
+    tt = data['tweet']
+    cleaned = basic_clean(tt)
+    grams = gram_sentence(cleaned)
+    
+    if len(grams) == 0:
+        return jsonify({
+            "cleaned": cleaned,
+            "grams": []
+        })
+
+    somd = load_som()
+    ft = load_features()
+    tup = ft['tup']
+
+    som_size = somd['size']
+    som = somd['model']
+
+
+    unq = []
+
+    for g in grams:
+        if g not in unq:
+            unq.append(g) 
+
+    chunks = chunker(prepare_for_chunking(tt))
+    
+    chunk_details = []
+
+    for c in chunks:
+        res = {}
+        gm = gram_sentence(c)
+
+        if len(gm) == 0:
+            continue
+    
+        (_, bmu) = tweet_find_cluster(som, som_size, gm, tup)
+
+        (sentiment, score) = get_sentiment(c)
+
+        res['score'] = score
+        res['sentiment'] = sentiment
+        res['chunk'] = c
+        res['grams'] = gm
+        res['cluster'] = {
+            "row": bmu[0],
+            "col": bmu[1],
+            "distance": _[bmu[0],bmu[1]]
+        }
+
+        chunk_details.append(res)
+
+
+    (sent, scr) = get_sentiment(tt)
+
+    result = {
+        "cleaned": cleaned,
+        "grams": grams,
+        "unique_grams": unq,
+        "chunk_details": chunk_details,
+        "overall_sentiment": {
+            "score": scr,
+            "sentiment": sent
+        }
+    }
+
+    return jsonify(result)
+
+
+
+@app.route('/som/cluster/words')
+def get_cluster_words():
+
+    # output is the words for a cluster
+
+    data = list(db.get_training_cleaned())
+    grams = []
+
+    for d in data:
+        res = [g for g in d['grams'] if 'learn' not in g and 'education' not in g and 'class' not in g]
+        grams.append(res)
+    
+
+    somd = load_som()
+
+    som = somd['model']
+    som_size = somd['size']
+
+    (bowm, unq, _) = bow(grams)
+
+    clusters = {}
+
+    for doc in grams:
+        (matrix, bmu) = tweet_find_cluster(som, som_size, doc, unq)
+        cell = str(bmu[0] * bmu[1] + bmu[1])
+        
+        if cell not in clusters:
+            clusters[cell] = {}
+        
+        for g in doc:
+            if g not in clusters[cell]:
+                clusters[cell][g] = 0
+
+            clusters[cell][g] += 1
+
+    return jsonify(clusters)    
+            
+
+
 
 
 if __name__ == '__main__':

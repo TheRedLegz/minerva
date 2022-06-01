@@ -34,6 +34,8 @@ def load_som():
     return {
         "model": som,
         "size": som_size,
+        "row": somd['size']['row'],
+        "col": somd['size']['col'],
         "iterations": somd['iterations'],
         "rate": somd['rate'],
     }

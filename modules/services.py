@@ -170,3 +170,6 @@ class DatabaseConnection:
 
     def get_training_features(self):
         return self.conn['training_features'].find()
+
+    def get_training_cleaned(self):
+        return self.conn['training_clean'].find()
