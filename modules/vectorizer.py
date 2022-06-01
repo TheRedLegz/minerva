@@ -37,6 +37,9 @@ def bow(doc_grams, max=4000, getIdf = False):
 
     for doc in doc_grams:
         for gram in doc:
+            if 'learn' in gram or 'education' in gram:
+                continue
+            
             if gram not in unique:
                 unique[gram] = 1
             else:

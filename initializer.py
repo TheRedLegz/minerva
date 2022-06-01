@@ -44,6 +44,9 @@ datarows = list(df.iterrows())[:200]
 
 dataclean = [json.loads(a.replace("'", "\"")) for a in list(df['Processed'])[:200]]
 
+for a in dataclean:
+    a = [b for b in a if 'learn' not in b and 'education' not in b]
+
 for i, row in datarows:
     full_text = row['Content']
 
@@ -65,6 +68,7 @@ for i, row in datarows:
     doc_uniq = []
 
     grams = json.loads(row['Processed'].replace("'", "\""))
+    grams = [g for g in grams if 'learn' not in g and 'education' not in g]
 
     for a in grams:
         if a not in doc_uniq:
