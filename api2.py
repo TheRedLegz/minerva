@@ -293,7 +293,11 @@ def get_tweet_cluster(id):
         }
     })
 
-
+@app.route('/som/details')
+def get_som_details():
+    model = db.get_latest_model()
+    model['_id'] = str(model['_id'])
+    return jsonify(model)
 
 @app.route('/scrape/results')
 def get_scrape_results():

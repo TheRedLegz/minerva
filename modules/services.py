@@ -123,8 +123,8 @@ class DatabaseConnection:
             "response": "Model added successfully"
         })
 
-    def get_model(self):
-        return self.conn['models'].find_one()
+    def get_latest_model(self):
+        return list(self.conn['training_model'].find().sort("createdAt", -1))[0]
 
     def get_features(self):
         return self.conn['features'].find()

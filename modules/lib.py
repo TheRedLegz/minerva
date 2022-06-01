@@ -79,6 +79,7 @@ def init_save_clean(data):
         tt = raw['data']['tweet']
         pp = basic_clean(tt)
         grams = gram_sentence(pp)
+        (_, tweet_bmu) = tweet_find_cluster(som, som_size, grams, tup)
 
         if len(grams) == 0:
             return False
@@ -131,6 +132,11 @@ def init_save_clean(data):
                 'sentiment': sent,
                 'score': scr,
 
+            },
+            "cluster" : {
+                "row": tweet_bmu[0],
+                "col": tweet_bmu[1],
+                "distance": _[tweet_bmu[0],tweet_bmu[1]]
             },
             "parameters": raw['parameters']
         }
