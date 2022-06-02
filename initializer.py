@@ -7,7 +7,7 @@ from modules.sentiment import get_sentiment, chunker
 from modules.tweet_preprocessor import prepare_for_chunking
 from modules.vectorizer import bow, tf_idf
 from modules.som import SOM
-from modules.lib import init_save_clean,filter_non_eng
+from modules.lib import init_save_clean, filter_non_eng
 
 import json
 import os
@@ -42,7 +42,8 @@ table3 = db.conn['training_features']
 df = pd.read_csv('./data/tweets_processed.csv')
 datarows = list(df.iterrows())[:200]
 
-dataclean = [json.loads(a.replace("'", "\"")) for a in list(df['Processed'])[:200]]
+dataclean = [json.loads(a.replace("'", "\""))
+             for a in list(df['Processed'])[:200]]
 
 for a in dataclean:
     a = [b for b in a if 'learn' not in b and 'education' not in b]
@@ -62,7 +63,7 @@ for i, row in datarows:
             "sentiment": sent
         }
         chunk_details.append(res)
-        
+
     (sent, score) = get_sentiment(full_text)
 
     doc_uniq = []
@@ -73,7 +74,6 @@ for i, row in datarows:
     for a in grams:
         if a not in doc_uniq:
             doc_uniq.append(a)
-        
 
     insert_to_cleaned = {
         "grams": grams,
@@ -100,16 +100,16 @@ for u in uniq:
     }
 
     unq_list.append(u[0])
-    table3.replace_one({ "name": u[0] }, insert, upsert=True)
+    table3.replace_one({"name": u[0]}, insert, upsert=True)
 
 
 matrix = tf_idf(dataclean, bowm)
 
 # make topic coherence
 
-size = (3,3)
+size = (6, 6)
 rate = 0.05
-iterations = 3000
+iterations = 9000
 
 som = SOM(matrix, rate, size, iterations)
 
@@ -133,7 +133,7 @@ insert = {
 
 table2.insert_one(insert)
 
-# 
+#
 
 raw = db.get_full_raw_tweets()
 filt = filter_non_eng(raw)
