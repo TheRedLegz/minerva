@@ -15,6 +15,7 @@ import asyncio
 from modules.scraper import Scraper
 import pickle
 import math
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -310,8 +311,8 @@ def get_scrape_results():
 @app.route('/analyze', methods=["POST"])
 @cross_origin()
 def analyze_tweet():
-    response.headers.add("Access-Control-Allow-Origin", "*")
     data = request.data
+    data = json.loads(data.decode())
     
     if not data:
         abort(400)
