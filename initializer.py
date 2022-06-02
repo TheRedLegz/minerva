@@ -107,7 +107,7 @@ matrix = tf_idf(dataclean, bowm)
 
 # make topic coherence
 
-size = (6, 6)
+size = (3, 3)
 rate = 0.05
 iterations = 9000
 

@@ -15,9 +15,6 @@ res = list(db.get_clean_tweets())
 
 for data in res:
     grams = data['grams']
-    print(len(som))
-    print(len(som[0]))
-    print(len(som[0][0]))
     (matrix, bmu) = tweet_find_cluster(som, som_size, grams, tup)
-    db.conn['cleaned_tweets'].update_one({'tweet_id': data['tweet_id']}, {
-                                         'cluster': {'row': bmu[0], 'col': bmu[1]}})
+    db.conn['cleaned_tweets'].update_one({'tweet_id': data['tweet_id']}, {"$set": {
+                                         'cluster': {'row': bmu[0], 'col': bmu[1]}}})
