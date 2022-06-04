@@ -49,7 +49,7 @@ except:
     clean_test_data = p.clean_documents(test_data)
     tokenized_data = [doc.split(' ') for doc in clean_test_data]
 
-    bigram_phrases = Phrases(tokenized_data, min_count=1, threshold=25)
+    bigram_phrases = Phrases(tokenized_data, min_count=1, threshold=0)
     trigram_phrases = Phrases(
         bigram_phrases[tokenized_data], min_count=3, threshold=5)
 

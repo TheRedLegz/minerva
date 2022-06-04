@@ -1,4 +1,5 @@
 from modules.services import DatabaseConnection
+from modules.scraper import Scraper
 import json
 import requests
 
@@ -13,8 +14,20 @@ import requests
 #     f.write(text)
 
 
+scraper = Scraper()
+
+with open('data/2022-05-22.json', 'rb') as f:
+    data = json.load(f)
+    f.close()
+scraper.save_to_db(data, "2022-05-22")
+
+with open('data/2022-06-03.json', 'rb') as f:
+    data = json.load(f)
+    f.close()
+scraper.save_to_db(data, "2022-06-03")
 
 db = DatabaseConnection('mongodb://localhost:27017')
+table = db.conn['cleaned_tweets']
 lt = list(db.get_clean_tweets())
 grams = [a['grams'] for a in lt]
 
@@ -34,6 +47,7 @@ for a in lt:
             "q": g,
             "target": "en"
         }
+        
         r = requests.post(url=URL, params=PARAMS, data=data)
         res = json.loads(r.text)
         
@@ -50,13 +64,12 @@ for a in lt:
 
     print(len(doc))
     a['grams'] = newgrams
-    a['_id'] = str(a['_id'])
+    # a['_id'] = str(a['_id'])
     print(len(newgrams))
     print('')
     
-    newdocs.append(a)
+    table.replace_one({ 'tweet_id': a['tweet_id'] }, a, upsert=True)
 
-
-with open('grams.json', 'w') as f:
-    text = json.dumps(newdocs)
-    f.write(text)
+# with open('grams.json', 'w') as f:
+#     text = json.dumps(newdocs)
+#     f.write(text)
