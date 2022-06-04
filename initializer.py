@@ -38,18 +38,15 @@ table = db.conn['training_clean']
 table2 = db.conn['training_model']
 table3 = db.conn['training_features']
 
-
-df = pd.read_csv('./data/tweets_processed.csv')
-datarows = list(df.iterrows())[:200]
-
-dataclean = [json.loads(a.replace("'", "\""))
-             for a in list(df['Processed'])[:200]]
+clean = db.get_clean_tweets()
+tweet_cleaned = [tweet for tweet in clean]
+dataclean = [tweet['grams'] for tweet in tweet_cleaned]
 
 for a in dataclean:
     a = [b for b in a if 'learn' not in b and 'education' not in b]
 
-for i, row in datarows:
-    full_text = row['Content']
+for row in clean:
+    full_text = row['full_text']
 
     chunks = chunker(prepare_for_chunking(full_text))
 
@@ -107,9 +104,9 @@ matrix = tf_idf(dataclean, bowm)
 
 # make topic coherence
 
-size = (3, 3)
+size = (4, 4)
 rate = 0.05
-iterations = 9000
+iterations = 8000
 
 som = SOM(matrix, rate, size, iterations)
 

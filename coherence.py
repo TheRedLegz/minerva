@@ -1,3 +1,4 @@
+from matplotlib import pyplot as plt
 from modules.services import DatabaseConnection
 from modules.gram import tweet_grammer, tweet_cleaner, tweet_pos
 from modules.som import SOM, get_topic_words
@@ -14,10 +15,6 @@ if __name__ == '__main__':
     raw = conn.get_raw_tweets()
 
     data = [tweet['full_text'] for tweet in raw]
-    csv = pd.read_csv('./data/tweets_processed.csv')
-
-    for tweet in csv['Content'].values[:30000]:
-        data.append(tweet)
 
     print("--- Execution time: %s seconds ---" %
           (time.time() - start_time))
@@ -40,8 +37,8 @@ if __name__ == '__main__':
         grammed[i] = temp
     print("--- Execution time: %s seconds ---" %
           (time.time() - start_time))
-    test_data = grammed[:5000]
-    grammed = grammed[5000:]
+    test_data = grammed
+    grammed = grammed
 
     start_time = time.time()
     (bag, unique, docs) = bow(grammed)
@@ -81,6 +78,11 @@ if __name__ == '__main__':
                     SOM_matrix, lattice_size))
 
                 lattice_numbers.append(n)
+            plt.title('Lattice Size')
+            plt.xlabel('Lattice Size')
+            plt.ylabel('Coherence Score')
+            plt.plot(lattice_numbers, coherence_list)
+            plt.show()
             return lattice_numbers[coherence_list.index(
                 max(coherence_list))]
 
@@ -94,10 +96,15 @@ if __name__ == '__main__':
                     SOM_matrix, lattice_used))
 
                 iterations_list.append(n)
+            plt.title('Iterations')
+            plt.xlabel('Number of Iterations')
+            plt.ylabel('Coherence Score')
+            plt.plot(iterations_list, coherence_list)
+            plt.show()
             return iterations_list[coherence_list.index(
                 max(coherence_list))]
-        optimal_size = get_coherent_lattice()
-        optimal_iteration = get_coherent_iteration(optimal_size)
+        # optimal_size = get_coherent_lattice()
+        # optimal_iteration = get_coherent_iteration(optimal_size)
 
         def get_best_learning_rate(used_size, used_iteration):
             best_cohr_score = []
@@ -108,12 +115,16 @@ if __name__ == '__main__':
             for n in array_iterations:
                 SOM_matrix = SOM(matrix, n, lattice_size, used_iteration)
                 best_cohr_score.append(topic_coherence(
-                    SOM_matrix, (6, 6)))
+                    SOM_matrix, lattice_size))
+
                 best_learning_rate.append(n)
+            plt.title('Learning Rate')
+            plt.xlabel('Learning Rate')
+            plt.ylabel('Coherence Score')
+            plt.plot(best_learning_rate, best_cohr_score)
+            plt.show()
             return best_learning_rate[best_cohr_score.index(
                 max(best_cohr_score))]
 
-        optimal_learning_rate = get_best_learning_rate(
-            optimal_size, optimal_iteration)
-
-        return optimal_size, optimal_iteration, optimal_learning_rate
+        get_best_learning_rate(4, 8000)
+    get_coherence_scores()
