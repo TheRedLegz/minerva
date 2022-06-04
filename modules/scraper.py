@@ -10,7 +10,7 @@ from datetime import datetime
 import twint
 import json
 
-DEFAULT_SEARCH_STRING = '"online classes" OR "online class" OR "e-class" OR "online learning" OR "eclass" OR "face to face" OR "face-to-face" OR "lms" OR "distance learning" OR "online education" OR "education" OR "class" -filter:replies'
+DEFAULT_SEARCH_STRING = '"online classes" OR "online class" OR "e-class" OR "online learning" OR "eclass" OR "face to face" OR "face-to-face" OR "lms" OR "distance learning" OR "online education" -filter:replies'
 
 
 class Scraper:
@@ -35,12 +35,14 @@ class Scraper:
         c.Count = True
         c.Filter_retweets = True
         c.stats = True
-        c.Store_object = True
+        # c.Store_object = True
+        c.Store_json = True
+        c.Output = final_date + '.json'
 
         twint.run.Search(c)
-        tweets = twint.output.tweets_list
+        # tweets = twint.output.tweets_list
 
-        self.save_to_db(tweets, date)
+        # self.save_to_db(tweets, date)
 
     def save_to_db(self, data, date):
 

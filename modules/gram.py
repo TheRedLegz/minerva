@@ -8,10 +8,14 @@ import os.path
 import concurrent.futures
 from nltk.corpus import wordnet
 import nltk
+from googletrans import Translator
 
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('punkt')
+
+tr = Translator()
+
+# nltk.download('wordnet')
+# nltk.download('averaged_perceptron_tagger')
+# nltk.download('punkt')
 
 add = [
     'online',
@@ -45,9 +49,9 @@ except:
     clean_test_data = p.clean_documents(test_data)
     tokenized_data = [doc.split(' ') for doc in clean_test_data]
 
-    bigram_phrases = Phrases(tokenized_data, min_count=1, threshold=50)
+    bigram_phrases = Phrases(tokenized_data, min_count=1, threshold=25)
     trigram_phrases = Phrases(
-        bigram_phrases[tokenized_data], min_count=3, threshold=10)
+        bigram_phrases[tokenized_data], min_count=3, threshold=5)
 
     bigram_phrases.save(bpath)
     trigram_phrases.save(tpath)
@@ -63,6 +67,7 @@ def clean_token(word):
 
         if len(split[0]) > 2 and len(split[1]) > 2 and split[1] not in STOPWORDS and split[0] not in STOPWORDS:
             return p.lemmatize(split[0]) + '_' + p.lemmatize(split[1])
+
 
     elif len(word) > 2 and word not in STOPWORDS:
         return p.lemmatize(word)
@@ -90,7 +95,7 @@ def clean_document_tokens(doc):
 
         if cleaned:
             res.append(cleaned)
-
+            
     return res
 
 
