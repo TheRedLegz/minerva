@@ -55,7 +55,7 @@ class Scraper:
         table3 = self.connection.client['minerva_raw_tweets']['scrape_results']
 
         # save to raw
-        data = [a.__dict__ for a in data]
+        # data = [a.__dict__ for a in data]
 
         for a in data:
             a['full_text'] = a['tweet']
@@ -81,7 +81,11 @@ class Scraper:
         cleaned = 0
 
         for a in data:
-            lang = a['lang'] if 'lang' in a else detect(a['full_text'])
+
+            try:
+                lang = a['language'] if 'language' in a else detect(a['full_text'])
+            except:
+                continue
 
             if lang == 'en':
                 cleaned += 1
