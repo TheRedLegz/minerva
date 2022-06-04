@@ -20,13 +20,15 @@ def generate_dbvector_matrix(data, uniq):
         doccount = len(data)
 
         for k, gram in enumerate(row['grams']):
+            try:
+                idx = uniq.index(gram)
+                
+                score1 = df[k] / wordcount
+                score2 = math.log((doccount + 1)/(idf[k] + 1)) + 1
 
-            idx = uniq.index(gram)
-            
-            score1 = df[k] / wordcount
-            score2 = math.log((doccount + 1)/(idf[k] + 1)) + 1
-
-            mrow[idx] = score1 * score2
+                mrow[idx] = score1 * score2
+            except:
+                mrow[idx] = 0
 
     return matrix
 
