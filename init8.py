@@ -1,4 +1,3 @@
-from minerva.modules.lib import init_save_clean
 from modules.som import SOM, tweet_find_cluster
 from modules.services import DatabaseConnection
 from modules.vectorizer import bow, tf_idf
@@ -15,11 +14,10 @@ tweets = list(db.get_clean_tweets())
 grams = []
 
 
-for idx, doc in enumerate(tweets):
+for doc in tweets:
     g = doc['grams']
     temp = [a for a in g if 'learn' not in a and 'education' not in a]
-    tweets[idx]['grams'] = temp
-    grams.append(grams)
+    grams.append(temp)
 
 
 (bowm, unq, _, idf) = bow(grams, 4000, True)
