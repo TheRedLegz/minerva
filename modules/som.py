@@ -15,7 +15,7 @@ def get_topic_words(matrix, unique, size):
         for j in range(col):
             obj = {}
 
-            indx = np.argsort(matrix[i, j, :])[-10:]
+            indx = np.argsort(matrix[i, j, :])[-20:]
 
             for k in indx:
                 word = unique[k]
